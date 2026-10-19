@@ -43,6 +43,11 @@ nav.main a{text-decoration:none}nav.main a[aria-current]{text-decoration:underli
 .chip.soon{background:#E4E6DE;color:var(--soft)}
 .chip.play{border:1.5px dashed #8C9086;color:#50554B}
 .links{display:flex;flex-wrap:wrap;gap:16px;font-size:14px}
+.appcard{text-decoration:none;color:var(--ink);border:1px solid transparent;transition:border-color .15s,transform .15s}.appcard:hover{border-color:#B9BCB1;transform:translateY(-2px);color:var(--ink)}
+.cardfoot{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;font-weight:600}
+.status{padding:4px 10px;border-radius:999px;background:#E4E6DE;color:var(--soft)}.status.live{background:#DDEFE3;color:#1E5A35}.status.review{background:#E2E8F8;color:#2A3A8C}
+.trybadge{padding:4px 10px;border-radius:999px;background:#FBE3D8;color:#8A2E0C}
+.more{margin-left:auto;color:var(--ink)}
 .lab{display:flex;flex-direction:column;gap:20px;padding:28px;border-radius:24px;min-height:380px}
 .lab h3{font-size:28px}
 .lab .tag{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase}

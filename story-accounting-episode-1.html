@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Story Accounting · Free episode</title>
+<style>
+:root{
+  --teal:#0E6B66;--teal-dark:#0A4F4B;--teal-soft:#E3F1EF;
+  --ink:#16181D;--body:#23262D;--muted:#5B616E;--line:#E3E6EB;
+  --surface:#F4F5F7;--card:#FFFFFF;--pen:#B8322A;--pen-soft:#F7E4E1;
+  --ok:#2F6B4F;--ok-soft:#E2EFE8;--bg:#FFFFFF;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --teal:#4FB3AA;--teal-dark:#7FD0C8;--teal-soft:#143533;
+    --ink:#F1F3F5;--body:#D9DCE1;--muted:#9AA1AD;--line:#2C313A;
+    --surface:#1B1F25;--card:#20252C;--pen:#F08A80;--pen-soft:#3A2220;
+    --ok:#7CC8A0;--ok-soft:#1C3328;--bg:#14171B;
+  }
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--body)}
+body{font:17px/1.65 Georgia,"Iowan Old Style","Times New Roman",serif;-webkit-text-size-adjust:100%}
+.ui{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+.wrap{max-width:640px;margin:0 auto;padding:28px 16px 48px}
+.kicker{font-size:13px;letter-spacing:.04em;color:var(--teal);font-weight:600;text-transform:uppercase;margin:0 0 6px}
+h1{font-size:30px;line-height:1.2;color:var(--ink);margin:0 0 8px;font-weight:700}
+.meta{font-size:14px;color:var(--muted);margin:0 0 28px}
+h2{font-size:15px;color:var(--ink);margin:30px 0 8px;font-weight:700}
+p{margin:0 0 14px}
+b{color:var(--ink)}
+.turn{border:1.5px solid var(--teal);background:var(--teal-soft);border-radius:14px;padding:18px 18px 16px;margin:28px 0 8px}
+.turn .lbl{font-size:13px;font-weight:700;color:var(--teal-dark);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px}
+.turn p{margin:0;color:var(--body);font-size:15px;line-height:1.55}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin:16px 0}
+.q-ask{font-size:18px;font-weight:700;color:var(--ink);margin:0 0 10px;line-height:1.4}
+.given{margin:0 0 16px;padding:0;list-style:none}
+.given li{font-size:15px;line-height:1.5;padding:8px 12px;background:var(--surface);border-radius:8px;margin-bottom:6px}
+.opts{display:grid;gap:8px}
+.opt{display:flex;align-items:center;gap:12px;width:100%;text-align:left;font-size:17px;font-weight:600;color:var(--ink);background:var(--card);border:1.5px solid var(--line);border-radius:10px;padding:13px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.opt:hover:not([disabled]){border-color:var(--teal)}
+.opt:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+.opt .k{flex:none;width:26px;height:26px;border-radius:50%;border:1.5px solid var(--line);display:grid;place-items:center;font-size:13px;color:var(--muted)}
+.opt.wrong{border-color:var(--pen);background:var(--pen-soft)}
+.opt.wrong .k{border-color:var(--pen);color:var(--pen)}
+.opt.right{border-color:var(--ok);background:var(--ok-soft)}
+.opt.right .k{border-color:var(--ok);color:var(--ok)}
+.opt[disabled]{cursor:default}
+.fb{margin-top:14px;border-radius:10px;padding:14px 16px;font-size:15px;line-height:1.55}
+.fb.wrong{background:var(--pen-soft);border-left:4px solid var(--pen)}
+.fb.right{background:var(--ok-soft);border-left:4px solid var(--ok)}
+.fb .h{font-weight:700;color:var(--ink);margin-bottom:4px}
+.tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.02em;color:var(--pen);border:1px solid var(--pen);border-radius:999px;padding:1px 9px;margin:4px 6px 0 0}
+.steps{margin:10px 0 0;padding-left:20px}
+.steps li{margin-bottom:6px}
+.steps .doubt{color:var(--pen)}
+.btn{display:inline-block;font-size:15px;font-weight:600;border-radius:10px;padding:11px 16px;cursor:pointer;border:1.5px solid var(--teal);background:var(--teal);color:#fff}
+.btn.ghost{background:transparent;color:var(--teal)}
+.btn:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+.row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.hidden{display:none}
+.moral{border-top:1px solid var(--line);margin-top:22px;padding-top:16px}
+.moral ul{margin:0;padding-left:20px}
+.moral li{margin-bottom:6px}
+.foot{margin-top:40px;border-top:1px solid var(--line);padding-top:16px;font-size:13px;line-height:1.55;color:var(--muted)}
+.foot p{margin:0 0 8px}
+.store{font-size:15px;color:var(--ink);font-weight:600;margin-bottom:12px}
+@media (max-width:420px){h1{font-size:26px}body{font-size:16px}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <p class="kicker ui">Free episode · Financial Accounting (FA)</p>
+  <h1>Only 3 months belong to this year</h1>
+  <p class="meta ui">4-minute story · Accruals and prepayments</p>
+
+  <article id="story">
+    <p>Tomasz had been the bookkeeper at Lantern Yoga Studio for two months when Nadia, the studio manager, handed him his first year-end job: an insurance schedule and the rent payments. "Just tell me what this year really cost us," she said. "Not when the money left the bank — when we <b>used</b> the thing we paid for." Matching expenses to the period that uses them is the <b>accruals concept</b>.</p>
+
+    <h2 class="ui">One. Insurance paid in advance</h2>
+    <p>On 1 October the studio paid a full year of insurance, $4,800, and the whole amount was posted to the insurance expense account. Tomasz counted the calendar: 3 months of cover had passed by 31 December and 9 were still to come.</p>
+    <p>He wrote down: insurance expense $3,600, carried forward $1,200. Nadia frowned at the sheet. "Your two figures have swapped places. This year we were covered for only 3 months, so the expense is $1,200. The other 9 months, $3,600, are cover we have already paid for and will use next year. That is a <b>prepayment</b> — an asset."</p>
+    <p>"So I multiplied by the months left instead of the months used." Left alone, his schedule would have shown insurance of $3,600 instead of $1,200.</p>
+
+    <h2 class="ui">Two. Rent not yet paid</h2>
+    <p>Next, the rent. Cash paid during the year was $19,200. But that figure included $1,600 of last December's rent, paid late in January. And this December's rent of $2,400 had not been paid at all.</p>
+    <p>"We paid last year's rent this year, so surely it's a cost to us now? Then I add the $1,600…" Adding both balances would give rent of $23,200. Nadia shook her head. "Don't ask who paid when. Ask which year we were in the building."</p>
+    <p>She wrote on the whiteboard: rent used last year but paid this year belongs to last year — take it out. Rent used this year but not yet paid belongs to this year — put it in. An expense used but not yet paid is an <b>accrual</b>, and because we still owe it, it is a liability. $19,200 − $1,600 + $2,400 = $20,000.</p>
+  </article>
+
+  <div class="turn ui" id="turn">
+    <div class="lbl">Your turn</div>
+    <p>The story stops here. Work out the year's total before you read how it ends.</p>
+  </div>
+
+  <section class="card ui" aria-labelledby="ask">
+    <p class="q-ask" id="ask">What is the total insurance and rent expense for the year?</p>
+    <ul class="given">
+      <li>A year's insurance of $4,800 was paid on 1 October and debited to insurance expense. The year end is 31 December.</li>
+      <li>Rent paid in cash $19,200 · opening rent accrual $1,600 · closing rent accrual $2,400</li>
+    </ul>
+    <div class="opts" id="opts" role="group" aria-label="Answer options"></div>
+    <div id="fb" aria-live="polite"></div>
+    <div class="row hidden" id="after">
+      <button class="btn" id="readEnd" type="button">Read how the story ends</button>
+      <button class="btn ghost" id="retry" type="button">Try again</button>
+    </div>
+  </section>
+
+  <article id="ending" class="hidden">
+    <h2 class="ui">Three. Pay day and cost day</h2>
+    <p>Tomasz's corrected total for the year was insurance $1,200 plus rent $20,000: $21,200. His first draft, with both slips, would have reported $26,800. In the statement of financial position, the prepayment of $3,600 sits in current assets and the rent accrual of $2,400 sits in current liabilities. "So the day the money moves and the day the cost happens are different days," he said. Nadia initialled the schedule. "Get that right and half of year end is done."</p>
+    <div class="moral">
+      <ul>
+        <li>Expenses follow the period of use, not the date of payment.</li>
+        <li>Paid in advance and not yet used: a prepayment, a current asset.</li>
+        <li>Used but not yet paid: an accrual, a current liability.</li>
+      </ul>
+    </div>
+  </article>
+
+  <footer class="foot ui">
+    <p class="store">The full app has 270 episodes for FA, MA and FR, with a mistake log that brings wrong answers back. Coming soon to the App Store.</p>
+    <p>Story Accounting is an unofficial, independent study aid. It is not affiliated with or endorsed by ACCA. ACCA is a registered trademark of the Association of Chartered Certified Accountants.</p>
+    <p>All companies, people and figures are invented for learning. The question is an original practice item written by ARCHE, not a past exam question. This episode was written with the help of generative AI, and every figure was checked by calculation code.</p>
+  </footer>
+</main>
+
+<script>
+(function(){
+  var MT={D:'Timing error',E:'Direction or sign error'};
+  // Options in a fixed, mixed order. Wrong figures each come from a real wrong method.
+  var OPTS=[
+    {amt:24400,label:'Opening rent accrual added instead of deducted',mt:['E']},
+    {amt:21200,correct:true},
+    {amt:26800,label:'Insurance swapped and opening accrual added',mt:['D','E']},
+    {amt:16400,label:'Closing rent accrual deducted instead of added',mt:['E']},
+    {amt:23600,label:'Used and unused insurance swapped',mt:['D']}
+  ];
+  var STEPS=[
+    ['','Insurance: 3 months used, 9 months to come. Prepayment = 4,800 × 9/12 = 3,600.'],
+    ['doubt','Expense of 3,600? No. That is next year’s cover. This year’s expense is the used part, 1,200.'],
+    ['doubt','Rent: the opening accrual of 1,600 was last year’s expense paid this year. It is deducted, not added.'],
+    ['','19,200 − 1,600 + 2,400 = 20,000. The closing accrual is this year’s cost, so it is added.'],
+    ['','1,200 + 20,000 = $21,200.']
+  ];
+  var box=document.getElementById('opts'),fb=document.getElementById('fb'),
+      after=document.getElementById('after'),retry=document.getElementById('retry'),
+      readEnd=document.getElementById('readEnd'),ending=document.getElementById('ending');
+  var fmt=function(n){return '$'+n.toLocaleString('en-GB');};
+  function el(t,c,h){var e=document.createElement(t);if(c)e.className=c;if(h!=null)e.textContent=h;return e;}
+  function render(){
+    box.innerHTML='';fb.innerHTML='';after.classList.add('hidden');
+    OPTS.forEach(function(o,i){
+      var b=el('button','opt');b.type='button';
+      b.appendChild(el('span','k','ABCDE'[i]));b.appendChild(el('span','',fmt(o.amt)));
+      b.addEventListener('click',function(){pick(i,b);});
+      box.appendChild(b);
+    });
+  }
+  function pick(i,btn){
+    var o=OPTS[i];
+    [].forEach.call(box.children,function(b){b.disabled=true;});
+    fb.innerHTML='';
+    var d;
+    if(o.correct){
+      btn.classList.add('right');
+      d=el('div','fb right');d.appendChild(el('div','h','Correct — '+fmt(o.amt)));
+      d.appendChild(el('div','','Here is the working:'));
+      var ol=el('ol','steps');
+      STEPS.forEach(function(s){ol.appendChild(el('li',s[0],s[1]));});
+      d.appendChild(ol);
+      retry.classList.add('hidden');
+    }else{
+      btn.classList.add('wrong');
+      d=el('div','fb wrong');
+      d.appendChild(el('div','h',fmt(o.amt)+' is not right.'));
+      d.appendChild(el('div','','This figure comes from the mistake: '+o.label+'.'));
+      var t=el('div','');
+      o.mt.forEach(function(m){t.appendChild(el('span','tag',MT[m]));});
+      d.appendChild(t);
+      retry.classList.remove('hidden');
+    }
+    fb.appendChild(d);after.classList.remove('hidden');
+  }
+  retry.addEventListener('click',render);
+  readEnd.addEventListener('click',function(){
+    ending.classList.remove('hidden');readEnd.classList.add('hidden');
+    ending.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+  render();
+})();
+</script>
+</body>
+</html>

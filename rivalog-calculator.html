@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rivalog Study Calculator</title>
+<meta name="description" content="Fill in three of four — problems, minutes per problem, hours a week, finish date — and get the fourth. From Rivalog: Study Planner by Arche.">
+<style>
+:root{--bg:#f4f1ea;--card:#fffdf8;--ink:#1d1b17;--sub:#6b6458;--line:#e5dfd2;--track:#ece6d9;--acc:#2f5d50;--accsoft:#e3ede8;--dop:#7a5cc4;--dopsoft:#efe9fb;--warn:#b5482b;--shadow:0 1px 2px rgba(0,0,0,.05),0 4px 16px rgba(0,0,0,.05)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141310;--card:#1d1c18;--ink:#ece6da;--sub:#a39a8a;--line:#33302a;--track:#2a2823;--acc:#7fbfa9;--accsoft:#1f2b26;--dop:#b39cf0;--dopsoft:#25203a;--warn:#e98b6f;--shadow:none}}
+:root[data-theme="dark"]{--bg:#141310;--card:#1d1c18;--ink:#ece6da;--sub:#a39a8a;--line:#33302a;--track:#2a2823;--acc:#7fbfa9;--accsoft:#1f2b26;--dop:#b39cf0;--dopsoft:#25203a;--warn:#e98b6f;--shadow:none}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;-webkit-text-size-adjust:100%}
+.wrap{max-width:640px;margin:0 auto;padding:28px 16px 48px}
+.eyebrow{font-size:13px;font-weight:700;color:var(--acc);letter-spacing:.02em;text-transform:uppercase}
+h1{font-size:30px;line-height:1.15;letter-spacing:-.02em;margin:6px 0 10px}
+.lead{color:var(--sub);margin:0 0 22px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:var(--shadow);margin-bottom:14px}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+.grid>*{min-width:0}
+@media (max-width:480px){.grid{grid-template-columns:1fr}}
+.field{display:grid;gap:6px;min-width:0}
+.field .lab{display:flex;justify-content:space-between;align-items:baseline;gap:6px;min-width:0}
+.field label{font-size:13px;font-weight:650;color:var(--sub);min-width:0}
+.field .box{display:flex;align-items:center;gap:8px;border:1.5px solid var(--line);border-radius:12px;background:var(--bg);padding:0 12px;min-width:0;max-width:100%;transition:border-color .15s,background .15s}
+.field.solve .box{border-color:var(--dop);background:var(--dopsoft)}
+.field input{flex:1 1 0;width:100%;min-width:0;border:0;background:transparent;color:var(--ink);font:inherit;font-size:18px;font-weight:650;padding:12px 0;outline:none;font-variant-numeric:tabular-nums}
+.field .unit{font-size:13px;color:var(--sub);white-space:nowrap}
+.field .tag{font-size:11px;font-weight:700;color:var(--dop);display:none;white-space:nowrap}
+.field.solve .tag{display:inline}
+.field .datebox{gap:4px;padding:0 6px}
+.datebox select{flex:1 1 0;min-width:0;width:100%;border:0;background:transparent;font-size:16px;font-weight:650;padding:12px 2px;min-height:48px;cursor:pointer}
+.datebox select:focus{outline:none}
+.hint{font-size:13px;color:var(--sub);margin:12px 0 0}
+.chips{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;margin-top:8px}
+.chip{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:9px 0;font:inherit;font-size:13px;font-weight:650;cursor:pointer}
+.chip.on{background:var(--ink);color:var(--card);border-color:var(--ink)}
+.row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.sw{display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:14px}
+.sw input{width:18px;height:18px;margin:2px 0 0;accent-color:var(--acc)}
+.sw small{display:block;color:var(--sub);font-size:12.5px}
+select{font:inherit;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:12px;padding:10px 12px}
+.label{font-size:13px;font-weight:700;color:var(--sub)}
+.result{border-color:transparent;background:var(--acc);color:#fff}
+.result .label{color:rgba(255,255,255,.75)}
+.big{font-size:28px;font-weight:800;letter-spacing:-.02em;margin:4px 0 2px;line-height:1.2}
+.result p{margin:6px 0 0;color:rgba(255,255,255,.85);font-size:14px}
+.result.err{background:var(--card);color:var(--ink);border-color:var(--line)}
+.result.err .label{color:var(--sub)}
+.result.err p{color:var(--sub)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .result:not(.err){color:#0f1f1a}:root:not([data-theme="light"]) .result:not(.err) .label,:root:not([data-theme="light"]) .result:not(.err) p{color:rgba(15,31,26,.75)}}
+.passes{display:grid;gap:8px;margin-top:4px}
+.pass{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:center;font-size:14px}
+.pass b{font-variant-numeric:tabular-nums}
+.bar{height:8px;border-radius:99px;background:var(--track);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--acc);border-radius:99px}
+.pass:nth-child(n+2) .bar i{background:var(--dop)}
+.btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+button.ghost{border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:12px;padding:10px 14px;font:inherit;font-size:14px;font-weight:650;cursor:pointer}
+.foot{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);color:var(--sub);font-size:13px}
+.app{display:flex;gap:12px;align-items:center;margin-bottom:10px}
+.ico{width:44px;height:44px;border-radius:11px;background:#2f5d50;flex:none;display:grid;place-items:center}
+.app b{display:block;color:var(--ink);font-size:15px}
+:focus-visible{outline:2px solid var(--dop);outline-offset:2px}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="eyebrow">Arche Lab · Rivalog</div>
+  <h1>How long will your book take?</h1>
+  <p class="lead">Fill in any three of the four boxes and leave one empty. We'll work out the fourth: how many problems, how long each takes, how many hours a week, or when you'll finish your first pass.</p>
+
+  <section class="card" aria-labelledby="inT">
+    <div class="label" id="inT" style="margin-bottom:12px">Your numbers</div>
+    <div class="grid">
+      <div class="field" id="fN"><div class="lab"><label for="N">Problems in the book</label><span class="tag">Calculated</span></div>
+        <div class="box"><input id="N" type="number" inputmode="numeric" min="1" step="1" value="400"><span class="unit">problems</span></div></div>
+      <div class="field" id="fT"><div class="lab"><label for="T">Minutes per problem</label><span class="tag">Calculated</span></div>
+        <div class="box"><input id="T" type="number" inputmode="decimal" min="0.1" step="0.5" value="6"><span class="unit">min</span></div></div>
+      <div class="field" id="fH"><div class="lab"><label for="H">Study hours a week</label><span class="tag">Calculated</span></div>
+        <div class="box"><input id="H" type="number" inputmode="decimal" min="0.5" step="0.5" value="10"><span class="unit">h/wk</span></div></div>
+      <div class="field" id="fD"><div class="lab"><label for="Dm">Finish pass 1 by</label><span class="tag">Calculated</span></div>
+        <div class="box datebox"><select id="Dm" aria-label="Month"></select><select id="Dd" aria-label="Day"></select><select id="Dy" aria-label="Year"></select></div></div>
+    </div>
+    <p class="hint">Multiple choice often takes 5–6 minutes a problem; written answers 30–40.</p>
+    <div class="btns"><button class="ghost" type="button" data-t="6">Multiple choice · 6 min</button><button class="ghost" type="button" data-t="35">Written · 35 min</button></div>
+  </section>
+
+  <section class="card" aria-labelledby="dT">
+    <div class="label" id="dT">Study days</div>
+    <div class="chips" id="days" role="group" aria-label="Study days"></div>
+    <div class="row" style="margin-top:14px">
+      <label class="sw"><input type="checkbox" id="rest" checked><span>Count a 10-minute break every hour<small>50 minutes on, 10 off</small></span></label>
+      <label class="sw" style="align-items:center">Later passes take
+        <select id="fast" aria-label="Time for later passes"><option value="1">100%</option><option value="0.9">90%</option><option value="0.87" selected>87%</option><option value="0.8">80%</option><option value="0.7">70%</option></select></label>
+    </div>
+  </section>
+
+  <section class="card result" id="res" aria-live="polite">
+    <div class="label" id="resL">Result</div>
+    <div class="big" id="resV">—</div>
+    <p id="resP"></p>
+  </section>
+
+  <section class="card" id="passCard" aria-labelledby="pT">
+    <div class="label" id="pT" style="margin-bottom:10px">If you keep this pace</div>
+    <div class="passes" id="passes"></div>
+    <p class="hint">Counts study days only. Later passes are planned faster because you've seen the material before. You can change that above.</p>
+  </section>
+
+  <footer class="foot">
+    <div class="app"><div class="ico" aria-hidden="true"><svg width="30" height="26" viewBox="0 0 200 160"><circle cx="122" cy="46" r="26" fill="#b39cf0"/><rect x="82" y="80" width="82" height="62" rx="31" fill="#b39cf0"/><circle cx="86" cy="58" r="28" fill="#fff"/><rect x="42" y="94" width="88" height="62" rx="31" fill="#fff"/></svg></div>
+      <div><b>Rivalog: Study Planner</b>The app plans your whole week, splits it by subject and races you against a rival you create. Coming soon to the App Store and Google Play.</div></div>
+    <div>This calculator runs entirely in your browser. Nothing you type is sent anywhere. Results are estimates for planning, not guarantees. © Arche</div>
+  </footer>
+</main>
+<script>
+(function(){
+'use strict';
+const DAY=86400000, $=id=>document.getElementById(id);
+const t0=(()=>{const d=new Date();d.setHours(0,0,0,0);return d.getTime();})();
+const dow=t=>new Date(t+12*3600000).getDay();
+const ymd=t=>{const d=new Date(t);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');};
+const parseD=s=>{const a=String(s).split('-').map(Number);return a.length===3&&a.every(x=>x>0)?new Date(a[0],a[1]-1,a[2]).getTime():null;};
+const fmtD=t=>new Intl.DateTimeFormat('en-US',{weekday:'short',month:'short',day:'numeric',year:new Date(t).getFullYear()!==new Date().getFullYear()?'numeric':undefined}).format(new Date(t));
+const fmtH=m=>{m=Math.round(m);const h=Math.floor(m/60),r=m%60;return h?(r?h+' h '+r+' min':h+' h'):r+' min';};
+const nf=(x,d)=>Number(x).toLocaleString('en-US',{maximumFractionDigits:d==null?0:d});
+// study days (Mon first)
+const ORDER=[1,2,3,4,5,6,0], NAMES=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+let on=new Set([1,2,3,4,5,6]);
+$('days').innerHTML=ORDER.map(k=>`<button type="button" class="chip" data-d="${k}" aria-pressed="false">${NAMES[k]}</button>`).join('');
+const paintDays=()=>document.querySelectorAll('[data-d]').forEach(b=>{const v=on.has(+b.dataset.d);b.classList.toggle('on',v);b.setAttribute('aria-pressed',String(v));});
+document.querySelectorAll('[data-d]').forEach(b=>b.onclick=()=>{const k=+b.dataset.d; if(on.has(k)){ if(on.size>1) on.delete(k);} else on.add(k); paintDays(); calc();});
+paintDays();
+// weights: 1 for each study day
+const vOf=()=>[0,1,2,3,4,5,6].map(d=>on.has(d)?1:0);
+function sumW(v,a,b){ if(b<a) return 0; const tot=Math.round((b-a)/DAY)+1, full=Math.floor(tot/7), wk=v.reduce((x,y)=>x+y,0); let s=full*wk; for(let k=full*7;k<tot;k++) s+=v[dow(a+k*DAY)]; return s; }
+// same model as the app: work for pass r (0-based) = N × t × f^r; daily work = H × eff × w / Σw
+function finishDates(N,t,H,f,eff,passes){ const v=vOf(), vs=v.reduce((a,b)=>a+b,0); const out=[];
+  let r=0, target=N*t, acc=0; for(let d=0; d<3650 && r<passes; d++){ const day=t0+d*DAY, w=v[dow(day)]; if(!w) continue; acc+=H*60*eff*w/vs;
+    while(r<passes && acc>=target-1e-9){ out.push({r:r+1,at:day,days:sumW(v,t0,day)}); r++; target+=N*t*Math.pow(f,r); } }
+  return out; }
+// date picker: our own English selects, so the browser's language never shows
+const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'], Y0=new Date().getFullYear();
+$('Dm').innerHTML='<option value="">Month</option>'+MON.map((m,i)=>`<option value="${i+1}">${m}</option>`).join('');
+$('Dd').innerHTML='<option value="">Day</option>'+Array.from({length:31},(_,i)=>`<option value="${i+1}">${i+1}</option>`).join('');
+$('Dy').innerHTML='<option value="">Year</option>'+[0,1,2,3].map(i=>`<option value="${Y0+i}">${Y0+i}</option>`).join('');
+const dateEl={get value(){const m=$('Dm').value,d=$('Dd').value,y=$('Dy').value; if(!m||!d||!y) return ''; const dim=new Date(+y,+m,0).getDate(); return y+'-'+String(m).padStart(2,'0')+'-'+String(Math.min(+d,dim)).padStart(2,'0');}};
+['Dm','Dd','Dy'].forEach(id=>$(id).addEventListener('change',calc));
+const fields={N:$('N'),T:$('T'),H:$('H'),D:dateEl};
+const num=el=>{const v=parseFloat(el.value);return v>0?v:null;};
+function calc(){
+  const eff=$('rest').checked?5/6:1, f=parseFloat($('fast').value)||0.87, v=vOf(), vs=v.reduce((a,b)=>a+b,0);
+  const N=num(fields.N), t=num(fields.T), H=num(fields.H), D=fields.D.value?parseD(fields.D.value):null;
+  const blanks=['N','T','H','D'].filter(k=>(k==='D'?D==null:({N,T:t,H})[k]==null));
+  ['N','T','H','D'].forEach(k=>$('f'+k).classList.toggle('solve',blanks.length===1&&blanks[0]===k));
+  const res=$('res'); res.classList.remove('err');
+  const show=(l,vv,p)=>{$('resL').textContent=l;$('resV').textContent=vv;$('resP').textContent=p||'';};
+  let n=N,tt=t,h=H;
+  if(blanks.length!==1){ res.classList.add('err'); show('Leave exactly one box empty', blanks.length?'Empty: '+blanks.length:'All four are filled','Clear the box you want us to work out.'); $('passCard').hidden=true; return; }
+  const k=blanks[0];
+  if(D!=null && D<t0){ res.classList.add('err'); show('Pick a date from today on','—',''); $('passCard').hidden=true; return; }
+  const wl=D!=null?sumW(v,t0,D):0;
+  if(k==='D'){ const r=finishDates(N,t,H,f,eff,1); if(!r.length){ res.classList.add('err'); show('Pass 1 finishes','Not within 10 years','Add hours or study days.'); $('passCard').hidden=true; return; }
+    show('Pass 1 finishes', fmtD(r[0].at), `${nf(r[0].days)} study days · ${fmtH(N*t)} of work in total`); }
+  else if(k==='H'){ if(wl<=0){ res.classList.add('err'); show('No study days before that date','—','Pick a later date or more study days.'); $('passCard').hidden=true; return; }
+    h=N*t/eff*vs/wl/60; show('You need about', fmtH(Math.ceil(h*60/5)*5)+' a week', `${nf(wl)} study days until ${fmtD(D)}${eff<1?' · breaks counted':''}`); }
+  else { if(wl<=0){ res.classList.add('err'); show('No study days before that date','—','Pick a later date or more study days.'); $('passCard').hidden=true; return; }
+    const avail=H*60*eff*wl/vs;
+    if(k==='T'){ tt=avail/N; show('That leaves', nf(tt,1)+' min per problem', tt<2?'That is very fast. Try more hours or a later date.':`${fmtH(avail)} of study across ${nf(wl)} study days`); }
+    else { n=Math.floor(avail/t); show('You can get through', nf(n)+' problems', `${fmtH(avail)} of study across ${nf(wl)} study days`); } }
+  // pass dates
+  const pr=finishDates(n,tt,h,f,eff,3); const max=pr.length?pr[pr.length-1].days:1;
+  $('passCard').hidden=!pr.length;
+  $('passes').innerHTML=pr.map(p=>`<div class="pass"><span>Pass ${p.r}</span><div class="bar"><i style="width:${Math.max(4,p.days/max*100)}%"></i></div><b>${fmtD(p.at)}</b></div>`).join('');
+}
+[fields.N,fields.T,fields.H].forEach(el=>el.addEventListener('input',calc));
+$('rest').onchange=calc; $('fast').onchange=calc;
+document.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{fields.T.value=b.dataset.t; calc();});
+calc();
+})();
+</script>
+</body>
+</html>

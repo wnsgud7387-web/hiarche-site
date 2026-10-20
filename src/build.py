@@ -5,10 +5,15 @@ import os, shutil, html
 ROOT = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(ROOT, 'site')
 UP = '/mnt/user-data/uploads'
-ICONS = '/tmp/claude-0/-home-claude/18cbcfc9-2d52-53f3-b09f-38e638a79a7c/scratchpad/hiarche_icons'
+ICONS = os.path.join(ROOT, 'icons')
+REPO = os.path.dirname(ROOT)  # flat site files at repo root (fallback for lab files)
 PG = 'https://wnsgud7387-web.github.io/arche-pages/'
 BOARD = 'https://github.com/wnsgud7387-web/hiarche-community/discussions'
 E = html.escape
+
+# Legal notice for the site (법무 rpl-20261020-lq-collect-legal C, verbatim)
+SITE_NOTICE_KO = '이 사이트는 쿠키나 분석 도구를 쓰지 않아요. LQ 검사 결과는 브라우저 안에서만 계산되며, 이용자가 결과 화면에서 직접 동의하고 보내기를 누른 경우에만 위 항목이 아르케의 저장소(Supabase Inc., 서버 위치 대한민국 서울 — 처리 위탁)로 전송돼요. 사이트 호스팅 업체(Vercel Inc.)와 저장소 업체는 보안을 위해 접속 기록(IP 주소 등)을 자체적으로 짧은 기간 남길 수 있으며, 아르케는 이 기록을 받거나 검사 기록과 연결하지 않아요. 문의·개인정보 보호책임자: 박준형 · archeisit@gmail.com'
+SITE_NOTICE_EN = "This site uses no cookies or analytics. LQ results are calculated only in your browser and are sent to Arche's storage (Supabase Inc., servers in Seoul, Republic of Korea, acting as our processor) only if you agree and press Send on the result screen. Our hosting provider (Vercel Inc.) and storage provider may keep short-term access logs, including IP addresses, for security; Arche does not receive these logs or link them to test records. Contact and privacy officer: Junhyung Park · archeisit@gmail.com"
 
 APPS = [
   dict(slug='niblore', name='Niblore', kind='Stories', bg='#0A132A', fg='#E3DFD8',
@@ -235,7 +240,8 @@ def build():
             'lab/og_lq2_en.png': 'Desktop/ARCHE/마케팅/hiarche/og_lq2_en.png'}
     for dst, src in labs.items():
         os.makedirs(os.path.dirname(os.path.join(OUT, dst)), exist_ok=True)
-        shutil.copy(os.path.join(UP, src), os.path.join(OUT, dst))
+        s_up = os.path.join(UP, src)
+        shutil.copy(s_up if os.path.exists(s_up) else os.path.join(REPO, os.path.basename(dst)), os.path.join(OUT, dst))
 
     # ---------- index ----------
     icons = ''.join(f'<img src="assets/icons/{a["slug"]}.png" alt="" style="transform:rotate({t})">' for a,t in zip(APPS, ['-4deg','3deg','-2deg','2deg','-3deg','4deg']))
@@ -380,6 +386,11 @@ def build():
     trs = ''.join(f'<tr><td style="font-weight:600">{E(a["name"])}</td><td><a href="{a["privacy"]}">Read</a></td><td><a href="{a["support"]}">Open</a></td><td>{terms_cell(a)}</td></tr>' for a in APPS)
     legal = head('Privacy & Legal — HiArche', 'Privacy policies, terms and business information for Arche and its apps.', 0, 'legal.html') + nav(0, '') + f'''<main id="main" class="wrap" style="padding-block:48px 96px;display:flex;flex-direction:column;gap:48px">
 <div style="display:flex;flex-direction:column;gap:12px"><h1 class="h1" style="font-size:clamp(44px,6vw,72px)">Privacy &amp; Legal</h1><p class="lead">Each app has its own privacy policy, because each one handles different things. This site uses no cookies, analytics or ads.</p></div>
+<section style="display:flex;flex-direction:column;gap:16px"><h2 style="font-size:28px">This website and the LQ test</h2>
+<div style="display:flex;flex-wrap:wrap;gap:20px">
+<p class="card white" style="flex:1 1 480px;min-width:0;margin:0">{E(SITE_NOTICE_EN)}</p>
+<p lang="ko" class="card" style="flex:1 1 320px;min-width:0;margin:0;background:#E9EAE3">{E(SITE_NOTICE_KO)}</p>
+</div></section>
 <section style="display:flex;flex-direction:column;gap:16px"><h2 style="font-size:28px">App policies</h2>
 <div class="tablewrap"><table><thead><tr><th scope="col">App</th><th scope="col">Privacy policy</th><th scope="col">Support</th><th scope="col">Terms</th></tr></thead><tbody>{trs}</tbody></table></div></section>
 <section style="display:flex;flex-direction:column;gap:16px"><h2 style="font-size:28px">Business information</h2>

@@ -333,6 +333,9 @@ button.ghost{background:transparent;color:var(--sub);border:1px solid var(--line
 #cog .cg-study{display:grid;justify-items:center;gap:10px;padding:26px 18px 22px;margin-top:8px}
 #cog .cg-gl{width:132px;height:132px;color:var(--ink)}
 #cog .cg-gl svg{width:100%;height:100%}
+#cog .cg-pen{display:inline-block;margin:0 0 12px;padding:8px 14px;border-radius:12px;font-size:.875rem;font-weight:700;line-height:1.45;border:1.5px solid currentColor}
+#cog .cg-pen.ok{color:var(--acc)}
+#cog .cg-pen.no{color:var(--warn)}
 #cog .cg-emo{display:grid;place-items:center;width:100%;height:100%;font-size:84px;line-height:1;font-family:'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif}
 #cog .cg-qgl .cg-emo{font-size:76px}
 #cog .cg-word{font-size:2.125rem;font-weight:800;color:var(--dopink,#6a4fb0);letter-spacing:.03em;line-height:1.1}
@@ -971,7 +974,7 @@ const TYPE_I=`<svg viewBox="0 0 60 60" aria-hidden="true"><circle cx="38" cy="18
 
 function intro(area,go,btn){ main(`<section data-screen="intro-${area}" class="cg-anim">
   <div class="cg-icon">${IC[area]}</div>
-  <h2 class="cg-h" tabindex="-1" data-focus>${T['n_'+area]}</h2>
+  <h2 class="cg-h" tabindex="-1" data-focus>${T['n_'+area]}</h2>${PEN[area]?`<p class="cg-pen ${PEN[area]}">${T['pen_'+PEN[area]]}</p>`:''}
   <p class="cg-p">${T['i_'+area]}</p><p class="cg-p">${T['i_'+area+'2']}</p>${REF_OF[area]?`<p class="cg-refl">${T.refL}: ${refShort(area)}</p>`:''}
   <div class="cg-dock"><button class="cg-btn" data-next>${btn||T.tryIt}</button></div></section>`);
   $1('[data-next]').onclick=go; }
@@ -1537,6 +1540,62 @@ function shareCard(res){ setLang(); const cv=document.createElement('canvas'); c
 Object.assign(CT.ko,{i_learn:'그림과 단어 짝 5개를 하나씩 보여 드려요. 그다음 그림마다 짝 단어를 골라요.',i_learn2:'다 맞힐 때까지 최대 4바퀴 반복해요. 그림과 쉽게 이어지는 짝도 있고, 상관없는 짝도 있어요. 검사 끝에 한 번 더 물어요.',rcP:'그림 5개의 짝 단어를 골라요. 30초면 끝나요. 떠오르는 대로 고르면 돼요.',pickQ:'이 그림의 짝은?'});
 Object.assign(CT.en,{i_learn:"You'll see 5 picture–word pairs, one at a time. Then pick the word that goes with each picture.",i_learn2:"We repeat up to 4 rounds until you have them all. Some pairs go together naturally, some don't. We'll ask once more at the end.",rcP:'Pick the word for each of the 5 pictures. It takes about 30 seconds. Just go with your first thought.',pickQ:'Which word goes with this picture?'});
 if(CT.ja) Object.assign(CT.ja,{fxNames:['進度指数','復習スコア','集中指標','学習密度'],i_learn:'絵と単語のペアを、1つずつ5組お見せします。そのあと、絵ごとにペアの単語を選んでください。',i_learn2:'全部覚えるまで最大4周くり返します。絵と結びつきやすいペアも、関係のないペアもあります。検査の最後にもう一度ききます。',rcP:'5つの絵それぞれについて、ペアの単語を選んでください。30秒ほどで終わります。最初に思い浮かんだものを選んでください。',pickQ:'この絵とペアの単語は?'});
+const PEN={press:'ok',dyn:'ok',wm:'no',learn:'no'};
+Object.assign(CT.ko,{pen_ok:'✏️ 이 과제는 펜과 종이를 써도 돼요',pen_no:'🚫 이 과제는 펜과 종이를 쓰지 마세요 · 머리로만 기억해요'});
+Object.assign(CT.en,{pen_ok:'✏️ Pen and paper are fine for this task',pen_no:'🚫 No pen and paper for this task · keep it in your head'});
+if(CT.ja) Object.assign(CT.ja,{pen_ok:'✏️ この課題は紙とペンを使ってもかまいません',pen_no:'🚫 この課題では紙とペンを使わないでください · 頭の中だけで覚えます'});
+Object.assign(CT.ko,{
+ i_reason:'<b>무엇을 하나요?</b> 두 종류 문제가 번갈아 나와요.<br>① <b>그림 9칸의 빈칸 채우기</b> — 가로줄·세로줄마다 모양·개수·색이 같은 규칙으로 바뀌어요. 그 규칙을 찾아 빈칸에 들어갈 그림을 골라요.<br>② <b>숫자 줄의 다음 수 고르기</b> — 예: 2, 4, 8, 16, ? → 32(앞 수의 2배).',
+ i_reason2:'맞히면 조금씩 어려워지고 틀리면 쉬워져요. 다 맞히는 사람은 거의 없으니 모르겠으면 고르고 넘어가도 돼요. 답을 고른 뒤에는 「확실해요 · 반반 · 찍었어요」 중 하나를 눌러 주세요(누르는 동안 시계는 멈춰요). 3분 동안 최대 12문제예요.',
+ i_learn:'<b>무엇을 하나요?</b> 그림과 단어 짝 5개가 하나씩 잠깐씩 나와요(예: ☂️ — 비). 다 보고 나면 그림만 나오고, 아래 단어 중에서 그 그림의 짝을 골라요.',
+ i_learn2:'다 맞힐 때까지 최대 4바퀴 반복하고, 바퀴마다 틀린 짝만 다시 보여 드려요. 그림과 잘 어울리는 짝도 있고 전혀 상관없는 짝도 있어요. 검사 맨 끝에 한 번 더 물어보니 끝까지 기억해 두세요.',
+ i_verbal:'<b>무엇을 하나요?</b> 말의 관계를 묻는 4지선다예요. 예: 「손 : 장갑 = 발 : ?」 → 양말(손에 장갑을 끼듯 발에는 양말). 뜻이 반대인 말, 성격이 다른 하나, 주어진 문장에서 <b>반드시 맞는 것</b>을 고르는 문제도 나와요.',
+ i_verbal2:'맞히면 조금씩 어려워져요. 이번에도 답을 고른 뒤 「확실해요 · 반반 · 찍었어요」을 눌러 주세요. 2분 동안 최대 8문제예요.',
+ i_wm:'<b>무엇을 하나요?</b> 두 가지를 번갈아 해요.<br>① 「3 × 4 − 2 = 10」 같은 식이 <b>맞는지 틀린지</b> 고르기<br>② 그 뒤에 잠깐 나오는 <b>글자 하나 기억하기</b><br>한 묶음이 끝나면 본 글자들을 <b>나온 순서대로</b> 눌러요. 예: F → K → P 였다면 F, K, P.',
+ i_wm2:'기억할 글자는 2개에서 4개까지 늘어나요. 식은 약 8초 안에 골라요(아래 막대가 줄어들어요). 식도 되도록 맞혀 주세요.',
+ i_dyn:'<b>무엇을 하나요?</b> 숫자 줄에 숨은 규칙을 찾아 빈칸에 들어갈 수를 고르는 문제예요. 예: 1, 1, 2, 3, 5, ? → 8(앞의 두 수를 더함). 먼저 4문제를 풀고, 틀린 문제는 힌트를 보고 한 번 더 풀어요. 마지막에 같은 규칙의 새 문제 4개를 풀어요.',
+ i_dyn2:'처음에 틀려도 괜찮아요. 힌트를 받고 얼마나 나아지는지를 보는 과제예요. 시간제한은 없어요.',
+ i_press:'<b>무엇을 하나요?</b> 두 종류 문제가 섞여 나와요.<br>① <b>짧은 글 읽고 답하기</b> — 예: 반을 나누는 규칙을 읽고, 이 학생은 어느 반인지 고르기<br>② <b>처음 보는 공식으로 계산하기</b> — 예: 「진도 지수 = (A + B) × C − D」라면, 표에서 그 사람 줄의 A·B·C·D 숫자를 넣어 계산해요.',
+ i_press2:'먼저 시간 걱정 없이 5문제, 그다음 시간제한이 있는 5문제예요. 시간제한은 내가 처음 5문제를 푼 속도에 맞춰 정해져요. 계산이 길 수 있으니 펜과 종이를 써도 돼요.',
+ i_rot:'<b>무엇을 하나요?</b> 왼쪽과 오른쪽에 도형이 하나씩 나와요. 오른쪽 도형이 왼쪽 도형을 <b>돌리기만 한 것</b>인지, <b>뒤집은 것(거울에 비친 모양)</b>인지 골라요.',
+ i_rot2:'뒤집은 모양은 아무리 돌려도 왼쪽과 똑같이 겹치지 않아요. 1분 동안 빠르고 정확하게, 되도록 많이 풀어요.',
+ i_focus:'<b>무엇을 하나요?</b> 숫자 1~9가 하나씩 빠르게 나왔다 사라져요. <b>3이 아니면 버튼을 누르고, 3이면 누르지 마세요.</b>',
+ i_focus2:'1분 15초쯤 이어져요. 빨리 누르는 것보다 3에서 참는 게 중요해요. 끝까지 같은 리듬으로 해 보세요.'});
+Object.assign(CT.en,{
+ i_reason:'<b>What you do:</b> two kinds of question take turns.<br>① <b>Fill the gap in a 3×3 picture</b> — along each row and column, shape, number or colour changes by the same rule. Find the rule and pick the missing picture.<br>② <b>Pick the next number</b> — e.g. 2, 4, 8, 16, ? → 32 (each number doubles).',
+ i_reason2:'Questions get harder when you are right and easier when you miss. Hardly anyone gets them all, so if you are stuck just pick one and move on. After each answer, tap Sure · Half sure · Guess (the clock pauses while you do). Up to 12 questions in 3 minutes.',
+ i_learn:'<b>What you do:</b> you see 5 picture–word pairs, one at a time (e.g. ☂️ — rain). Then only the picture appears, and you pick its word from the list below.',
+ i_learn2:'We repeat up to 4 rounds until you have them all, showing only the pairs you missed. Some pairs go together naturally, some don\'t. We ask once more at the very end, so keep them in mind.',
+ i_verbal:'<b>What you do:</b> 4-choice questions about how words relate. E.g. "hand : glove = foot : ?" → sock (a glove goes on a hand, a sock on a foot). You will also find opposites, the odd one out, and what <b>must be true</b> from the sentences given.',
+ i_verbal2:'Questions get harder as you get them right. Again, tap Sure · Half sure · Guess after each answer. Up to 8 questions in 2 minutes.',
+ i_wm:'<b>What you do:</b> two things take turns.<br>① Say whether a sum like "3 × 4 − 2 = 10" is <b>right or wrong</b><br>② <b>Remember the letter</b> that appears next<br>At the end of a set, tap the letters <b>in the order you saw them</b>. E.g. F → K → P means F, K, P.',
+ i_wm2:'Sets grow from 2 to 4 letters. Answer each sum within about 8 seconds (the bar below shrinks). Try to get the sums right too.',
+ i_dyn:'<b>What you do:</b> find the rule in a number series and pick the missing number. E.g. 1, 1, 2, 3, 5, ? → 8 (add the two before). First solve 4, retry the ones you miss with a hint, then solve 4 new ones with the same rules.',
+ i_dyn2:'Missing some at first is fine — we look at how much the hints help. There is no time limit.',
+ i_press:'<b>What you do:</b> two kinds of question are mixed.<br>① <b>Read a short passage and answer</b> — e.g. read how classes are assigned and pick this student\'s class<br>② <b>Use a new formula</b> — e.g. for "Progress index = (A + B) × C − D", plug in the A, B, C, D numbers from that person\'s row.',
+ i_press2:'First 5 at your own pace, then 5 with a time limit set from your own pace. Some sums are long, so feel free to use pen and paper.',
+ i_rot:'<b>What you do:</b> there is a shape on the left and one on the right. Is the right one the left shape <b>just turned</b>, or <b>flipped over (a mirror image)</b>?',
+ i_rot2:'A flipped shape never lines up with the left one, however you turn it. You have 1 minute — be quick but careful.',
+ i_focus:'<b>What you do:</b> digits 1–9 flash one at a time. <b>Tap for every digit except 3. When you see 3, don\'t tap.</b>',
+ i_focus2:'It lasts about 1¼ minutes. Holding back on 3 matters more than speed. Keep the same rhythm to the end.'});
+if(CT.ja) Object.assign(CT.ja,{
+ i_reason:'<b>何をするか</b> 2種類の問題が交互に出ます。<br>① <b>3×3の絵の空欄を埋める</b> — 横の行・縦の列ごとに、形・数・色が同じルールで変わります。ルールを見つけて空欄に入る絵を選びます。<br>② <b>数の列の次の数を選ぶ</b> — 例:2, 4, 8, 16, ? → 32(前の数の2倍)。',
+ i_reason2:'正解すると少しずつ難しく、間違えるとやさしくなります。全問正解する人はほとんどいないので、わからなければ選んで次へ進んでかまいません。答えたあと「自信あり・半々・勘で選んだ」を押してください(押している間は時計が止まります)。3分で最大12問です。',
+ i_learn:'<b>何をするか</b> 絵と単語のペアが5組、1つずつ短く出ます(例:☂️ — 雨)。見終わると絵だけが出るので、下の単語からその絵のペアを選びます。',
+ i_learn2:'全部覚えるまで最大4周くり返し、周ごとに間違えたペアだけをもう一度見せます。絵と結びつきやすいペアも、関係のないペアもあります。検査の最後にもう一度ききますので、最後まで覚えておいてください。',
+ i_verbal:'<b>何をするか</b> ことばの関係をきく4択問題です。例:「手 : 手袋 = 足 : ?」→ くつした(手に手袋をはめるように、足にはくつした)。反対の意味のことば、性質の違う1つ、文から<b>必ず正しいと言えるもの</b>を選ぶ問題も出ます。',
+ i_verbal2:'正解すると少しずつ難しくなります。今回も答えたあと「自信あり・半々・勘で選んだ」を押してください。2分で最大8問です。',
+ i_wm:'<b>何をするか</b> 2つを交互に行います。<br>①「3 × 4 − 2 = 10」のような式が<b>正しいか間違いか</b>を選ぶ<br>② そのあと短く出る<b>文字を1つ覚える</b><br>1セットが終わったら、見た文字を<b>出た順番に</b>押します。例:F → K → P なら F, K, P。',
+ i_wm2:'覚える文字は2個から4個まで増えます。式は約8秒以内に答えてください(下のバーが縮みます)。式もできるだけ正しく答えてください。',
+ i_dyn:'<b>何をするか</b> 数の列にかくれたルールを見つけて、空欄に入る数を選びます。例:1, 1, 2, 3, 5, ? → 8(前の2つを足す)。まず4問解き、間違えた問題はヒントを見てもう一度解きます。最後に同じルールの新しい問題を4問解きます。',
+ i_dyn2:'最初に間違えても大丈夫です。ヒントでどれだけ伸びるかを見る課題です。制限時間はありません。',
+ i_press:'<b>何をするか</b> 2種類の問題がまざって出ます。<br>① <b>短い文章を読んで答える</b> — 例:クラス分けのルールを読み、この生徒はどのクラスかを選ぶ<br>② <b>初めて見る公式で計算する</b> — 例:「進度指数 = (A + B) × C − D」なら、表のその人の行のA・B・C・Dを入れて計算します。',
+ i_press2:'まず時間を気にせず5問、次に制限時間つきで5問です。制限時間は、最初の5問を解いた速さに合わせて決まります。計算が長くなることがあるので、紙とペンを使ってもかまいません。',
+ i_rot:'<b>何をするか</b> 左と右に図形が1つずつ出ます。右の図形が、左の図形を<b>回しただけ</b>か、<b>裏返したもの(鏡に映した形)</b>かを選びます。',
+ i_rot2:'裏返した形は、どんなに回しても左の図形とぴったり重なりません。1分間、すばやく正確に、できるだけ多く解いてください。',
+ i_focus:'<b>何をするか</b> 数字1〜9が1つずつすばやく出て消えます。<b>3以外なら押して、3のときは押さないでください。</b>',
+ i_focus2:'1分15秒ほど続きます。速く押すことより、3でがまんすることが大切です。最後まで同じリズムで続けてください。'});
+
 const AREA_FN={reason:aReason,verbal:aVerbal,dyn:aDyn,press:aPress,rule:aRule,learn:aLearn,seq:aSeq,rot:aRot,wm:aWm,speed:aSpeed,focus:aFocus};
 function runArea(i){ if(!S) return; if(i>=FLOW.length) return endRecall(finishTest);
   setStep(i,tr('step',{i:i+1,n:T['n_'+FLOW[i]]})); clockStop(); AREA_FN[FLOW[i]](()=>{ clockStop(); runArea(i+1); }); }
@@ -1710,7 +1769,7 @@ return {start,showResult,shareCard,recallDue,recall};
     const card=$('bd'); if(!card) return; const res=$('res'); if(!res||res.hidden){ card.hidden=true; return; } const Bn=B?B.n:0;
     const lq=myLq(); card.hidden=false; $('bdH').textContent=s.h;
     $('bdMe').innerHTML=(Bn>=MIN&&lq!=null)?f(s.me,{p:pctOf(lq)}):(lq!=null?f(s.meRef,{p:refPct(lq)})+'<small class="few">'+s.meFew+'</small>':s.meFew);
-    $('bdTopH').textContent=s.top;
+    $('bdTopH').textContent=((B?B.n:0)>=20)?s.top:({ko:'목표 기준선',en:'Target lines',ja:'目標ライン'}[document.documentElement.lang.slice(0,2)]||'Target lines');
     const ol=$('bdTop'); ol.replaceChildren(); let marked=false;
     const rows=((Bn>=MIN&&B&&B.top)||[]).slice(0,3).map(x=>({lq:x.lq,age:x.age})); REF.forEach(r=>rows.push({lq:r.lq,ref:r.p})); rows.sort((x,y)=>(y.lq-x.lq)||((x.ref?1:0)-(y.ref?1:0))); let rk=0; rows.forEach(x=>{ const li=document.createElement('li'); const a=document.createElement('span'); a.className='rk'; const b=document.createElement('span'); b.className='lqv'; b.textContent='LQ '+x.lq; const c=document.createElement('span'); c.className='ag'; if(x.ref){ li.className='ref'; a.textContent='—'; a.setAttribute('aria-hidden','true'); c.textContent=x.ref===50?s.refMid:f(s.ref,{p:x.ref}); } else { rk++; li.className=rk<=3?'t3':'nt'; if(!marked&&lq!=null&&x.lq===lq){ li.className+=' mine'; marked=true; } a.textContent=rk; c.textContent=(s.age[x.age]||''); } li.append(a,b,c); ol.append(li); }); { const o2=card.querySelector('p.lock'); if(o2) o2.remove(); } if(Bn<MIN){ const lk=document.createElement('p'); lk.className='lock'; lk.textContent=s.lock; ol.after(lk); }
     const iq=$('bdIq'); iq.replaceChildren(); const hh=document.createElement('p'); hh.innerHTML='<b>'+s.iqH+'</b>'; iq.append(hh);
@@ -1757,7 +1816,7 @@ return {start,showResult,shareCard,recallDue,recall};
   paint(); new MutationObserver(paint).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
 })();
 </script>
-<script>(function(){ const P={ko:'✏️ 펜과 종이를 준비해 주세요. 암산하기 긴 계산 문제가 있어요.',en:'✏️ Have a pen and paper ready. Some sums are long to do in your head.',ja:'✏️ 紙とペンを用意してください。暗算しにくい計算問題があります。'};
+<script>(function(){ const P={ko:'✏️ 펜과 종이를 준비해 주세요. 계산 과제에서만 쓰고, 외우는 과제에서는 쓰지 않아요. 과제마다 알려 드려요.',en:'✏️ Have a pen and paper ready. Use them only for the calculation tasks, never for the memory tasks. Each task tells you which.',ja:'✏️ 紙とペンを用意してください。使うのは計算の課題だけで、覚える課題では使いません。課題ごとにお知らせします。'};
   const paint=()=>{ const e=document.getElementById('tPrep'); if(e){ const l=(document.documentElement.lang||'ko').slice(0,2); e.textContent=P[l]||P.en; } };
   paint(); new MutationObserver(paint).observe(document.documentElement,{attributes:true,attributeFilter:['lang']}); })();</script>
 <script>(function(){var b=document.getElementById('bJa');if(!b)return;b.addEventListener('click',function(){var q=new URLSearchParams(location.search),o=new URLSearchParams();['src','t'].forEach(function(k){var v=q.get(k);if(v)o.set(k,v);});var s=o.toString();location.href='lq2-test-ja.html'+(s?'?'+s:'');});})();</script>

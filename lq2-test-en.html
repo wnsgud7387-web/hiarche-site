@@ -95,6 +95,46 @@ button.ghost{background:transparent;color:var(--sub);border:1px solid var(--line
 .w .legal details.more summary{cursor:pointer;font-size:12px;font-weight:600;color:var(--sub);min-height:44px;display:flex;align-items:center;list-style:revert}
 .w .legal details.more[open] summary{margin-bottom:4px}
 .w .legal details.more p+p{margin-top:6px}
+
+.w .intro{gap:10px}
+.w .intro .lead{margin:0;font-size:15px;line-height:1.6;color:var(--ink)}
+.w .intro dl{margin:0;display:grid;gap:8px}
+.w .intro dl div{display:grid;grid-template-columns:64px 1fr;gap:12px;align-items:baseline}
+.w .intro dt{font-size:13px;font-weight:700;color:var(--acc)}
+.w .intro dd{margin:0;font-size:14px;line-height:1.6;color:var(--ink)}
+.w .intro .foot{margin:0;font-size:13px;line-height:1.5;color:var(--mut, var(--ink));opacity:.8}
+:lang(en) .w .intro dl div{grid-template-columns:72px 1fr}
+</style>
+<style>
+.w .strip{display:block;text-align:center;font-size:14px;color:var(--ink);margin:-4px 0 0;line-height:1.6}
+.w .strip b{color:var(--acc)}
+.w .board{gap:12px}
+.w .board h2{font-size:18px;margin:0}
+.w .board .me{margin:0;font-size:16px;line-height:1.5}
+.w .board .me b{font-size:28px;color:var(--acc);font-variant-numeric:tabular-nums}
+.w .board ol{margin:0;padding:0;list-style:none;display:grid;gap:6px}
+.w .board li{display:grid;grid-template-columns:32px 1fr auto;align-items:center;gap:8px;min-height:40px;padding:6px 12px;border-radius:10px;background:var(--bg);font-variant-numeric:tabular-nums}
+.w .board li .rk{font-weight:800;color:var(--sub)}
+.w .board li:nth-child(-n+3) .rk{color:var(--amberink,#8a5a0b)}
+.w .board li .lqv{font-weight:800;font-size:18px}
+.w .board li .ag{font-size:12px;color:var(--sub)}
+.w .board li.mine{outline:2px solid var(--acc);background:var(--accsoft)}
+.w .board .iq{display:grid;gap:8px;padding:12px;border-radius:10px;background:var(--dopsoft)}
+.w .board .iq p{margin:0;font-size:14px;line-height:1.5}
+.w .board .iq b{color:var(--dopink,#6a4fb0);font-size:16px}
+.w .board .cap2{margin:0;font-size:12px;color:var(--sub);line-height:1.5}
+.w .cl .iqf{display:grid;gap:6px;font-size:14px;font-weight:700}
+.w .cl .iqf input{font:inherit;font-weight:400;min-height:44px;border:1px solid var(--fieldline);border-radius:10px;padding:0 12px;background:var(--card);color:var(--ink);width:10em}
+.w .cl .iqf small{font-weight:400;color:var(--sub);font-size:12px}
+</style>
+<style>
+.w .board li.t3 .rk{color:var(--amberink,#8a5a0b)}
+.w .board li.nt .rk,.w .board li.ref .rk{color:var(--sub)}
+.w .board li.ref{background:transparent;border:1px dashed var(--sub);min-height:36px}
+.w .board li.ref .lqv{font-size:15px;font-weight:700;color:var(--sub)}
+.w .board li.ref .ag{font-size:13px;font-weight:700;color:var(--acc)}
+.w .board p.lock{margin:0;font-size:13px;line-height:1.5;color:var(--sub)}
+.w .board .me small.few{display:block;font-size:13px;color:var(--sub);margin-top:2px}
 </style>
 </head><body>
 <main class="w">
@@ -110,6 +150,12 @@ button.ghost{background:transparent;color:var(--sub);border:1px solid var(--line
     <p class="sub" id="tSub"></p>
     <ul class="facts"><li id="f0"></li><li id="f1"></li><li id="f2"></li></ul>
     <button id="bStart" type="button" class="cta"></button>
+  </section>
+  <section class="card intro" id="lqIntro" aria-labelledby="iH">
+    <h2 id="iH"></h2>
+    <p class="lead" id="iLead"></p>
+    <dl><div><dt id="iT1"></dt><dd id="iD1"></dd></div><div><dt id="iT2"></dt><dd id="iD2"></dd></div><div><dt id="iT3"></dt><dd id="iD3"></dd></div></dl>
+    <p class="foot" id="iFoot"></p>
   </section>
   <section class="card how">
     <h2 id="tHowH"></h2>
@@ -127,6 +173,7 @@ button.ghost{background:transparent;color:var(--sub);border:1px solid var(--line
       <textarea id="out" readonly aria-label="결과 기록" hidden></textarea>
     </div>
   </section>
+  <section class="card board" id="bd" hidden aria-labelledby="bdH"><h2 id="bdH"></h2><p class="me" id="bdMe"></p><p class="cap" id="bdTopH"></p><ol id="bdTop"></ol><div class="iq" id="bdIq"></div><p class="cap2" id="bdCap"></p></section>
   <section class="card app" id="app" hidden>
     <p id="tApp"></p>
     <a class="btn" id="aApp" href="https://hiarche.com/apps/rivalog.html">라이벌로그 보기</a>
@@ -1604,7 +1651,7 @@ return {start,showResult,shareCard,recallDue,recall};
     out.push({k:'all',t:sec(R.ms)}); return out; };
   const clSend=async()=>{ const r=clFor, c=TX[lang].cl; if(!r||sentSet.has(r)||clBusy) return; if(!($('clAdult').checked&&$('clAgree').checked)) return;
     const areas={}; Object.keys(r.areas||{}).forEach(k=>{ const v=r.areas[k]; areas[k]=(typeof v==='number')?Math.round(v):null; });
-    const body={ver:'lq2.0',lang:lang,device:devOf(),src:srcOf(),age_band:pick('clAge'),gender:pick('clGen'),adult:true,consent:true,consent_v:(lang==='ko'?'ko-20261020-a14':lang+'-20261020'),lq:Math.round(r.lq),areas:areas,items:itemsOf(r)};
+    const body={ver:'lq2.0',lang:lang,device:devOf(),src:srcOf(),age_band:pick('clAge'),gender:pick('clGen'),adult:true,consent:true,consent_v:(lang==='ko'?'ko-20261020-a14':lang+'-20261020'),lq:Math.round(r.lq),areas:areas,items:itemsOf(r),iq_self:(window.__iqSelf?window.__iqSelf():null)};
     clBusy=true; clGate(); $('clSend').textContent=c.sending; $('clMsg').textContent='';
     try{ const res=await fetch('https://cvuyarvywlkvxwfckqjb.supabase.co/rest/v1/lq_records',{method:'POST',headers:{'apikey':'sb_publishable_Z04lS5iGlcrsF605w-oyKA_kXf5DOBA','Authorization':'Bearer sb_publishable_Z04lS5iGlcrsF605w-oyKA_kXf5DOBA','Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify(body),credentials:'omit',cache:'no-store',referrerPolicy:'no-referrer'});
       if(res.ok){ sentSet.add(r); clBusy=false; clShow(r); return; }
@@ -1621,6 +1668,76 @@ return {start,showResult,shareCard,recallDue,recall};
   $('bCopy').onclick=()=>{ const o=$('out'); o.select(); const done=()=>{ $('bCopy').textContent=TX[lang].copied; setTimeout(()=>$('bCopy').textContent=TX[lang].copy,1500); };
     try{ navigator.clipboard.writeText(o.value).then(done,()=>{ document.execCommand('copy'); done(); }); }catch(e){ try{ document.execCommand('copy'); done(); }catch(_){} } };
   apply();
+})();
+</script>
+<script>
+/* ═══ 순위표·내 위치·IQ 비교(웹 검사 전용) — add_board.mjs ═══ */
+(function(){
+  const U='https://cvuyarvywlkvxwfckqjb.supabase.co/rest/v1/rpc/lq_board', K='sb_publishable_Z04lS5iGlcrsF605w-oyKA_kXf5DOBA';
+  const S={
+    ko:{ref:'잠정 기준 상위 {p}%',refMid:'잠정 기준 중간',stripRef:'<b>LQ 125</b> 넘으면 잠정 기준 상위 5% — 도전해 보세요',meRef:'잠정 기준으로는 <b>상위 {p}%</b>',lock:'기록이 20개 모이면 실제 순위가 열려요. 그전에는 누구의 점수도 보이지 않아요.',refCap:'점선 줄은 실제 참여 기록이 아니라 잠정 눈금(기준점 100·표준편차 15)의 기준선이에요.',strip:'지금 1위 <b>LQ {t}</b> — 도전해 보세요',h:'참여자 순위',me:'지금까지 참여자 결과를 종합하면 내 LQ는 <b>상위 {p}%</b> 수준이에요',meFew:'참여자가 조금 더 모이면 내 위치가 보여요.',top:'지금까지 탑3',iqH:'IQ를 안다고 답한 사람들은?',iq115:'IQ 115 안팎(113~117)이라고 답한 사람들: LQ 중간값 <b>{m}</b>',iq120:'IQ 120 이상이라고 답한 사람들: LQ 중간값 <b>{m}</b>',iqFew:'더 모으는 중',cap:'{d} 기준 · 보낸 기록만 셈 · 스스로 알려 준 IQ라 검사 기관·시기가 달라요. 재미로 봐 주세요.',iqL:'알고 있는 IQ가 있으면 적어 주세요(선택)',iqS:'예: 웩슬러 검사 115. 모르면 비워 두세요.',iqLi:'고른 경우만: 스스로 적은 IQ 점수. 보낸 LQ는 나이대와 함께 익명 순위표(탑3)에 보일 수 있어요.',note:'순위표를 보여 주기 위해 이 페이지는 저장소(Supabase)에서 집계 숫자만 받아와요. 이때 내 답이나 결과는 보내지 않아요.',age:{u19:'14~18',u30:'19~29',['30s']:'30대',['40s']:'40대',['50s']:'50대',['60+']:'60+',na:''}},
+    en:{ref:'Provisional top {p}%',refMid:'Provisional middle',stripRef:'Score over <b>LQ 125</b> = provisional top 5% — can you?',meRef:'On the provisional scale: <b>top {p}%</b>',lock:'Real rankings open once 20 records are in. Until then, no one’s score is shown.',refCap:'Dashed rows are reference lines on the provisional scale (baseline 100, SD 15), not real records.',strip:'Current #1: <b>LQ {t}</b> — can you beat it?',h:'Leaderboard',me:'Across everyone so far, your LQ is around the <b>top {p}%</b>',meFew:'Your position appears once a few more people join.',top:'Top 3 so far',iqH:'People who told us their IQ',iq115:'Said IQ about 115 (113–117): median LQ <b>{m}</b>',iq120:'Said IQ 120 or higher: median LQ <b>{m}</b>',iqFew:'still collecting',cap:'As of {d} · sent records only · IQs are self-reported from different tests and years. Just for fun.',iqL:'If you know your IQ, enter it (optional)',iqS:'e.g. 115 on a Wechsler test. Leave blank if you don’t know.',iqLi:'Only if you enter it: the IQ score you report. Your LQ may appear with your age band on the anonymous top-3 leaderboard.',note:'To show the leaderboard, this page fetches summary numbers from our storage (Supabase). Your answers and result are not sent when it does.',age:{u19:'14–18',u30:'18–29',['30s']:'30s',['40s']:'40s',['50s']:'50s',['60+']:'60+',na:''}},
+    ja:{ref:'暫定基準 上位{p}%',refMid:'暫定基準 中間',stripRef:'<b>LQ 125</b>を超えれば暫定基準で上位5% — 挑戦してみよう',meRef:'暫定基準では <b>上位{p}%</b>',lock:'記録が20件集まると実際のランキングが表示されます。それまでは誰の点数も表示されません。',refCap:'点線の行は実際の記録ではなく、暫定の目盛り(基準点100・標準偏差15)の基準線です。',strip:'現在の1位 <b>LQ {t}</b> — 挑戦してみよう',h:'参加者ランキング',me:'これまでの参加者の結果から見ると、あなたのLQは<b>上位{p}%</b>ぐらいです',meFew:'参加者がもう少し集まると、自分の位置が表示されます。',top:'これまでのトップ3',iqH:'IQを知っていると答えた人は?',iq115:'IQ115前後(113〜117)と答えた人: LQの中央値 <b>{m}</b>',iq120:'IQ120以上と答えた人: LQの中央値 <b>{m}</b>',iqFew:'集めている途中です',cap:'{d}時点 · 送信された記録のみ · IQは自己申告のため、検査の種類や時期はさまざまです。お楽しみとしてご覧ください。',iqL:'知っているIQがあれば入力してください(任意)',iqS:'例:ウェクスラー式検査で115。わからなければ空欄のままで。',iqLi:'入力した場合のみ:自分で入力したIQの点数。送ったLQは年代とともに匿名ランキング(トップ3)に表示されることがあります。',note:'ランキングを表示するため、このページは保存先(Supabase)から集計の数字だけを受け取ります。そのとき、回答や結果は送りません。',age:{u19:'14〜18',u30:'18〜29',['30s']:'30代',['40s']:'40代',['50s']:'50代',['60+']:'60歳以上',na:''}}
+  };
+  const $=id=>document.getElementById(id); const L=()=>{ const l=document.documentElement.lang; return S[l]?l:'en'; };
+  const f=(s,o)=>s.replace(/\{(\w+)\}/g,(_,k)=>o[k]!=null?o[k]:'');
+  let B=null, busy=false; /* ref-lines */ const MIN=20, MIN_IQ=5; const REF=[{lq:125,p:5},{lq:119,p:10},{lq:110,p:25},{lq:100,p:50}]; const phi=z=>{ const t=1/(1+0.3275911*Math.abs(z)/Math.SQRT2), y=1-(((((1.061405429*t-1.453152027)*t)+1.421413741)*t-0.284496736)*t+0.254829592)*t*Math.exp(-z*z/2); return z>=0?(1+y)/2:(1-y)/2; }; const refPct=lq=>Math.max(1,Math.min(99,Math.round(100*(1-phi((lq-100)/15)))));
+  const myLq=()=>{ const t=($('lq')&&$('lq').textContent)||''; const m=t.match(/(\d{2,3})/); return m?+m[1]:null; };
+  const today=()=>{ try{ return new Intl.DateTimeFormat(document.documentElement.lang||'ko',{month:'long',day:'numeric'}).format(new Date()); }catch(e){ return ''; } };
+  const pctOf=(lq)=>{ if(!B||!B.hist) return null; let above=0, same=0; for(const k in B.hist){ const b=+k, c=+B.hist[k]; if(b>Math.floor(lq/5)*5) above+=c; else if(b===Math.floor(lq/5)*5) same+=c; } const r=(above+same/2)/Math.max(1,B.n); return Math.max(1,Math.min(99,Math.ceil(r*100))); };
+  const load=async()=>{ if(B||busy) return; busy=true; try{ const r=await fetch(U,{method:'POST',headers:{apikey:K,Authorization:'Bearer '+K,'Content-Type':'application/json'},body:'{}',credentials:'omit',cache:'no-store',referrerPolicy:'no-referrer'}); if(r.ok){ B=await r.json(); draw(); } }catch(e){} busy=false; };
+  const draw=()=>{ const s=S[L()];
+    // 시작 화면 한 줄
+    const st=$('bdStrip'); if(st){ st.innerHTML=(B&&B.n>=MIN&&B.top&&B.top[0])?f(s.strip,{t:B.top[0].lq}):s.stripRef; st.hidden=false; }
+    // 결과 아래 순위 카드
+    const card=$('bd'); if(!card) return; const res=$('res'); if(!res||res.hidden){ card.hidden=true; return; } const Bn=B?B.n:0;
+    const lq=myLq(); card.hidden=false; $('bdH').textContent=s.h;
+    $('bdMe').innerHTML=(Bn>=MIN&&lq!=null)?f(s.me,{p:pctOf(lq)}):(lq!=null?f(s.meRef,{p:refPct(lq)})+'<small class="few">'+s.meFew+'</small>':s.meFew);
+    $('bdTopH').textContent=s.top;
+    const ol=$('bdTop'); ol.replaceChildren(); let marked=false;
+    const rows=((Bn>=MIN&&B&&B.top)||[]).slice(0,3).map(x=>({lq:x.lq,age:x.age})); REF.forEach(r=>rows.push({lq:r.lq,ref:r.p})); rows.sort((x,y)=>(y.lq-x.lq)||((x.ref?1:0)-(y.ref?1:0))); let rk=0; rows.forEach(x=>{ const li=document.createElement('li'); const a=document.createElement('span'); a.className='rk'; const b=document.createElement('span'); b.className='lqv'; b.textContent='LQ '+x.lq; const c=document.createElement('span'); c.className='ag'; if(x.ref){ li.className='ref'; a.textContent='—'; a.setAttribute('aria-hidden','true'); c.textContent=x.ref===50?s.refMid:f(s.ref,{p:x.ref}); } else { rk++; li.className=rk<=3?'t3':'nt'; if(!marked&&lq!=null&&x.lq===lq){ li.className+=' mine'; marked=true; } a.textContent=rk; c.textContent=(s.age[x.age]||''); } li.append(a,b,c); ol.append(li); }); { const o2=card.querySelector('p.lock'); if(o2) o2.remove(); } if(Bn<MIN){ const lk=document.createElement('p'); lk.className='lock'; lk.textContent=s.lock; ol.after(lk); }
+    const iq=$('bdIq'); iq.replaceChildren(); const hh=document.createElement('p'); hh.innerHTML='<b>'+s.iqH+'</b>'; iq.append(hh);
+    [['iq115','iq115'],['iq120','iq120']].forEach(([k,t])=>{ const o=(B&&B[k])||{n:0}; const p=document.createElement('p'); p.innerHTML=(o.n>=MIN_IQ&&o.med!=null)?f(s[t],{m:Math.round(o.med),n:o.n}):(f(s[t],{m:'—',n:o.n})+' · '+f(s.iqFew,{n:o.n})); iq.append(p); });
+    $('bdCap').textContent=s.refCap+' '+f(s.cap,{d:today()}); };
+  const text=()=>{ const s=S[L()];
+    const lab=$('clIqLab'); if(lab){ $('clIqL').textContent=s.iqL; $('clIqS').textContent=s.iqS; }
+    const ul=$('clList'); if(ul&&!$('clIqLi')){ const li=document.createElement('li'); li.id='clIqLi'; ul.append(li); } if($('clIqLi')) $('clIqLi').textContent=s.iqLi;
+    const lg=$('tL3'); if(lg){ let p=$('tLBd'); if(!p){ p=document.createElement('p'); p.id='tLBd'; lg.after(p); } p.textContent=s.note; }
+    draw(); };
+  window.__iqSelf=()=>{ const v=$('clIq')&&$('clIq').value.trim(); if(!v) return null; const n=Math.round(+v); return (n>=50&&n<=160)?n:null; };
+  // 자리 만들기: IQ 칸은 성별 아래, 시작 화면 한 줄은 칩 아래
+  const g=$('clGen'); if(g&&!$('clIqLab')){ const lab=document.createElement('label'); lab.className='iqf'; lab.id='clIqLab'; lab.innerHTML='<span id="clIqL"></span><input id="clIq" type="number" inputmode="numeric" min="50" max="160" step="1" autocomplete="off"><small id="clIqS"></small>'; g.after(lab); }
+  const fc=document.querySelector('.w .facts'); if(fc&&!$('bdStrip')){ const p=document.createElement('p'); p.className='strip'; p.id='bdStrip'; p.hidden=true; fc.after(p); }
+  new MutationObserver(text).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
+  const res=$('res'); if(res) new MutationObserver(()=>{ if(!res.hidden){ load(); draw(); } }).observe(res,{attributes:true,attributeFilter:['hidden']});
+  const ul=$('clList'); if(ul) new MutationObserver(()=>{ if(!$('clIqLi')) text(); }).observe(ul,{childList:true});
+  const msg=$('clMsg'); if(msg) new MutationObserver(()=>{ const row=$('clSend')&&$('clSend').closest('.row'); if(row&&row.hidden&&!window.__bdRe){ window.__bdRe=1; B=null; setTimeout(load,800); } }).observe(msg,{childList:true,characterData:true,subtree:true});
+  text(); load();
+})();
+</script>
+
+<script>
+(function(){
+  const IX={
+    ko:{h:'LQ(학습지수)란?',lead:'새로운 것을 얼마나 빨리 익히고, 기억하고, 응용하는지를 8가지 짧은 과제로 추정한 점수예요.',
+        t1:'무엇을',d1:'규칙 찾기 · 말의 관계 · 기억 · 도형 · 집중처럼 배울 때 쓰는 힘',
+        t2:'100은',d2:'라이벌로그의 잠정 기준점이에요. 높을수록 과제를 빠르고 정확하게 해낸 거예요.',
+        t3:'어디에',d3:'나와 비슷한 수준의 공부 라이벌을 고르는 데 써요.',
+        foot:'추정치이며 지능검사나 진단이 아니에요. 기준점은 참여 기록이 쌓이면 다듬어요.'},
+    en:{h:'What is LQ (Learning Quotient)?',lead:'A score that estimates how quickly you pick up, remember and apply new things, from 8 short tasks.',
+        t1:'Measures',d1:'Finding rules, word logic, memory, shapes and focus: skills you use when learning',
+        t2:'100',d2:"Rivalog's provisional baseline. A higher score means you did the tasks faster and more accurately.",
+        t3:'Used for',d3:'Matching you with a study rival at a similar level.',
+        foot:'An estimate, not an intelligence test or diagnosis. The baseline is refined as records come in.'},
+    ja:{h:'LQ(学習指数)とは?',lead:'新しいことをどれだけ速く身につけ、覚え、応用できるかを、8つの短い課題から推定した点数です。',
+        t1:'測るもの',d1:'ルールを見つける・ことばの関係・記憶・図形・集中など、学ぶときに使う力',
+        t2:'100とは',d2:'Rivalogの暫定の基準点です。高いほど、課題を速く正確にこなしたことを表します。',
+        t3:'使い道',d3:'自分に近いレベルの勉強ライバル選びに使います。',
+        foot:'推定であり、知能検査や診断ではありません。基準点は記録が集まるにつれて調整します。'}};
+  const set=(id,s)=>{const e=document.getElementById(id); if(e) e.textContent=s;};
+  const paint=()=>{const l=(document.documentElement.lang||'ko').slice(0,2); const t=IX[l]||IX.en;
+    set('iH',t.h); set('iLead',t.lead); set('iT1',t.t1); set('iD1',t.d1); set('iT2',t.t2); set('iD2',t.d2); set('iT3',t.t3); set('iD3',t.d3); set('iFoot',t.foot);};
+  paint(); new MutationObserver(paint).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
 })();
 </script>
 <script>(function(){var b=document.getElementById('bJa');if(!b)return;b.addEventListener('click',function(){var q=new URLSearchParams(location.search),o=new URLSearchParams();['src','t'].forEach(function(k){var v=q.get(k);if(v)o.set(k,v);});var s=o.toString();location.href='lq2-test-ja.html'+(s?'?'+s:'');});})();</script>

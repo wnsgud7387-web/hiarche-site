@@ -12,8 +12,8 @@ BOARD = 'https://github.com/wnsgud7387-web/hiarche-community/discussions'
 E = html.escape
 
 # Legal notice for the site (법무 rpl-20261020-lq-age14-legal 15:07 KST 확정본)
-SITE_NOTICE_KO = '이 사이트는 쿠키나 분석 도구를 쓰지 않아요. LQ 검사 결과는 브라우저 안에서만 계산돼요. 이용자가 결과 화면에서 직접 동의하고 보내기를 누른 경우에만 LQ 기록(LQ·영역 점수, 문항별 정답 여부와 걸린 시간, 언어, 화면 종류, 보낸 날짜, 들어온 경로, 고른 경우 나이대·성별)이 아르케의 저장소(Supabase Inc., 서버 위치 대한민국 서울 — 처리 위탁)로 전송돼요. 사이트를 열면 호스팅 업체 Vercel Inc.(미국)가 보안과 운영을 위해 접속 기록(IP 주소, 접속 시각, 브라우저 정보)을 미국 등 국외에서 Vercel의 정책에 따른 기간 동안 처리할 수 있어요. 저장소 업체 Supabase도 보안을 위해 접속 기록(IP 주소 포함)을 1일 동안 남길 수 있어요. 아르케는 이 기록들을 받거나 LQ 기록과 연결하지 않아요. 국외 처리를 원하지 않으면 이 사이트에 접속하지 않으면 돼요. 문의·개인정보 보호책임자: 박준형 · archeisit@gmail.com'
-SITE_NOTICE_EN = "This site uses no cookies or analytics. LQ results are calculated only in your browser. Only if you agree and press Send on the result screen is your LQ record (LQ and area scores, right/wrong and time per item, language, device type, date sent, how you arrived, and age band and gender if you chose them) sent to Arche's storage (Supabase Inc., servers in Seoul, Republic of Korea, acting as our processor). When you open this site, our hosting provider Vercel Inc. (USA) may process access logs (IP address, access time, browser information) for security and operation, in the US or other countries, for the period set by Vercel's own policy. Our storage provider Supabase may also keep access logs, including IP addresses, for 1 day for security. Arche does not receive these logs or link them to LQ records. If you do not want this processing abroad, please do not visit this site. Contact and privacy officer: Junhyung Park · archeisit@gmail.com"
+SITE_NOTICE_KO = '이 사이트는 쿠키나 분석 도구를 쓰지 않아요. LQ 검사 결과는 브라우저 안에서만 계산돼요. 이용자가 결과 화면에서 직접 동의하고 보내기를 누른 경우에만 LQ 기록(LQ·영역 점수, 문항별 정답 여부와 걸린 시간, 언어, 화면 종류, 보낸 날짜, 들어온 경로, 고른 경우 나이대·성별)이 아르케의 저장소(Supabase Inc., 서버 위치 대한민국 서울 — 처리 위탁)로 전송돼요. 사이트를 열면 호스팅 업체 Vercel Inc.(미국)가 보안과 운영을 위해 접속 기록(IP 주소, 접속 시각, 브라우저 정보)을 미국 등 국외에서 Vercel의 정책에 따른 기간 동안 처리할 수 있어요. 저장소 업체 Supabase도 보안을 위해 접속 기록(IP 주소 포함)을 1일 동안 남길 수 있어요. 아르케는 이 기록들을 받거나 LQ 기록과 연결하지 않아요. 국외 처리를 원하지 않으면 이 사이트에 접속하지 않으면 돼요. 문의: 아르케 개인정보 보호 담당 · archeisit@gmail.com'
+SITE_NOTICE_EN = "This site uses no cookies or analytics. LQ results are calculated only in your browser. Only if you agree and press Send on the result screen is your LQ record (LQ and area scores, right/wrong and time per item, language, device type, date sent, how you arrived, and age band and gender if you chose them) sent to Arche's storage (Supabase Inc., servers in Seoul, Republic of Korea, acting as our processor). When you open this site, our hosting provider Vercel Inc. (USA) may process access logs (IP address, access time, browser information) for security and operation, in the US or other countries, for the period set by Vercel's own policy. Our storage provider Supabase may also keep access logs, including IP addresses, for 1 day for security. Arche does not receive these logs or link them to LQ records. If you do not want this processing abroad, please do not visit this site. Contact: Arche privacy team · archeisit@gmail.com"
 
 APPS = [
   dict(slug='niblore', name='Niblore', kind='Stories', bg='#0A132A', fg='#E3DFD8',
@@ -236,6 +236,7 @@ def build():
             'lab/story-accounting-episode-1.html': 'Documents/story/hiarche_lab/story-acca-lab.html',
             'lab/lq2-test.html': 'Documents/doppel/lq2/lq2-test.html',
             'lab/lq2-test-en.html': 'Documents/doppel/lq2/lq2-test-en.html',
+            'lab/lq2-test-ja.html': 'Documents/doppel/lq2/lq2-test-ja.html',
             'lab/og_lq2_ko.png': 'Desktop/ARCHE/마케팅/hiarche/og_lq2_ko.png',
             'lab/og_lq2_en.png': 'Desktop/ARCHE/마케팅/hiarche/og_lq2_en.png'}
     for dst, src in labs.items():

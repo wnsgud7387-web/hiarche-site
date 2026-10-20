@@ -62,7 +62,8 @@ button.ghost{background:transparent;color:var(--sub);border:1px solid var(--line
 .sheet p{margin:0;font-size:14px}
 .sheet textarea{width:100%;min-height:84px;font:14px/1.5 inherit;background:var(--bg);color:var(--ink);border:1px solid var(--fieldline);border-radius:8px;padding:10px}
 .sheet button{min-height:44px}
-</style></head><body>
+</style><style>#legal details.more{margin-top:6px}#legal details.more summary{cursor:pointer;font-size:12.5px;opacity:.75;list-style:revert}#legal details.more[open] summary{margin-bottom:6px}</style>
+</head><body>
 <main class="w">
   <h1 id="tTitle">라이벌로그 학습능력검사 LQ 2.0</h1>
   <p class="sub" id="tSub"></p>
@@ -111,7 +112,7 @@ button.ghost{background:transparent;color:var(--sub);border:1px solid var(--line
   <p class="toast" id="toast" role="status"></p>
   <div class="sheet" id="sheet" hidden><p id="tSheet"></p><textarea id="shareBox" readonly></textarea><button id="bSheet" class="ghost"></button></div>
   <section class="legal" id="legal" aria-label="안내">
-    <p id="tL1"></p><p id="tL2"></p><p id="tL3"></p>
+    <p id="tL1"></p><details class="more"><summary id="tLMore"></summary><p id="tL2"></p><p id="tL3"></p></details>
   </section>
 </main>
 <style>
@@ -1511,7 +1512,7 @@ return {start,showResult,shareCard,recallDue,recall};
     $('tHow').innerHTML=t.how.map(s=>'<li>'+s.replace(/</g,'&lt;')+'</li>').join('');
     $('bStart').textContent=t.start; $('tResH').textContent=t.resH; $('bShow').textContent=t.show; $('bCopy').textContent=t.copy; $('tNote').textContent=t.note;
     $('bShare').textContent=t.share; $('tApp').textContent=t.app; $('aApp').textContent=t.appBtn; $('aApp').href='https://hiarche.com/apps/rivalog.html'+(lang==='en'?'?lang=en':'');
-    $('tL1').textContent=t.l1; $('tL2').textContent=t.l2; $('tL3').textContent=(COLLECT_ON?t.l3c:t.l3); if(COLLECT_ON){ if(window.__clLang!==lang){ $('clAdult').checked=false; $('clAgree').checked=false; $('clSend').disabled=true; window.__clLang=lang; } clText(); } $('bCopy').hidden=!T1; $('out').hidden=!T1;
+    $('tL1').textContent=t.l1; $('tLMore').textContent=(lang==='ko'?'개인정보·안내 더 보기':'Privacy and notes'); $('tL2').textContent=t.l2; $('tL3').textContent=(COLLECT_ON?t.l3c:t.l3); if(COLLECT_ON){ if(window.__clLang!==lang){ $('clAdult').checked=false; $('clAgree').checked=false; $('clSend').disabled=true; window.__clLang=lang; } clText(); } $('bCopy').hidden=!T1; $('out').hidden=!T1;
     $('bKo').classList.toggle('on',lang==='ko'); $('bEn').classList.toggle('on',lang==='en'); if(last) render(last); };
   const render=r=>{ const t=TX[lang], A=r.areas||{};
     $('res').hidden=false; $('app').hidden=false; if(COLLECT_ON) clShow(r); $('lq').textContent=t.lab.lq+' '+r.lq;

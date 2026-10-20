@@ -308,6 +308,18 @@ def build():
 <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px"><a href="{src}" style="font-weight:600">Open full screen</a><span class="note">{E(ln)}</span></div>
 </section>
 '''
+        lqsec = ''
+        if a['slug'] == 'rivalog':
+            lqsec = '''<section id="lq" class="wrap sec" style="padding-bottom:24px">
+<div class="card white" style="gap:14px">
+<p class="eyebrow" style="color:#B23E12">Take part · beta</p>
+<h2 style="font-size:clamp(28px,3.6vw,40px);font-weight:800;letter-spacing:-.03em">Try the LQ learning check</h2>
+<p class="lead" style="font-size:17px">Eight short tasks, about 20–25 minutes, no sign-in. See how you learn and what kind of rival fits you. An estimate, not an intelligence test.</p>
+<p style="color:var(--soft)">At the end you can choose to send your record anonymously to help set the baseline. Nothing is sent unless you press Send.</p>
+<div style="display:flex;flex-wrap:wrap;gap:12px"><a class="btn" style="border-radius:12px;background:#2F5D50;color:#F1F5F2" href="../lab/lq2-test-en.html">Start in English</a><a class="btn" lang="ko" style="border-radius:12px;border:2px solid #2F5D50;color:#2F5D50" href="../lab/lq2-test.html">한국어로 하기</a></div>
+</div>
+</section>
+'''
         page = head(f'{a["name"]} — {a["line"]} | HiArche', a['sub'], 1, f'apps/{a["slug"]}.html') + nav(1, 'Apps') + f'''<main id="main">
 <section style="background:{a["bg"]};color:{a["fg"]}"><div class="wrap hero" style="padding-block:72px">
 <div class="text">
@@ -315,11 +327,11 @@ def build():
 <h1 class="h1" style="font-size:clamp(44px,6vw,80px)">{E(a["name"])}</h1>
 <p style="font-family:'Bricolage Grotesque',sans-serif;font-size:28px;font-weight:700">{E(a["line"])}</p>
 <p style="font-size:18px;max-width:32em;opacity:.88">{E(a["sub"])}</p>
-<div style="display:flex;flex-wrap:wrap;gap:12px">{dl}{'<a class="btn" style="border-radius:12px;border:2px solid '+a["fg"]+';color:'+a["fg"]+'" href="#try">Try it here</a>' if lab else ''}{'' if a['slug']=='burnpile' else '<span class="btn" style="border-radius:12px;border:1.5px dashed '+a['fg']+';opacity:.8">Google Play · soon</span>'}</div>
+<div style="display:flex;flex-wrap:wrap;gap:12px">{dl}{'<a class="btn" style="border-radius:12px;border:2px solid '+a["fg"]+';color:'+a["fg"]+'" href="#try">Try it here</a>' if lab else ''}{'<a class="btn" style="border-radius:12px;border:2px solid '+a["fg"]+';color:'+a["fg"]+'" href="#lq">LQ check</a>' if a['slug']=='rivalog' else ''}{'' if a['slug']=='burnpile' else '<span class="btn" style="border-radius:12px;border:1.5px dashed '+a['fg']+';opacity:.8">Google Play · soon</span>'}</div>
 <p style="font-size:14px;opacity:.78">{E(a["meta"])}</p>
 </div>
 </div></section>
-{trysec}<section class="wrap sec"><h2 style="font-size:clamp(32px,4vw,48px);font-weight:800;letter-spacing:-.03em">What you can do</h2><div class="grid">{feats}</div></section>
+{lqsec}{trysec}<section class="wrap sec"><h2 style="font-size:clamp(32px,4vw,48px);font-weight:800;letter-spacing:-.03em">What you can do</h2><div class="grid">{feats}</div></section>
 <section class="band"><div class="wrap sec" style="flex-direction:row;flex-wrap:wrap;gap:48px">
 <div style="flex:1 1 480px;min-width:0;display:flex;flex-direction:column;gap:16px">
 <h2 style="font-size:clamp(32px,4vw,48px);font-weight:800;letter-spacing:-.03em">Questions</h2>

@@ -1,0 +1,1509 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Rivalog LQ 2.0 check</title>
+<meta name="description" content="See how you learn with short tasks, then pick a rival to race. An estimate, not an intelligence test.">
+<meta property="og:title" content="20–25 minute learning skills check — Rivalog LQ">
+<meta property="og:description" content="See how you learn with short tasks, then pick a rival to race. An estimate, not an intelligence test.">
+<meta property="og:image" content="https://hiarche.com/lab/og_lq2_en.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://hiarche.com/lab/lq2-test-en.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://hiarche.com/lab/lq2-test-en.html">
+<!-- 라이벌로그 LQ 2.0 학습능력검사 공개 시험판. build_public.mjs 자동 생성. 쿠키·분석·저장·전송 없음. -->
+<style>
+:root{--amberink:#8a5a0b;--dopink:#6a4fb0;--bg:#f4f1ea;--card:#fffdf8;--ink:#1d1b17;--sub:#6b6458;--line:#e5dfd2;--track:#ece6d9;--acc:#2f5d50;--accsoft:#e3ede8;--dop:#7a5cc4;--dopsoft:#efe9fb;--amber:#c98a1b;--ambersoft:#fbf1dc;--warn:#b5482b;--warnsoft:#f8e4dd;--shadow:0 1px 2px rgba(40,30,10,.05),0 4px 16px rgba(40,30,10,.05);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141310;--card:#1d1c18;--ink:#ece6da;--sub:#a39a8a;--line:#33302a;--track:#2a2823;--acc:#7fbfa9;--accsoft:#1f2b26;--dop:#b39cf0;--dopsoft:#25203a;--amber:#e5b04e;--ambersoft:#2e2614;--warn:#e07a5f;--warnsoft:#33211c;--amberink:#e5b04e;--dopink:#b39cf0;--shadow:none;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#141310;--card:#1d1c18;--ink:#ece6da;--sub:#a39a8a;--line:#33302a;--track:#2a2823;--acc:#7fbfa9;--accsoft:#1f2b26;--dop:#b39cf0;--dopsoft:#25203a;--amber:#e5b04e;--ambersoft:#2e2614;--warn:#e07a5f;--warnsoft:#33211c;--amberink:#e5b04e;--dopink:#b39cf0;--shadow:none;color-scheme:dark}
+:root{--fieldline:#8f8778}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--fieldline:#757062}}
+:root[data-theme="dark"]{--fieldline:#757062}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Hiragino Sans","Noto Sans",system-ui,sans-serif;font-size:1rem;line-height:1.5;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
+button{font:inherit;border:0;border-radius:14px;padding:12px 16px;cursor:pointer;background:var(--acc);color:var(--card);font-weight:650}
+button.ghost{background:transparent;color:var(--sub);border:1px solid var(--line);font-weight:550}
+.w{max-width:560px;margin:0 auto;padding:24px 16px 40px;display:grid;gap:14px}
+.w h1{font-size:28px;line-height:1.25;margin:0}
+.w .sub{color:var(--sub);font-size:14px;margin:0}
+.w .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:10px}
+.w .card h2{font-size:16px;margin:0}
+.w ol,.w ul{margin:0;padding-left:20px;font-size:14px;line-height:1.6}
+.w .row{display:flex;gap:8px;flex-wrap:wrap}
+.w .row button{min-height:44px}
+.w button.on{background:var(--accsoft);color:var(--acc);border-color:var(--acc)}
+.w textarea{width:100%;min-height:220px;font:12px/1.5 ui-monospace,Menlo,Consolas,monospace;background:var(--bg);color:var(--ink);border:1px solid var(--fieldline);border-radius:8px;padding:10px}
+.w .big{font-size:34px;font-weight:700;margin:0}
+.w .muted{color:var(--sub);font-size:12px}
+.w .app{border-color:var(--acc)}
+.w .app p{margin:0;font-size:14px;line-height:1.55}
+.w a.btn{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:10px;background:var(--acc);color:#fff;text-decoration:none;font-weight:600}
+.w .legal{font-size:12px;line-height:1.6;color:var(--sub);display:grid;gap:4px}
+.w .legal p{margin:0}
+#cog [data-pl]{display:none}
+.toast{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:100;max-width:calc(100% - 32px);background:var(--ink);color:var(--bg);font-size:14px;padding:10px 16px;border-radius:10px}
+.toast:empty{display:none}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:101;background:var(--card);border-top:1px solid var(--line);padding:16px 16px calc(16px + env(safe-area-inset-bottom,0px));display:grid;gap:10px;max-width:560px;margin:0 auto}
+.sheet p{margin:0;font-size:14px}
+.sheet textarea{width:100%;min-height:84px;font:14px/1.5 inherit;background:var(--bg);color:var(--ink);border:1px solid var(--fieldline);border-radius:8px;padding:10px}
+.sheet button{min-height:44px}
+</style></head><body>
+<main class="w">
+  <h1 id="tTitle">라이벌로그 학습능력검사 LQ 2.0</h1>
+  <p class="sub" id="tSub"></p>
+  <section class="card">
+    <h2 id="tHowH">진행 방법</h2>
+    <ol id="tHow">
+      <li>8개 과제를 차례로 풉니다(약 20~25분). 과제마다 처음에 설명과 연습 문제가 나옵니다.</li>
+      <li>시간제한이 있는 과제가 있습니다. 화면을 보고 바로 판단해 고르세요.</li>
+      <li>규칙 찾기·말의 관계에서는 답을 고른 뒤 '확실해요·반반·찍었어요' 중 하나를 누릅니다.</li>
+      <li>끝나면 결과 화면이 나오고, 이 페이지 아래에 결과 기록이 생깁니다. 기록을 복사해 전달하세요.</li>
+    </ol>
+    <div class="row">
+      <button id="bKo" class="ghost on">한국어</button>
+      <button id="bEn" class="ghost">English</button>
+      <button id="bTheme" class="ghost">밝음/어두움</button>
+    </div>
+    <div class="row"><button id="bStart">검사 시작</button></div>
+  </section>
+  <section class="card" id="res" hidden>
+    <h2 id="tResH">결과 기록</h2>
+    <p class="big" id="lq"></p>
+    <p id="tType"></p>
+    <div class="row">
+      <button id="bShow" class="ghost">결과 화면 다시 보기</button>
+      <button id="bShare" class="ghost">공유하기</button>
+      <button id="bCopy" class="ghost" hidden>기록 복사</button>
+    </div>
+    <textarea id="out" readonly aria-label="결과 기록" hidden></textarea>
+    <p class="muted" id="tNote"></p>
+  </section>
+  <section class="card app" id="app" hidden>
+    <p id="tApp"></p>
+    <div class="row"><a class="btn" id="aApp" href="https://hiarche.com/apps/rivalog.html">라이벌로그 보기</a></div>
+  </section>
+  <p class="toast" id="toast" role="status"></p>
+  <div class="sheet" id="sheet" hidden><p id="tSheet"></p><textarea id="shareBox" readonly></textarea><button id="bSheet" class="ghost"></button></div>
+  <section class="legal" id="legal" aria-label="안내">
+    <p id="tL1"></p><p id="tL2"></p><p id="tL3"></p>
+  </section>
+</main>
+<style>
+/* 라이벌로그 「내 라이벌 찾기」 학습 성향 체크 모듈 v1 (2026-10-15 · Lueur팀 실무)
+   앱 HTML에 그대로 붙여 넣는 조각. 모든 선택자는 #cog 아래로 한정하고, 색은 앱 토큰(var(--acc) 등)만 쓴다.
+   바깥 주소·저장소·외부 글꼴·이미지 없음. 그림은 전부 SVG/canvas로 직접 그린다. */
+#cog{position:fixed;inset:0;z-index:60;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Hiragino Sans","Noto Sans",system-ui,sans-serif;font-size:1rem;line-height:1.5;text-align:left;word-break:keep-all;overflow-wrap:anywhere;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
+#cog[hidden],#cog [hidden]{display:none!important}
+#cog *,#cog *::before,#cog *::after{box-sizing:border-box}
+#cog button{font:inherit;font-weight:650;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 14px;margin:0;min-height:44px;min-width:44px;cursor:pointer;box-shadow:none;touch-action:manipulation;-webkit-user-select:none;user-select:none;transition:background .15s,border-color .15s,transform .08s}
+#cog button:active{transform:scale(.98)}
+#cog button:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+#cog button:disabled{cursor:default;transform:none}
+#cog [tabindex="-1"]:focus{outline:none}
+#cog .cg-btn{display:block;width:100%;background:var(--acc);border-color:var(--acc);color:var(--card);padding:15px 16px;font-size:1rem}
+#cog .cg-ghost{display:block;width:100%;background:transparent;color:var(--sub);font-weight:600}
+#cog .cg-center{text-align:center}
+#cog .cg-muted{color:var(--sub);font-size:.875rem}
+/* 위 막대 */
+#cog .cg-top{position:sticky;top:0;z-index:3;background:var(--bg);padding:calc(env(safe-area-inset-top,0px) + 6px) 16px 8px}
+#cog .cg-topin{max-width:520px;margin:0 auto}
+#cog .cg-bar{display:flex;align-items:center;gap:8px;min-height:44px}
+#cog .cg-quit{background:transparent;border:0;color:var(--sub);font-weight:600;padding:8px 6px;margin-left:-6px}
+#cog .cg-quit.cg-off{visibility:hidden}
+#cog .cg-steplab{flex:1;text-align:center;font-size:.875rem;font-weight:700;color:var(--sub);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#cog .cg-clock{min-width:64px;text-align:right;font-size:1rem;font-weight:750;font-variant-numeric:tabular-nums;color:var(--ink);display:flex;align-items:center;justify-content:flex-end;gap:4px}
+#cog .cg-clock svg{width:15px;height:15px;color:var(--sub)}
+#cog .cg-clock.low{color:var(--warn)}
+#cog .cg-segs{display:grid;grid-template-columns:repeat(8,1fr);gap:4px;margin-top:4px}
+#cog .cg-seg{height:5px;border-radius:999px;background:var(--track);overflow:hidden}
+#cog .cg-seg i{display:block;height:100%;width:0;background:var(--acc);border-radius:999px;transition:width .3s}
+#cog .cg-seg.done i{width:100%!important}
+#cog .cg-main{max-width:520px;margin:0 auto;padding:6px 16px calc(env(safe-area-inset-bottom,0px) + 28px)}
+/* 글 */
+#cog .cg-h{font-size:1.75rem;line-height:1.3;letter-spacing:-.01em;margin:10px 0 8px}
+#cog .cg-p{color:var(--sub);margin:0 0 12px;line-height:1.6}
+#cog .cg-p b{color:var(--ink)}
+#cog .cg-eyebrow{font-size:.75rem;font-weight:700;color:var(--sub);letter-spacing:.04em}
+#cog .cg-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:var(--shadow)}
+#cog .cg-stack{display:grid;gap:10px;margin-top:18px}
+#cog .cg-tag{display:inline-block;font-size:.75rem;font-weight:750;color:var(--amberink,#8a5a0b);background:var(--ambersoft);border-radius:999px;padding:3px 10px}
+#cog .cg-qhead{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:.875rem;font-weight:700;color:var(--sub);margin:4px 0 10px;min-height:24px}
+#cog .cg-ask{font-size:1rem;font-weight:700;margin:0 0 10px}
+#cog .cg-fb{min-height:24px;text-align:center;font-weight:700;margin:12px 0 0}
+#cog .cg-fb.ok{color:var(--acc)}
+#cog .cg-fb.no{color:var(--warn)}
+#cog .cg-after{margin-top:10px}
+#cog .cg-dock{position:sticky;bottom:-2px;z-index:2;display:grid;gap:10px;margin:18px -16px 0;padding:12px 16px calc(env(safe-area-inset-bottom,0px) + 14px);background:var(--bg)}   /* -2px: 높이가 소수일 때 맨 아래 한 줄이 비치지 않게 */
+#cog .cg-dock::before{content:"";position:absolute;left:0;right:0;top:-16px;height:16px;background:linear-gradient(to bottom,transparent,var(--bg));pointer-events:none}
+#cog .cg-after.cg-dock{margin-top:8px}
+#cog .cg-timeup{text-align:center;padding:30px 18px;margin-top:24px}
+#cog .cg-timeup svg{width:52px;height:52px;color:var(--amberink,#8a5a0b);display:block;margin:0 auto 6px}
+/* 시작 화면 */
+#cog .cg-hero{display:block;width:150px;height:110px;margin:14px auto 4px}
+#cog .cg-title{font-size:1.75rem;line-height:1.2;letter-spacing:-.02em;margin:6px 0 4px;text-align:center}
+#cog .cg-tagline{text-align:center;color:var(--acc);font-weight:750;font-size:.875rem;margin:0 0 12px}
+#cog .cg-lead{text-align:center;color:var(--sub);margin:0 auto 16px;max-width:400px;line-height:1.6}
+#cog .cg-plan{padding:4px 0;margin:0 0 14px}
+#cog .cg-prow{display:grid;grid-template-columns:34px 1fr auto;gap:12px;align-items:center;padding:10px 16px;border-top:1px solid var(--line)}
+#cog .cg-prow:first-child{border-top:0}
+#cog .cg-num{width:32px;height:32px;border-radius:8px;display:grid;place-items:center;background:var(--accsoft);color:var(--acc);font-weight:800;font-size:.875rem}
+#cog .cg-prow b{display:block;font-size:1rem;line-height:1.3}
+#cog .cg-prow span{display:block;font-size:.75rem;color:var(--sub);line-height:1.4}
+#cog .cg-prow i{font-style:normal;font-size:.75rem;color:var(--sub);font-weight:700;white-space:nowrap}
+#cog .cg-points{display:grid;gap:8px;margin:0 0 4px;padding:0 4px;list-style:none}
+#cog .cg-points li{display:flex;gap:10px;align-items:flex-start;font-size:.875rem}
+#cog .cg-points svg{flex:none;width:18px;height:18px;margin-top:2px;color:var(--acc)}
+/* 영역 안내 */
+#cog .cg-icon{width:64px;height:64px;border-radius:14px;background:var(--accsoft);color:var(--acc);display:grid;place-items:center;margin:18px 0 6px}
+#cog .cg-icon svg{width:38px;height:38px}
+#cog .cg-ready{text-align:center;padding:28px 18px}
+#cog .cg-ready .cg-big{font-size:2.125rem;font-weight:800;color:var(--acc);font-variant-numeric:tabular-nums;margin:4px 0}
+/* ① 규칙 찾기 */
+#cog .cg-mx{display:grid;grid-template-columns:repeat(3,1fr);width:min(100%,330px,42vh);margin:0 auto;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;color:var(--ink)}
+#cog .cg-cell{aspect-ratio:1/1;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:grid;place-items:center;min-width:0}
+#cog .cg-cell:nth-child(3n){border-right:0}
+#cog .cg-cell:nth-child(n+7){border-bottom:0}
+#cog .cg-cell svg,#cog .cg-opt svg{width:100%;height:100%;display:block}
+#cog .cg-cell.q{background:var(--accsoft);color:var(--acc);font-size:2.125rem;font-weight:800}
+#cog .cg-opts6{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:min(100%,330px,50vh);margin:12px auto 0}
+#cog .cg-opt{aspect-ratio:1/1;padding:3px;border-width:2px;border-radius:14px;display:grid;place-items:center;color:var(--ink);min-width:0}
+#cog .cg-ans.sel,#cog .cg-ans.ok{border-color:var(--acc);background:var(--accsoft)}
+#cog .cg-ans.no{border-color:var(--warn);background:var(--warnsoft)}
+/* ② 수열 */
+#cog .cg-seq{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:22px 0 26px}
+#cog .cg-n{min-width:44px;height:56px;padding:0 7px;border-radius:8px;background:var(--card);border:1px solid var(--line);display:grid;place-items:center;font-size:1.125rem;font-weight:750;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+#cog .cg-n.q{background:var(--accsoft);color:var(--acc);border:2px dashed var(--acc)}
+#cog .cg-opts4{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+#cog .cg-opts4 button{min-height:64px;font-size:1.75rem;font-weight:750;font-variant-numeric:tabular-nums;border-width:2px}
+/* ③ 도형 돌리기 */
+#cog .cg-pair{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:8px 0 16px}
+#cog .cg-pair>div{background:var(--card);border:1px solid var(--line);border-radius:14px;aspect-ratio:1/1;display:grid;place-items:center;color:var(--acc);position:relative}
+#cog .cg-pair>div:last-child{color:var(--dopink,#6a4fb0)}
+#cog .cg-pair svg{width:84%;height:84%}
+#cog .cg-pair small{position:absolute;left:10px;top:6px;font-size:.75rem;font-weight:700;color:var(--sub)}
+#cog .cg-two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+#cog .cg-two button{min-height:64px;font-size:1rem;border-width:2px}
+#cog .cg-two button svg{width:22px;height:22px;display:block;margin:0 auto 2px;color:var(--sub)}
+/* ④ 계산하며 기억하기 */
+#cog .cg-eq{font-size:2.125rem;font-weight:750;text-align:center;font-variant-numeric:tabular-nums;margin:34px 0 12px;letter-spacing:.01em;white-space:nowrap}
+#cog .cg-tbar{height:4px;background:var(--track);border-radius:999px;overflow:hidden;margin:0 auto 22px;max-width:220px}
+#cog .cg-tbar i{display:block;height:100%;width:100%;background:var(--sub);opacity:.6}
+#cog .cg-letter{font-size:104px;font-weight:800;text-align:center;color:var(--acc);line-height:1.1;margin:48px 0 6px}
+#cog .cg-slots{display:flex;justify-content:center;gap:8px;margin:14px 0 16px;flex-wrap:wrap}
+#cog .cg-slots b{min-width:46px;min-height:54px;padding:0 6px;border-radius:8px;border:2px solid var(--line);display:grid;place-items:center;font-size:1.75rem;background:var(--card)}
+#cog .cg-slots b.f{border-color:var(--acc);color:var(--acc)}
+#cog .cg-keys{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+#cog .cg-keys button{min-height:54px;font-size:1.125rem;font-weight:750}
+#cog .cg-keys .cg-wide{grid-column:span 2;font-size:1rem;color:var(--sub)}
+/* ⑤ 기호를 숫자로 */
+#cog .cg-key9{display:grid;grid-template-columns:repeat(9,1fr);gap:2px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:8px 4px 6px}
+#cog .cg-kc{display:grid;justify-items:center;gap:2px;color:var(--ink);min-width:0}
+#cog .cg-kc svg{width:100%;max-width:28px;height:auto;aspect-ratio:1/1}
+#cog .cg-kc b{font-size:1rem;font-weight:800;color:var(--acc)}
+#cog .cg-target{width:116px;height:116px;margin:16px auto 14px;color:var(--ink);display:grid;place-items:center;background:var(--card);border:2px solid var(--line);border-radius:14px}
+#cog .cg-target svg{width:70px;height:70px}
+#cog .cg-fstage{height:150px;display:grid;place-items:center;font-size:var(--fs,64px);font-weight:800;font-variant-numeric:tabular-nums;color:var(--ink);user-select:none}
+#cog .cg-fstage.mask{font-size:56px;color:var(--sub)}
+#cog .cg-tap{width:100%;min-height:150px;font-size:1.75rem;font-weight:800;border-radius:14px}
+#cog .cg-tap:disabled{opacity:.45}
+#cog .cg-quit,#cog .cg-clock,#cog .cg-tag{white-space:nowrap}
+#cog .cg-bar{flex-wrap:wrap;row-gap:0}
+#cog.cg-big .cg-clock{margin-left:auto}
+#cog.cg-big .cg-steplab{order:3;flex-basis:100%;text-align:left;padding-bottom:6px}
+#cog.cg-big .cg-qhead{flex-wrap:wrap}
+#cog.cg-big .cg-type{grid-template-columns:minmax(0,1fr)}
+#cog.cg-big .cg-opts4{grid-template-columns:minmax(0,1fr)}
+#cog .cg-nw{white-space:nowrap}
+#cog .cg-ask.cg-late{color:var(--amberink,#8a5a0b)}
+#cog .cg-tsec{margin:-14px 0 10px;font-size:.75rem}
+#cog .cg-pad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+#cog .cg-pad button{min-height:56px;font-size:1.75rem;font-weight:750;font-variant-numeric:tabular-nums}
+#cog .cg-tally{text-align:center;font-size:.875rem;color:var(--sub);font-weight:700;margin-top:10px;font-variant-numeric:tabular-nums}
+/* ⑥ 짝 외우기 */
+#cog .cg-study{display:grid;justify-items:center;gap:10px;padding:26px 18px 22px;margin-top:8px}
+#cog .cg-gl{width:132px;height:132px;color:var(--ink)}
+#cog .cg-gl svg{width:100%;height:100%}
+#cog .cg-word{font-size:2.125rem;font-weight:800;color:var(--dopink,#6a4fb0);letter-spacing:.03em;line-height:1.1}
+#cog .cg-dots{display:flex;gap:6px;justify-content:center;margin-top:14px}
+#cog .cg-dots i{width:7px;height:7px;border-radius:999px;background:var(--line)}
+#cog .cg-dots i.on{background:var(--dop);width:18px}
+#cog .cg-qgl{width:120px;height:120px;margin:4px auto 14px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;color:var(--ink)}
+#cog .cg-qgl svg{width:100%;height:100%;display:block}
+#cog .cg-words{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+#cog .cg-words button{min-height:52px;font-size:1.125rem;font-weight:700;letter-spacing:.03em;border-width:2px}
+/* 결과 */
+#cog .cg-res{display:grid;gap:12px;padding-top:6px}
+#cog .cg-scorecard{text-align:center;padding:20px 18px 16px;background:linear-gradient(180deg,var(--accsoft),var(--card) 70%)}
+#cog .cg-lab{font-size:.75rem;font-weight:700;color:var(--sub);letter-spacing:.02em}
+#cog .cg-range{font-size:64px;font-weight:850;letter-spacing:-.035em;line-height:1.05;font-variant-numeric:tabular-nums;margin:6px 0 2px;color:var(--ink)}
+#cog .cg-range span{color:var(--acc);margin:0 .04em}
+#cog .cg-scale{font-size:.75rem;color:var(--sub);font-weight:600}
+#cog .cg-curve{display:block;width:100%;max-width:340px;height:auto;margin:10px auto 2px}
+#cog .cg-s24{font-size:.875rem;color:var(--sub);margin-top:4px;line-height:1.7}
+#cog .cg-ntop{font-size:.75rem;line-height:1.55;color:var(--sub);margin:10px auto 0;max-width:340px}
+#cog .cg-more{margin-top:6px}
+#cog .cg-more summary{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 12px;font-size:.75rem;font-weight:700;color:var(--sub);cursor:pointer;list-style:none;border-radius:8px}
+#cog .cg-more summary::-webkit-details-marker{display:none}
+#cog .cg-more summary::after{content:"";width:6px;height:6px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);margin:-3px 0 0 8px;transition:transform .2s}
+#cog .cg-more[open] summary::after{transform:rotate(-135deg);margin-top:3px}
+#cog .cg-more summary:focus-visible{outline:3px solid var(--acc)}
+#cog .cg-prevr{display:inline-block;margin-top:8px;font-size:.75rem;font-weight:700;color:var(--sub);background:var(--track);border-radius:999px;padding:3px 10px}
+#cog .cg-type{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;background:var(--dopsoft);border-color:transparent}
+#cog .cg-type svg{width:60px;height:60px}
+#cog .cg-tyname{font-size:1.125rem;font-weight:800;line-height:1.3;color:var(--dopink,#6a4fb0);margin:2px 0 4px;letter-spacing:-.01em}
+#cog .cg-type p{margin:0;font-size:.875rem;line-height:1.55;color:var(--ink)}
+#cog .cg-cardh{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:6px}
+#cog .cg-cardh b{font-size:1rem}
+#cog .cg-cardh span{font-size:.75rem;color:var(--sub);text-align:right}
+#cog .cg-arow{display:grid;grid-template-columns:1fr auto;gap:2px 10px;align-items:baseline;padding:10px 0;border-top:1px solid var(--line)}
+#cog .cg-arow:first-of-type{border-top:0}
+#cog .cg-an b{font-size:.875rem;font-weight:700}
+#cog .cg-an span{font-size:.75rem;color:var(--sub);margin-left:6px}
+#cog .cg-av{font-size:1.125rem;font-weight:800;font-variant-numeric:tabular-nums}
+#cog .cg-av small{font-size:.75rem;font-weight:700;margin-left:4px}
+#cog .cg-av small.up{color:var(--acc)}
+#cog .cg-av small.dn{color:var(--sub)}
+#cog .cg-trk{grid-column:1/-1;position:relative;height:9px;border-radius:999px;background:var(--track);margin-top:4px}
+#cog .cg-trk i{position:absolute;left:0;top:0;bottom:0;border-radius:999px;background:var(--acc)}
+#cog .cg-trk u{position:absolute;top:-3px;bottom:-3px;width:2px;margin-left:-1px;background:var(--sub);opacity:.55;border-radius:2px}
+#cog .cg-trk.pv{height:4px;margin-top:3px;background:transparent}
+#cog .cg-trk.pv i{background:var(--sub);opacity:.45}
+#cog .cg-trk.dash{background:transparent;border:1.5px dashed var(--line)}
+#cog .cg-arow.keep .cg-an b{color:var(--dopink,#6a4fb0)}
+#cog .cg-arow.keep .cg-trk i{background:var(--dop)}
+#cog .cg-pend{grid-column:1/-1;font-size:.75rem;color:var(--sub)}
+#cog .cg-basis{font-size:.875rem;line-height:1.6;color:var(--sub);text-align:center;margin:-6px auto 14px;max-width:400px}
+#cog .cg-refs{margin:10px 0 0;border:1px solid var(--line);border-radius:14px;padding:0 14px}
+#cog .cg-refs summary{cursor:pointer;font-size:.875rem;font-weight:700;padding:12px 0;color:var(--ink,inherit);list-style:none}
+#cog .cg-refs summary::-webkit-details-marker{display:none}
+#cog .cg-refs summary::after{content:" ▾";color:var(--sub)}
+#cog .cg-refs[open] summary::after{content:" ▴"}
+#cog .cg-refs p{font-size:.75rem;line-height:1.55;color:var(--sub);margin:0 0 10px}
+#cog .cg-refs ol{margin:0 0 12px;padding-left:22px;display:grid;gap:10px}
+#cog .cg-refs li{font-size:.75rem;line-height:1.5;color:var(--sub);overflow-wrap:anywhere}
+#cog .cg-refs li cite{font-style:italic}
+#cog .cg-refs li em{display:block;font-style:normal;color:var(--ink,inherit);opacity:.85}
+#cog sup.cg-fn{font-size:.75rem;font-weight:700;color:var(--acc);margin-left:2px;vertical-align:super;line-height:0}
+#cog .cg-refl{font-size:.75rem;color:var(--sub);margin:8px 0 0;line-height:1.5}
+#cog .cg-notes{margin:2px 0 0;padding:0 2px;list-style:none;display:grid;gap:6px}
+#cog .cg-notes li{font-size:.875rem;color:var(--sub);display:flex;gap:8px}
+#cog .cg-notes li::before{content:"";flex:none;width:5px;height:5px;border-radius:50%;background:var(--sub);margin-top:8px;opacity:.6}
+#cog .cg-notice{font-size:.75rem;line-height:1.6;color:var(--sub);background:var(--track);border-radius:14px;padding:12px 14px;margin:6px 0 0}
+/* 그만두기 확인 */
+#cog .cg-modal{position:fixed;inset:0;z-index:5;background:rgba(10,8,4,.45);display:flex;align-items:flex-end;justify-content:center;padding:16px 16px calc(env(safe-area-inset-bottom,0px) + 16px)}
+#cog .cg-dlg{width:100%;max-width:420px;background:var(--card);border-radius:14px;padding:22px 18px 18px;border:1px solid var(--line)}
+#cog .cg-dlg h3{margin:0 0 6px;font-size:1.125rem}
+#cog .cg-dlg p{margin:0 0 16px;color:var(--sub)}
+#cog .cg-dlg .cg-two button{min-height:52px}
+#cog .cg-warnbtn{background:var(--warnsoft)!important;color:var(--warn)!important;border-color:transparent!important}
+@keyframes cg-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+#cog .cg-anim{animation:cg-in .25s ease both}
+@media (prefers-reduced-motion:reduce){#cog .cg-anim{animation:none}#cog button{transition:none}#cog .cg-seg i{transition:none}}
+@media (max-width:360px){#cog .cg-range{font-size:54px}#cog .cg-eq{font-size:1.75rem}#cog .cg-title{font-size:1.75rem}}
+#cog .cg-spdv{font-size:2.125rem;font-weight:800;line-height:1.15;margin:6px 0 10px;color:var(--ink)}
+#cog .cg-spd{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin:0 0 10px}
+#cog .cg-spd i{height:10px;border-radius:999px;background:var(--track)}
+#cog .cg-spd i.on{background:var(--acc)}
+#cog .cg-av{font-size:.875rem!important;font-weight:700}
+
+/* LQ 2.0(10-19): 확신도 · 말의 관계 · 힌트 · 학습지수 카드 · 공부할 때 쓰는 힘 — 글자 6단계 rem · 모서리 8/14/999 */
+#cog .cg-confq{margin:0;text-align:center;font-size:.875rem;font-weight:700;color:var(--sub)}
+#cog .cg-conf{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+#cog .cg-conf button{min-height:48px;font-size:.875rem;padding:8px 6px;border-width:2px}
+#cog .cg-conf button.sel{border-color:var(--acc);background:var(--accsoft)}
+#cog .cg-vq{font-size:1.125rem;font-weight:700;line-height:1.5;white-space:pre-line;margin:6px 0 16px;color:var(--ink)}
+#cog .cg-vopts{display:grid;gap:8px}
+#cog .cg-vopts button{min-height:52px;text-align:left;font-size:1rem;font-weight:600;border-width:2px;padding:12px 14px}
+#cog .cg-hint{display:grid;gap:4px;background:var(--accsoft);border-radius:14px;padding:12px 14px;margin:0 0 14px}
+#cog .cg-hint b{font-size:.75rem;color:var(--acc);font-weight:700}
+#cog .cg-hint span{font-size:1rem;font-weight:600;color:var(--ink);line-height:1.5}
+#cog .cg-tag.cg-hot{color:var(--warn,#b5482b);background:var(--warnsoft,#f8e4dd)}
+#cog .cg-lqcard{text-align:center;padding:20px 18px 16px;background:linear-gradient(180deg,var(--accsoft),var(--card) 70%)}
+#cog .cg-lqv{font-size:2.125rem;font-weight:800;line-height:1.2;margin:4px 0 8px;color:var(--ink);font-variant-numeric:tabular-nums}
+#cog .cg-lqnote{font-size:.875rem;font-weight:600;line-height:1.5;color:var(--ink);margin:0 auto 8px;max-width:340px}
+#cog .cg-reflink{color:var(--acc);font-weight:700;text-decoration:underline;text-underline-offset:2px;display:inline-flex;align-items:center;min-height:44px;padding:0 4px}
+#cog .cg-lv.lvHi{color:var(--acc)}
+#cog .cg-lv.lvLo{color:var(--amberink,#8a5a0b)}
+#cog .cg-ablnote{font-size:.75rem;color:var(--sub);margin:0 0 4px;line-height:1.5}
+#cog .cg-abl{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;align-items:baseline;padding:12px 0;border-top:1px solid var(--line)}
+#cog .cg-abl p{grid-column:1/-1;margin:2px 0 0;font-size:.875rem;color:var(--sub);line-height:1.5}
+#cog .cg-arow,#cog .cg-abl{grid-template-columns:minmax(0,1fr) auto}
+#cog .cg-an{min-width:0}
+#cog .cg-an span{display:inline-block}
+#cog .cg-seq{flex-wrap:wrap}
+#cog .cg-eq{white-space:normal}
+#cog .cg-opts4 button,#cog .cg-n{white-space:nowrap}
+html.bigtext #cog .cg-opts4{grid-template-columns:minmax(0,1fr)}
+html.bigtext #cog .cg-type{grid-template-columns:minmax(0,1fr)}
+html.bigtext #cog .cg-type svg{width:3rem;height:3rem}
+html.bigtext #cog .cg-conf{grid-template-columns:minmax(0,1fr)}
+html.bigtext #cog .cg-two{grid-template-columns:minmax(0,1fr)}
+#cog .cg-rd{font-size:1rem;line-height:1.6;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin:4px 0 10px}
+#cog .cg-fx{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin:4px 0 10px;overflow-x:auto}
+#cog .cg-fxf{font-size:1rem;margin:0 0 8px;color:var(--ink)}
+#cog .cg-fxt{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:1rem}
+#cog .cg-fxt th,#cog .cg-fxt td{padding:6px 8px;text-align:center;border-top:1px solid var(--line)}
+#cog .cg-fxt thead th{border-top:0;color:var(--sub);font-size:.875rem}
+#cog .cg-fxt tbody th{text-align:left;font-weight:700}
+#cog .cg-tbar.wide{max-width:none;margin:0 0 12px}
+/* 사용자 시험(10-19) */
+#cog .cg-steplab{white-space:normal;overflow:visible;text-overflow:clip;line-height:1.25;overflow-wrap:break-word}
+#cog .cg-ev{grid-column:1/-1;font-size:.75rem;color:var(--sub);line-height:1.45;margin:0}
+#cog .cg-abl .cg-ev{font-size:.75rem}
+#cog .cg-tbar{height:6px}
+#cog .cg-tbar i{background:var(--amber);opacity:1}
+#cog .cg-prem{font-weight:400}
+#cog .cg-nw{white-space:nowrap}
+
+</style>
+<div id="cog" hidden></div>
+<script>
+/* 「내 라이벌 찾기」 — 학습 성향 체크 (라이벌로그 v1.1 · 2026-10-15 · Lueur팀 실무)
+   설계: doppel_kit/10-학습능력검사-설계-v0.md 3절(6영역)·4절(결과)·3-1절(법무 문안).
+   문항은 전부 규칙으로 자동 생성한다(매번 새 문제). 다른 검사의 문항·이름·지시문·채점표를 쓰지 않는다.
+   전역 이름은 Cog 하나. 저장은 하지 않는다 — 결과 객체를 앱에 돌려주면 앱이 기기에 저장한다.
+   API: Cog.start / showResult / shareCard / recallDue / recall  (아래 맨 끝 참고) */
+window.Cog=(function(){
+'use strict';
+
+/* ═══════════════════════════════════════════════════════════════════════
+   잠정 눈금 표 — ★잠정: 비교 자료(사전 표본 조사, 설계 5절 B안)가 생기면 이 표만 교체★
+   점수 = 100 + 15 × (원점수 − m) / sd,  영역마다 70~145로 자름.
+   종합 = 아래 w로 가중 평균(규칙 찾기·수열 크게, 처리 속도 작게) → ±BAND 범위.
+   ─────────────────────────────────────────────────────────────────────── */
+const NORM={
+  // ★LQ 2.0 잠정(10-19): 가중치는 문헌 조사의 잠정값(유동 추론 .35 · 언어 .25 · 작업기억 .15 · 배우는 속도 .15 · 공간 .07 · 처리 속도 .03).
+  //   표본이 없어 평균·표준편차는 가정이다 — 동의 기반 자료나 표본 조사가 생기면 이 표만 바꾼다.
+  reason:{m:0,    sd:0.85, w:0.35},   // 그림 행렬 + 수열 번갈아(적응형 θ)
+  verbal:{m:0,    sd:0.85, w:0.25},   // 말의 관계(적응형 θ, 한국어·영어 문항 따로 — 두 언어 점수를 서로 비교하지 않음)
+  wm:    {m:0.78, sd:0.15, w:0.15},
+  learn: {m:24,   sd:5.5,  w:0.15},
+  rot:   {m:4,    sd:3,    w:0.07},   // 1분 (맞힘−틀림): 2분 가정의 절반
+  speed: {m:37,   sd:6,    w:0.03},   // 1분 맞힌 개수
+  keep:  {m:6.0,  sd:1.7,  w:0},
+  focus: {m:0.62, sd:0.18, w:0},
+  meta:  {m:0.2,  sd:0.2,  w:0},      // 확신도 변별 − 과신 절반(잠정)
+  dyn:   {m:1.4,  sd:1.0,  w:0},      // 새 문제 − 0.6×먼저 풀기 + 0.3×힌트로 고침 − 0.1×힌트 수(잠정)
+  press: {m:-0.1, sd:0.12, w:0}       // 시간제한 정답률 − 여유 정답률(잠정)
+};
+const LEVEL_B=[-2.2,-1.4,-0.6,0.2,1.0,1.8]; // 난이도 1~6단계의 잠정 난이도(θ 눈금). 평균인 사람이 3~4단계를 절반쯤 맞히도록.
+const IRT_A=1.2;                            // 문항 변별도(잠정, 모든 문항 같게)
+const RET={m:0.92,sd:0.12};                 // 검사 끝 다시 묻기 유지 비율(끝/마지막 바퀴) — 다음 날 결과 전까지 학습 유형에만 씀
+const BAND=6, LO=70, HI=145, K24=1.6;       // 신뢰 범위 ±6 · 70~145로 자름 · 표준편차 24 눈금 = 100+(x−100)×1.6
+/* ═══════════════════════════════════════════════════════════════════════ */
+
+const DUR={focusOn:250,focusMask:900,reason:180000,verbal:120000,rule:240000,seq:120000,rot:60000,speed:60000,study:2800,letter:1000,eq:8000,pstudy:2200};
+const RULE_MAX=12, SEQ_MAX=16, REASON_MAX=12, VERBAL_MAX=8, PRESS_N=5, WM_SETS=[2,3,4,4,5], PAIRS_N=8, ROUNDS=4, RECALL_AFTER=20*3600*1000;
+// LQ 2.0 진행 순서(약 20분): 짝 외우기를 앞쪽에 두어 검사 끝 다시 묻기까지 약 12분 간격
+const FLOW=['reason','learn','verbal','wm','dyn','press','rot','focus'];   // 기호를 숫자로(처리 속도, 비중 .03)는 시간 압박 수험형으로 바꾸며 뺌(10-19)
+const SHOW=['reason','verbal','wm','learn','rot'];   // LQ에 들어가는 영역
+const ABL=['meta','dyn','press','focus'];                    // 공부할 때 쓰는 힘(LQ에 넣지 않음)
+const FOCUS_N=63, FOCUS_PRAC=18;            // 본 과제 126번(숫자마다 14번, 3도 14번 ≈ 11%) · 약 2분 25초
+/* 근거 연구(대표님 10-19 "논문·실험을 각주로") — NORM 주석과 설계 v0에서 실제로 쓴 것만. 쪽수는 확인한 것만 적는다.
+   ★다른 검사의 이름·상표는 법무 답(10-15)으로 넣지 않는다. 문항은 모두 직접 생성(아래 연구의 문항을 쓰지 않음).★ */
+const REFS=[
+ {a:'Chierchia, G.',m:1,y:2019,t:'The matrix reasoning item bank (MaRs-IB): novel, open-access abstract reasoning items for adolescents and adults',j:'Royal Society Open Science',v:'6, 190232',doi:'10.1098/rsos.190232',ko:'규칙 찾기: 9칸 그림 과제의 구성과 문항 수에 따른 신뢰도 (문항은 직접 만듦)',en:'Find the rule: matrix task format and reliability by item count (our items are our own)'},
+ {a:'Zorowitz, S.',m:1,y:2024,t:'An item response theory analysis of the matrix reasoning item bank (MaRs-IB)',j:'Behavior Research Methods',doi:'10.3758/s13428-023-02067-8',ko:'규칙 찾기·수열: 맞히면 어려워지는 문항과 점수 계산(문항 반응 이론)',en:'Find the rule and Number series: adaptive difficulty and scoring (item response theory)'},
+ {a:'McGrew, K. S.',y:2009,t:'CHC theory and the human cognitive abilities project: Standing on the shoulders of the giants of psychometric intelligence research',j:'Intelligence',v:'37(1), 1–10',ko:'추론·언어·작업 기억·공간·학습처럼 능력을 나눠 보는 이론 틀(CHC) — 영역을 고른 근거',en:'The framework (CHC) for splitting abilities into areas like reasoning, verbal, working memory, spatial, and learning'},
+ {a:'Shepard, R. N., & Metzler, J.',y:1971,t:'Mental rotation of three-dimensional objects',j:'Science',v:'171(3972), 701–703',ko:'도형 돌리기: 돌린 것과 뒤집은 것 구별(정신 회전)',en:'Turn the shape: telling turned from flipped (mental rotation)'},
+ {a:'Unsworth, N., Heitz, R. P., Schrock, J. C., & Engle, R. W.',y:2005,t:'An automated version of the operation span task',j:'Behavior Research Methods',v:'37(3), 498–505',doi:'10.3758/BF03192720',ko:'계산하며 기억하기: 계산과 글자 기억을 번갈아 하는 진행 방식',en:'Count and remember: alternating sums and letters'},
+ {a:'Conway, A. R. A.',m:1,y:2005,t:"Working memory span tasks: A methodological review and user's guide",j:'Psychonomic Bulletin & Review',v:'12(5), 769–786',doi:'10.3758/BF03196772',ko:'계산하며 기억하기: 부분 점수 채점과 평균값',en:'Count and remember: partial-credit scoring and typical scores'},
+ {a:'Kaufman, S. B., DeYoung, C. G., Gray, J. R., Brown, J., & Mackintosh, N.',y:2009,t:'Associative learning predicts intelligence above and beyond working memory and processing speed',j:'Intelligence',v:'37, 374–382',doi:'10.1016/j.intell.2009.03.004',ko:'짝 외우기: 짝을 익히는 능력이 작업 기억·속도와 따로 학습을 설명한다는 근거',en:'Pair memory: pair learning explains ability beyond memory and speed'},
+ {a:'Zerr, C. L.',m:1,y:2018,t:'Learning efficiency: Identifying individual differences in learning rate and retention in healthy adults',j:'Psychological Science',v:'29(9)',doi:'10.1177/0956797618772540',ko:'짝 외우기·기억 유지: 다 맞힐 때까지 반복하고 나중에 다시 묻는 방식',en:'Pair memory and Memory kept: learn to criterion, then re-ask later'},
+ {a:'McDermott, K. B., & Zerr, C. L.',y:2019,t:'Individual differences in learning efficiency',j:'Current Directions in Psychological Science',v:'28(6)',doi:'10.1177/0963721419869005',ko:'빨리 배우는 사람이 오래 기억한다는 학습 효율 연구 — 학습 유형의 근거',en:'Faster learners tend to remember longer: the basis of learning types'},
+ {a:'Robertson, I. H., Manly, T., Andrade, J., Baddeley, B. T., & Yiend, J.',y:1997,t:"'Oops!': Performance correlates of everyday attentional failures in traumatic brain injured and normal subjects",j:'Neuropsychologia',v:'35(6), 747–758',ko:'숫자 3만 참기: 지속 주의 반응 과제(SART)와 시간이 갈수록 실수가 느는 정도',en:'Hold back on 3: the sustained attention task (SART) and how errors grow over time'},
+ {a:'Hausknecht, J. P., Halpert, J. A., Di Paolo, N. T., & Moriarty Gerrard, M. O.',y:2007,t:'Retesting in selection: A meta-analysis of coaching and practice effects for tests of cognitive ability',j:'Journal of Applied Psychology',v:'92(2), 373–385',ko:'다시 하면 점수가 조금 오르는 연습 효과 — 매번 새 문항을 만드는 이유',en:'Practice effects on retesting: why every attempt gets new questions'},
+ {a:'Roth, B., Becker, N., Romeyke, S., Schäfer, S., Domnick, F., & Spinath, F. M.',y:2015,t:'Intelligence and school grades: A meta-analysis',j:'Intelligence',v:'53, 118–137',ko:'말의 관계: 언어가 들어간 검사가 성적을 더 잘 설명한다는 메타분석 — 언어 영역을 넣고 비중을 정한 근거',en:'Word logic: verbal tests relate more to grades — why verbal reasoning is included and weighted'},
+ {a:'Zaboski, B. A., Kranzler, J. H., & Gage, N. A.',y:2018,t:'Meta-analysis of the relationship between academic achievement and broad abilities of the Cattell-Horn-Carroll theory',j:'Journal of School Psychology',v:'71, 42–56',ko:'말의 관계: 언어 지식·추론이 읽기 성취와 가장 관련이 크다는 근거',en:'Word logic: verbal knowledge and reasoning relate most to reading achievement'},
+ {a:'Flavell, J. H.',y:1979,t:'Metacognition and cognitive monitoring: A new area of cognitive-developmental inquiry',j:'American Psychologist',v:'34(10), 906–911',ko:'아는 걸 아는 힘: 메타인지(내 앎을 살피는 능력)의 개념',en:'Knowing what you know: the idea of metacognition'},
+ {a:'Fleming, S. M., & Lau, H. C.',y:2014,t:'How to measure metacognition',j:'Frontiers in Human Neuroscience',v:'8, 443',doi:'10.3389/fnhum.2014.00443',ko:'아는 걸 아는 힘: 확신도와 정답을 견줘 재는 방법',en:'Knowing what you know: measuring it by comparing confidence with accuracy'},
+ {a:'Embretson, S. E.',y:1991,t:'A multidimensional latent trait model for measuring learning and change',j:'Psychometrika',v:'56(3), 495–515',ko:'힌트로 배우기: 처음 능력과 배우며 바뀌는 정도를 나눠 재는 생각',en:'Learn from hints: separating starting ability from change while learning'},
+ {a:'Beilock, S. L., & Carr, T. H.',y:2005,t:'When high-powered people fail: Working memory and "choking under pressure" in math',j:'Psychological Science',v:'16(2), 101–105',ko:'시간 압박: 압박 속에서 계산 수행이 흔들리는 현상',en:'Time pressure: how math performance can slip under pressure'},
+ {a:'Eysenck, M. W., Derakshan, N., Santos, R., & Calvo, M. G.',y:2007,t:'Anxiety and cognitive performance: Attentional control theory',j:'Emotion',v:'7(2), 336–353',ko:'시간 압박: 불안은 정확도보다 처리 효율을 먼저 흔든다는 이론 — 정답률과 속도를 따로 보는 이유',en:'Time pressure: anxiety hits efficiency before accuracy — why we track accuracy and speed separately'}
+];
+const REF_OF={rule:[1,2,3],seq:[2,3],reason:[1,2,3],verbal:[12,13],rot:[4],wm:[5,6],learn:[7,8,9],keep:[8,9],focus:[10],meta:[14,15],dyn:[16],press:[17,18]};
+const fnOf=a=>`<sup class="cg-fn" aria-label="${L==='ko'?'근거':'Refs'} ${REF_OF[a].join(', ')}">${REF_OF[a].join(',')}</sup>`;
+function refCite(r){ const au=r.m?`${r.a} ${L==='ko'?'외':'et al.'}`:r.a;
+  return `${esc(au)} (${r.y}). ${esc(r.t)}. <cite>${esc(r.j)}</cite>${r.v?`, ${esc(r.v)}`:''}.${r.doi?` doi:${r.doi}`:''}`; }
+function refsHTML(){ return `<details class="cg-refs" id="cg-refs"><summary>${tr('refsBtn',{n:REFS.length})}</summary><p>${T.refsNote}</p>
+  <ol>${REFS.map(r=>`<li><em>${esc(r[L])}</em>${refCite(r)}</li>`).join('')}</ol></details>`; }
+const REF_S=['Chierchia+','Zorowitz+','McGrew','Shepard & Metzler','Unsworth+','Conway+','Kaufman+','Zerr+','McDermott & Zerr','Robertson+','Hausknecht+','Roth+','Zaboski+','Flavell','Fleming & Lau','Embretson','Beilock & Carr','Eysenck+'];
+function refShort(a){ return REF_OF[a].map(i=>`${REF_S[i-1].replace('+',L==='ko'?' 외':' et al.')} (${REFS[i-1].y})`).join(' · '); }
+const LETTERS='FHJKLNPQRSTY'.split('');                 // 두 언어 공통 글자
+
+/* ─── 문구 사전 (해요체, 짧게) ─── */
+const CT={
+ko:{app:'라이벌로그',title:'내 라이벌 찾기',tagline:'18분 학습 성향 체크',timeH:'시간이 다 됐어요',timeP:'다음 과제로 넘어가요',
+lead:'짧은 과제 일곱 개로 내가 어떻게 배우는지 살펴보고, 나와 겨룰 라이벌을 정해요.',
+p1:'약 15~18분 걸려요',p2:'언제든 그만둘 수 있어요',p3:'결과는 이 기기에만 저장돼요',p4:'조용한 곳에서 한 번에 하면 좋아요',
+go:'시작하기',later:'나중에 할게요',quit:'그만두기',quitQ:'그만둘까요?',quitP:'지금까지 한 내용은 저장되지 않아요.',stay:'계속하기',close:'닫기',
+n_focus:'숫자 3만 참기',g_focus:'집중',d_focus:'3만 빼고 숫자마다 누르기',t_focus:'2.5분',i_focus:'숫자가 하나씩 빠르게 나와요. <b>3이 아니면 누르고, 3이면 누르지 마세요.</b>',i_focus2:'2분 30초쯤 이어져요. 속도보다 정확하게, 끝까지 같은 리듬으로 해 보세요. 결과는 라이벌의 집중력 게이지에도 쓰여요.',tapBtn:'누르기',focusFb:'3을 {n}번 중 {k}번 참았어요',n_rule:'규칙 찾기',n_learn:'짝 외우기',n_seq:'수열',n_rot:'도형 돌리기',n_wm:'계산하며 기억하기',n_speed:'기호를 숫자로',n_keep:'기억 유지',
+g_rule:'추론',g_seq:'수 규칙',g_rot:'공간 감각',g_wm:'작업 기억',g_speed:'처리 속도',g_learn:'배우는 속도',g_keep:'다시 묻기',
+d_rule:'9칸 그림에서 빈칸 채우기',d_learn:'낯선 기호와 단어 짝 외우기',d_seq:'숫자 줄의 다음 수 고르기',d_rot:'돌린 건지 뒤집은 건지 고르기',d_wm:'계산하면서 글자 순서 기억하기',d_speed:'기호에 맞는 숫자 빨리 누르기',
+t_rule:'4분',t_learn:'2~3분',t_seq:'2분',t_rot:'2분',t_wm:'3분',t_speed:'90초',
+step:'{i}/7 · {n}',stepEnd:'마무리',practice:'연습',tryIt:'연습해 볼게요',next:'다음',start:'시작',
+readyH:'좋아요, 이제 본 문제예요',readyT:'{t} 동안 풀어요. 남은 시간은 위에 보여요.',readyU:'연습과 같은 방식이에요. 이번엔 정답을 알려 드리지 않아요.',
+ok:'맞아요!',no:'아쉬워요. 초록 테두리가 정답이에요.',itemN:'{i}번째 문제',itemNN:'{i} / {n}',
+i_rule:'가로줄마다 같은 규칙이 있어요. 빈칸(?)에 들어갈 그림을 아래 6개 중에서 골라요.',
+i_rule2:'개수·모양·채움·크기·방향·선이 규칙에 따라 바뀌어요. 맞히면 조금씩 어려워져요. 모르겠으면 가장 그럴듯한 것을 골라요.',
+ask_rule:'빈칸에 들어갈 그림은?',mxAria:'3×3 그림, 오른쪽 아래 칸이 비어 있어요',optN:'보기 {n}',
+i_seq:'숫자들이 어떤 규칙으로 놓였는지 찾아서, 물음표에 올 수를 골라요.',i_seq2:'맞히면 조금씩 어려워져요. 계산은 머릿속으로 해요.',ask_seq:'다음에 올 수는?',
+i_rot:'오른쪽 도형이 왼쪽 도형을 돌리기만 한 것인지, 뒤집은 것인지 골라요.',i_rot2:'뒤집은 모양은 아무리 돌려도 왼쪽과 겹치지 않아요. 빠르고 꼼꼼하게 풀어요.',
+same:'돌린 것',mirror:'뒤집은 것',ask_rot:'오른쪽은 왼쪽을…',
+i_wm:'식이 맞는지 고르면 글자가 하나 나와요. 글자를 순서대로 기억했다가, 마지막에 본 순서대로 눌러요.',i_wm2:'글자는 2개에서 5개까지 늘어나요. 식도 맞혀야 해요.',
+eqQ:'이 식이 맞나요?',yes:'맞아요',nope:'틀려요',remember:'기억하세요',recallQ:'본 순서대로 눌러요',blank:'모름',undo:'지우기',confirm:'확인',
+wmFb:'글자 {n}개 중 {r}개를 제자리에 맞혔어요',setN:'세트 {i} / {n} · 글자 {k}개',
+i_speed:'위 표에서 가운데 기호를 찾아, 그 아래 숫자를 눌러요.',i_speed2:'90초 동안 몇 개 맞히는지 세요. 틀려도 다음으로 넘어가요.',hits:'맞힘 {n}',
+i_learn:'낯선 기호와 짧은 단어 짝 8개를 하나씩 보여 드려요. 그다음 기호마다 짝 단어를 골라요.',
+i_learn2:'다 맞힐 때까지 최대 4바퀴 반복해요. 단어는 뜻 없는 지어낸 말이에요. 검사 끝과 내일 한 번 더 물어요.',
+studyQ:'짝을 눈에 담아 두세요',pickQ:'이 기호의 짝은?',round:'{n}바퀴째',roundRes:'맞힌 짝',allIn:'다 외웠어요!',againMiss:'틀린 짝만 다시 보여 드릴게요.',goOn:'계속',
+endH:'마지막이에요',endP:'처음에 외운 기호와 단어 짝, 기억나요? 한 번씩만 물어볼게요. 이번엔 정답을 알려 드리지 않아요.',
+resEyebrow:'내 라이벌 찾기 · 결과',scoreLab:'학습 성향 점수 · 추정 범위',scale15:'평균 100 기준(잠정) · 3명 중 2명이 85~115',moreScale:'다른 눈금으로 보기',scale15b:'평균 100·표준편차 15 눈금으로는 {r}',scale24:'평균 100·표준편차 24 눈금으로는 {r}',keepRaw:'{of}개 중 {n}개 기억',retest2:'점수는 날마다 조금씩 달라져요',
+typeLab:'나의 학습 유형',areasLab:'영역별 점수',areaNote:'100 = 잠정 평균',keepPend:'내일 짝 외우기를 다시 물으면 채워져요',keepNow:'지금 다시 묻기를 할 수 있어요',
+prev:'지난번',prevRange:'지난번 {r}',noVerbal:'언어 지식은 재지 않았어요',retest:'다시 하면 조금 오르는 게 보통이에요',
+recallNote:'내일 이맘때 짝 외우기를 30초 다시 물어요',
+basis:'심리학 논문과 실험에서 오래 쓰여 온 과제 방식을 바탕으로 만들었어요. 문항은 모두 라이벌로그가 새로 만들어요.',refsBtn:'근거 논문 보기 ({n}편)',refsNote:'과제 이름 옆 작은 숫자가 아래 논문 번호예요. 우리 검사는 이 연구들의 과제 방식과 결과를 참고했을 뿐, 인용한 연구자나 기관이 이 앱을 검토하거나 보증한 것은 아니에요.',refL:'근거',
+pick:'내 결과 보기',share:'공유하기',
+notice:'라이벌을 고르기 위한 학습 성향 추정치입니다. 지능검사나 의료·심리 진단이 아니며, 비교 자료가 적어 잠정 눈금입니다.',
+shareText:'나의 학습 유형은 「{t}」 · 학습 성향 {r} (평균 100 기준, 잠정). 라이벌로그에서 내 라이벌 찾기',
+cardTop:'내 라이벌 찾기 · 학습 성향',cardScale:'평균 100 기준 · 3명 중 2명이 85~115 · 잠정',cardFoot:'18분 학습 성향 체크',cardSmall:'학습 성향 추정치 · 잠정 눈금',
+rcH:'지난번에 외운 짝, 기억나요?',rcP:'기호 8개의 짝 단어를 골라요. 30초면 끝나요. 떠오르는 대로 고르면 돼요.',rcLater:'나중에',
+rcDone:'지난번 짝을 이만큼 기억했어요',rcDoneP:'기억 유지 칸이 채워졌어요.',rcFinish:'완료',
+ty_FL:'빨리 배우고 오래 남기는 형',ty_SL:'차근차근 쌓아 오래 남기는 형',ty_FA:'빠르게 흡수하는 순발력형',ty_RP:'되풀이할수록 단단해지는 꾸준형',ty_PF:'규칙을 꿰뚫는 탐구형',ty_QD:'손이 빠른 실행형',
+tyd_FL:'새것을 금방 익히고 잘 잊지 않아요. 진도를 넉넉히 잡아도 좋아요.',
+tyd_SL:'처음엔 시간이 걸려도 한번 익힌 건 오래가요. 꾸준한 속도가 무기예요.',
+tyd_FA:'새것을 빨리 받아들여요. 복습 간격을 짧게 두면 더 오래 남아요.',
+tyd_RP:'되풀이할수록 단단해져요. 짧게 자주 보는 계획이 잘 맞아요.',
+tyd_PF:'처음 보는 문제에서 규칙을 잘 찾아요. 응용 문제에서 힘을 내요.',
+tyd_QD:'손과 머리가 빠르게 움직여요. 짧고 굵게 집중하는 데 강해요.'},
+en:{app:'Rivalog',title:'Find your rival quiz',tagline:'18-minute learning style quiz',timeH:'Time\'s up',timeP:'On to the next one',
+lead:'Seven short tasks show how you learn, so we can set up a rival that fits you.',
+p1:'Takes about 15–18 minutes',p2:'You can stop any time',p3:'Results stay on this device',p4:'Best done in one go, somewhere quiet',
+go:'Start the quiz',later:'Maybe later',quit:'Stop',quitQ:'Stop now?',quitP:'What you\'ve done so far won\'t be saved.',stay:'Keep going',close:'Close',
+n_focus:'Hold back on 3',g_focus:'Focus',d_focus:'Tap for every digit except 3',t_focus:'2.5 min',i_focus:'Digits flash one at a time. <b>Tap for every digit except 3. When you see 3, don\'t tap.</b>',i_focus2:'It lasts about 2½ minutes. Aim for accuracy over speed and keep the same rhythm to the end. Your result also sets your rival\'s focus gauge.',tapBtn:'Tap',focusFb:'You held back on {k} of {n} threes',n_rule:'Find the rule',n_learn:'Pair memory',n_seq:'Number series',n_rot:'Turn the shape',n_wm:'Count and remember',n_speed:'Symbols to numbers',n_keep:'Memory kept',
+g_rule:'Reasoning',g_seq:'Number rules',g_rot:'Spatial',g_wm:'Working memory',g_speed:'Speed',g_learn:'Learning',g_keep:'Recall',
+d_rule:'Fill the gap in a 3×3 picture',d_learn:'Learn pairs of new symbols and words',d_seq:'Pick the next number',d_rot:'Turned or flipped?',d_wm:'Do sums while holding letters',d_speed:'Tap the number for each symbol',
+t_rule:'4 min',t_learn:'2–3 min',t_seq:'2 min',t_rot:'2 min',t_wm:'3 min',t_speed:'90 seconds',
+step:'{i}/7 · {n}',stepEnd:'Last step',practice:'Practice',tryIt:'Try a practice one',next:'Next',start:'Start',
+readyH:'Nice. Now the real ones',readyT:'You have {t}. Time left is shown at the top.',readyU:'Same as the practice, but we won\'t show the answers this time.',
+ok:'Correct!',no:'Not quite. The green outline is the answer.',itemN:'Question {i}',itemNN:'{i} / {n}',
+i_rule:'Each row follows the same rule. Pick the picture that belongs in the empty cell (?) from the six below.',
+i_rule2:'Number, shape, fill, size, direction and lines change by rule. Questions get harder as you get them right. If unsure, pick your best guess.',
+ask_rule:'Which one fills the gap?',mxAria:'3 by 3 picture with the bottom-right cell empty',optN:'Option {n}',
+i_seq:'Find the rule behind the numbers and pick the one that replaces the question mark.',i_seq2:'Questions get harder as you get them right. Do the math in your head.',ask_seq:'What comes next?',
+i_rot:'Is the right shape just the left one turned, or is it flipped over?',i_rot2:'A flipped shape never lines up with the left one, however you turn it. Be quick but careful.',
+same:'Turned',mirror:'Flipped',ask_rot:'The right shape is…',
+i_wm:'Say whether each sum is right, then a letter appears. Keep the letters in order and tap them back at the end.',i_wm2:'Sets grow from 2 to 5 letters. Try to get the sums right too.',
+eqQ:'Is this right?',yes:'Right',nope:'Wrong',remember:'Remember this',recallQ:'Tap them in the order you saw',blank:'Skip',undo:'Undo',confirm:'Done',
+wmFb:'{r} of {n} letters in the right place',setN:'Set {i} of {n} · {k} letters',
+i_speed:'Find the symbol in the key above and tap the number under it.',i_speed2:'You have 90 seconds. Mistakes just move you on.',hits:'Correct {n}',
+i_learn:'You\'ll see 8 pairs of new symbols and short words, one at a time. Then pick the word that goes with each symbol.',
+i_learn2:'We repeat up to 4 rounds until you have them all. The words are made up. We\'ll ask once more at the end and again tomorrow.',
+studyQ:'Take in the pair',pickQ:'Which word goes with this?',round:'Round {n}',roundRes:'pairs correct',allIn:'You got them all!',againMiss:'Here are the ones you missed again.',goOn:'Continue',
+endH:'Last one',endP:'Remember the symbol and word pairs from earlier? We\'ll ask each once. No answers shown this time.',
+resEyebrow:'Find your rival quiz · Result',scoreLab:'Learning style score · estimated range',scale15:'Average is 100 (provisional) · about 2 in 3 people score 85–115',moreScale:'See another scale',scale15b:'On a mean-100, SD-15 scale: {r}',scale24:'On a mean-100, SD-24 scale: {r}',keepRaw:'{n} of {of} remembered',retest2:'Scores vary a little from day to day',
+typeLab:'Your learning style',areasLab:'By area',areaNote:'100 = provisional mean',keepPend:'Filled in after tomorrow\'s pair quiz',keepNow:'The pair quiz is ready now',
+prev:'Last time',prevRange:'Last time {r}',noVerbal:'Verbal knowledge isn\'t measured',retest:'Scores usually rise a little on a second try',
+recallNote:'About this time tomorrow we\'ll re-ask the pairs (30 seconds)',
+basis:'Built on task formats long used in published psychology papers and experiments. Every question is newly made by Rivalog.',refsBtn:'See the research ({n} papers)',refsNote:'The small numbers next to each task match the papers below. We drew on their task formats and findings; the researchers and institutions cited have not reviewed or endorsed this app.',refL:'Based on',
+pick:'See my result',share:'Share',
+notice:'This is an estimate of your learning style for choosing a rival. It is not an intelligence test or a medical or psychological diagnosis, and the scale is provisional because comparison data is limited.',
+shareText:'My learning style: "{t}" · {r} (average is 100, provisional). Take the Find your rival quiz on Rivalog.',
+cardTop:'Find your rival quiz · Learning style',cardScale:'Average is 100 · 2 in 3 people score 85–115 · provisional',cardFoot:'18-minute learning style quiz',cardSmall:'Learning style estimate · provisional scale',
+rcH:'Remember the pairs from last time?',rcP:'Pick the word for each of the 8 symbols. It takes about 30 seconds. Just go with your first thought.',rcLater:'Later',
+rcDone:'Pairs you remembered',rcDoneP:'Your memory score is ready.',rcFinish:'Done',
+ty_FL:'Quick learner, long memory',ty_SL:'Steady builder, lasting memory',ty_FA:'Fast absorber',ty_RP:'Stronger with every repeat',ty_PF:'Pattern seeker',ty_QD:'Quick doer',
+tyd_FL:'You pick up new things fast and hold on to them. A brisk pace suits you.',
+tyd_SL:'It may take a little longer at first, but what you learn stays. Steady pace is your strength.',
+tyd_FA:'You take in new things quickly. Short review gaps help them stick longer.',
+tyd_RP:'You get stronger with each repeat. Short, frequent sessions work well for you.',
+tyd_PF:'You spot rules in problems you\'ve never seen. You shine on applied questions.',
+tyd_QD:'Your hands and head move fast. You\'re strong at short, focused bursts.'}
+};
+
+/* ─── 공통 도구 ─── */
+let L='en',T=CT.en,root=null,S=null,SID=0,C=null,keyH=null,prevOv=null,F=1,FAST=false;
+// 결과 표기: 지능지수처럼 보이는 숫자 대신 라이벌 빠르기 5단계 · 강함/보통/연습 필요(법무·디자인 검수 10-19)
+Object.assign(CT.ko,{"spdLab": "라이벌 빠르기 (자체 눈금)", "spdV": "{s}단계 / 5", "spdAria": "5단계 중 {s}단계", "spdScale": "라이벌을 고르는 데 쓰는 1~5단계 눈금이에요. 3단계가 보통이에요(잠정).", "prevSpd": "지난번 {s}단계", "lvHi": "강함", "lvMid": "보통", "lvLo": "연습 필요", "areasLab": "영역별 결과", "shareText": "나의 학습 유형은 「{t}」 · 라이벌 빠르기 {s}단계(잠정). 라이벌로그에서 내 라이벌 찾기", "cardScale": "라이벌을 고르는 자체 눈금 · 3단계가 보통 · 잠정"});Object.assign(CT.en,{"spdLab": "Rival speed (our own scale)", "spdV": "Step {s} of 5", "spdAria": "Step {s} of 5", "spdScale": "A 1–5 scale we use to pick your rival. Step 3 is typical (provisional).", "prevSpd": "Last time: step {s}", "lvHi": "Strong", "lvMid": "Typical", "lvLo": "Needs practice", "areasLab": "Results by area", "shareText": "My learning style: \"{t}\" · rival speed step {s} (provisional). Take the Find your rival quiz on Rivalog.", "cardScale": "Our own scale for picking a rival · step 3 is typical · provisional"});
+// 사용자 시험(10-19)·법무 최종 문구(reply_legal_1915): 1.0.1 결과는 LQ 숫자 + 바로 아래 자체 점수·지능검사 아님 · 시간 안내 · 영어 다듬기
+Object.assign(CT.ko,{"lqBig": "LQ 학습지수 {l}", "lqFoot": "논문에서 쓰는 과제 방식을 바탕으로, 라이벌로그가 정한 잠정 기준(100)으로 계산한 자체 점수예요. 지능검사가 아니에요.", "prevLq1": "지난번 LQ {l}", "shareText": "나의 학습 유형은 「{t}」 · LQ 학습지수 {s}(라이벌로그 자체 점수 · 지능검사 아님). 라이벌로그에서 내 라이벌 찾기", "cardScale": "라이벌로그 잠정 기준(100)으로 계산한 자체 점수 · 지능검사 아님", "cardSmall": "LQ 학습지수 · 잠정 점수표", "pickLater": "라이벌은 나중에 고를게요", "timeN": "시간 안에 {n}문제를 풀었어요. 다음 과제로 넘어가요.", "secN": "약 {s}초", "eqLate": "시간이 지났어요 · 다음 글자를 기억하세요", "wmLate": "식 {k}개는 시간이 지났어요.", "wmLatePrac": "식 {k}개는 시간이 지났어요. 식은 약 8초 안에 골라요. 시간이 지나도 글자는 나와요.", "readyU_learn": "연습과 같은 방식이에요. 틀리면 정답을 보여 주고, 틀린 짝은 다음 바퀴에 다시 보여 드려요.", "readyU_wm": "연습과 같은 방식이에요. 식은 약 8초 안에 골라요. 세트가 끝나면 맞힌 글자 수를 보여 드려요.", "readyU_focus": "연습과 같은 방식이에요. 이번엔 맞음·틀림 표시 없이 이어져요.", "readyU_speed": "연습과 같은 방식이에요. 이번엔 맞음·틀림 표시 없이 이어져요.", "i_wm2": "글자는 2개에서 5개까지 늘어나요. 식은 약 8초 안에 골라요(아래 막대가 줄어들어요). 시간이 지나도 글자는 나와요.", "i_learn2": "검사 끝과 내일 한 번 더 물어요. 다 맞힐 때까지 최대 4바퀴 반복하고, 단어는 뜻 없는 지어낸 말이에요.", "tyd_PF": "처음 보는 문제에서 규칙을 잘 찾아요. 새 유형을 만나도 원리부터 파악해요."});Object.assign(CT.en,{"lqBig": "LQ (Learning Quotient) {l}", "lqFoot": "Rivalog's own score, based on task types used in research and calculated against Rivalog's provisional baseline (100). This is not an intelligence test.", "prevLq1": "Last time: LQ {l}", "shareText": "My learning style: \"{t}\" · LQ {s} (Rivalog's own score, not an intelligence test). Take the Find your rival quiz on Rivalog.", "cardScale": "Rivalog's own score on a provisional baseline (100) · not an intelligence test", "cardSmall": "LQ · provisional score table", "pickLater": "Pick a rival later", "timeN": "You answered {n} in time. On to the next task.", "secN": "about {s} s", "eqLate": "Out of time for this one. Remember the next letter.", "wmLate": "{k} sums ran out of time.", "wmLatePrac": "{k} sums ran out of time. Answer each sum within about 8 seconds; the letter still appears.", "readyU_learn": "Same as the practice. If you miss one, we show the answer, and missed pairs come back next round.", "readyU_wm": "Same as the practice. Answer each sum within about 8 seconds. After each set you'll see how many letters you got.", "readyU_focus": "Same as the practice, but without right or wrong marks.", "readyU_speed": "Same as the practice, but without right or wrong marks.", "readyH": "Nice. Now for the real round", "studyQ": "Memorize this pair", "againMiss": "Let's go over the ones you missed.", "i_wm": "Tap whether each sum is right or wrong, then a letter appears. Keep the letters in order and tap them back at the end.", "i_wm2": "Sets grow from 2 to 5 letters. Answer each sum within about 8 seconds (the bar below shrinks). The letter still appears if time runs out.", "i_learn2": "We'll ask once more at the end, and again tomorrow (30 seconds). We repeat up to 4 rounds until you have them all, and the words are made up.", "endH": "One more check", "tyd_PF": "You spot rules in problems you've never seen, and get to the principle of new question types fast."});
+// LQ 2.0 문구(대표님 10-19 · 법무 lg-20261019-01: 'LQ(학습지수)' 숫자 + 바로 아래 '추정·지능검사 아님', 상위 %·평균 100 설명·분포 그림 없음)
+Object.assign(CT.ko,{tagline:'20분 학습능력 체크',lead:'짧은 과제 아홉 개로 내가 어떻게 배우는지 살펴보고, 나와 겨룰 라이벌을 정해요.',p1:'약 20분 걸려요',step:'{i}/9 · {n}',
+ n_reason:'규칙 찾기',g_reason:'추론',d_reason:'9칸 그림과 숫자 줄에서 규칙 찾기',t_reason:'3분',
+ i_reason:'그림 9칸의 빈칸, 숫자 줄의 다음 수를 번갈아 골라요. 줄마다 같은 규칙이 숨어 있어요.',i_reason2:'맞히면 조금씩 어려워져요. 답을 고른 뒤에는 얼마나 확신하는지도 한 번 눌러 주세요.',
+ n_verbal:'말의 관계',g_verbal:'언어 추론',d_verbal:'낱말 관계와 문장 논리 고르기',t_verbal:'2분',
+ i_verbal:'두 낱말의 관계를 찾거나, 주어진 문장에서 반드시 맞는 것을 골라요.',i_verbal2:'맞히면 조금씩 어려워져요. 이번에도 답을 고른 뒤 확신하는 정도를 눌러요.',
+ n_dyn:'힌트로 배우기',g_dyn:'배우는 힘',d_dyn:'틀린 문제를 힌트로 다시 풀기',t_dyn:'2~3분',
+ i_dyn:'숫자 규칙 문제 4개를 먼저 풀어요. 틀린 문제는 힌트를 보고 다시 풀고, 마지막에 같은 규칙의 새 문제 4개를 풀어요.',i_dyn2:'처음에 틀려도 괜찮아요. 힌트를 받고 얼마나 나아지는지를 봐요.',
+ n_press:'시간 압박',g_press:'압박 속 침착함',d_press:'시간제한이 있을 때와 없을 때 계산 비교',t_press:'1분 30초',
+ i_press:'식이 맞는지 골라요. 먼저 여유 있게 12문제, 그다음 문제마다 시간제한이 있는 12문제예요.',i_press2:'시간제한은 내 여유 속도에 맞춰 정해져요. 평소 실력과 비교해 얼마나 흔들리지 않는지 봐요.',
+ n_meta:'아는 걸 아는 힘',g_meta:'메타인지',
+ t_rot:'1분',t_speed:'1분',t_focus:'1분 30초',i_speed2:'1분 동안 몇 개 맞히는지 세요. 틀려도 다음으로 넘어가요.',i_focus2:'1분 30초쯤 이어져요. 속도보다 정확하게, 끝까지 같은 리듬으로 해 보세요. 결과는 라이벌의 집중력 게이지에도 쓰여요.',
+ confQ:'얼마나 확신해요?',conf0:'확실해요',conf1:'반반',conf2:'찍었어요',
+ dynPre:'먼저 풀어 보기',dynRe:'힌트 보고 다시',dynNew:'새 문제',dynHint:'힌트 {n}',dynRetry:'힌트를 보고 다시 골라요',
+ dynMidH:'틀린 문제를 힌트와 함께 다시 풀어요',dynMidP:'힌트는 두 단계까지 나와요.',dynPostH:'이제 같은 규칙의 새 문제예요',dynPostP:'이번엔 힌트 없이 풀어요.',dynAllRight:'모두 맞혔어요! 같은 규칙의 새 문제로 넘어가요.',dynShow:'정답은 {a}이에요',
+ h1_alt:'옆 수와의 차이를 차례로 적어 보세요.',h2_alt:'+{x}, +{y}가 번갈아 반복돼요.',
+ h1_mul:'앞 수에 몇을 곱하면 다음 수와 가까워지는지 보세요.',h2_mulP:'앞 수에 {k}를 곱하고 {c}를 더해요.',h2_mulM:'앞 수에 {k}를 곱하고 {c}을 빼요.',
+ h1_grow:'차이를 적고, 그 차이가 어떻게 바뀌는지 보세요.',h2_grow:'차이가 {d}부터 시작해 {i}씩 커져요.',
+ h1_mix:'한 칸씩 건너뛰어 보세요. 줄 두 개가 섞여 있어요.',h2_mix:'홀수째 수는 {da}씩 커지고, 짝수째 수는 {db}씩 작아져요.',
+ pressCalm:'여유 있게',pressHot:'시간제한',pressMidH:'이번엔 문제마다 시간제한이 있어요',pressMidP:'막대가 다 줄기 전(약 {s}초)에 골라요. 못 고르면 다음 문제로 넘어가요.',
+ lqLab:'학습지수 LQ',lqV:'LQ {l}',lqNote:'논문에서 쓰는 과제 방식을 바탕으로, 라이벌로그가 정한 잠정 기준으로 계산한 추정이에요 · 지능검사가 아니에요',lqScale:'100은 라이벌로그의 잠정 기준점이에요. 비교 자료가 적어 점수표는 잠정이에요.',lqRefs:'근거 보기',prevLq:'지난번 LQ {l}',
+ areasLab:'LQ를 이루는 영역',ablLab:'공부할 때 쓰는 힘',ablNote:'LQ 숫자에는 넣지 않아요. 공부 방법을 고를 때 참고해요.',ablNone:'이번 검사에서는 재지 않았어요',
+ tip_meta:'확신했는데 틀린 문제를 따로 모아 다시 풀어 보세요.',tip_dyn:'틀린 문제는 해설을 본 뒤 같은 유형을 한 번 더 풀어 보세요.',tip_press:'실전처럼 시간을 재고 푸는 연습을 자주 해 보세요.',tip_focus:'집중이 떨어지기 전에 짧게 쉬어 가세요(50분 공부·10분 휴식).',
+ notice:'라이벌을 고르고 공부 방법을 정하기 위한 추정치예요. 지능검사나 의료·심리 진단이 아니며, 비교 자료가 적어 점수표는 잠정이에요.',
+ shareText:'나의 학습 유형은 「{t}」 · 학습지수 LQ {l}(추정 · 지능검사 아님). 라이벌로그에서 내 라이벌 찾기',
+ cardTop:'내 라이벌 찾기 · 학습지수',cardScale:'라이벌로그 잠정 기준으로 계산한 추정 · 지능검사 아님',cardFoot:'20분 학습능력 체크',cardSmall:'학습지수 LQ · 잠정 점수표'});
+Object.assign(CT.en,{tagline:'20-minute learning skills check',lead:'Nine short tasks show how you learn, so we can set up a rival that fits you.',p1:'Takes about 20 minutes',step:'{i}/9 · {n}',
+ n_reason:'Find the rule',g_reason:'Reasoning',d_reason:'Spot the rule in pictures and number series',t_reason:'3 min',
+ i_reason:'You\'ll alternate between filling the gap in a 3×3 picture and picking the next number in a series. Each one hides a rule.',i_reason2:'Questions get harder as you get them right. After each answer, tap how sure you are.',
+ n_verbal:'Word logic',g_verbal:'Verbal reasoning',d_verbal:'Word relations and sentence logic',t_verbal:'2 min',
+ i_verbal:'Find how two words relate, or pick what must be true from the sentences given.',i_verbal2:'Questions get harder as you get them right. Again, tap how sure you are after each answer.',
+ n_dyn:'Learn from hints',g_dyn:'Learning from feedback',d_dyn:'Retry missed questions with hints',t_dyn:'2–3 min',
+ i_dyn:'First solve 4 number-rule questions. Retry the ones you miss with hints, then solve 4 new questions that use the same rules.',i_dyn2:'Missing some at first is fine. We look at how much the hints help you improve.',
+ n_press:'Time pressure',g_press:'Calm under pressure',d_press:'The same sums with and without a time limit',t_press:'1½ min',
+ i_press:'Say whether each sum is right. First 12 at your own pace, then 12 with a time limit on each.',i_press2:'The limit is set from your own pace. We compare how steady you stay against your usual level.',
+ n_meta:'Knowing what you know',g_meta:'Metacognition',
+ t_rot:'1 min',t_speed:'1 min',t_focus:'1½ min',i_speed2:'You have 60 seconds. Mistakes just move you on.',i_focus2:'It lasts about 1½ minutes. Aim for accuracy over speed and keep the same rhythm to the end. Your result also sets your rival\'s focus gauge.',
+ confQ:'How sure are you?',conf0:'Sure',conf1:'Half sure',conf2:'Guess',
+ dynPre:'First try',dynRe:'Retry with a hint',dynNew:'New question',dynHint:'Hint {n}',dynRetry:'Use the hint and pick again',
+ dynMidH:'Retry the missed ones with hints',dynMidP:'You\'ll get up to two hints.',dynPostH:'Now new questions with the same rules',dynPostP:'No hints this time.',dynAllRight:'All correct! On to new questions with the same rules.',dynShow:'The answer is {a}',
+ h1_alt:'Write down the gap between each pair of numbers.',h2_alt:'It alternates: +{x}, then +{y}.',
+ h1_mul:'See what you multiply by to get close to the next number.',h2_mulP:'Multiply by {k}, then add {c}.',h2_mulM:'Multiply by {k}, then subtract {c}.',
+ h1_grow:'Write the gaps, then see how the gaps change.',h2_grow:'The gaps start at {d} and grow by {i} each time.',
+ h1_mix:'Try skipping every other number. Two series are mixed together.',h2_mix:'Odd positions go up by {da}; even positions go down by {db}.',
+ pressCalm:'Own pace',pressHot:'Time limit',pressMidH:'Now each question has a time limit',pressMidP:'Answer before the bar runs out (about {s} s). If you don\'t, we move on.',
+ lqLab:'Learning Quotient (LQ)',lqV:'LQ {l}',lqNote:'An estimate based on task types used in research, scored against Rivalog\'s provisional baseline · not an intelligence test',lqScale:'100 is Rivalog\'s provisional baseline. Comparison data is limited, so the score table is provisional.',lqRefs:'See the research',prevLq:'Last time: LQ {l}',
+ areasLab:'What makes up your LQ',ablLab:'Skills you use when studying',ablNote:'Not part of your LQ. Use them to choose how you study.',ablNone:'Not measured this time',
+ tip_meta:'Collect questions you were sure about but got wrong, and redo them.',tip_dyn:'After reading a worked answer, try one more question of the same type.',tip_press:'Practise often with a timer, like the real exam.',tip_focus:'Take a short break before your focus drops (50 min study, 10 min rest).',
+ notice:'This is an estimate for choosing a rival and a way to study. It is not an intelligence test or a medical or psychological diagnosis, and the score table is provisional because comparison data is limited.',
+ shareText:'My learning style: "{t}" · LQ {l} (estimate, not an intelligence test). Find your rival on Rivalog.',
+ cardTop:'Find your rival quiz · Learning Quotient',cardScale:'Estimate on Rivalog\'s provisional baseline · not an intelligence test',cardFoot:'20-minute learning skills check',cardSmall:'LQ · provisional score table'});
+// 10-19 저녁: 힌트로 배우기 규칙 어렵게 · 시간 압박을 수험형(짧은 글·새 공식)으로 · 기호를 숫자로 빼고 8과제
+Object.assign(CT.ko,{lead:'짧은 과제 여덟 개로 내가 어떻게 배우는지 살펴보고, 나와 겨룰 라이벌을 정해요.',p1:'약 20~22분 걸려요',step:'{i}/8 · {n}',t_focus:'1분 15초',i_focus2:'1분 15초쯤 이어져요. 속도보다 정확하게, 끝까지 같은 리듬으로 해 보세요. 결과는 라이벌의 집중력 게이지에도 쓰여요.',
+ h1_alt2:'두 가지 계산이 번갈아 나오는지 보세요.',h2_alt2:'×{k}와 +{c}가 번갈아 나와요.',
+ h1_fib:'앞의 두 수를 함께 보세요.',h2_fib:'앞의 두 수를 더하면 다음 수예요.',
+ h1_grow2:'차이를 적고, 그 차이끼리 어떻게 바뀌는지 보세요.',h2_grow2:'차이가 {d}부터 {k}배씩 커져요.',
+ h1_sq:'1, 4, 9, 16 같은 제곱수와 비교해 보세요.',h2_sqP:'{o}부터 1씩 커지는 수를 제곱하고 {c}를 더해요.',h2_sqM:'{o}부터 1씩 커지는 수를 제곱하고 {c}을 빼요.',
+ h2_mix:'홀수째 수는 {da}씩 커지고, 짝수째 수는 빼는 수가 {db}씩 커지면서 작아져요.',
+ dynMoreH:'조금 더 어려운 규칙도 풀어 볼게요',dynMoreP:'처음 4문제를 모두 맞혔어요. 배우는 과정을 보려고 2문제를 더 내요.',
+ d_press:'짧은 글·처음 보는 공식 문제를 시간제한 있을 때와 없을 때 비교',t_press:'3분',
+ i_press:'짧은 글을 읽고 답하거나, 처음 보는 공식을 표에 대입해 답을 골라요. 먼저 여유 있게 5문제, 그다음 시간제한이 있는 5문제예요.',
+ pressMidH:'이번엔 문제마다 시간제한이 있어요',pressMidP:'문제마다 약 {s}초예요. 막대가 다 줄기 전에 골라요. 못 고르면 다음 문제로 넘어가요.',
+ fxNames:['진도 지수','복습 점수','집중 지표','학습 밀도'],fxQ:'{n}의 {x}는?',
+ rd0:'스터디 카페는 평일 {o}시부터 {c}시까지, 주말에는 {wo}시부터 {wc}시까지 열어요. 매주 {off}요일은 쉬어요.',rd0q:'{d}요일 {h}시에 가면?',
+ rdCanGo:'들어갈 수 있어요',rdNotYet:'아직 문을 안 열었어요',rdAlready:'이미 문을 닫았어요',rdClosedDay:'쉬는 날이에요',
+ rd1:'A 강의는 {n1}강이고 한 강에 {m1}분, B 강의는 {n2}강이고 한 강에 {m2}분이에요.',rd1q:'전체 시간이 더 긴 강의와 그 차이는?',rd1a:'{w} 강의가 {d}분 더 길어요',
+ rd2:'모의고사 {p}점 이상은 심화반, {q}점 이상 {p}점 미만은 기본반, 그 아래는 보충반이에요. 단, 출석이 {a}회 미만이면 한 단계 아래 반으로 가요.',rd2q:'{s}점, 출석 {x}회인 학생의 반은?',
+ rdC0:'심화반',rdC1:'기본반',rdC2:'보충반',rdC3:'정할 수 없어요',
+ rd3:'지수는 월요일에 {a}쪽을 읽고, 다음 날부터 매일 전날보다 {d}쪽씩 더 읽었어요.',rd3q:'{e}요일까지 모두 몇 쪽을 읽었나요?'});
+Object.assign(CT.en,{lead:'Eight short tasks show how you learn, so we can set up a rival that fits you.',p1:'Takes about 20–22 minutes',step:'{i}/8 · {n}',t_focus:'1¼ min',i_focus2:'It lasts about 1¼ minutes. Aim for accuracy over speed and keep the same rhythm to the end. Your result also sets your rival\'s focus gauge.',
+ h1_alt2:'Check whether two different steps take turns.',h2_alt2:'×{k} and +{c} take turns.',
+ h1_fib:'Look at the two numbers before it together.',h2_fib:'Add the two numbers before it to get the next.',
+ h1_grow2:'Write the gaps, then see how the gaps change.',h2_grow2:'The gaps start at {d} and get {k} times bigger each time.',
+ h1_sq:'Compare each number with square numbers like 1, 4, 9, 16.',h2_sqP:'Square {o}, then the next whole numbers in turn, and add {c}.',h2_sqM:'Square {o}, then the next whole numbers in turn, and subtract {c}.',
+ h2_mix:'Odd positions go up by {da}; on even positions the amount taken away grows by {db} each time.',
+ dynMoreH:'Let\'s try a couple of harder rules',dynMoreP:'You got all 4 right. We\'ll add 2 more so we can see how you learn.',
+ d_press:'Short reading and new-formula questions, with and without a time limit',t_press:'3 min',
+ i_press:'Read a short passage and answer, or plug a formula you haven\'t seen before into a table. First 5 at your own pace, then 5 with a time limit.',
+ pressMidH:'Now each question has a time limit',pressMidP:'About {s} seconds each. Answer before the bar runs out; if you don\'t, we move on.',
+ fxNames:['Progress index','Review score','Focus rating','Study density'],fxQ:'What is {n}\'s {x}?',
+ rd0:'The study café opens {o}:00–{c}:00 on weekdays and {wo}:00–{wc}:00 at weekends. It is closed every {off}.',rd0q:'If you go on {d} at {h}:00?',
+ rdCanGo:'You can get in',rdNotYet:'It hasn\'t opened yet',rdAlready:'It has already closed',rdClosedDay:'It\'s the closed day',
+ rd1:'Course A has {n1} lectures of {m1} minutes each; course B has {n2} lectures of {m2} minutes each.',rd1q:'Which course is longer in total, and by how much?',rd1a:'Course {w}, by {d} minutes',
+ rd2:'Mock-exam scores of {p} or more go to Advanced, from {q} up to (not including) {p} go to Standard, and lower scores go to Support. Anyone with fewer than {a} attendances moves down one level.',rd2q:'A student scored {s} with {x} attendances. Which class?',
+ rdC0:'Advanced',rdC1:'Standard',rdC2:'Support',rdC3:'Can\'t tell',
+ rd3:'Jo read {a} pages on Monday, then each day read {d} more pages than the day before.',rd3q:'How many pages in total by {e}?'});
+// 사용자 시험(10-19): 시간 안내 통일(실제 13~42분, 보통 21~23분) · 근거 한 줄 · 미국식 영어 · 과제별 준비 문구
+Object.assign(CT.ko,{"tagline": "약 20~25분 학습능력 체크", "p1": "약 20~25분 · 대부분 과제에 시간제한이 있어요(설명·연습 화면은 제한 없음)", "cardFoot": "약 20~25분 학습능력 체크", "i_reason": "9칸 그림의 빈칸에 들어갈 그림과, 숫자 줄의 다음 수를 번갈아 골라요. 그림은 가로줄·세로줄마다 같은 규칙으로 바뀌어요.", "i_reason2": "맞히면 조금씩 어려워져요. 답을 고른 뒤 얼마나 확신하는지 한 번 눌러 주세요(누르는 동안 시계는 멈춰요).", "i_verbal": "두 낱말의 관계를 찾거나, 빈칸에 알맞은 말을 고르거나, 주어진 문장에서 반드시 맞는 것을 골라요.", "dynNotYet": "아직 아니에요", "lateFb": "시간이 지났어요", "dynAllNone": "처음 문제를 모두 맞혀 힌트를 쓰지 않았어요. 이번엔 재지 않았어요.", "readyU_press": "이번에도 정답은 알려 드리지 않아요. 먼저 여유 있게 5문제를 풀어요.", "n_end": "마무리 · 짝 다시 묻기", "d_end": "처음에 외운 짝을 한 번씩 다시 골라요", "t_end": "1분", "ev_q": "{n}문제 중 {r}개 맞힘", "ev_qt": " · 시간 안에 {m}문제 중 {n}문제 풀었어요", "ev_thin": " · 푼 문제가 적어 덜 정확해요", "ev_wm": "글자 {t}개 중 {r}개 제자리 · 식 {t}개 중 {e}개 맞힘", "ev_learn": "바퀴마다 맞힌 짝: {r} (8개 중)", "ev_rot": "1분에 {n}문제 · {r}개 맞힘", "ev_meta": "확신도를 누른 {n}문제 · 맞힌 비율 {a}% · 평균 확신 {c}%", "ev_dyn": "먼저 풀기 {p}/{pn} → 힌트 뒤 새 문제 {q}/{n} · 힌트 {h}번", "ev_press": "여유 있게 {c}/5 → 시간제한 {h}/5", "ev_pressLate": " · 시간 초과 {l}", "ev_focus": "3을 {g}번 중 {k}번 참음 · 놓친 누르기 {o}번"});
+Object.assign(CT.en,{"tagline": "20–25-minute learning skills check", "p1": "About 20–25 minutes · most tasks are timed (instructions and practice are not)", "cardFoot": "20–25-minute learning skills check", "i_reason": "You'll alternate between filling the gap in a 3×3 picture and picking the next number in a series. In the pictures, each row and column changes by the same rule.", "i_reason2": "Questions get harder as you get them right. After each answer, tap how sure you are (the clock pauses while you do).", "i_verbal": "Find how two words relate, pick the word that fills a gap, or pick what must be true from the sentences given.", "i_press": "Read a short passage and answer, or use a new formula to fill in a table. First 5 at your own pace, then 5 with a time limit.", "i_press2": "The limit is set from your own pace, so we can see how well you hold up under time pressure.", "tip_press": "Practice with a timer often, like on a real exam.", "fxNames": ["Progress index", "Review score", "Focus rating", "Study density"], "rd0": "The study café is open {o}–{c} on weekdays and {wo}–{wc} on weekends. It's closed on {off}s.", "rd0q": "You go on {d} at {h}. Can you get in?", "rdCanGo": "Yes, it's open", "rdNotYet": "No, it hasn't opened yet", "rdAlready": "No, it has already closed", "rdClosedDay": "No, it's the closed day", "rd2": "Practice-test scores of {p} or more go to Advanced, scores from {q} up to (not including) {p} go to Standard, and lower scores go to Support. Anyone who attended fewer than {a} classes moves down one level.", "rd2q": "A student scored {s} and attended {x} classes. Which class?", "rd3q": "How many pages has Jo read in total by {e}?", "dynNotYet": "Not yet", "lateFb": "Out of time", "dynAllNone": "You got the first questions all right, so no hints were used. Not measured this time.", "readyU_press": "We won't show the answers this time either. First 5 at your own pace.", "n_end": "Wrap-up · pairs check", "d_end": "Pick the word for each pair you learned earlier", "t_end": "1 min", "ev_q": "{r} of {n} right", "ev_qt": " · answered {n} of {m} in time", "ev_thin": " · few answers, so less precise", "ev_wm": "{r} of {t} letters in place · {e} of {t} sums right", "ev_learn": "Pairs right each round: {r} (of 8)", "ev_rot": "{n} in 1 minute · {r} right", "ev_meta": "{n} answers rated · {a}% right · average confidence {c}%", "ev_dyn": "First try {p}/{pn} → new questions {q}/{n} after hints · {h} hints", "ev_press": "Own pace {c}/5 → time limit {h}/5", "ev_pressLate": " · {l} ran out of time", "ev_focus": "Held back on {k} of {g} threes · {o} missed taps"});
+// 결과지 점검(10-20)
+Object.assign(CT.ko,{"pressNone": "여유 있게 푼 문제를 절반 넘게 맞혀야 비교할 수 있어요. 이번엔 재지 않았어요."});
+Object.assign(CT.en,{"pressNone": "We can only compare once you get more than half right at your own pace. Not measured this time."});
+Object.assign(CT.ko,{"metaNone": "맞힌 문제와 틀린 문제가 둘 다 있어야 확신도를 견줄 수 있어요. 이번엔 재지 않았어요.", "tip_metaUnder": "맞힌 문제에도 확신이 낮았어요. 왜 그 답인지 한 줄로 말해 보면 확신이 붙어요."});
+Object.assign(CT.en,{"metaNone": "We need both right and wrong answers to compare your confidence. Not measured this time.", "tip_metaUnder": "You were unsure even when you were right. Saying in one line why an answer is right builds confidence."});
+
+function setLang(){ let v=''; try{ if(typeof LANG!=='undefined'&&LANG) v=String(LANG); }catch(e){}
+  if(!v){ try{ v=(navigator.languages&&navigator.languages[0])||navigator.language||'en'; }catch(e){ v='en'; } }
+  L=v.toLowerCase().startsWith('ko')?'ko':'en'; T=CT[L]; }
+const tr=(k,v)=>String(T[k]!=null?T[k]:(CT.en[k]!=null?CT.en[k]:k)).replace(/\{(\w+)\}/g,(_,x)=>v&&v[x]!=null?v[x]:'');
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const now=()=>performance.now();
+const rnd=Math.random, ri=(a,b)=>a+Math.floor(rnd()*(b-a+1)), pick=a=>a[Math.floor(rnd()*a.length)];
+const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(rnd()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x)), r3=x=>Math.round(x*1000)/1000, r1=x=>Math.round(x*10)/10;
+const median=a=>{if(!a.length)return null;const s=a.slice().sort((x,y)=>x-y);return Math.round(s[Math.floor(s.length/2)]);};
+const mark=ok=>FAST&&ok?' data-ans="1"':'';    // 자동 검사용 정답 표시(fast 옵션일 때만)
+function later(fn,ms){ const my=SID; return setTimeout(()=>{ if(my===SID) fn(); },Math.max(0,ms)); }
+
+/* ─── 시간 재기(화면 위에 보임, 그만두기 확인 중엔 멈춤) ─── */
+function clockStart(ms,onEnd){ clockStop(); const my=SID; C={ms,left:ms,last:now(),onEnd,paused:false,h:0};
+  const tick=()=>{ if(my!==SID||!C) return; const t=now(); if(!C.paused) C.left-=t-C.last; C.last=t; paintClock();
+    if(C.left<=0){ const f=C.onEnd; clockStop(); if(f) f(); return; } C.h=setTimeout(tick,100); };
+  tick(); }
+function clockStop(){ if(C) clearTimeout(C.h); C=null; paintClock(); }
+const ICLK='<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="8.5" r="6"/><path d="M8 5.5v3l2 1.5"/></svg>';
+function paintClock(){ if(!root) return; const e=root.querySelector('.cg-clock'); if(!e) return;
+  if(!C){ e.innerHTML=''; e.classList.remove('low'); return; }
+  const s=Math.ceil(Math.max(0,C.left)/1000);
+  e.innerHTML=ICLK+'<span>'+Math.floor(s/60)+':'+String(s%60).padStart(2,'0')+'</span>';
+  e.classList.toggle('low',C.left<Math.min(15000,C.ms*0.15));
+  segProg(Math.max(S&&S.itemFrac||0,1-C.left/C.ms)); }
+function segProg(f){ if(!root||!S||S.step==null) return; const segs=root.querySelectorAll('.cg-seg');
+  segs.forEach((s,i)=>{ s.classList.toggle('done',i<S.step); const b=s.querySelector('i'); if(i===S.step) b.style.width=Math.round(clamp(f,0,1)*100)+'%'; else if(i>S.step) b.style.width='0'; }); }
+function setStep(i,label){ if(!S) return; S.step=i; S.itemFrac=0; const l=root.querySelector('.cg-steplab'); if(l) l.textContent=label; segProg(0); }
+
+/* ─── 오버레이 ─── */
+function ensureRoot(){ root=document.getElementById('cog'); if(!root){ root=document.createElement('div'); root.id='cog'; root.hidden=true; document.body.appendChild(root); } }
+function openOverlay(mode){ ensureRoot(); SID++; clockStop(); if(keyH){ document.removeEventListener('keydown',keyH); keyH=null; }
+  root.setAttribute('role','dialog'); root.setAttribute('aria-modal','true'); root.setAttribute('aria-label',T.title); root.lang=L;
+  root.innerHTML=`<div class="cg-top"><div class="cg-topin"><div class="cg-bar"><button class="cg-quit ${mode==='result'?'cg-off':''}" data-a="${mode==='test'?'quit':'close'}">${mode==='test'?T.quit:mode==='recall'?T.rcLater:T.close}</button><div class="cg-steplab"></div><div class="cg-clock"></div></div>${mode==='test'?`<div class="cg-segs" aria-hidden="true">${'<div class="cg-seg"><i></i></div>'.repeat(FLOW.length)}</div>`:''}</div></div>
+  <div class="cg-main"></div>
+  <div class="cg-modal" hidden><div class="cg-dlg" role="alertdialog" aria-modal="true" aria-label="${esc(T.quitQ)}"><h3>${T.quitQ}</h3><p>${T.quitP}</p><div class="cg-two"><button data-a="stay">${T.stay}</button><button class="cg-warnbtn" data-a="quitYes">${T.quit}</button></div></div></div>`;
+  root.onclick=e=>{ const b=e.target.closest('[data-a]'); if(!b||!root.contains(b)) return; const a=b.dataset.a, M=root.querySelector('.cg-modal');
+    if(a==='quit'){ M.hidden=false; if(C){C.paused=true;} M.querySelector('[data-a=stay]').focus(); }
+    else if(a==='stay'){ M.hidden=true; if(C){C.paused=false;C.last=now();} }
+    else if(a==='quitYes'){ const cb=S&&S.onCancel; closeOverlay(); if(cb) cb(); }
+    else if(a==='close'){ const cb=S&&S.onClose; closeOverlay(); if(cb) cb(); }
+    else if(a==='close0'){ const cb=S&&S.onCancel; closeOverlay(); if(cb) cb(); } };   // 시작 전 닫기: 한 게 없으니 확인 없이
+  try{ root.classList.toggle('cg-big',parseFloat(getComputedStyle(document.documentElement).fontSize)>20); }catch(e){}   // 큰 글자: 위 머리줄을 두 줄로(사용자 시험 10-19)
+  if(root.hidden){ prevOv=document.documentElement.style.overflow; document.documentElement.style.overflow='hidden'; }
+  root.hidden=false; }
+function closeOverlay(){ SID++; clockStop(); if(keyH){ document.removeEventListener('keydown',keyH); keyH=null; }
+  if(root){ root.hidden=true; root.innerHTML=''; root.onclick=null; }
+  if(prevOv!==null){ document.documentElement.style.overflow=prevOv; prevOv=null; } S=null; }
+function main(html){ const m=root.querySelector('.cg-main'); m.innerHTML=html; root.scrollTop=0;
+  const h=m.querySelector('[data-focus]'); if(h){ try{ h.focus({preventScroll:true}); }catch(e){} } return m; }
+const $$=(sel)=>[...root.querySelectorAll('.cg-main '+sel)];
+const $1=(sel)=>root.querySelector('.cg-main '+sel);
+
+/* ─── 문항 반응 이론: 능력값 추정(EAP) ─── */
+function eap(resp){ let num=0,num2=0,den=0;
+  for(let t=-4;t<=4.0001;t+=0.05){ let Lk=Math.exp(-t*t/2);
+    for(const x of resp){ const p=x.c+(1-x.c)/(1+Math.exp(-1.7*IRT_A*(t-x.b))); Lk*=x.ok?p:1-p; }
+    num+=t*Lk; num2+=t*t*Lk; den+=Lk; }
+  const m=num/den; return {m,se:Math.sqrt(Math.max(0,num2/den-m*m))}; }
+// 다음 문항 단계: 지금 추정값보다 조금 위(맞힐 확률 약 절반) — 찍기 확률이 있어 +0.25
+// 첫 본 문항은 start 단계, 그 뒤로는 추정값을 따르되 한 번에 한 단계까지만 오르내림(연습 직후 갑자기 어려워지지 않게)
+function nextLv(resp,start){ if(!resp.length) return start; const prev=resp[resp.length-1].lv; return clamp(lvFor(eap(resp).m),Math.max(1,prev-1),Math.min(6,prev+1)); }
+function lvFor(th){ let best=1,bd=1e9; LEVEL_B.forEach((b,i)=>{ const d=Math.abs(b-(th+0.25)); if(d<bd){bd=d;best=i+1;} }); return best; }
+
+/* ═══ ① 규칙 찾기 — 3×3 그림 행렬 생성기 ═══ */
+const SHP={circle:'M1 0A1 1 0 1 1 -1 0A1 1 0 1 1 1 0Z',square:'M-.82 -.82H.82V.82H-.82Z',triangle:'M0 -.95L.98 .75H-.98Z',
+  diamond:'M0 -1L.78 0L0 1L-.78 0Z',hexagon:'M1 0L.5 .866L-.5 .866L-1 0L-.5 -.866L.5 -.866Z',
+  cross:'M-.32 -1H.32V-.32H1V.32H.32V1H-.32V.32H-1V-.32H-.32Z',
+  arrow:'M0 -1L.74 -.08H.27V.96H-.27V-.08H-.74Z',pac:'M0 0L.866 -.5A1 1 0 1 0 .866 .5Z',half:'M-1 .4A1 1 0 0 1 1 .4Z'};
+SHP.star=(()=>{let d='';for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,r=i%2?.45:1;d+=(i?'L':'M')+(r*Math.cos(a)).toFixed(3)+' '+(r*Math.sin(a)).toFixed(3);}return d+'Z';})();
+const SH_N=['circle','square','triangle','diamond','hexagon','star','cross'];   // 방향이 없는 모양
+const SH_R=['arrow','pac','half'];                                               // 돌리면 달라 보이는 모양
+const POS={1:[[50,50]],2:[[29,50],[71,50]],3:[[50,29],[28,70],[72,70]],4:[[29,29],[71,29],[29,71],[71,71]],5:[[26,26],[74,26],[50,50],[26,74],[74,74]]};
+const RAD={1:33,2:18,3:17,4:16,5:13}, SIZE=[.6,.8,1];
+const LNP={1:'M8 50H92',2:'M14 86L86 14',3:'M50 8V92'};
+function shpEl(k,x,y,r,rot,fill){ const st=fill===0?'fill="none"':fill===1?'fill="currentColor" fill-opacity=".3"':'fill="currentColor"';
+  return `<path d="${SHP[k]}" transform="translate(${x} ${y}) rotate(${rot}) scale(${r.toFixed(2)})" ${st} stroke="currentColor" stroke-width="2.4" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>`; }
+function cellSVG(c){ return `<svg viewBox="0 0 100 100" aria-hidden="true" focusable="false">${c.line?`<path d="${LNP[c.line]}" stroke="currentColor" stroke-opacity=".45" stroke-width="3" stroke-linecap="round" fill="none" vector-effect="non-scaling-stroke"/>`:''}${POS[c.count].map(([x,y])=>shpEl(c.shape,x,y,RAD[c.count]*SIZE[c.size],c.rot,c.fill)).join('')}</svg>`; }
+const nrot=v=>((v%360)+360)%360;
+const ckey=c=>[c.shape,c.count,c.fill,c.size,nrot(c.rot),c.line].join('|');
+const KINDS={easy:['count+','size+','shapeRow','fillRow'],mid:['shapeDist','fillDist','rot90','lineRow','count+','sizeDist'],hard:['shapeDist2','fillDist2','countOff','rot45','lineDist','sizeDist2']};
+const KATTR={'count+':'count',countOff:'count','size+':'size',sizeDist:'size',sizeDist2:'size',shapeRow:'shape',shapeDist:'shape',shapeDist2:'shape',fillRow:'fill',fillDist:'fill',fillDist2:'fill',rot90:'rot',rot45:'rot',lineRow:'line',lineDist:'line'};
+const RECIPE={1:['easy'],2:['easy','easy'],3:['mid','easy'],4:['mid','mid','easy'],5:['hard','mid','mid'],6:['hard','hard','mid','mid']};
+function genMatrix(lv){
+  for(let tries=0;tries<80;tries++){
+    const kinds=[],used=new Set();
+    for(const tier of RECIPE[lv]){ let k,g=0; do{ k=pick(KINDS[tier]); }while(used.has(KATTR[k])&&++g<40); if(used.has(KATTR[k])) continue; used.add(KATTR[k]); kinds.push(k); }
+    const rotOn=used.has('rot'), pal=rotOn?SH_R:SH_N;
+    const shapes=shuffle(pal.slice()).slice(0,3), fills=shuffle([0,1,2]), sizes=shuffle([0,1,2]), lines=shuffle([0,1,2,3]).slice(0,3);
+    const f={shape:()=>shapes[0],fill:()=>fills[0],size:()=>2,count:()=>1,rot:()=>0,line:()=>0};
+    const dir=pick([1,-1]);
+    for(const k of kinds){ switch(k){
+      case 'count+':{ const b=pick([1,2]); f.count=(r,c)=>dir>0?b+c:b+2-c; break; }
+      case 'countOff': f.count=(r,c)=>dir>0?1+c+r:5-c-r; break;
+      case 'size+': f.size=(r,c)=>dir>0?c:2-c; break;
+      case 'sizeDist': f.size=(r,c)=>sizes[(c+r)%3]; break;
+      case 'sizeDist2': f.size=(r,c)=>sizes[(c+2*r)%3]; break;
+      case 'shapeRow': f.shape=(r)=>shapes[r]; break;
+      case 'shapeDist': f.shape=(r,c)=>shapes[(c+r)%3]; break;
+      case 'shapeDist2': f.shape=(r,c)=>shapes[(c+2*r)%3]; break;
+      case 'fillRow': f.fill=(r)=>fills[r]; break;
+      case 'fillDist': f.fill=(r,c)=>fills[(c+r)%3]; break;
+      case 'fillDist2': f.fill=(r,c)=>fills[(c+2*r)%3]; break;
+      case 'rot90':{ const a0=pick([0,90,180,270]); f.rot=(r,c)=>a0+90*c*dir; break; }
+      case 'rot45':{ const a0=pick([0,90,180,270]); f.rot=(r,c)=>a0+45*(c+r)*dir; break; }
+      case 'lineRow': f.line=(r)=>lines[r]; break;
+      case 'lineDist': f.line=(r,c)=>lines[(c+r)%3]; break; } }
+    const grid=[0,1,2].map(r=>[0,1,2].map(c=>({shape:f.shape(r,c),count:f.count(r,c),fill:f.fill(r,c),size:f.size(r,c),rot:nrot(f.rot(r,c)),line:f.line(r,c)})));
+    const ans=grid[2][2], flat=grid.flat();
+    // 헷갈리는 보기: 바뀌는 속성 3개(모자라면 고정 속성으로 채움)의 '정답값/다른 값' 조합 8개 중 정답 + 5개.
+    // → 속성마다 정답값이 보기의 약 절반에만 있어 '많이 나온 값 고르기'로는 못 맞힌다.
+    const consts=['fill','count','size','shape'].filter(a=>!used.has(a));
+    const oa=shuffle([...used]).concat(shuffle(consts)).slice(0,3);
+    const altOf=a=>{ const v=ans[a], present=[...new Set(flat.map(x=>a==='rot'?nrot(x.rot):x[a]))].filter(x=>x!==v);
+      if(a==='count'){ const c=[v-1,v+1].filter(x=>x>=1&&x<=5); const p=c.filter(x=>present.includes(x)); return pick(p.length?p:c); }
+      if(a==='size'){ const c=[v-1,v+1].filter(x=>x>=0&&x<=2); return pick(c); }
+      if(a==='rot') return present.length?pick(present):nrot(v+90);
+      if(a==='shape') return present.length?pick(present):pick(pal.filter(s=>s!==v));
+      if(a==='fill') return present.length?pick(present):pick([0,1,2].filter(x=>x!==v));
+      if(a==='line') return present.length?pick(present):pick([1,2,3].filter(x=>x!==v)); };
+    const alts=oa.map(altOf);
+    const combos=[]; for(let m=1;m<8;m++){ const o=Object.assign({},ans); oa.forEach((a,i)=>{ if(m>>i&1) o[a]=alts[i]; }); combos.push(o); }
+    const opts=[ans].concat(shuffle(combos).slice(0,5));
+    const keys=new Set(opts.map(ckey)); if(keys.size!==6) continue;
+    const order=shuffle([0,1,2,3,4,5]);
+    return {lv,kinds,grid,opts:order.map(i=>opts[i]),ci:order.indexOf(0)}; }
+  return genMatrix(Math.max(1,lv-1)); }
+
+/* ═══ ② 수열 생성기 (단계 1~6) ═══ */
+function mk(n,first,f){ const t=first.slice(); for(let i=t.length;i<=n;i++) t.push(f(t,i)); return {q:t.slice(0,n),a:t[n]}; }
+const SEQ=[
+ [()=>{const s=ri(1,20),d=ri(2,6);return mk(5,[s],(t,i)=>t[i-1]+d);}, ()=>{const s=ri(1,5);return mk(5,[s],(t,i)=>t[i-1]*2);}, ()=>{const s=ri(3,12);return mk(5,[s*10],(t,i)=>t[i-1]+10);}],
+ [()=>{const s=ri(50,90),d=ri(3,9);return mk(5,[s],(t,i)=>t[i-1]-d);}, ()=>{const s=ri(10,40),d=ri(11,19);return mk(5,[s],(t,i)=>t[i-1]+d);}, ()=>{const s=ri(1,3);return mk(4,[s],(t,i)=>t[i-1]*3);}],
+ [()=>{const s=ri(1,10),d=ri(1,3);return mk(5,[s],(t,i)=>t[i-1]+d+i-1);}, ()=>{const s=ri(5,20),a=ri(3,7),b=ri(1,a-1);return mk(6,[s],(t,i)=>i%2?t[i-1]+a:t[i-1]-b);}, ()=>{const n0=ri(1,4);return mk(5,[n0*n0],(t,i)=>(n0+i)*(n0+i));}],
+ [()=>{const a0=ri(1,9),da=ri(2,5),b0=ri(25,40),db=ri(1,4);return mk(6,[a0,b0],(t,i)=>i%2===0?t[i-2]+da:t[i-2]-db);}, ()=>{const s=ri(1,4);return mk(5,[s],(t,i)=>2*t[i-1]+1);}, ()=>{const a=ri(1,4),b=ri(2,6);return mk(6,[a,b],(t,i)=>t[i-1]+t[i-2]);}, ()=>{const s=ri(1,10);return mk(5,[s],(t,i)=>t[i-1]+Math.pow(2,i-1));}],
+ [()=>{const s=ri(3,6),k=ri(1,3);return mk(6,[s],(t,i)=>i%2?t[i-1]*2:t[i-1]-k);}, ()=>{const s=ri(1,10),d0=ri(1,4),dd=ri(2,4);return mk(5,[s],(t,i)=>t[i-1]+d0+dd*(i-1));}, ()=>{const n0=ri(1,3);return mk(5,[n0*(n0+1)],(t,i)=>(n0+i)*(n0+i+1));}, ()=>{const s=ri(1,3);return mk(5,[s],(t,i)=>3*t[i-1]-1);}],
+ [()=>{const s=ri(1,9);return mk(5,[s],(t,i)=>t[i-1]+Math.pow(3,i-1));}, ()=>{const s=ri(1,5),k=ri(2,5);return mk(6,[s],(t,i)=>i%2?t[i-1]+k:t[i-1]*2);}, ()=>{const s=ri(1,6),FB=[0,1,2,3,5,8,13];return mk(6,[s],(t,i)=>t[i-1]+FB[i]);}, ()=>{const a=ri(1,2);return mk(6,[a,a,2*a],(t,i)=>t[i-1]+t[i-2]+t[i-3]);}, ()=>{const a0=ri(1,9),da=ri(2,6),b0=ri(1,3);return mk(7,[a0,b0],(t,i)=>i%2===0?t[i-2]+da:t[i-2]*2);}]
+];
+let seqRecent=[];   // 최근 쓴 규칙(단계:번호) 2개 — 같은 규칙이 연달아 나오지 않게
+// 보기: 정답보다 작은 보기 수 k를 0~3 중 거의 고르게 뽑아 정답이 가장 큰 수·가장 작은 수로 쏠리지 않게 한다(각 약 25%).
+//   작은 쪽·큰 쪽 모두 '흔한 실수'(앞 차이로 한 번 더 간 값, 차이 절반)를 먼저 두고 나머지는 가까운 수.
+function genSeq(lv){ const gens=SEQ[lv-1]; let gi,g=0; do{ gi=Math.floor(rnd()*gens.length); }while(seqRecent.includes(lv+':'+gi)&&++g<30);
+  seqRecent.push(lv+':'+gi); if(seqRecent.length>2) seqRecent.shift();
+  const {q,a}=gens[gi](); const last=q[q.length-1], prev=q[q.length-2], lin=last+(last-prev);
+  const big=Math.abs(a)>=100?10:1, half=Math.max(1,Math.round(Math.abs(a-last)/2)), bad=new Set([a].concat(q));
+  const pool=(sgn,first)=>{ const out=[]; const add=v=>{ if(v!=null&&v>=0&&!bad.has(v)&&!out.includes(v)) out.push(v); };
+    first.forEach(add); shuffle([a+sgn*half,a+sgn*big,a+2*sgn*big,a+3*sgn*big,a+5*sgn*big]).forEach(add);
+    [1,2,3,4,5,6,7,8].forEach(d=>{ if(out.length<4) add(a+sgn*d*(big>1&&d>3?big/2:1)); }); return out; };   // 문제 숫자와 겹쳐 모자라면 가까운 수로 채움
+  const lowP=pool(-1,[lin<a?lin:null]), highP=pool(1,[lin>a?lin:null]);
+  let k=rnd()<.28?3:ri(0,2); if(k>lowP.length) k=lowP.length;   // 정답이 가장 큰 수 약 28%, 나머지 자리 각 약 24%
+  const take=(arr,n)=>{ const o=arr.slice(0,1).concat(shuffle(arr.slice(1))); return rnd()<.5?o.slice(0,n):shuffle(arr.slice()).slice(0,n); };
+  const ds=take(lowP,k).concat(take(highP,3-k));
+  while(ds.length<3){ const v=a+ri(4,9)*big; if(!bad.has(v)&&!ds.includes(v)) ds.push(v); }
+  const opts=shuffle([a].concat(ds)); return {lv,g:gi,q,a,opts,ci:opts.indexOf(a)}; }
+
+/* ═══ ③ 도형 돌리기 — 비대칭 6칸 조각 생성 ═══ */
+function nrmCells(cs){ const mx=Math.min(...cs.map(c=>c[0])),my=Math.min(...cs.map(c=>c[1])); return cs.map(([x,y])=>(x-mx)+','+(y-my)).sort().join(';'); }
+function chiral(cs){ const m=cs.map(([x,y])=>[-x,y]); let r=cs; for(let k=0;k<4;k++){ if(nrmCells(r)===nrmCells(m)) return false; r=r.map(([x,y])=>[-y,x]); } return true; }
+function genPoly(){ for(;;){ const cells=[[0,0]],set=new Set(['0,0']);
+    while(cells.length<6){ const [x,y]=pick(cells),[dx,dy]=pick([[1,0],[-1,0],[0,1],[0,-1]]),k=(x+dx)+','+(y+dy); if(!set.has(k)){set.add(k);cells.push([x+dx,y+dy]);} }
+    const xs=cells.map(c=>c[0]),ys=cells.map(c=>c[1]),w=Math.max(...xs)-Math.min(...xs)+1,h=Math.max(...ys)-Math.min(...ys)+1;
+    if(w>4||h>4||w<2||h<2) continue; if(chiral(cells)) return cells; } }
+function polySVG(cells,ang,flip){ const xs=cells.map(c=>c[0]),ys=cells.map(c=>c[1]);
+  const cx=(Math.min(...xs)+Math.max(...xs)+1)/2, cy=(Math.min(...ys)+Math.max(...ys)+1)/2;
+  const d=cells.map(([x,y])=>`M${x} ${y}h1v1h-1z`).join('');
+  return `<svg viewBox="-3.1 -3.1 6.2 6.2" aria-hidden="true" focusable="false"><g transform="rotate(${ang}) scale(${flip?-1:1} 1) translate(${-cx} ${-cy})"><path d="${d}" fill="currentColor" stroke="currentColor" stroke-width=".06" stroke-linejoin="round"/></g></svg>`; }
+function genRot(){ const cells=genPoly(), a1=ri(0,11)*30, d=pick([60,90,120,150,180,210,240,270,300]), flip=rnd()<.5; return {cells,a1,a2:a1+d,flip}; }
+
+/* ═══ ⑤ 기호를 숫자로 — 직접 그린 기호 9개 ═══ */
+const SG=['<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="1.9" fill="currentColor"/>','<path d="M4 6h16L12 19z"/>','<path d="M8 4v16M16 4v16"/>',
+ '<path d="M5 5l14 14M19 5L5 19"/>','<path d="M5 5h14v14H5zM5 19L19 5"/>','<path d="M5 5v7a7 7 0 0 0 14 0V5"/>','<path d="M5 6h14L5 18h14"/>','<path d="M12 4v15M5 19h14"/>','<path d="M12 3l8 9-8 9-8-9z"/>'];
+const sgSVG=i=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${SG[i]}</svg>`;
+
+/* ═══ ⑥ 짝 외우기 — 낯선 기호(3×3 점 격자 위 선·곡선)와 지어낸 단어 ═══ */
+const CON='bdfgklmnprstvz', VOW='aeiou';
+// 가짜 단어 금지 목록: 실제 영어 단어·이름(hunspell en_US 사전의 '자음모음자음모음' 4글자 전부)과 다른 언어의 흔한 말 689개를
+//   글자 대신 32비트 FNV-1a 해시 값으로만 둔다(원래 목록은 앱 소스 밖에 보관). 해시 충돌로 무해한 단어가 걸러지는 건 괜찮다.
+const fnv1a=w=>{ let h=0x811c9dc5; for(let i=0;i<w.length;i++){ h^=w.charCodeAt(i); h=Math.imul(h,0x01000193)>>>0; } return h; };
+const BADH=new Set([1355577,15016487,16987963,17171560,17907035,18665249,35667883,56717786,59825223,65226096,69020893,75086619,82524321,84098439,88177039,93337041,103746780,127382252,132336572,133175215,133867603,140809796,153572226,155684873,170857256,171151446,171990089,194340365,199741238,200579881,202153999,202949555,203084363,205497124,205942786,219635821,221732057,231593560,238261922,254532130,268382745,270537232,271768957,272766982,272949993,295065827,299568309,299965667,300112762,304507145,304636923,306608500,313702815,314835648,321642606,323971889,324894010,332553464,333123547,337315702,338051177,339877458,341699939,358149134,358527541,360499017,368542649,371617621,372041589,372934457,373615707,375163215,375450386,381107481,388753082,389508247,398089822,398825297,400234023,402205499,407568404,411217166,425259610,439152065,440044933,440726183,442016409,465935773,469315975,472283335,473259767,474438814,475076238,476116100,476215081,478327642,479063117,485318789,505091892,506262541,519804544,526559918,529811322,534852333,540767601,559417684,572404596,575398718,577076004,577217175,579047480,580326348,582733099,583975110,585249028,585984503,586915020,588886496,591133865,597743964,607878077,609597390,617203525,626822350,630912397,634865982,642509194,644480670,646157956,649843575,651520861,653492337,661789935,663868702,667664559,676707866,677546509,684935014,690390853,693932826,697238035,720602813,747575301,752851500,760042888,762749839,764348511,765481344,783923442,784762085,785306538,785600728,796010887,805707838,814685777,816857667,831458987,831856345,832591820,848241015,851284181,851572361,852711204,857260339,862680078,863415553,864905940,878228579,900835129,918682837,918983037,924370815,932310606,939634600,945339055,999421082,1006745076,1011129313,1012765801,1013898634,1018042000,1020922669,1033187773,1033923248,1035056081,1036733367,1037866200,1037991868,1045024955,1053498179,1056541257,1074988385,1078239789,1085152476,1092147005,1102166557,1112135431,1116621776,1120608655,1123651733,1126756042,1129542027,1190125882,1196652503,1204711871,1215082967,1216362895,1217287490,1239007361,1250842728,1252928666,1254829607,1257431400,1294678419,1305175271,1353153095,1355021403,1362105179,1366335302,1382020514,1384139085,1385357870,1390378687,1415575752,1416414395,1418385871,1440381961,1462851967,1465785955,1483524871,1483819061,1484657704,1485496347,1487668237,1493117899,1496723489,1498040325,1519665766,1524599639,1525732472,1535979800,1550929537,1564253156,1564650514,1570954151,1586776242,1590430187,1592842948,1630604931,1632496465,1641713389,1653342265,1660247614,1661086257,1680112691,1687441956,1702111423,1705447866,1719319908,1730137812,1743022702,1744155535,1747223167,1749091475,1758887219,1765143299,1769478187,1793733091,1797542478,1803669013,1804454423,1816201951,1825997695,1832253775,1833337259,1836588663,1841569845,1845799968,1854673693,1860843567,1862711875,1880656320,1899658441,1902233372,1904101680,1904575684,1909381107,1925824766,1926663409,1927409590,1931601659,1968799395,1971206973,1975790797,1982366207,1995358709,1999044227,2017930737,2028461956,2034135681,2036008262,2045159920,2049770873,2057535312,2058528960,2060791899,2076053869,2083363927,2086321141,2094733789,2099709941,2101441452,2105722115,2108519545,2112270396,2114241872,2116881349,2122968502,2123226675,2123962150,2125639436,2127902375,2128299733,2136242585,2137919871,2144267773,2169286997,2170419830,2173952735,2180927320,2181352348,2190078978,2192749912,2195410209,2204078642,2205211475,2205324537,2223928406,2224178669,2225311502,2230472243,2236397473,2237633880,2241260897,2248037796,2251102301,2273273656,2273498305,2273792495,2276295735,2295520764,2296359407,2297582719,2297839007,2303802139,2306024284,2306715832,2313470986,2315442462,2323461287,2324299930,2324594120,2337868203,2339366755,2344162032,2363028598,2363764073,2365243673,2369371622,2370177546,2375681521,2389163037,2393381882,2393577177,2396828581,2406655965,2432097861,2436482098,2440730042,2441568685,2441953354,2442791997,2459073245,2464135597,2465947289,2486897151,2497494295,2504252230,2523781347,2555402925,2565095501,2566575101,2566613003,2568831360,2571906332,2581912890,2603240658,2604917944,2627053971,2636795896,2645550448,2658218935,2660698863,2661831696,2664306827,2682725699,2686129127,2690174441,2703449670,2712660924,2718594803,2721022728,2725112775,2726235221,2740270902,2742061250,2780904233,2782258580,2785705279,2789375468,2792517441,2797185481,2800863980,2827195125,2834310867,2844469115,2850501889,2852179175,2855537870,2860750363,2863163124,2863470828,2867484483,2901421343,2902459573,2904781098,2905075288,2905269692,2909724378,2913447899,2927860839,2931049365,2934594959,2935829814,2937824516,2944525511,2967682136,2970223695,2970508478,2978984257,2980558375,2982235661,2995265505,3002087057,3004923545,3005762188,3008469139,3026340815,3033980745,3034792612,3035260673,3035642295,3035658031,3036239240,3036495528,3040444490,3054021515,3088989100,3102752771,3103155312,3104444647,3104482549,3104661369,3107560735,3107733953,3107912773,3115714707,3117391993,3138844538,3140271561,3146233043,3169343667,3171290270,3171593025,3172237264,3173167143,3181251065,3182825183,3193969910,3203434221,3205032893,3213343519,3237376264,3237670454,3238509097,3239347740,3240643085,3248172761,3255779552,3256765290,3282755422,3283160946,3283888255,3293502791,3293796981,3294635624,3299688922,3303858809,3304672579,3307404403,3312729305,3318178968,3340013454,3341146287,3360907457,3364158861,3371783055,3377781700,3380275142,3382876683,3384553969,3385289444,3404230333,3406495999,3414674947,3432924136,3434063232,3438918404,3439001882,3439290889,3439296072,3439840525,3440134715,3440423722,3440865007,3441625355,3441812001,3449987159,3451664445,3484051089,3496789471,3498760947,3501173708,3505671073,3506268691,3506401365,3506406548,3507026905,3508922477,3509868664,3514496094,3516364402,3518041688,3539117960,3564297305,3573298738,3574272189,3575270214,3576140497,3577027929,3578671843,3581606570,3583474878,3590758228,3616594755,3625181360,3631407781,3641398082,3645782319,3650585354,3653198187,3658162894,3662231514,3664963019,3667375780,3675935928,3680712000,3683705231,3690717718,3691556361,3692291836,3702063851,3706349697,3711978346,3713444012,3715121298,3716121712,3746145190,3747822476,3750374422,3751213065,3765922923,3769174327,3769468517,3775059164,3775762999,3776590195,3777869283,3784070831,3785203664,3785939139,3792957550,3799761964,3805617460,3811681548,3818323541,3821654633,3826071503,3834042464,3836578993,3840595522,3841196189,3841728355,3842579285,3843700671,3844833504,3848665378,3851481421,3851878779,3852314140,3853452897,3888595679,3892887789,3897901536,3911105337,3912384425,3913679770,3913915456,3915598666,3921934281,3930765125,3942835354,3943526902,3945939663,3947873976,3951847021,3952979854,3953677326,3959453812,3965012012,3966689298,3967538154,3986535092,3987270567,3989430823,4037616231,4043059783,4046605377,4048136408,4050486291,4052262472,4056371869,4056769227,4058126709,4060098185,4063576371,4065677726,4068929130,4079578999,4083227761,4084003526,4085382349,4091976137,4093653423,4099232964,4112834123,4113715853,4116085527,4117558764,4133099608,4149499594,4150338237,4162656761,4170851445,4171135248,4192641851,4194319137,4204406683,4212966831,4218262481,4220528147,4230889683,4251313558,4261429613,4266776107,4280702189,4284853379,4284868796,4294657034]);
+function genWords(n){ const out=[],first=new Set(); let g=0;
+  while(out.length<n&&g++<5000){ const w=pick(CON)+pick(VOW)+pick(CON)+pick(VOW);
+    if(BADH.has(fnv1a(w))||first.has(w[0])||w.slice(0,2)===w.slice(2)||out.some(x=>x.slice(2)===w.slice(2))) continue; out.push(w); first.add(w[0]); }
+  return out; }
+function genGlyphs(n){ const P=[];for(let y=0;y<3;y++)for(let x=0;x<3;x++)P.push([x,y]);
+  const SEG=[];for(let i=0;i<9;i++)for(let j=i+1;j<9;j++)SEG.push([i,j]);
+  const out=[],sig=[]; let g=0;
+  while(out.length<n&&g++<4000){ const k=pick([2,3,3]); const ss=shuffle(SEG.slice()).slice(0,k);
+    const pts=new Set(ss.flat()); const xs=[...pts].map(i=>P[i][0]),ys=[...pts].map(i=>P[i][1]);
+    if(Math.max(...xs)-Math.min(...xs)<2||Math.max(...ys)-Math.min(...ys)<1) continue;
+    const key=ss.map(s=>s.join('-')); if(sig.some(o=>o.filter(x=>key.includes(x)).length>=Math.min(2,k-1))) continue;
+    const gl={s:ss.map(([a,b])=>[P[a][0],P[a][1],P[b][0],P[b][1],pick([0,0,1,-1])]),d:rnd()<.55?pick(P):null,o:rnd()<.3?pick(P):null};
+    if(k===2&&!gl.d&&!gl.o) gl.d=pick(P);
+    out.push(gl); sig.push(key); }
+  return out; }
+function glyphSVG(g){ const p=v=>10+20*v; let b='';
+  for(const [x1,y1,x2,y2,bd] of g.s){ if(bd){ const mx=(p(x1)+p(x2))/2,my=(p(y1)+p(y2))/2,dx=p(x2)-p(x1),dy=p(y2)-p(y1),l=Math.hypot(dx,dy)||1;
+      b+=`<path d="M${p(x1)} ${p(y1)}Q${(mx-dy/l*11*bd).toFixed(1)} ${(my+dx/l*11*bd).toFixed(1)} ${p(x2)} ${p(y2)}"/>`; }
+    else b+=`<path d="M${p(x1)} ${p(y1)}L${p(x2)} ${p(y2)}"/>`; }
+  if(g.o) b+=`<circle cx="${p(g.o[0])}" cy="${p(g.o[1])}" r="6"/>`;
+  if(g.d) b+=`<circle cx="${p(g.d[0])}" cy="${p(g.d[1])}" r="3.8" fill="currentColor" stroke="none"/>`;
+  return `<svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${b}</svg>`; }
+
+/* ─── 화면 조각 ─── */
+const IC={
+ reason:'<svg viewBox="0 0 40 40" fill="currentColor"><rect x="4" y="4" width="9" height="9" rx="2"/><rect x="15.5" y="4" width="9" height="9" rx="2" opacity=".6"/><rect x="4" y="15.5" width="9" height="9" rx="2" opacity=".6"/><circle cx="20" cy="31" r="3"/><circle cx="29" cy="25" r="3"/><circle cx="36" cy="16" r="3" fill="none" stroke="currentColor" stroke-width="2"/></svg>',
+ verbal:'<svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h28v18H18l-8 6v-6H6z"/><path d="M12 15h16M12 20h10"/></svg>',
+ dyn:'<svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 5a10 10 0 0 0-6 18v4h12v-4a10 10 0 0 0-6-18z"/><path d="M15 32h10M17 36h6"/></svg>',
+ press:'<svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="20" cy="22" r="13"/><path d="M20 22v-7M16 4h8M31 9l2-2"/></svg>',
+ focus:'<svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="20" cy="20" r="14"/><circle cx="20" cy="20" r="6"/><path d="M20 2v6M20 32v6M2 20h6M32 20h6"/></svg>',
+ rule:'<svg viewBox="0 0 40 40" fill="currentColor"><rect x="4" y="4" width="9" height="9" rx="2"/><rect x="15.5" y="4" width="9" height="9" rx="2" opacity=".6"/><rect x="27" y="4" width="9" height="9" rx="2" opacity=".3"/><rect x="4" y="15.5" width="9" height="9" rx="2" opacity=".6"/><rect x="15.5" y="15.5" width="9" height="9" rx="2" opacity=".3"/><rect x="27" y="15.5" width="9" height="9" rx="2"/><rect x="4" y="27" width="9" height="9" rx="2" opacity=".3"/><rect x="15.5" y="27" width="9" height="9" rx="2"/><rect x="27" y="27" width="9" height="9" rx="2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-dasharray="2 2"/></svg>',
+ learn:'<svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M5 8l9 12M14 8L6 22"/><circle cx="12" cy="30" r="2.4" fill="currentColor" stroke="none"/><path d="M20 20h6M24 16l3 4-3 4"/><path d="M30 14v12M36 14v12M30 20h6" stroke-width="2.2"/></svg>',
+ seq:'<svg viewBox="0 0 40 40" fill="currentColor"><circle cx="7" cy="27" r="3"/><circle cx="15" cy="22" r="3"/><circle cx="23" cy="16" r="3"/><circle cx="33" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="2.5 2"/></svg>',
+ rot:'<svg viewBox="0 0 40 40" fill="currentColor"><path d="M4 8h6v12h6v6H4z"/><path d="M36 14v6H24v6h-6V14z" opacity=".55"/><path d="M14 32a12 12 0 0 0 16-2" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M31 26l-1 5-5-1" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>',
+ wm:'<svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 9l6 6M11 9l-6 6M16 12h6"/><rect x="24" y="22" width="12" height="14" rx="3"/><path d="M28 26v6l4-6v6" stroke-width="2"/><path d="M8 24h8M12 20v8"/></svg>',
+ speed:'<svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12L12 18z"/><path d="M8 26h18M22 22l4 4-4 4"/><path d="M31 14c3 0 4 2 3 4l-4 4h5"/></svg>'};
+const OK_I='<svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="9" r="7.5" stroke-width="1.6" opacity=".35"/><path d="M5.5 9.2l2.4 2.3 4.6-4.8"/></svg>';
+const HERO=`<svg class="cg-hero" viewBox="0 0 200 150" aria-hidden="true"><circle cx="126" cy="44" r="25" style="fill:var(--dop)"/><rect x="88" y="76" width="78" height="58" rx="29" style="fill:var(--dop)"/><circle cx="84" cy="54" r="27" style="fill:var(--acc)"/><rect x="42" y="88" width="84" height="60" rx="30" style="fill:var(--acc)"/><path d="M160 14l3 7 7 3-7 3-3 7-3-7-7-3 7-3z" style="fill:var(--amber)"/><path d="M34 24l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" style="fill:var(--amber)" opacity=".8"/></svg>`;
+const TYPE_I=`<svg viewBox="0 0 60 60" aria-hidden="true"><circle cx="38" cy="18" r="9" style="fill:var(--dop)" opacity=".55"/><rect x="25" y="30" width="28" height="22" rx="11" style="fill:var(--dop)" opacity=".55"/><circle cx="24" cy="22" r="10" style="fill:var(--dop)"/><rect x="9" y="35" width="30" height="22" rx="11" style="fill:var(--dop)"/></svg>`;
+
+function intro(area,go,btn){ main(`<section data-screen="intro-${area}" class="cg-anim">
+  <div class="cg-icon">${IC[area]}</div>
+  <h2 class="cg-h" tabindex="-1" data-focus>${T['n_'+area]}</h2>
+  <p class="cg-p">${T['i_'+area]}</p><p class="cg-p">${T['i_'+area+'2']}</p>${REF_OF[area]?`<p class="cg-refl">${T.refL}: ${refShort(area)}</p>`:''}
+  <div class="cg-dock"><button class="cg-btn" data-next>${btn||T.tryIt}</button></div></section>`);
+  $1('[data-next]').onclick=go; }
+function ready(area,ms,go){ main(`<section data-screen="ready-${area}" class="cg-card cg-ready cg-anim" style="margin-top:18px">
+  <div class="cg-tag">${T['n_'+area]}</div><h2 class="cg-h" tabindex="-1" data-focus>${T.readyH}</h2>
+  ${ms?`<div class="cg-big">${T['t_'+area]}</div><p class="cg-p">${tr('readyT',{t:T['t_'+area]})}</p>`:''}<p class="cg-p">${T['readyU_'+area]||T.readyU}</p>
+  <div class="cg-stack"><button class="cg-btn" data-next>${T.start}</button></div></section>`);
+  $1('[data-next]').onclick=go; }
+function practice(gens,show,then){ let i=0; const go=()=>{ if(i>=gens.length) return then(); const it=gens[i](); i++; show(it,i,gens.length,go); }; go(); }
+// 고르기 문항 공통: 연습이면 정답 표시 + '다음', 본 문제면 고른 것만 표시하고 바로 넘김
+function bindMC(ci,prac,cb,conf){ const bs=$$('.cg-ans'); const t0=now();
+  bs.forEach((b,k)=>b.onclick=()=>{ if(b.disabled) return; const ok=k===ci, ms=Math.round(now()-t0); bs.forEach(x=>x.disabled=true); b.classList.add('sel');
+    const fin=c=>{ if(prac){ bs[ci].classList.add('ok'); if(!ok) b.classList.add('no'); const fb=$1('.cg-fb'); fb.className='cg-fb '+(ok?'ok':'no'); fb.textContent=ok?T.ok:T.no;
+        const af=$1('.cg-after'); af.classList.add('cg-dock'); af.innerHTML=`<button class="cg-btn" data-next>${T.next}</button>`; $1('[data-next]').onclick=()=>cb(ok,ms,c); $1('[data-next]').focus({preventScroll:true}); }
+      else cb(ok,ms,c); };
+    if(conf) confRow(fin); else fin(null); }); }
+// 시간이 다 되면 알리고 '다음'으로 넘어감(사용자 시험 10-19: 저절로 넘어가면 못 보고 지나침) · n이 있으면 푼 문제 수
+const I_TIME='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9.5 2.5h5"/></svg>';
+function timeUp(cb,n){ let gone=false; const go=()=>{ if(gone) return; gone=true; cb(); };
+  main(`<section data-screen="timeup" class="cg-card cg-timeup cg-anim" role="status">${I_TIME}<h2 class="cg-h" tabindex="-1" data-focus>${T.timeH}</h2><p class="cg-p">${n!=null?tr('timeN',{n}):T.timeP}</p>
+    <div class="cg-stack"><button class="cg-btn" data-next>${T.next}</button></div></section>`);
+  $1('[data-next]').onclick=go; }
+const head=(prac,i,n)=>`<div class="cg-qhead">${prac?`<span class="cg-tag">${T.practice} ${i}/${n}</span>`:`<span>${n?tr('itemNN',{i,n}):tr('itemN',{i})}</span>`}</div>`;
+
+/* ─── ① 규칙 찾기 ─── */
+function mxItem(it,o,cb){ const cells=it.grid.flat().map((c,k)=>k===8?`<div class="cg-cell q">?</div>`:`<div class="cg-cell">${cellSVG(c)}</div>`).join('');
+  main(`<section data-screen="${o.prac?'prac-rule':'rule-item'}">${head(o.prac,o.i,o.n)}
+  <p class="cg-ask cg-center">${T.ask_rule}</p>
+  <div class="cg-mx" role="img" aria-label="${esc(T.mxAria)}">${cells}</div>
+  <div class="cg-opts6" role="group" aria-label="${esc(T.ask_rule)}">${it.opts.map((c,k)=>`<button class="cg-ans cg-opt" aria-label="${esc(tr('optN',{n:k+1}))}"${mark(k===it.ci)}>${cellSVG(c)}</button>`).join('')}</div>
+  <div class="cg-fb" role="status"></div><div class="cg-after"></div></section>`);
+  bindMC(it.ci,o.prac,cb,o.conf); }
+function aRule(done){
+  intro('rule',()=>practice([()=>genMatrix(1),()=>genMatrix(2)],(it,i,n,go)=>mxItem(it,{prac:true,i,n},go),()=>ready('rule',DUR.rule,run)));
+  function run(){ const resp=[]; let fin=false; const t0=now();
+    const end=timed=>{ if(fin) return; fin=true; clockStop(); const e=eap(resp);
+      S.raw.rule={theta:r3(e.m),se:r3(e.se),n:resp.length,right:resp.filter(x=>x.ok).length,items:resp.map(x=>[x.lv,x.ok?1:0,x.ms]),sec:r1((now()-t0)/1000)}; timed?timeUp(done):done(); };
+    const nextQ=()=>{ if(fin) return; if(resp.length>=RULE_MAX) return end(false);
+      const lv=nextLv(resp,2); const it=genMatrix(lv); S.itemFrac=resp.length/RULE_MAX;
+      mxItem(it,{i:resp.length+1,n:RULE_MAX},(ok,ms)=>{ if(fin) return; resp.push({lv,b:LEVEL_B[lv-1],c:1/6,ok,ms}); later(nextQ,160*F); }); };
+    clockStart(DUR.rule*F,()=>end(true)); nextQ(); } }
+
+/* ─── ② 수열 ─── */
+function seqItem(it,o,cb){ main(`<section data-screen="${o.prac?'prac-seq':'seq-item'}">${head(o.prac,o.i,o.n)}
+  <p class="cg-ask cg-center">${T.ask_seq}</p>
+  <div class="cg-seq">${it.q.map(v=>`<div class="cg-n">${v}</div>`).join('')}<div class="cg-n q" aria-label="?">?</div></div>
+  <div class="cg-opts4">${it.opts.map((v,k)=>`<button class="cg-ans"${mark(k===it.ci)}>${v}</button>`).join('')}</div>
+  <div class="cg-fb" role="status"></div><div class="cg-after"></div></section>`);
+  bindMC(it.ci,o.prac,cb,o.conf); }
+function aSeq(done){
+  intro('seq',()=>practice([()=>genSeq(1)],(it,i,n,go)=>seqItem(it,{prac:true,i,n},go),()=>ready('seq',DUR.seq,run)));
+  function run(){ const resp=[]; let fin=false; const t0=now();
+    const end=timed=>{ if(fin) return; fin=true; clockStop(); const e=eap(resp);
+      S.raw.seq={theta:r3(e.m),se:r3(e.se),n:resp.length,right:resp.filter(x=>x.ok).length,items:resp.map(x=>[x.lv,x.ok?1:0,x.ms]),sec:r1((now()-t0)/1000)}; timed?timeUp(done):done(); };
+    const nextQ=()=>{ if(fin) return; if(resp.length>=SEQ_MAX) return end(false);
+      const lv=nextLv(resp,2); const it=genSeq(lv);
+      seqItem(it,{i:resp.length+1},(ok,ms)=>{ if(fin) return; resp.push({lv,b:LEVEL_B[lv-1],c:1/4,ok,ms}); later(nextQ,140*F); }); };
+    seqRecent=[]; clockStart(DUR.seq*F,()=>end(true)); nextQ(); } }
+
+/* ─── ③ 도형 돌리기 ─── */
+const I_TURN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v5h-5"/></svg>';
+const I_FLIP='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18" stroke-dasharray="2 2.5"/><path d="M9 7L4 17h5zM15 7l5 10h-5z"/></svg>';
+function rotItem(it,o,cb){ main(`<section data-screen="${o.prac?'prac-rot':'rot-item'}">${head(o.prac,o.i,o.n)}
+  <div class="cg-pair"><div>${polySVG(it.cells,it.a1,false)}</div><div>${polySVG(it.cells,it.a2,it.flip)}</div></div>
+  <p class="cg-ask cg-center">${T.ask_rot}</p>
+  <div class="cg-two"><button class="cg-ans"${mark(!it.flip)}>${I_TURN}${T.same}</button><button class="cg-ans"${mark(it.flip)}>${I_FLIP}${T.mirror}</button></div>
+  <div class="cg-fb" role="status"></div><div class="cg-after"></div></section>`);
+  bindMC(it.flip?1:0,o.prac,cb); }
+function aRot(done){
+  intro('rot',()=>practice([()=>Object.assign(genRot(),{flip:false}),()=>Object.assign(genRot(),{flip:true})],(it,i,n,go)=>rotItem(it,{prac:true,i,n},go),()=>ready('rot',DUR.rot,run)));
+  function run(){ let right=0,wrong=0,n=0,fin=false; const rts=[];
+    const end=()=>{ if(fin) return; fin=true; clockStop(); S.raw.rot={right,wrong,n,rt:median(rts),sec:r1(DUR.rot*F/1000)}; timeUp(done,n); };
+    const nextQ=()=>{ if(fin) return; rotItem(genRot(),{i:n+1},(ok,ms)=>{ if(fin) return; n++; if(ok){right++;rts.push(ms);}else wrong++; later(nextQ,110*F); }); };
+    clockStart(DUR.rot*F,end); nextQ(); } }
+
+/* ─── ④ 계산하며 기억하기 ─── */
+function wmSet(n,prac,si,cb){ const lets=shuffle(LETTERS.slice()).slice(0,n); let k=0,eqOK=0,late=0; const eqMs=[];
+  const hd=()=>prac?`<div class="cg-qhead"><span class="cg-tag">${T.practice}</span></div>`:`<div class="cg-qhead"><span>${tr('setN',{i:si+1,n:WM_SETS.length,k:n})}</span></div>`;
+  const eq=()=>{ if(k>=n) return rec();
+    const a=ri(2,9),b=ri(2,4),c=ri(1,9),real=a*b-c,truth=rnd()<.5, shown=truth?real:real+pick([-3,-2,-1,1,2,3]);
+    main(`<section data-screen="wm-eq">${hd()}<div class="cg-eq"><span class="cg-nw">(${a} × ${b})</span> <span class="cg-nw">− ${c}</span> <span class="cg-nw">= ${shown<0?'−'+(-shown):shown}</span></div><div class="cg-tbar"><i></i></div><p class="cg-center cg-muted cg-tsec">${tr('secN',{s:Math.round(DUR.eq/1000)})}</p>
+      <p class="cg-ask cg-center">${T.eqQ}</p><div class="cg-two"><button class="cg-ans"${mark(truth)}>${T.yes}</button><button class="cg-ans"${mark(!truth)}>${T.nope}</button></div></section>`);
+    const bar=$1('.cg-tbar i'); requestAnimationFrame(()=>requestAnimationFrame(()=>{ if(bar){ bar.style.transition=`width ${DUR.eq*F}ms linear`; bar.style.width='0%'; } }));
+    let answered=false; const ts=now();
+    const ans=v=>{ if(answered) return; answered=true; clearTimeout(to); if(v===truth) eqOK++; eqMs.push(Math.round(now()-ts));
+      if(v===null){ late++; $$('.cg-ans').forEach(x=>x.disabled=true); const q=$1('.cg-ask'); if(q){ q.textContent=T.eqLate; q.classList.add('cg-late'); } return later(letter,700*F); }
+      letter(); };
+    const to=later(()=>ans(null),DUR.eq*F);
+    $$('.cg-ans').forEach((b,i)=>b.onclick=()=>{ $$('.cg-ans').forEach(x=>x.disabled=true); b.classList.add('sel'); ans(i===0); }); };
+  const letter=()=>{ main(`<section data-screen="wm-letter">${hd()}<div class="cg-letter" aria-live="polite">${lets[k]}</div><p class="cg-center cg-muted">${T.remember} · ${k+1}/${n}</p></section>`); k++; later(eq,DUR.letter*F); };
+  const rec=()=>{ const picks=[];
+    main(`<section data-screen="wm-recall"${FAST?` data-seq="${lets.join('')}"`:''}>${hd()}<p class="cg-ask cg-center">${T.recallQ}</p>
+      <div class="cg-slots" aria-live="polite">${'<b></b>'.repeat(n)}</div>
+      <div class="cg-keys">${LETTERS.map(l=>`<button data-l="${l}">${l}</button>`).join('')}<button class="cg-wide" data-l="_">${T.blank}</button><button class="cg-wide" data-u>${T.undo}</button></div>
+      <div class="cg-stack"><button class="cg-btn" data-ok>${T.confirm}</button></div></section>`);
+    const paint=()=>$$('.cg-slots b').forEach((s,i)=>{ s.textContent=picks[i]==='_'?'–':(picks[i]||''); s.classList.toggle('f',i<picks.length); });
+    $$('[data-l]').forEach(b=>b.onclick=()=>{ if(picks.length<n){ picks.push(b.dataset.l); paint(); } });
+    $1('[data-u]').onclick=()=>{ picks.pop(); paint(); };
+    $1('[data-ok]').onclick=()=>{ let right=0; for(let i=0;i<n;i++) if(picks[i]===lets[i]) right++;
+      const r={n,right,eq:eqOK,eqMs:median(eqMs),late};
+      const fbScr=(withBtn)=>{ main(`<section data-screen="wm-fb" class="cg-card cg-ready" style="margin-top:18px"><div class="cg-slots">${lets.map((l,i)=>`<b class="${picks[i]===l?'f':''}">${l}</b>`).join('')}</div>
+        <p class="cg-ask">${tr('wmFb',{n,r:right})}</p>${late?`<p class="cg-p">${tr(prac?'wmLatePrac':'wmLate',{k:late})}</p>`:''}${withBtn?`<div class="cg-stack"><button class="cg-btn" data-next>${T.next}</button></div>`:''}</section>`); };
+      fbScr(true); $1('[data-next]').onclick=()=>cb(r); }; };   // 본 과제도 버튼으로 넘김(저절로 넘어가 다음 식이 잘못 눌리던 문제 · 사용자 시험 10-19)
+  eq(); }
+function aWm(done){
+  intro('wm',()=>wmSet(2,true,0,()=>ready('wm',0,run)));
+  function run(){ const sets=[]; let i=0;
+    const go=()=>{ if(i>=WM_SETS.length){ const tot=sets.reduce((a,x)=>a+x.n,0),got=sets.reduce((a,x)=>a+x.right,0),eq=sets.reduce((a,x)=>a+x.eq,0);
+        S.raw.wm={pc:r3(got/tot),right:got,total:tot,eqAcc:r3(eq/tot),sets:sets.map(x=>[x.n,x.right,x.eq])}; return done(); }
+      S.itemFrac=i/WM_SETS.length; segProg(S.itemFrac); wmSet(WM_SETS[i],false,i,r=>{ sets.push(r); i++; go(); }); };
+    go(); } }
+
+/* ─── ⑤ 기호를 숫자로 ─── */
+function aSpeed(done){ const perm=shuffle([0,1,2,3,4,5,6,7,8]);   // 표의 p번째 칸(숫자 p+1)에 기호 perm[p]
+  const keyRow=`<div class="cg-key9" aria-hidden="true">${perm.map((g,p)=>`<div class="cg-kc">${sgSVG(g)}<b>${p+1}</b></div>`).join('')}</div>`;
+  let cur=-1;
+  const screen=(name,prac)=>{ main(`<section data-screen="${name}">${prac?`<div class="cg-qhead"><span class="cg-tag">${T.practice}</span></div>`:''}${keyRow}
+    <div class="cg-target" role="img"></div><div class="cg-pad">${[1,2,3,4,5,6,7,8,9].map(d=>`<button class="cg-ans" data-d="${d}">${d}</button>`).join('')}</div>
+    <div class="cg-tally" role="status"></div><div class="cg-after"></div></section>`); };
+  const draw=()=>{ let g; do{ g=ri(0,8); }while(g===cur); cur=g; const t=$1('.cg-target'); t.innerHTML=sgSVG(g); const d=perm.indexOf(g)+1;
+    $$('.cg-pad button').forEach(b=>{ if(FAST){ if(+b.dataset.d===d) b.setAttribute('data-ans','1'); else b.removeAttribute('data-ans'); } }); return d; };
+  intro('speed',()=>{ screen('prac-speed',true); let n=0,want=draw();
+    $$('.cg-pad button').forEach(b=>b.onclick=()=>{ if(n>=3) return; const ok=+b.dataset.d===want; n++;
+      const fb=$1('.cg-tally'); fb.textContent=(ok?T.ok:'✕ '+want)+` · ${n}/3`; fb.style.color=ok?'var(--acc)':'var(--warn)';
+      if(n<3) want=draw(); else { $$('.cg-pad button').forEach(x=>x.disabled=true); const af=$1('.cg-after'); af.classList.add('cg-dock'); af.innerHTML=`<button class="cg-btn" data-next>${T.next}</button>`; $1('[data-next]').onclick=()=>ready('speed',DUR.speed,run); } }); });
+  function run(){ let hit=0,miss=0,fin=false; screen('speed-item',false); let want=draw(); const tally=()=>{ $1('.cg-tally').textContent=tr('hits',{n:hit}); }; tally();
+    const press=d=>{ if(fin) return; if(d===want) hit++; else miss++; tally(); want=draw(); };
+    $$('.cg-pad button').forEach(b=>b.onclick=()=>press(+b.dataset.d));
+    keyH=e=>{ if(/^[1-9]$/.test(e.key)){ e.preventDefault(); press(+e.key); } }; document.addEventListener('keydown',keyH);
+    clockStart(DUR.speed*F,()=>{ if(fin) return; fin=true; document.removeEventListener('keydown',keyH); keyH=null; S.raw.speed={hit,miss,sec:r1(DUR.speed*F/1000)}; timeUp(done); }); } }
+
+/* ─── ⑦ 숫자 3만 참기(지속 주의 반응 과제, Robertson 외 1997) ─── */
+// 숫자 1~9가 250ms 보이고 900ms 가림(⊗) — 한 번에 1.15초. 3이 아니면 누르고 3이면 참는다. 글자 크기는 매번 달리(모양으로만 맞히지 않게).
+function focusSeq(n){ const per=Math.round(n/9), a=[]; for(let d=1;d<=9;d++) for(let k=0;k<per;k++) a.push(d);
+  for(let g=0;g<200;g++){ shuffle(a); let ok=true; for(let i=1;i<a.length;i++) if(a[i]===3&&a[i-1]===3){ ok=false; break; } if(ok) break; } return a; }
+function aFocus(done){
+  const screen=(name,prac)=>{ main(`<section data-screen="${name}">${prac?`<div class="cg-qhead"><span class="cg-tag">${T.practice}</span></div>`:''}
+    <div class="cg-fstage mask" aria-live="off">⊗</div><button class="cg-ans cg-btn cg-tap">${T.tapBtn}</button><div class="cg-tally" role="status"></div><div class="cg-after"></div></section>`); };
+  const play=(seq,prac,fin)=>{ const tr2=[]; let k=-1, t0=0; const st=$1('.cg-fstage'), btn=$1('.cg-tap'), sizes=[48,60,72,84,96];
+    const step=()=>{ if(k>=0){ const r=tr2[k]; if(prac&&r){ const fb=$1('.cg-tally'); const good=r.d===3?!r.tap:r.tap; fb.textContent=good?T.ok:(r.d===3?'✕ 3':'✕'); fb.style.color=good?'var(--acc)':'var(--warn)'; } }
+      k++; if(k>=seq.length){ btn.disabled=true; return fin(tr2); }
+      const d=seq[k]; tr2.push({d,tap:false,rt:null}); st.classList.remove('mask'); st.style.setProperty('--fs',sizes[Math.floor(rnd()*sizes.length)]+'px'); st.textContent=d; t0=now();
+      if(FAST){ if(d!==3) btn.setAttribute('data-ans','1'); else btn.removeAttribute('data-ans'); }
+      S.itemFrac=k/seq.length; segProg(S.itemFrac);
+      later(()=>{ st.classList.add('mask'); st.textContent='⊗'; later(step,DUR.focusMask*F); },DUR.focusOn*F); };
+    const press=()=>{ const r=tr2[k]; if(!r||r.tap) return; r.tap=true; r.rt=Math.round(now()-t0); };
+    btn.onclick=press; btn.addEventListener('touchstart',e=>{ e.preventDefault(); press(); },{passive:false});
+    keyH=e=>{ if(e.key===' '||e.key==='Enter'){ e.preventDefault(); press(); } }; document.addEventListener('keydown',keyH);
+    later(step,600*F); };
+  intro('focus',()=>{ screen('prac-focus',true); play(focusSeq(FOCUS_PRAC),true,tr2=>{ document.removeEventListener('keydown',keyH); keyH=null;
+    const ng=tr2.filter(r=>r.d===3), held=ng.filter(r=>!r.tap).length; const fb=$1('.cg-tally'); fb.textContent=tr('focusFb',{n:ng.length,k:held}); fb.style.color='var(--ink)';
+    const af=$1('.cg-after'); af.classList.add('cg-dock'); af.innerHTML=`<button class="cg-btn" data-next>${T.next}</button>`; $1('[data-next]').onclick=()=>ready('focus',0,run); }); });
+  function run(){ screen('focus-item',false); play(focusSeq(FOCUS_N),false,tr2=>{ document.removeEventListener('keydown',keyH); keyH=null;
+    const part=a=>{ const ng=a.filter(r=>r.d===3), go=a.filter(r=>r.d!==3), rts=go.filter(r=>r.tap&&r.rt!=null).map(r=>r.rt), m=rts.length?rts.reduce((x,y)=>x+y,0)/rts.length:0,
+        sd=rts.length>1?Math.sqrt(rts.reduce((x,y)=>x+(y-m)*(y-m),0)/(rts.length-1)):0;
+      return {nogo:ng.length,com:ng.filter(r=>r.tap).length,go:go.length,om:go.filter(r=>!r.tap).length,rt:Math.round(m),cv:m?r3(sd/m):0}; };
+    const n=tr2.length, th=[part(tr2.slice(0,Math.floor(n/3))),part(tr2.slice(Math.floor(n/3),Math.floor(2*n/3))),part(tr2.slice(Math.floor(2*n/3)))], all=part(tr2);
+    S.raw.focus={...all,thirds:th}; done(); }); } }
+
+/* ─── ⑥ 짝 외우기 ─── */
+function studyScr(list,lab,cb){ let i=0;
+  const one=()=>{ if(i>=list.length) return cb(); const p=list[i];
+    main(`<section data-screen="learn-study">${lab}<p class="cg-ask cg-center">${T.studyQ}</p>
+      <div class="cg-card cg-study cg-anim"><div class="cg-gl">${glyphSVG(p.g)}</div><div class="cg-word" lang="zxx">${p.w}</div></div>
+      <div class="cg-dots" aria-hidden="true">${list.map((_,k)=>`<i class="${k===i?'on':''}"></i>`).join('')}</div></section>`);
+    i++; later(one,(S.prac?DUR.pstudy:DUR.study)*F); };
+  one(); }
+function pickScr(p,words,lab,o,cb){ const ci=words.indexOf(p.w);
+  main(`<section data-screen="${o.name}">${lab}<p class="cg-ask cg-center">${T.pickQ}</p><div class="cg-qgl">${glyphSVG(p.g)}</div>
+    <div class="cg-words">${words.map((w,k)=>`<button class="cg-ans" lang="zxx"${mark(k===ci)}>${w}</button>`).join('')}</div><div class="cg-fb" role="status"></div></section>`);
+  const bs=$$('.cg-ans'); const t0=now();
+  bs.forEach((b,k)=>b.onclick=()=>{ if(b.disabled) return; bs.forEach(x=>x.disabled=true); const ok=k===ci, ms=Math.round(now()-t0);
+    if(o.fb){ bs[ci].classList.add('ok'); if(!ok) b.classList.add('no'); const fb=$1('.cg-fb'); if(fb){ fb.className='cg-fb '+(ok?'ok':'no'); fb.textContent=ok?T.ok:T.no; } later(()=>cb(ok,ms),(ok?600:1500)*F); }
+    else { b.classList.add('sel'); later(()=>cb(ok,ms),160*F); } }); }
+function aLearn(done){ const ws=genWords(PAIRS_N+2), gs=genGlyphs(PAIRS_N+1);
+  const pairs=ws.slice(0,PAIRS_N).map((w,i)=>({w,g:gs[i]})); S.pairs=pairs; const words=pairs.map(p=>p.w).sort();
+  intro('learn',()=>{ const pp={w:ws[PAIRS_N],g:gs[PAIRS_N]}, lab=`<div class="cg-qhead"><span class="cg-tag">${T.practice}</span></div>`; S.prac=true;
+    studyScr([pp],lab,()=>{ S.prac=false; const two=[pp.w,ws[PAIRS_N+1]].sort();
+      pickScr(pp,two,lab,{name:'prac-learn',fb:true},()=>{ ready('learn',0,run); }); }); });
+  function run(){ const rounds=[]; let r=0, toStudy=pairs.slice();
+    const lab=j=>`<div class="cg-qhead"><span>${tr('round',{n:r})}</span>${j?`<span>${j} / ${PAIRS_N}</span>`:''}</div>`;
+    const round=()=>{ r++; S.itemFrac=(r-1)/ROUNDS; segProg(S.itemFrac);
+      studyScr(toStudy,lab(),()=>{ const order=shuffle(pairs.map((_,i)=>i)), okv=new Array(PAIRS_N).fill(false); let j=0;
+        const q=()=>{ if(j>=order.length) return after(okv); const idx=order[j++];
+          pickScr(pairs[idx],words,lab(j),{name:'learn-test',fb:true},ok=>{ okv[idx]=ok; q(); }); };
+        q(); }); };
+    const after=okv=>{ const c=okv.filter(Boolean).length; rounds.push(c); toStudy=pairs.filter((_,i)=>!okv[i]);
+      const last=c===PAIRS_N||r>=ROUNDS;
+      main(`<section data-screen="learn-round" class="cg-card cg-ready cg-anim" style="margin-top:18px"><div class="cg-tag">${tr('round',{n:r})}</div>
+        <div class="cg-big">${c}<span style="font-size:1.125rem;color:var(--sub)"> / 8</span></div><p class="cg-ask">${c===PAIRS_N?T.allIn:T.roundRes}</p>
+        ${last?'':`<p class="cg-p">${T.againMiss}</p>`}<div class="cg-stack"><button class="cg-btn" data-next>${last?T.next:T.goOn}</button></div></section>`);
+      $1('[data-next]').onclick=()=>{ if(last){ const full=rounds.slice(); while(full.length<ROUNDS) full.push(PAIRS_N);
+          const k=rounds.indexOf(PAIRS_N); S.raw.learn={rounds,sum:full.reduce((a,b)=>a+b,0),toLearn:k<0?null:k+1,end:null}; done(); }
+        else round(); }; };
+    round(); } }
+// 검사 끝 다시 묻기(정답 표시 없음)
+function endRecall(done){ S.step=FLOW.length; const l=root.querySelector('.cg-steplab'); if(l) l.textContent=T.stepEnd; root.querySelectorAll('.cg-seg').forEach(s=>s.classList.add('done'));
+  main(`<section data-screen="end-intro" class="cg-anim"><div class="cg-icon">${IC.learn}</div><h2 class="cg-h" tabindex="-1" data-focus>${T.endH}</h2><p class="cg-p">${T.endP}</p>
+    <div class="cg-dock"><button class="cg-btn" data-next>${T.start}</button></div></section>`);
+  $1('[data-next]').onclick=()=>{ const pairs=S.pairs, words=pairs.map(p=>p.w).sort(), order=shuffle(pairs.map((_,i)=>i)); let j=0,c=0;
+    const q=()=>{ if(j>=order.length){ S.raw.learn.end=c; return done(); } const p=pairs[order[j]]; j++;
+      pickScr(p,words,`<div class="cg-qhead"><span>${j} / ${pairs.length}</span></div>`,{name:'end-item',fb:false},ok=>{ if(ok) c++; q(); }); };
+    q(); }; }
+
+/* ═══ 언어 추론 문항(직접 만듦, 단계 1~6 · 한국어·영어 따로) — 정답은 늘 첫 번째 보기, 화면에서 섞음 ═══ */
+const VB={
+ko:[
+ [['낮 : 밤 = 여름 : ?',['겨울','가을','더위','방학']],
+  ['성격이 다른 하나는?',['당근','사과','배','포도']],
+  ['손 : 장갑 = 발 : ?',['양말','신발끈','무릎','걸음']],
+  ["'크다'와 뜻이 반대인 말은?",['작다','넓다','높다','많다']],
+  ['의사 : 병원 = 교사 : ?',['학교','학생','칠판','시험']]],
+ [['씨앗 : 나무 = 알 : ?',['새','둥지','껍데기','노른자']],
+  ['성격이 다른 하나는?',['악보','피아노','바이올린','첼로']],
+  ["'시작'과 뜻이 가장 가까운 말은?",['개시','종료','과정','결과']],
+  ['작가 : 소설 = 작곡가 : ?',['교향곡','지휘자','악기','무대']],
+  ['성격이 다른 하나는?',['온도계','킬로그램','미터','리터']]],
+ [['가뭄 : 비 = 어둠 : ?',['빛','밤','그림자','눈']],
+  ["'꼼꼼하다'와 뜻이 가장 가까운 말은?",['세심하다','대담하다','느긋하다','엄격하다']],
+  ['지도 : 길 = 설계도 : ?',['건물','연필','자','종이']],
+  ['성격이 다른 하나는?',['암기','추론','연역','귀납']],
+  ['원인 : 결과 = 투입 : ?',['산출','비용','시간','노력']]],
+ [["'일시적'과 뜻이 반대인 말은?",['항구적','순간적','우연적','부분적']],
+  ['백신 : 질병 = 방음벽 : ?',['소음','벽','귀','음악']],
+  ['성격이 다른 하나는?',['증가','감소','축소','하락']],
+  ['빈칸에 가장 알맞은 말은?\n그의 설명은 너무 ___해서 핵심을 파악하기 어려웠다.',['장황','간결','명료','정확']],
+  ["'솔직하다'와 뜻이 가장 가까운 말은?",['진솔하다','신중하다','은밀하다','쾌활하다']]],
+ [['반드시 맞는 것은?\n모든 A는 B다. 어떤 C는 A다.',['어떤 C는 B다','모든 C는 B다','모든 B는 A다','어떤 B도 C가 아니다']],
+  ['반드시 맞는 것은?\n비가 오면 땅이 젖는다. 땅이 젖지 않았다.',['비가 오지 않았다','비가 왔다','땅이 젖었다가 말랐다','알 수 없다']],
+  ['성격이 다른 하나는?',['삼단논법','귀납','유추','일반화']],
+  ["'모순'과 뜻이 가장 가까운 말은?",['자가당착','일석이조','우공이산','동문서답']],
+  ['빈칸에 가장 알맞은 말은?\n증거가 ___해서 어느 쪽 주장도 뒷받침할 수 있었다.',['모호','결정적','무관','풍부']]],
+ [['반드시 맞는 것은?\n어떤 학생도 게으르지 않다. 민수는 게으르다.',['민수는 학생이 아니다','민수는 학생이다','어떤 학생은 게으르다','알 수 없다']],
+  ['가장 작은 것은?\nA는 B보다 크고, C는 A보다 크며, D는 B보다 작다.',['D','B','A','C']],
+  ['반드시 맞는 것은?\n시험이 쉬우면 모두 통과한다. 지수는 통과하지 못했다.',['시험은 쉽지 않았다','시험이 쉬웠다','지수는 공부하지 않았다','아무도 통과하지 못했다']],
+  ["'견강부회'와 뜻이 가장 가까운 것은?",['억지로 끌어다 붙임','굳센 의지','어려움을 이겨 냄','남의 의견을 따름']],
+  ['반드시 맞는 것은?\n파란 상자는 모두 무겁다. 이 상자는 가볍다.',['이 상자는 파란색이 아니다','이 상자는 파란색이다','무거운 상자는 모두 파랗다','알 수 없다']]]
+],
+en:[
+ [['day : night = summer : ?',['winter','autumn','heat','holiday']],
+  ['Which one does not belong?',['carrot','apple','pear','grape']],
+  ['hand : glove = foot : ?',['sock','lace','knee','step']],
+  ['Which word means the opposite of \"big\"?',['small','wide','tall','many']],
+  ['doctor : hospital = teacher : ?',['school','student','board','exam']]],
+ [['seed : tree = egg : ?',['bird','nest','shell','yolk']],
+  ['Which one does not belong?',['sheet music','piano','violin','cello']],
+  ['Which word is closest in meaning to \"begin\"?',['commence','conclude','proceed','result']],
+  ['author : novel = composer : ?',['symphony','conductor','instrument','stage']],
+  ['Which one does not belong?',['thermometer','kilogram','metre','litre']]],
+ [['drought : rain = darkness : ?',['light','night','shadow','snow']],
+  ['Which word is closest in meaning to \"meticulous\"?',['careful','bold','relaxed','strict']],
+  ['map : road = blueprint : ?',['building','pencil','architect','paper']],
+  ['Which one does not belong?',['memorize','reason','deduce','infer']],
+  ['cause : effect = input : ?',['output','cost','time','effort']]],
+ [['Which word means the opposite of \"temporary\"?',['permanent','momentary','accidental','partial']],
+  ['vaccine : disease = soundproofing : ?',['noise','wall','ear','music']],
+  ['Which one does not belong?',['increase','decrease','shrink','decline']],
+  ['Pick the best word for the gap.\nHis explanation was so ___ that the main point got lost.',['long-winded','concise','clear','precise']],
+  ['Which word is closest in meaning to \"candid\"?',['frank','cautious','secretive','cheerful']]],
+ [['Which must be true?\nAll A are B. Some C are A.',['Some C are B','All C are B','All B are A','No B are C']],
+  ['Which must be true?\nIf it rains, the ground gets wet. The ground is not wet.',['It did not rain','It rained','The ground dried out','Can\'t tell']],
+  ['Which one does not belong?',['syllogism','induction','analogy','generalization']],
+  ['Which word is closest in meaning to \"contradiction\"?',['inconsistency','coincidence','agreement','repetition']],
+  ['Pick the best word for the gap.\nThe evidence was ___: it could support either side.',['ambiguous','conclusive','irrelevant','abundant']]],
+ [['Which must be true?\nNo student is lazy. Max is lazy.',['Max is not a student','Max is a student','Some students are lazy','Can\'t tell']],
+  ['Which is smallest?\nA is bigger than B, C is bigger than A, and D is smaller than B.',['D','B','A','C']],
+  ['Which must be true?\nIf the test is easy, everyone passes. Jo failed.',['The test was not easy','The test was easy','Jo did not study','Everyone failed']],
+  ['Which word is closest in meaning to \"ostensible\"?',['apparent','hidden','enormous','careless']],
+  ['Which must be true?\nEvery blue box is heavy. This box is light.',['This box is not blue','This box is blue','Every heavy box is blue','Can\'t tell']]]
+]};
+
+/* ═══ LQ 2.0 과제(대표님 10-19): 추론 합치기 · 언어 추론 · 확신도(메타인지) · 힌트로 배우기 · 시간 압박 ═══ */
+// 확신도: 본 문제에서 답을 고른 뒤 한 번 더 누른다(1 · 0.5 · 0). 점수(LQ)에는 넣지 않고 '내가 아는 걸 아는 힘'에만 쓴다.
+const CONF=[1,0.5,0];
+function confRow(cb){ const af=$1('.cg-after'); if(!af) return cb(null); af.classList.add('cg-dock');
+  af.innerHTML=`<p class="cg-confq">${T.confQ}</p><div class="cg-conf" role="group" aria-label="${esc(T.confQ)}">${CONF.map((v,k)=>`<button data-c="${k}">${T['conf'+k]}</button>`).join('')}</div>`;
+  const held=!!(C&&!C.paused); if(held){ C.paused=true; }   // 확신도를 누르는 시간은 제한 시간에서 빼요(사용자 시험 10-19)
+  af.querySelectorAll('[data-c]').forEach(b=>b.onclick=()=>{ af.querySelectorAll('[data-c]').forEach(x=>x.disabled=true); b.classList.add('sel'); if(held&&C){ C.paused=false; C.last=now(); } cb(CONF[+b.dataset.c]); }); }
+const addConf=resp=>{ S.conf=(S.conf||[]).concat(resp.filter(x=>x.cf!=null).map(x=>({ok:!!x.ok,cf:x.cf}))); };
+
+/* ─── ① 규칙 찾기(9칸 그림 + 숫자 줄을 한 과제로, 번갈아 냄) ─── */
+function aReason(done){
+  intro('reason',()=>practice([()=>genMatrix(1),()=>genSeq(1)],(it,i,n,go)=>(it.grid?mxItem:seqItem)(it,{prac:true,i,n,conf:true},go),()=>ready('reason',DUR.reason,run)));
+  function run(){ const resp=[]; let fin=false, cur=null; const t0=now(); seqRecent=[];
+    const end=timed=>{ if(fin) return; fin=true; clockStop(); const nAns=resp.length; if(timed&&cur) resp.push(Object.assign({},cur,{ok:false,ms:null,cf:null,late:1})); const e=eap(resp);
+      S.raw.reason={theta:r3(e.m),se:r3(e.se),n:nAns,right:resp.filter(x=>x.ok).length,max:REASON_MAX,timed:timed?1:0,items:resp.map(x=>[x.k,x.lv,x.ok?1:0,x.ms,x.cf]),sec:r1((now()-t0)/1000)};
+      addConf(resp.filter(x=>!x.late)); timed?timeUp(done,nAns):done(); };
+    const nextQ=()=>{ if(fin) return; if(resp.length>=REASON_MAX) return end(false);
+      const lv=nextLv(resp,2), mx=resp.length%2===0, it=mx?genMatrix(lv):genSeq(lv); S.itemFrac=resp.length/REASON_MAX; cur={k:mx?'m':'s',lv,b:LEVEL_B[lv-1],c:mx?1/6:1/4};
+      (mx?mxItem:seqItem)(it,{i:resp.length+1,n:REASON_MAX,conf:true},(ok,ms,cf)=>{ if(fin) return; cur=null; resp.push({k:mx?'m':'s',lv,b:LEVEL_B[lv-1],c:mx?1/6:1/4,ok,ms,cf}); later(nextQ,160*F); }); };
+    clockStart(DUR.reason*F,()=>end(true)); nextQ(); } }
+
+/* ─── ② 말의 관계(언어 추론) ─── */
+function genVerbal(lv,used){ const bank=VB[L][lv-1]; let idx=bank.map((_,i)=>i).filter(i=>!used.has(lv+':'+i)); if(!idx.length) idx=bank.map((_,i)=>i);
+  const i=pick(idx); used.add(lv+':'+i); const it=bank[i], order=shuffle([0,1,2,3]); return {q:it[0],opts:order.map(k=>it[1][k]),ci:order.indexOf(0)}; }
+function vbItem(it,o,cb){ main(`<section data-screen="${o.prac?'prac-verbal':'verbal-item'}">${head(o.prac,o.i,o.n)}
+  ${(()=>{ const ps=String(it.q).split('\n'); return `<p class="cg-vq">${esc(ps[0])}</p>${ps.length>1?`<p class="cg-rd cg-prem">${ps.slice(1).map(esc).join('<br>')}</p>`:''}`; })()}
+  <div class="cg-vopts" role="group">${it.opts.map((v,k)=>`<button class="cg-ans"${mark(k===it.ci)}>${esc(v)}</button>`).join('')}</div>
+  <div class="cg-fb" role="status"></div><div class="cg-after"></div></section>`);
+  bindMC(it.ci,o.prac,cb,o.conf); }
+function aVerbal(done){ const used=new Set();
+  intro('verbal',()=>practice([()=>genVerbal(1,used)],(it,i,n,go)=>vbItem(it,{prac:true,i,n,conf:true},go),()=>ready('verbal',DUR.verbal,run)));
+  function run(){ const resp=[]; let fin=false, cur=null; const t0=now();
+    const end=timed=>{ if(fin) return; fin=true; clockStop(); const nAns=resp.length; if(timed&&cur) resp.push(Object.assign({},cur,{ok:false,ms:null,cf:null,late:1})); const e=eap(resp);
+      S.raw.verbal={theta:r3(e.m),se:r3(e.se),n:nAns,right:resp.filter(x=>x.ok).length,max:VERBAL_MAX,timed:timed?1:0,items:resp.map(x=>[x.lv,x.ok?1:0,x.ms,x.cf]),sec:r1((now()-t0)/1000),lang:L};
+      addConf(resp.filter(x=>!x.late)); timed?timeUp(done,nAns):done(); };
+    const nextQ=()=>{ if(fin) return; if(resp.length>=VERBAL_MAX) return end(false);
+      const lv=nextLv(resp,2), it=genVerbal(lv,used); S.itemFrac=resp.length/VERBAL_MAX; cur={lv,b:LEVEL_B[lv-1],c:1/4};
+      vbItem(it,{i:resp.length+1,n:VERBAL_MAX,conf:true},(ok,ms,cf)=>{ if(fin) return; cur=null; resp.push({lv,b:LEVEL_B[lv-1],c:1/4,ok,ms,cf}); later(nextQ,160*F); }); };
+    clockStart(DUR.verbal*F,()=>end(true)); nextQ(); } }
+
+/* ─── ③ 힌트로 배우기(동적 평가) — 대표님 10-19 '너무 쉬움' 반영: 처음 보는 규칙 위주, 보통 사람이 처음 4문제 중 절반쯤 틀리게(잠정) ─── */
+// 처음 4문제를 다 맞히면 더 어려운 규칙 2문제를 더 내서, 누구나 '힌트로 배우는 구간'을 거치게 한다.
+const DYN_F=['alt2','fib','grow2','mix','sq','mul'];
+const DYN_HARD=['sq','fib','grow2'];
+function genDyn(f){ let q,a,p;
+  for(let g=0;g<60;g++){
+    if(f==='alt2'){ const k=ri(2,3), c=ri(2,5), s=ri(1,4); q=[s]; for(let i=1;i<7;i++) q.push(i%2?q[i-1]*k:q[i-1]+c); a=q.pop(); p={k,c}; if(a>900) continue; }
+    else if(f==='fib'){ const x=ri(1,4), y=ri(2,6); q=[x,y]; for(let i=2;i<7;i++) q.push(q[i-1]+q[i-2]); a=q.pop(); p={}; }
+    else if(f==='grow2'){ const s=ri(1,6), d=ri(1,3), k=ri(2,3); q=[s]; let dd=d; for(let i=1;i<6;i++){ q.push(q[i-1]+dd); dd*=k; } a=q.pop(); p={d,k}; if(a>800) continue; }
+    else if(f==='sq'){ const c=pick([-1,1,2,3,5]), o=ri(1,3); q=[]; for(let n=o;n<o+6;n++) q.push(n*n+c); a=q.pop(); p={c,o}; if(q[0]<=0) continue; }
+    else if(f==='mul'){ const k=ri(2,3), c=pick([1,2,3,-1,-2]), s=ri(2,5); q=[s]; for(let i=1;i<6;i++) q.push(q[i-1]*k+c); a=q.pop(); p={k,c}; if(a>1500||q.some(v=>v<=0)) continue; }
+    else { const x=ri(1,9), y=ri(30,48), da=ri(3,6), dbk=ri(2,3); const t=[]; let ev=y; for(let i=0;i<8;i++){ if(i%2===0) t.push(x+da*(i/2)); else { t.push(ev); ev=ev-dbk*((i+1)/2); } } a=t.pop(); q=t; p={da,db:dbk}; if(q.some(v=>v<=0)||a<=0) continue; }
+    break; }
+  // 다른 규칙으로도 설명되는 수는 보기에서 뺌(사용자 시험 10-19: 7,32,10,30,13,26,16,? → 18·20)
+  const alt=new Set(); if(f==='mix'){ const ev=q.filter((_,i)=>i%2===1), d1=ev[ev.length-2]-ev[ev.length-1]; alt.add(ev[ev.length-1]-2*d1); alt.add(a-p.db); alt.add(a+p.db); }
+  const opts=new Set([a]); for(const d of shuffle([1,-1,2,-2,3,4,-3,6,10,-5,5,7,-4])){ if(opts.size>=4) break; const v=a+d; if(v>0&&!alt.has(v)) opts.add(v); }
+  const arr=shuffle([...opts]); return {f,q,opts:arr,ci:arr.indexOf(a),a,p}; }
+function dynHint(it,lv){ const p=it.p, f=it.f; if(lv===1) return T['h1_'+f];
+  if(f==='mul') return tr(p.c>0?'h2_mulP':'h2_mulM',{k:p.k,c:Math.abs(p.c)});
+  if(f==='sq') return tr(p.c>0?'h2_sqP':'h2_sqM',{o:p.o,c:Math.abs(p.c)});
+  return tr('h2_'+f,p); }
+function dynItem(it,o,cb){ main(`<section data-screen="${o.name}"><div class="cg-qhead"><span${o.tag?' class="cg-tag"':''}>${o.lab}</span>${o.j?`<span>${o.j}</span>`:''}</div>
+  ${o.hint?`<div class="cg-hint" role="note"><b>${tr('dynHint',{n:o.hl})}</b><span>${esc(o.hint)}</span></div>`:''}
+  <p class="cg-ask cg-center">${o.hint?T.dynRetry:T.ask_seq}</p>
+  <div class="cg-seq">${it.q.map(v=>`<div class="cg-n">${v}</div>`).join('')}<div class="cg-n q" aria-label="?">?</div></div>
+  <div class="cg-opts4">${it.opts.map((v,k)=>`<button class="cg-ans"${mark(k===it.ci)}>${v}</button>`).join('')}</div>
+  <div class="cg-fb" role="status"></div><div class="cg-after"></div></section>`);
+  const bs=$$('.cg-ans'); const t0=now();
+  bs.forEach((b,k)=>b.onclick=()=>{ if(b.disabled) return; bs.forEach(x=>x.disabled=true); b.classList.add('sel'); const ok=k===it.ci, ms=Math.round(now()-t0);
+    if(o.hint){ const fb=$1('.cg-fb'); if(fb){ fb.className='cg-fb '+(ok?'ok':'no'); fb.textContent=ok?T.ok:T.dynNotYet; } if(ok) bs[it.ci].classList.add('ok'); return later(()=>cb(ok,ms),900*F); }
+    later(()=>cb(ok,ms),160*F); }); }
+function msgScr(name,h,p,btn,go,tag){ main(`<section data-screen="${name}" class="cg-card cg-ready cg-anim" style="margin-top:18px"><div class="cg-tag">${tag||T.n_dyn}</div><h2 class="cg-h" tabindex="-1" data-focus>${h}</h2>${p?`<p class="cg-p">${p}</p>`:''}
+  <div class="cg-stack"><button class="cg-btn" data-next>${btn}</button></div></section>`); $1('[data-next]').onclick=go; }
+function aDyn(done){
+  const base=shuffle(['alt2','grow2','mix','mul']), pre=base.map(genDyn), res={pre:[],post:[],hints:0,fixed:0,extra:0};
+  intro('dyn',run,T.start);
+  function run(){ let i=0; const wrong=[]; const N=()=>pre.length;
+    const stepPre=()=>{ if(i>=N()){ if(!wrong.length&&!res.extra){ res.extra=1; DYN_HARD.slice(0,2).forEach(f=>pre.push(genDyn(f))); return msgScr('dyn-more',T.dynMoreH,T.dynMoreP,T.next,stepPre); } return mid(); }
+      const it=pre[i]; S.itemFrac=i/12;
+      dynItem(it,{name:'dyn-pre',lab:T.dynPre,j:`${i+1} / ${N()}`},ok=>{ res.pre.push(ok?1:0); if(!ok) wrong.push(it); i++; stepPre(); }); };
+    const mid=()=>{ if(!wrong.length) return msgScr('dyn-all',T.dynAllRight,'',T.next,post);
+      msgScr('dyn-mid',T.dynMidH,T.dynMidP,T.start,()=>{ let w=0;
+        const fix=()=>{ if(w>=wrong.length) return msgScr('dyn-post-intro',T.dynPostH,T.dynPostP,T.start,post); const it=wrong[w];
+          const tryH=hl=>{ res.hints++; dynItem(it,{name:'dyn-hint',lab:T.dynRe,tag:1,j:`${w+1} / ${wrong.length}`,hint:dynHint(it,hl),hl},ok=>{
+              if(ok){ res.fixed++; w++; return fix(); }
+              if(hl<2) return tryH(2);
+              msgScr('dyn-show',tr('dynShow',{a:it.a}),dynHint(it,2),T.next,()=>{ w++; fix(); }); }); };
+          tryH(1); };
+        fix(); }); };
+    const post=()=>{ // 새 문제: 틀렸던 규칙을 먼저, 모자라면 처음 규칙에서 채워 4문제
+      const fs=[...new Set(wrong.map(x=>x.f).concat(base))].slice(0,4), ps=shuffle(fs).map(genDyn); let k=0;
+      const one=()=>{ if(k>=ps.length){ const pr=res.pre.slice(0,4).reduce((a,b)=>a+b,0), po=res.post.reduce((a,b)=>a+b,0);
+          S.raw.dyn={pre:pr,post:po,n:ps.length,hints:res.hints,fixed:res.fixed,wrongPre:wrong.length,extra:res.extra,preAll:res.pre}; return done(); }
+        S.itemFrac=(8+k)/12;
+        dynItem(ps[k],{name:'dyn-post',lab:T.dynNew,j:`${k+1} / ${ps.length}`},ok=>{ res.post.push(ok?1:0); k++; one(); }); };
+      one(); };
+    stepPre(); } }
+
+/* ─── ④ 시간 압박 — 대표님 10-19: 계산만이 아니라 '짧은 글 읽고 고르기'와 '처음 보는 공식을 표에 대입하기'(수험형) ───
+   여유 5문제 → 시간제한 5문제(유형마다 내 여유 속도의 80%로 제한). 문항은 틀에서 매번 새로 만든다. */
+const NM={ko:['민지','준호','서연','도윤','하린','지후'],en:['Mia','Leo','Ava','Noah','Zoe','Sam']};
+const WDN={ko:['월','화','수','목','금','토','일'],en:['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']};
+const HR=h=>L==='en'?((h%12)||12)+(h<12?' a.m.':' p.m.'):h;
+function mcOpts(a,cands){ const s=new Set([String(a)]); for(const c of shuffle(cands.map(String))){ if(s.size>=4) break; s.add(c); } const arr=shuffle([...s]); return {opts:arr,ci:arr.indexOf(String(a))}; }
+function genFormula(){ const fam=ri(0,3), names=shuffle(NM[L].slice()).slice(0,3), who=ri(0,2), idxName=pick(T.fxNames);
+  let rows,a,expr,wrongs;
+  if(fam===0){ rows=names.map(()=>[ri(2,9),ri(2,9),ri(2,4)]); const [A,B,C]=rows[who]; a=(A+B)*C; expr='(A + B) × C'; wrongs=[A+B*C,(A+B)*C+C,(rows[(who+1)%3][0]+rows[(who+1)%3][1])*rows[(who+1)%3][2],A*B+C]; }
+  else if(fam===1){ rows=names.map(()=>{ const A=ri(3,9),B=ri(2,6); return [A,B,ri(1,Math.min(9,A*B-2))]; }); const [A,B,C]=rows[who]; a=A*B-C; expr='A × B − C'; wrongs=[A*(B-C),A*B+C,rows[(who+1)%3][0]*rows[(who+1)%3][1]-rows[(who+1)%3][2],A+B-C]; }
+  else if(fam===2){ rows=names.map(()=>{ const C=ri(2,5), r=ri(2,6), B=ri(1,9); return [B+C*r,B,C]; }); const [A,B,C]=rows[who]; a=(A-B)/C; expr='(A − B) ÷ C'; wrongs=[A-B/C|0,(A+B)/C|0,a+1,a+C]; }
+  else { rows=names.map(()=>{ const B=ri(2,5), r=ri(2,9), C=ri(1,9); return [B*r,B,C]; }); const [A,B,C]=rows[who]; a=A/B+C; expr='A ÷ B + C'; wrongs=[A/(B+C)|0,A/B-C,a+B,rows[(who+1)%3][0]/rows[(who+1)%3][1]+rows[(who+1)%3][2]]; }
+  const m=mcOpts(a,wrongs.filter(x=>Number.isFinite(x)&&x>0&&x!==a).concat([a+1,a+2,a-1>0?a-1:a+3]));
+  return {k:'fx',name:idxName,expr,rows,names,who,...m}; }
+function genRead(){ const t=ri(0,3);
+  if(t===0){ const o=ri(8,10), c=ri(20,22), wo=ri(9,11), wc=ri(16,18), off=ri(0,6), day=ri(0,6), h=pick([7,o-1,o+2,13,c-1,c+1,wo-1,wc+1,wc-1].filter(x=>x>=6&&x<=23));
+    const weekend=day>=5, open=weekend?wo:o, close=weekend?wc:c; let a;
+    if(day===off) a=T.rdClosedDay; else if(h<open) a=T.rdNotYet; else if(h>=close) a=T.rdAlready; else a=T.rdCanGo;
+    const txt=tr('rd0',{o:HR(o),c:HR(c),wo:HR(wo),wc:HR(wc),off:WDN[L][off]}), q=tr('rd0q',{d:WDN[L][day],h:HR(h)}); const m=mcOpts(a,[T.rdCanGo,T.rdNotYet,T.rdAlready,T.rdClosedDay]); return {k:'rd',txt,q,...m}; }
+  if(t===1){ const n1=ri(12,30), m1=pick([20,25,30,40]), n2=ri(12,30), m2=pick([20,25,30,40]); if(n1*m1===n2*m2) return genRead();
+    const A=n1*m1, B=n2*m2, diff=Math.abs(A-B), win=A>B?'A':'B', a=tr('rd1a',{w:win,d:diff});
+    const m=mcOpts(a,[tr('rd1a',{w:win==='A'?'B':'A',d:diff}),tr('rd1a',{w:win,d:diff+pick([10,20,30])}),tr('rd1a',{w:win==='A'?'B':'A',d:Math.abs(n1-n2)*10||15}),tr('rd1a',{w:win,d:Math.abs(m1-m2)||5})]);
+    return {k:'rd',txt:tr('rd1',{n1,m1,n2,m2}),q:T.rd1q,...m}; }
+  if(t===2){ const p=pick([80,85,90]), qq=p-pick([15,20,25]), at=pick([8,10,12]), s=ri(qq-10,p+12), x=ri(at-3,at+3);
+    const lv=s>=p?0:s>=qq?1:2; if(lv===2&&x<at) return genRead(); const fin=Math.min(2,lv+(x<at?1:0)), cls=[T.rdC0,T.rdC1,T.rdC2][fin];
+    const m=mcOpts(cls,[T.rdC0,T.rdC1,T.rdC2,T.rdC3]); return {k:'rd',txt:tr('rd2',{p,q:qq,a:at}),q:tr('rd2q',{s,x}),...m}; }
+  const a0=ri(6,15), d=ri(2,6), days=ri(3,4), sum=Array.from({length:days},(_,i)=>a0+d*i).reduce((x,y)=>x+y,0);
+  const m=mcOpts(sum,[sum+d,sum-d,a0*days,sum+a0,(a0+d*(days-1))*days]); return {k:'rd',txt:tr('rd3',{a:a0,d}),q:tr('rd3q',{e:WDN[L][days-1]}),...m}; }
+function pressItem(it,o,cb){ const body=it.k==='fx'
+  ? `<div class="cg-fx"><div class="cg-fxf"><b>${esc(it.name)}</b>&nbsp;= <span class="cg-nw">${it.expr}</span></div><table class="cg-fxt"><thead><tr><th></th><th>A</th><th>B</th><th>C</th></tr></thead><tbody>${it.rows.map((r,i)=>`<tr><th>${esc(it.names[i])}</th>${r.map(v=>`<td>${v}</td>`).join('')}</tr>`).join('')}</tbody></table></div><p class="cg-vq">${tr('fxQ',{n:it.names[it.who],x:L==='en'?it.name.toLowerCase():it.name})}</p>`
+  : `<p class="cg-rd">${esc(it.txt)}</p><p class="cg-vq">${esc(it.q)}</p>`;
+  main(`<section data-screen="${o.name}"><div class="cg-qhead"><span${o.limit?' class="cg-tag cg-hot"':''}>${o.lab}</span><span>${o.j}${o.limit?` · ${tr('secN',{s:Math.round(o.limit/F/1000)})}`:''}</span></div>
+    ${o.limit?'<div class="cg-tbar wide"><i></i></div>':''}${body}
+    <div class="cg-vopts">${it.opts.map((v,k)=>`<button class="cg-ans"${mark(k===it.ci)}>${esc(v)}</button>`).join('')}</div><div class="cg-fb" role="status"></div><div class="cg-after"></div></section>`);
+  const t0=now(); let fin=false, to=null;
+  const ans=v=>{ if(fin) return; fin=true; if(to) clearTimeout(to); const r={k:it.k,ok:v===it.ci,ms:Math.round(now()-t0),late:v===null};
+    if(v===null){ $$('.cg-ans').forEach(x=>x.disabled=true); const fb=$1('.cg-fb'); if(fb){ fb.className='cg-fb no'; fb.textContent=T.lateFb; } return later(()=>cb(r),900*F); }
+    if(o.prac){ const bs=$$('.cg-ans'); bs[it.ci].classList.add('ok'); if(v!==it.ci) bs[v].classList.add('no'); const fb=$1('.cg-fb'); fb.className='cg-fb '+(r.ok?'ok':'no'); fb.textContent=r.ok?T.ok:T.no;
+      const af=$1('.cg-after'); af.classList.add('cg-dock'); af.innerHTML=`<button class="cg-btn" data-next>${T.next}</button>`; $1('[data-next]').onclick=()=>cb(r); return; }
+    cb(r); };
+  if(o.limit){ const bar=$1('.cg-tbar i'); requestAnimationFrame(()=>requestAnimationFrame(()=>{ if(bar){ bar.style.transition=`width ${o.limit}ms linear`; bar.style.width='0%'; } })); to=later(()=>ans(null),o.limit); }
+  $$('.cg-ans').forEach((b,i)=>b.onclick=()=>{ $$('.cg-ans').forEach(x=>x.disabled=true); b.classList.add('sel'); later(()=>ans(i),140*F); }); }
+function pressBlock(n,lim,lab,name,cb,prac){ const res=[]; let k=0; const kinds=shuffle(Array.from({length:n},(_,i)=>i%2?'fx':'rd'));
+  const one=()=>{ if(k>=n) return cb(res); const kind=kinds[k], it=kind==='fx'?genFormula():genRead(); k++; S.itemFrac=(S.pressBase||0)+k/(n*2);
+    pressItem(it,{name,lab,j:`${k} / ${n}`,limit:lim?lim[kind]:0,prac},r=>{ res.push(r); later(one,160*F); }); };
+  one(); }
+function aPress(done){ const sum=a=>{ const ok=a.filter(x=>x.ok).length, rts=a.filter(x=>!x.late).map(x=>x.ms); return {acc:r3(ok/a.length),rt:median(rts)||0,late:a.filter(x=>x.late).length}; };
+  intro('press',()=>pressBlock(2,0,T.practice,'press-prac',()=>ready('press',0,run),true));
+  function run(){ S.pressBase=0; pressBlock(PRESS_N,0,T.pressCalm,'press-calm',calm=>{ const c=sum(calm);
+      const limOf=kind=>{ const v=median(calm.filter(x=>x.k===kind).map(x=>x.ms)); return Math.round(clamp((v?v/F:15000)*0.8,6000,25000)*F); };
+      const lim={rd:limOf('rd'),fx:limOf('fx')}; S.pressBase=0.5;
+      main(`<section data-screen="press-mid" class="cg-card cg-ready cg-anim" style="margin-top:18px"><div class="cg-tag cg-hot">${T.pressHot}</div><h2 class="cg-h" tabindex="-1" data-focus>${T.pressMidH}</h2><p class="cg-p">${tr('pressMidP',{s:Math.round((lim.rd+lim.fx)/2/F/1000)})}</p>
+        <div class="cg-stack"><button class="cg-btn" data-next>${T.start}</button></div></section>`);
+      $1('[data-next]').onclick=()=>pressBlock(PRESS_N,lim,T.pressHot,'press-hot',hot=>{ const h=sum(hot);
+        S.raw.press={calm:c,hot:h,limit:{rd:Math.round(lim.rd/F),fx:Math.round(lim.fx/F)},kinds:{rd:[calm,hot].map(b=>b.filter(x=>x.k==='rd').filter(x=>x.ok).length),fx:[calm,hot].map(b=>b.filter(x=>x.k==='fx').filter(x=>x.ok).length)}}; done(); }); }); } }
+
+/* ─── 메타인지(확신도) 점수 ─── */
+function metaRaw(list){ const a=(list||[]).filter(x=>x.cf!=null); if(a.length<6) return null;
+  const okC=a.filter(x=>x.ok), noC=a.filter(x=>!x.ok), mean=v=>v.reduce((s,x)=>s+x.cf,0)/v.length;
+  const acc=okC.length/a.length, conf=mean(a), bias=conf-acc, res=(okC.length&&noC.length)?mean(okC)-mean(noC):null;
+  return {n:a.length,acc:r3(acc),conf:r3(conf),bias:r3(bias),res:res==null?null:r3(res)}; }
+// 변별(맞힌 문항에 더 확신했나)이 중심, 과신·과소신은 깎음. 맞힘·틀림이 한쪽뿐이면 과신 정도만 씀(잠정)
+const metaIdx=m=>m&&m.res!=null?m.res-0.5*Math.abs(m.bias):null;   // 맞힌 문제·틀린 문제가 둘 다 있어야 잼(결과지 점검 10-20: 다 맞혔는데 '연습 필요')
+const dynIdx=d=>d&&d.wrongPre>0?d.post-0.6*d.pre+0.3*d.fixed-0.1*d.hints:null;   // 처음 문제를 다 맞혀 힌트를 안 쓰면 재지 않음(사용자 시험 10-19)
+const pressIdx=p=>p&&p.calm.acc>=0.5?p.hot.acc-p.calm.acc:null;   // 여유 있게 푼 문제를 절반 넘게 못 맞히면 재지 않음(결과지 점검 10-20: 0/5→1/5가 '강함'으로 나옴)
+
+/* ═══ 점수 ═══ */
+function zs(raw){ const z={}, N=NORM;
+  z.reason=(raw.reason.theta-N.reason.m)/N.reason.sd;
+  z.verbal=raw.verbal?(raw.verbal.theta-N.verbal.m)/N.verbal.sd:0;
+  z.rot=((raw.rot.right-raw.rot.wrong)-N.rot.m)/N.rot.sd;                                   // 1분 동안 (맞힘−틀림)
+  z.wm=(raw.wm.pc-N.wm.m)/N.wm.sd;
+  z.speed=raw.speed?(raw.speed.hit-N.speed.m)/N.speed.sd:null;                                             // 1분 동안 맞힌 개수
+  z.learn=(raw.learn.sum-N.learn.m)/N.learn.sd;
+  z.keep=raw.keep?(raw.keep.n-N.keep.m)/N.keep.sd:null;
+  z.focus=raw.focus?(focusRaw(raw.focus)-N.focus.m)/N.focus.sd:null;
+  const mi=metaIdx(raw.meta), di=dynIdx(raw.dyn), pi=pressIdx(raw.press);
+  z.meta=mi==null?null:(mi-N.meta.m)/N.meta.sd; z.dyn=di==null?null:(di-N.dyn.m)/N.dyn.sd; z.press=pi==null?null:(pi-N.press.m)/N.press.sd;
+  return z; }
+const focusRaw=f=>(f.nogo?1-f.com/f.nogo:1)-(f.go?f.om/f.go:0);
+// 집중 저하 → 라이벌 게이지가 내려가는 속도(1 = 보통, 0.6~1.6). 뒤 1/3의 실수율·반응 흔들림이 앞 1/3보다 클수록 빨라짐.
+function fatigueOf(f){ if(!f||!f.thirds) return 1; const a=f.thirds[0], b=f.thirds[2], err=x=>(x.nogo?x.com/x.nogo:0)*0.7+(x.go?x.om/x.go:0)*0.3;
+  return clamp(r3(1+1.5*(err(b)-err(a))+2*((b.cv||0)-(a.cv||0))),0.6,1.6); }
+const toS=z=>clamp(Math.round(100+15*z),LO,HI);
+const to24=x=>Math.round(100+(x-100)*K24);
+function typeOf(z,raw){ const zR=z.reason, zW=z.speed!=null?(z.wm+z.speed)/2:z.wm, zL=z.learn; let zK;
+  if(z.keep!=null) zK=z.keep;
+  else { const Lr=raw.learn||{}, last=(Lr.rounds&&Lr.rounds.length)?Lr.rounds[Lr.rounds.length-1]:PAIRS_N;
+    const r=Lr.end==null?RET.m:Math.min(1,Lr.end/Math.max(4,last)); zK=(r-RET.m)/RET.sd; }   // 마지막 바퀴가 4개 미만이면 4로 나눔(작은 수로 부풀지 않게)
+  let code; if(zR-Math.max(zL,zW)>=0.5&&zR>=0.3) code='PF'; else if(zW-Math.max(zR,zL)>=0.5&&zW>=0.3) code='QD'; else code=zL>=0?(zK>=0?'FL':'FA'):(zK>=0?'SL':'RP');
+  return {code,ko:CT.ko['ty_'+code],en:CT.en['ty_'+code]}; }
+function score(raw){ const z=zs(raw), areas={}; let sw=0,sx=0;
+  // LQ = 아래 SHOW 영역만 가중 평균(70~145로 자른 영역 점수). 공부할 때 쓰는 힘(ABL)은 따로 두고 LQ에 넣지 않는다.
+  for(const a of SHOW){ areas[a]=toS(z[a]); sw+=NORM[a].w; sx+=NORM[a].w*areas[a]; }
+  areas.keep=z.keep==null?null:toS(z.keep);
+  for(const a of ABL) areas[a]=z[a]==null?null:toS(z[a]);
+  const zc={}; for(const a in areas) zc[a]=areas[a]==null?null:(areas[a]-100)/15;
+  let s2=0,sAll=0; for(const a of SHOW){ s2+=NORM[a].w*NORM[a].w; sAll+=NORM[a].w; }
+  const R_AREA=0.5, sdBar=Math.sqrt(s2+R_AREA*(sAll*sAll-s2))/sAll;
+  const mid=clamp(Math.round(100+((sx/sw)-100)/sdBar),LO,HI), lo=Math.max(LO,mid-BAND), hi=Math.min(HI,mid+BAND);
+  return {idx:{mid,lo,hi},idx24:{mid:to24(mid),lo:to24(lo),hi:to24(hi)},areas,type:typeOf(zc,raw)}; }
+function build(raw,at,pairs){ raw.meta=metaRaw(S&&S.conf); const s=score(raw);
+  return {v:2,lq:s.idx.mid,at,idx:s.idx,idx24:s.idx24,areas:s.areas,type:s.type,focus:raw.focus?{fat:fatigueOf(raw.focus),score:s.areas.focus}:null,raw,recall:{pairs:pairs.map(p=>({w:p.w,g:p.g})),dueAt:at+RECALL_AFTER,done:false}}; }
+const clone=o=>JSON.parse(JSON.stringify(o));
+
+/* ═══ 결과 화면 ═══ */
+function curveSVG(lo,hi){ const X=s=>10+(s-55)/90*300, Y=s=>80-64*Math.exp(-Math.pow((s-100)/15,2)/2);
+  const path=(a,b)=>{ let d=`M${X(a).toFixed(1)} 80`; for(let s=a;s<=b+0.01;s+=1) d+=`L${X(s).toFixed(1)} ${Y(s).toFixed(1)}`; return d+`L${X(b).toFixed(1)} 80Z`; };
+  return `<svg class="cg-curve" viewBox="0 0 320 98" aria-hidden="true"><path d="${path(55,145)}" style="fill:var(--track)"/><path d="${path(lo,hi)}" style="fill:var(--acc)"/>
+   <line x1="10" y1="80" x2="310" y2="80" style="stroke:var(--line)" stroke-width="1.5"/>${[70,85,100,115,130,145].map(v=>`<text x="${X(v)}" y="95" text-anchor="middle" style="fill:var(--sub);font-size:10px;font-weight:600">${v}</text>`).join('')}</svg>`; }
+const pctOf=v=>clamp(50+(v-100)/45*50,3,100);   // 100 = 가운데, 145 = 끝
+function prevOf(res,hist){ if(!Array.isArray(hist)) return null; const c=hist.filter(h=>h&&h.idx&&h.at<res.at).sort((a,b)=>b.at-a.at); return c[0]||null; }
+const SPD=L=>{ L=+L||100; return L<88?1:L<96?2:L<105?3:L<114?4:5; };
+const lvlOf=v=>v>=115?'lvHi':v>85?'lvMid':'lvLo';
+function spdMeter(s){ return `<div class="cg-spd" role="img" aria-label="${esc(tr('spdAria',{s}))}">${[1,2,3,4,5].map(k=>`<i class="${k<=s?'on':''}"></i>`).join('')}</div>`; }
+// 영역마다 근거 한 줄(사용자 시험 10-19: '왜 강함·연습 필요인지 안 보여요')
+function evOf(a,raw){ raw=raw||{}; const x=raw[a]; if(!x) return '';
+  const pc=v=>Math.round((v||0)*100);
+  if(a==='reason'||a==='verbal'){ const n=x.n!=null?x.n:(x.items||[]).length, r=(x.items||[]).filter(it=>it[a==='reason'?2:1]===1).length;
+    return tr('ev_q',{n,r})+(x.timed&&x.max&&n<x.max?tr('ev_qt',{n,m:x.max}):'')+(n<6?T.ev_thin:''); }
+  if(a==='wm') return tr('ev_wm',{t:x.total,r:x.right,e:(x.sets||[]).reduce((s,v)=>s+(v[2]||0),0)});
+  if(a==='learn') return x.rounds?tr('ev_learn',{r:x.rounds.join(' → ')}):'';
+  if(a==='rot') return tr('ev_rot',{n:x.n,r:x.right});
+  if(a==='meta') return tr('ev_meta',{n:x.n,a:pc(x.acc),c:pc(x.conf)});
+  if(a==='dyn'){ const pn=Math.min(4,(x.preAll||[]).length||4); return tr('ev_dyn',{p:x.pre,pn,q:x.post,n:x.n,h:x.hints}); }
+  if(a==='press') return tr('ev_press',{c:Math.round(x.calm.acc*PRESS_N),h:Math.round(x.hot.acc*PRESS_N)})+(x.hot.late?tr('ev_pressLate',{l:x.hot.late}):'');
+  if(a==='focus') return tr('ev_focus',{g:x.nogo,k:x.nogo-x.com,o:x.om});
+  return ''; }
+function resultHTML(res,o){ const ty=res.type||{}, code=ty.code||'FL', name=ty[L]||T['ty_'+code], pv=o.prev, A=res.areas||{}, RAW=res.raw||{};
+  const evl=a=>{ const t=evOf(a,RAW); return t?`<p class="cg-ev">${esc(t)}</p>`:''; };
+  const lvTag=v=>`<div class="cg-av cg-lv ${lvlOf(v)}">${T[lvlOf(v)]}</div>`;
+  const row=a=>{ const v=A[a], p=pv&&pv.areas?pv.areas[a]:null;
+    return `<div class="cg-arow"><div class="cg-an"><b>${T['n_'+a]}</b><span>${T['g_'+a]}</span></div>${lvTag(v)}
+      <div class="cg-trk"><i style="width:${pctOf(v)}%"></i></div>${p!=null?`<div class="cg-trk pv" title="${esc(T.prev)}"><i style="width:${pctOf(p)}%"></i></div>`:''}${evl(a)}</div>`; };
+  const keepRow=A.keep!=null?`<div class="cg-arow keep"><div class="cg-an"><b>${T.n_keep}</b><span>${T.g_keep}</span></div>${lvTag(A.keep)}<div class="cg-trk"><i style="width:${pctOf(A.keep)}%"></i></div>${res.raw&&res.raw.keep?`<div class="cg-pend">${tr('keepRaw',{n:res.raw.keep.n,of:res.raw.keep.of||PAIRS_N})}</div>`:''}</div>`
+    :`<div class="cg-arow keep"><div class="cg-an"><b>${T.n_keep}</b><span>${T.g_keep}</span></div><div class="cg-av">–</div><div class="cg-trk dash"></div><div class="cg-pend">${recallDue(res)?T.keepNow:T.keepPend}</div></div>`;
+  const abl=a=>{ const v=A[a], none=a==='dyn'&&RAW.dyn&&RAW.dyn.wrongPre===0?T.dynAllNone:a==='press'&&RAW.press?T.pressNone:a==='meta'&&RAW.meta?T.metaNone:T.ablNone, tip=a==='meta'&&RAW.meta&&RAW.meta.bias<-0.15?T.tip_metaUnder:T['tip_'+a];
+    return `<div class="cg-abl"><div class="cg-an"><b>${T['n_'+a]}</b><span>${T['g_'+a]}</span></div>${v==null?`<div class="cg-av">–</div><p>${none}</p>`:`${lvTag(v)}${evl(a)}<p>${tip}</p>`}</div>`; };
+  const lq=res.lq||res.idx.mid, plq=pv?(pv.lq||(pv.idx&&pv.idx.mid)):null;
+  return `<section data-screen="result" class="cg-res cg-anim">
+  <div class="cg-eyebrow cg-center" tabindex="-1" data-focus>${T.resEyebrow}</div>
+  <div class="cg-card cg-type">${TYPE_I}<div><div class="cg-lab">${T.typeLab}</div><div class="cg-tyname">${esc(name)}</div><p>${T['tyd_'+code]||''}</p></div></div>
+  <div class="cg-card cg-lqcard"><div class="cg-lab">${T.lqLab}</div>
+    <div class="cg-lqv">${tr('lqV',{l:lq})}</div>
+    <p class="cg-lqnote">${T.lqNote} <a href="#cg-refs" class="cg-reflink" data-refs>${T.lqRefs}</a></p>
+    <div class="cg-scale">${T.lqScale}</div>
+    ${plq?`<div class="cg-prevr">${tr('prevLq',{l:plq})}</div>`:''}</div>
+  <div class="cg-card"><div class="cg-cardh"><b>${T.areasLab}</b><span>${pv?`<span style="opacity:.7">▬ ${T.prev}</span>`:''}</span></div>${SHOW.filter(a=>A[a]!=null).map(row).join('')}${keepRow}</div>
+  <div class="cg-card"><div class="cg-cardh"><b>${T.ablLab}</b></div><p class="cg-ablnote">${T.ablNote}</p>${ABL.map(abl).join('')}</div>
+  <ul class="cg-notes"><li>${pv&&plq&&lq<plq?T.retest2:T.retest}</li>${res.recall&&!res.recall.done?`<li>${T.recallNote}</li>`:''}</ul>
+  ${o.primary?`<div class="cg-dock"><button class="cg-btn" data-go>${o.primary}</button></div>`:''}
+  <div class="cg-stack" style="margin-top:4px">${o.share?`<button class="cg-ghost" data-share>${T.share}</button>`:''}${o.closeBtn?`<button class="cg-ghost" data-close>${T.close}</button>`:''}</div>
+  ${refsHTML()}<p class="cg-notice">${T.notice}</p></section>`; }
+function bindRefs(){ const a=$1('[data-refs]'); if(a) a.onclick=e=>{ e.preventDefault(); const d=$1('.cg-refs'); if(d){ d.open=true; try{ d.scrollIntoView({behavior:'smooth',block:'start'}); }catch(x){ d.scrollIntoView(); } } }; }
+function shareTextOf(res){ const ty=res.type||{}; return tr('shareText',{t:ty[L]||T['ty_'+(ty.code||'FL')],l:res.lq||res.idx.mid}); }
+function doShare(res,fn){ if(typeof fn!=='function') return; let url=''; try{ url=shareCard(res); }catch(e){} fn(url,shareTextOf(res)); }
+
+/* ═══ 공유 카드 (1080×1350, 앱 밝은 색, 이름 없음) ═══ */
+const PAL={bg:'#f4f1ea',card:'#fffdf8',ink:'#1d1b17',sub:'#6b6458',line:'#e5dfd2',track:'#ece6d9',acc:'#2f5d50',accsoft:'#e3ede8',dop:'#7a5cc4',dopink:'#6a4fb0',dopsoft:'#efe9fb',amber:'#c98a1b'};
+function shareCard(res){ setLang(); const cv=document.createElement('canvas'); cv.width=1080; cv.height=1350; const x=cv.getContext('2d'); const P=PAL;
+  const FF='-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Noto Sans CJK KR","Noto Sans",system-ui,sans-serif';
+  const font=(w,s)=>{ x.font=`${w} ${s}px ${FF}`; };
+  const circ=(cx,cy,r,c)=>{ x.fillStyle=c; x.beginPath(); x.arc(cx,cy,r,0,Math.PI*2); x.fill(); };
+  const rr=(X,Y,W,H,R)=>{ x.beginPath(); x.moveTo(X+R,Y); x.arcTo(X+W,Y,X+W,Y+H,R); x.arcTo(X+W,Y+H,X,Y+H,R); x.arcTo(X,Y+H,X,Y,R); x.arcTo(X,Y,X+W,Y,R); x.closePath(); };
+  const wrap=(t,maxW)=>{ const ws=String(t).split(' '),out=[]; let line=''; for(const w of ws){ const tt=line?line+' '+w:w; if(x.measureText(tt).width>maxW&&line){ out.push(line); line=w; } else line=tt; } if(line) out.push(line); return out; };
+  x.fillStyle=P.bg; x.fillRect(0,0,1080,1350);
+  circ(122,98,20,P.dop); rr(98,122,50,34,17); x.fillStyle=P.dop; x.fill(); circ(96,108,22,P.acc); rr(68,132,56,36,18); x.fillStyle=P.acc; x.fill();
+  font(800,46); x.fillStyle=P.ink; x.textBaseline='alphabetic'; x.fillText(T.app,170,146);
+  font(650,30); x.fillStyle=P.sub; x.fillText(T.cardTop,72,228);
+  rr(56,262,968,958,48); x.fillStyle=P.card; x.fill(); x.lineWidth=3; x.strokeStyle=P.line; x.stroke();
+  const ty=res.type||{}; font(650,32); x.fillStyle=P.sub; x.fillText(T.typeLab,112,340);
+  font(800,60); x.fillStyle=P.dopink; const tl=wrap(ty[L]||T['ty_'+(ty.code||'FL')],856).slice(0,2); let y=414; tl.forEach(s=>{ x.fillText(s,112,y); y+=74; });
+  y+=96; font(850,104); x.fillStyle=P.ink; x.fillText(tr('lqV',{l:res.lq||res.idx.mid}),108,y);
+  font(600,28); x.fillStyle=P.sub; wrap(T.cardScale,856).slice(0,2).forEach((s,i)=>x.fillText(s,112,y+56+i*38));
+  y+=56+38*Math.min(2,wrap(T.cardScale,856).length);
+  x.fillStyle=P.line; x.fillRect(112,y+20,856,3);
+  const A=res.areas||{}, bars=SHOW.filter(a=>A[a]!=null).map(a=>['n_'+a,A[a]]);
+  let by=y+90; const bx=112,bw=856, step=Math.min(76,(1188-by)/bars.length);
+  bars.forEach(([k,v])=>{ v=v||100; font(700,30); x.fillStyle=P.ink; x.textAlign='left'; x.fillText(T[k],bx,by);
+    x.textAlign='right'; x.fillText(T[lvlOf(v)],bx+bw,by); x.textAlign='left';
+    rr(bx,by+12,bw,14,7); x.fillStyle=P.track; x.fill(); rr(bx,by+12,Math.max(14,bw*pctOf(v)/100),14,7); x.fillStyle=P.acc; x.fill(); by+=step; });
+  font(800,36); x.fillStyle=P.acc; x.fillText(T.cardFoot,72,1278);
+  font(550,26); x.fillStyle=P.sub; x.fillText(T.cardSmall,72,1318);
+  return cv.toDataURL('image/png'); }
+
+/* ═══ 진행 ═══ */
+const AREA_FN={reason:aReason,verbal:aVerbal,dyn:aDyn,press:aPress,rule:aRule,learn:aLearn,seq:aSeq,rot:aRot,wm:aWm,speed:aSpeed,focus:aFocus};
+function runArea(i){ if(!S) return; if(i>=FLOW.length) return endRecall(finishTest);
+  setStep(i,tr('step',{i:i+1,n:T['n_'+FLOW[i]]})); clockStop(); AREA_FN[FLOW[i]](()=>{ clockStop(); runArea(i+1); }); }
+function finishTest(){ const at=Date.now(); S.raw.ms=Math.round(now()-S.t0); S.raw.lang=L; if(FAST) S.raw.fast=F;
+  const res=build(S.raw,at,S.pairs); S.res=res; const o=S;
+  const q=root.querySelector('.cg-quit'); if(q){ q.classList.add('cg-off'); } const l=root.querySelector('.cg-steplab'); if(l) l.textContent=T.title;
+  main(resultHTML(res,{primary:T.pick,share:typeof o.onShare==='function'})); bindRefs();
+  $1('[data-go]').onclick=()=>{ const cb=o.onDone, r=clone(res); closeOverlay(); if(cb) cb(r); };
+  const st=$1('.cg-res .cg-stack'); if(st){ st.insertAdjacentHTML('beforeend',`<button class="cg-ghost" data-pl>${T.pickLater}</button>`); $1('[data-pl]').onclick=()=>{ const cb=o.onDone, r=clone(res); closeOverlay(); if(cb) cb(r,{later:true}); }; }
+  const sb=$1('[data-share]'); if(sb) sb.onclick=()=>doShare(res,o.onShare); }
+function startScreen(){ const rows=FLOW.map((a,i)=>`<div class="cg-prow"><div class="cg-num">${i+1}</div><div><b>${T['n_'+a]}</b><span>${T['d_'+a]}</span></div><i>${T['t_'+a]}</i></div>`).join('');
+  main(`<section data-screen="start" class="cg-anim">${HERO}<h1 class="cg-title" tabindex="-1" data-focus>${T.title}</h1><p class="cg-tagline">${T.tagline}</p><p class="cg-lead">${T.lead}</p><p class="cg-basis">${T.basis}</p>
+    <div class="cg-card cg-plan">${rows}<div class="cg-prow"><div class="cg-num">+</div><div><b>${T.n_end}</b><span>${T.d_end}</span></div><i>${T.t_end}</i></div></div>${refsHTML()}
+    <ul class="cg-points">${['p1','p2','p3','p4'].map(k=>`<li>${OK_I}<span>${T[k]}</span></li>`).join('')}</ul>
+    <div class="cg-dock"><button class="cg-btn" data-next>${T.go}</button><button class="cg-ghost" data-later>${T.later}</button></div></section>`);
+  $1('[data-later]').onclick=()=>{ const cb=S&&S.onCancel; closeOverlay(); if(cb) cb(); };
+  const qb=root.querySelector('.cg-quit'); if(qb){ qb.textContent=T.close; qb.dataset.a='close0'; }
+  $1('[data-next]').onclick=()=>{ if(qb){ qb.textContent=T.quit; qb.dataset.a='quit'; } S.t0=now(); runArea(0); }; }
+
+/* ═══ 공개 API ═══ */
+function start(opts){ opts=opts||{}; setLang(); FAST=!!opts.fast; F=FAST?(typeof opts.fast==='number'?opts.fast:0.1):1;
+  openOverlay('test'); S={onDone:opts.onDone,onCancel:opts.onCancel,onShare:opts.onShare,raw:{},step:null,itemFrac:0,t0:now()};
+  root.querySelector('.cg-steplab').textContent=T.title; startScreen(); }
+function showResult(result,opts){ opts=opts||{}; setLang(); if(!result||!result.idx) return; FAST=false; F=1;
+  openOverlay('view'); S={onClose:opts.onClose,step:null};
+  root.querySelector('.cg-steplab').textContent=T.title;
+  main(resultHTML(result,{prev:prevOf(result,opts.history),share:typeof opts.onShare==='function',closeBtn:false})); bindRefs();
+  const sb=$1('[data-share]'); if(sb) sb.onclick=()=>doShare(result,opts.onShare);
+  const cbt=$1('[data-close]'); if(cbt) cbt.onclick=()=>{ const cb=S&&S.onClose; closeOverlay(); if(cb) cb(); }; }
+function recallDue(result){ try{ const r=result&&result.recall; return !!(r&&!r.done&&Array.isArray(r.pairs)&&r.pairs.length&&Date.now()-result.at>=RECALL_AFTER&&Date.now()>=(r.dueAt||0)); }catch(e){ return false; } }
+function recall(result,opts){ opts=opts||{}; setLang(); FAST=!!opts.fast; F=FAST?(typeof opts.fast==='number'?opts.fast:0.1):1;
+  if(!result||!result.recall||!Array.isArray(result.recall.pairs)||!result.recall.pairs.length){ if(opts.onCancel) opts.onCancel(); return; }
+  openOverlay('recall'); S={onClose:opts.onCancel,step:null};
+  root.querySelector('.cg-steplab').textContent=T.n_keep;
+  const pairs=result.recall.pairs, words=pairs.map(p=>p.w).sort();
+  main(`<section data-screen="recall-intro" class="cg-anim"><div class="cg-icon" style="background:var(--dopsoft);color:var(--dop)">${IC.learn}</div><h2 class="cg-h" tabindex="-1" data-focus>${T.rcH}</h2><p class="cg-p">${T.rcP}</p>
+    <div class="cg-dock"><button class="cg-btn" data-next>${T.start}</button><button class="cg-ghost" data-a="close">${T.rcLater}</button></div></section>`);
+  $1('[data-next]').onclick=()=>{ const order=shuffle(pairs.map((_,i)=>i)); let j=0,c=0; const t0=now();
+    const q=()=>{ if(j>=order.length) return fin(); const p=pairs[order[j]]; j++;
+      pickScr(p,words,`<div class="cg-qhead"><span>${j} / ${pairs.length}</span></div>`,{name:'recall-item',fb:false},ok=>{ if(ok) c++; q(); }); };
+    const fin=()=>{ const r=clone(result); r.raw=r.raw||{}; r.raw.keep={n:c,of:pairs.length,ms:Math.round(now()-t0),at:Date.now()};
+      try{ const s=score(r.raw); r.areas=s.areas; r.type=s.type; }catch(e){ r.areas=r.areas||{}; r.areas.keep=toS((c-NORM.keep.m)/NORM.keep.sd); }
+      r.recall.done=true;
+      main(`<section data-screen="recall-done" class="cg-card cg-ready cg-anim" style="margin-top:18px"><div class="cg-big" style="color:var(--dop)">${c}<span style="font-size:1.125rem;color:var(--sub)"> / ${pairs.length}</span></div>
+        <h2 class="cg-h" tabindex="-1" data-focus>${T.rcDone}</h2><p class="cg-p">${T.rcDoneP}</p>
+        <div class="cg-arow keep" style="text-align:left"><div class="cg-an"><b>${T.n_keep}</b></div><div class="cg-av">${T[lvlOf(r.areas.keep)]}</div><div class="cg-trk"><i style="width:${pctOf(r.areas.keep)}%"></i><u style="left:${pctOf(100)}%"></u></div></div>
+        <div class="cg-stack"><button class="cg-btn" data-next>${T.rcFinish}</button></div></section>`);
+      $1('[data-next]').onclick=()=>{ const cb=opts.onDone; closeOverlay(); if(cb) cb(r); }; };
+    q(); }; }
+
+return {start,showResult,shareCard,recallDue,recall};
+})();
+</script>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const Q=new URLSearchParams(location.search), T1=Q.get('t')==='1';
+  const TX={
+    ko:{title:'라이벌로그 학습능력검사 LQ 2.0',sub:'시험판 · 지능검사가 아닙니다 · 결과는 이 화면에만 보이고 어디에도 보내지지 않아요',howH:'진행 방법',
+      how:['8개 과제를 차례로 풉니다(약 20~25분). 과제마다 처음에 설명과 연습 문제가 나오고, 본 문제는 대부분 시간제한이 있습니다.','시간제한이 있는 과제가 있습니다. 화면을 보고 바로 판단해 고르세요.',"규칙 찾기·말의 관계에서는 답을 고른 뒤 '확실해요·반반·찍었어요' 중 하나를 누릅니다.",(T1?'끝나면 결과 화면이 나오고, 이 페이지 아래에 결과 기록이 생깁니다. 기록을 복사해 전달하세요.':'끝나면 결과 화면이 나오고, 이 페이지 아래에도 결과가 남습니다(이 화면에만).')],
+      start:'검사 시작',resH:T1?'결과 기록':'내 결과',show:'결과 화면 다시 보기',copy:'기록 복사',copied:'복사했어요',note:'100은 라이벌로그의 잠정 기준점이에요. 비교 자료가 적어 점수표는 잠정이에요.',share:'공유하기',shared:'공유 문구를 복사했어요',shareNA:'아래 문구를 길게 눌러 복사해 주세요',close:'닫기',typeL:'나의 학습 유형',shareT:'나의 학습 유형은 「{t}」 · 라이벌로그 학습능력 체크(추정 · 지능검사 아님)\n나도 해 보기 hiarche.com/lab/lq2-test.html',app:'이 결과로 만든 라이벌과 공부 계획을 겨루는 앱, 라이벌로그 — 곧 나와요',appBtn:'라이벌로그 보기',l1:'점수는 연구에서 쓰는 과제 방식을 바탕으로 라이벌로그가 정한 잠정 기준으로 계산한 추정이에요. 지능검사나 진단이 아니에요.',l2:'결과 화면에 인용한 연구자·기관이 이 검사를 검토·보증한 것은 아니에요.',l3:'이 페이지는 쿠키나 분석 도구를 쓰지 않으며, 검사 답과 결과는 이 브라우저 화면에서만 계산되고 저장·전송되지 않아요. 다만 사이트를 호스팅하는 업체가 보안을 위해 접속 기록(IP 주소 등)을 남길 수 있어요.',
+      areas:{reason:'규칙 찾기',verbal:'말의 관계',wm:'계산하며 기억하기',learn:'짝 외우기',rot:'도형 돌리기',keep:'기억 유지',meta:'아는 걸 아는 힘',dyn:'힌트로 배우기',press:'시간 압박',focus:'숫자 3만 참기'},
+      lab:{lq:'LQ',range:'범위',type:'유형',time:'걸린 시간',min:'분',none:'측정 안 됨'}},
+    en:{title:'Rivalog Learning Skills Check · LQ 2.0',sub:'Trial version · not an intelligence test · your result stays on this screen and is not sent anywhere',howH:'How it works',
+      how:['Eight tasks in a row (about 20–25 minutes). Each starts with instructions and a practice item; most main rounds are timed.','Some tasks have a time limit. Look and answer right away.',"In Find the rule and Word logic, tap 'Sure · 50/50 · Guessed' after each answer.",(T1?'At the end you see your result, and a result record appears below on this page. Copy it and send it on.':'At the end you see your result, and it also stays below on this page (on this screen only).')],
+      start:'Start',resH:T1?'Result record':'My result',show:'Show result screen again',copy:'Copy record',copied:'Copied',note:"100 is Rivalog's provisional baseline. Comparison data is limited, so the score table is provisional.",share:'Share',shared:'Share text copied',shareNA:'Press and hold the text below to copy it',close:'Close',typeL:'My learning style',shareT:'My learning style: "{t}" · Rivalog learning skills check (an estimate, not an intelligence test)\nTry it: hiarche.com/lab/lq2-test-en.html',app:'Rivalog, the app where you race this rival with your study plan, is coming soon',appBtn:'See Rivalog',l1:'Scores are estimates based on task types used in research, on a provisional baseline set by Rivalog. This is not an intelligence test or a diagnosis.',l2:'Researchers and institutions cited on the result screen have not reviewed or endorsed this check.',l3:'This page uses no cookies or analytics. Your answers and results are calculated only in this browser and are not stored or sent. Our hosting provider may keep access logs (such as IP addresses) for security.',
+      areas:{reason:'Find the rule',verbal:'Word logic',wm:'Count and remember',learn:'Pair memory',rot:'Turn the shape',keep:'Memory kept',meta:'Knowing what you know',dyn:'Learn from hints',press:'Time pressure',focus:'Hold back on 3'},
+      lab:{lq:'LQ',range:'Range',type:'Type',time:'Time taken',min:'min',none:'not measured'}}};
+  let lang=Q.get('lang')==='en'?'en':Q.get('lang')==='ko'?'ko':'en', last=null; const hist=[];
+  const apply=()=>{ const t=TX[lang]; window.LANG=lang; document.documentElement.lang=lang;
+    $('tTitle').textContent=t.title; $('tSub').textContent=t.sub; $('tHowH').textContent=t.howH;
+    $('tHow').innerHTML=t.how.map(s=>'<li>'+s.replace(/</g,'&lt;')+'</li>').join('');
+    $('bStart').textContent=t.start; $('tResH').textContent=t.resH; $('bShow').textContent=t.show; $('bCopy').textContent=t.copy; $('tNote').textContent=t.note;
+    $('bShare').textContent=t.share; $('tApp').textContent=t.app; $('aApp').textContent=t.appBtn; $('aApp').href='https://hiarche.com/apps/rivalog.html'+(lang==='en'?'?lang=en':'');
+    $('tL1').textContent=t.l1; $('tL2').textContent=t.l2; $('tL3').textContent=t.l3; $('bCopy').hidden=!T1; $('out').hidden=!T1;
+    $('bKo').classList.toggle('on',lang==='ko'); $('bEn').classList.toggle('on',lang==='en'); if(last) render(last); };
+  const render=r=>{ const t=TX[lang], A=r.areas||{};
+    $('res').hidden=false; $('app').hidden=false; $('lq').textContent=t.lab.lq+' '+r.lq;
+    $('tType').textContent=t.typeL+': '+(((r.type||{})[lang])||((r.type||{}).code)||'-');
+    const ty=r.type||{}; const rows=[
+      t.lab.lq+': '+r.lq+'  ('+t.lab.range+' '+r.idx.lo+'–'+r.idx.hi+')',
+      t.lab.type+': '+(ty[lang]||ty.code||'-'),
+      t.lab.time+': '+((r.raw&&r.raw.ms||0)/60000).toFixed(1)+' '+t.lab.min,'' ];
+    for(const k in t.areas) if(k in A) rows.push(t.areas[k]+': '+(A[k]==null?t.lab.none:A[k]));
+    const raw=JSON.parse(JSON.stringify(r,(k,v)=>k==='pairs'?undefined:v));
+    $('out').value=rows.join('\n')+'\n\n--- raw ---\n'+JSON.stringify(raw); };
+  const toast=s=>{ $('toast').textContent=s; clearTimeout(toast.t); toast.t=setTimeout(()=>$('toast').textContent='',2500); };
+  const shareMsg=()=>{ const t=TX[lang], ty=(last&&last.type)||{}; return t.shareT.replace('{t}',ty[lang]||ty.code||'-'); };
+  const onShare=()=>{ const t=TX[lang], msg=shareMsg();
+    const manual=()=>{ $('tSheet').textContent=t.shareNA; $('shareBox').value=msg; $('bSheet').textContent=t.close; $('sheet').hidden=false; try{ $('shareBox').focus(); $('shareBox').select(); }catch(e){} };
+    const copy=()=>{ try{ navigator.clipboard.writeText(msg).then(()=>toast(t.shared),manual); }catch(e){ manual(); } };
+    try{ if(navigator.share){ navigator.share({text:msg}).catch(e=>{ if(!e||e.name!=='AbortError') copy(); }); return; } }catch(e){}
+    copy(); };
+  $('bShare').onclick=onShare; $('bSheet').onclick=()=>{ $('sheet').hidden=true; };
+  $('bKo').onclick=()=>{ lang='ko'; apply(); }; $('bEn').onclick=()=>{ lang='en'; apply(); };
+  $('bTheme').onclick=()=>{ const d=document.documentElement; d.dataset.theme=d.dataset.theme==='dark'?'light':'dark'; };
+  $('bStart').onclick=()=>{ window.LANG=lang; Cog.start({fast:false,onShare,onDone:r=>{ if(last) hist.push(last); last=r; render(r); $('res').scrollIntoView(); },onCancel:()=>{}}); };
+  $('bShow').onclick=()=>{ if(last) Cog.showResult(last,{history:hist.concat([last]),onShare,onClose:()=>{}}); };
+  $('bCopy').onclick=()=>{ const o=$('out'); o.select(); const done=()=>{ $('bCopy').textContent=TX[lang].copied; setTimeout(()=>$('bCopy').textContent=TX[lang].copy,1500); };
+    try{ navigator.clipboard.writeText(o.value).then(done,()=>{ document.execCommand('copy'); done(); }); }catch(e){ try{ document.execCommand('copy'); done(); }catch(_){} } };
+  apply();
+})();
+</script>
+</body></html>

@@ -138,6 +138,7 @@ button.ghost{background:transparent;color:var(--sub);border:1px solid var(--line
 .w .board p.lock{margin:0;font-size:13px;line-height:1.5;color:var(--sub)}
 .w .board .me small.few{display:block;font-size:13px;color:var(--sub);margin-top:2px}
 </style>
+<style>.w .again{margin:0;font-size:14px;line-height:1.55;color:var(--ink);background:var(--accsoft);border-radius:12px;padding:10px 14px;text-align:left}</style>
 </head><body>
 <main class="w">
   <header class="top">
@@ -152,6 +153,7 @@ button.ghost{background:transparent;color:var(--sub);border:1px solid var(--line
     <p class="sub" id="tSub"></p>
     <ul class="facts"><li id="f0"></li><li id="f1"></li><li id="f2"></li></ul>
     <p class="prep" id="tPrep"></p>
+    <p class="again" id="tAgain" hidden></p>
     <button id="bStart" type="button" class="cta"></button>
   </section>
   <section class="card intro" id="lqIntro" aria-labelledby="iH">
@@ -1663,7 +1665,7 @@ return {start,showResult,shareCard,recallDue,recall};
       ageL:'나이대(선택)',age:[['u19','14~18'],['u30','19~29'],['30s','30대'],['40s','40대'],['50s','50대'],['60+','60 이상'],['na','밝히지 않음']],
       genL:'성별(선택)',gen:[['m','남'],['f','여'],['na','밝히지 않음']],
       adult:'만 14세 이상이에요(필수)',agree:'위 내용을 읽고 보내는 데 동의해요(필수)',send:'보내기',sending:'보내는 중…',ok:'보냈어요. 기준을 만드는 데 쓸게요. 고마워요.',err:'보내지 못했어요. 잠시 뒤 다시 눌러 주세요.',full:'오늘 받을 수 있는 기록이 다 찼어요. 내일 다시 보내 주세요.'},
-    l3c:"이 사이트는 쿠키나 분석 도구를 쓰지 않아요. LQ 검사 결과는 브라우저 안에서만 계산돼요. 이용자가 결과 화면에서 직접 동의하고 보내기를 누른 경우에만 LQ 기록(LQ·영역 점수, 문항별 정답 여부와 걸린 시간, 언어, 화면 종류, 보낸 날짜, 들어온 경로, 고른 경우 나이대·성별)이 아르케의 저장소(Supabase Inc., 서버 위치 대한민국 서울 — 처리 위탁)로 전송돼요. 사이트를 열면 호스팅 업체 Vercel Inc.(미국)가 보안과 운영을 위해 접속 기록(IP 주소, 접속 시각, 브라우저 정보)을 미국 등 국외에서 Vercel의 정책에 따른 기간 동안 처리할 수 있어요. 저장소 업체 Supabase도 보안을 위해 접속 기록(IP 주소 포함)을 1일 동안 남길 수 있어요. 아르케는 이 기록들을 받거나 LQ 기록과 연결하지 않아요. 국외 처리를 원하지 않으면 이 사이트에 접속하지 않으면 돼요. 문의: 아르케 개인정보 보호 담당 · archeisit@gmail.com",l1:'점수는 연구에서 쓰는 과제 방식을 바탕으로 라이벌로그가 정한 잠정 기준으로 계산한 추정이에요. 지능검사나 진단이 아니에요.',l2:'결과 화면에 인용한 연구자·기관이 이 검사를 검토·보증한 것은 아니에요.',l3:'이 페이지는 쿠키나 분석 도구를 쓰지 않으며, 검사 답과 결과는 이 브라우저 화면에서만 계산되고 저장·전송되지 않아요. 다만 사이트를 호스팅하는 업체가 보안을 위해 접속 기록(IP 주소 등)을 남길 수 있어요.',
+    l3c:"이 사이트는 쿠키나 분석 도구를 쓰지 않아요(기록을 보낸 경우에만 \'보낸 횟수\' 숫자 하나를 이 브라우저에 남겨요). LQ 검사 결과는 브라우저 안에서만 계산돼요. 이용자가 결과 화면에서 직접 동의하고 보내기를 누른 경우에만 LQ 기록(LQ·영역 점수, 문항별 정답 여부와 걸린 시간, 언어, 화면 종류, 보낸 날짜, 들어온 경로, 고른 경우 나이대·성별)이 아르케의 저장소(Supabase Inc., 서버 위치 대한민국 서울 — 처리 위탁)로 전송돼요. 사이트를 열면 호스팅 업체 Vercel Inc.(미국)가 보안과 운영을 위해 접속 기록(IP 주소, 접속 시각, 브라우저 정보)을 미국 등 국외에서 Vercel의 정책에 따른 기간 동안 처리할 수 있어요. 저장소 업체 Supabase도 보안을 위해 접속 기록(IP 주소 포함)을 1일 동안 남길 수 있어요. 아르케는 이 기록들을 받거나 LQ 기록과 연결하지 않아요. 국외 처리를 원하지 않으면 이 사이트에 접속하지 않으면 돼요. 문의: 아르케 개인정보 보호 담당 · archeisit@gmail.com",l1:'점수는 연구에서 쓰는 과제 방식을 바탕으로 라이벌로그가 정한 잠정 기준으로 계산한 추정이에요. 지능검사나 진단이 아니에요.',l2:'결과 화면에 인용한 연구자·기관이 이 검사를 검토·보증한 것은 아니에요.',l3:'이 페이지는 쿠키나 분석 도구를 쓰지 않으며, 검사 답과 결과는 이 브라우저 화면에서만 계산되고 저장·전송되지 않아요. 다만 사이트를 호스팅하는 업체가 보안을 위해 접속 기록(IP 주소 등)을 남길 수 있어요.',
       areas:{reason:'규칙 찾기',verbal:'말의 관계',wm:'계산하며 기억하기',learn:'짝 외우기',rot:'도형 돌리기',keep:'기억 유지',meta:'아는 걸 아는 힘',dyn:'힌트로 배우기',press:'시간 압박',focus:'숫자 3만 참기'},
       lab:{lq:'LQ',range:'범위',type:'유형',time:'걸린 시간',min:'분',none:'측정 안 됨'}},
     en:{title:'Rivalog Learning Skills Check',facts:['20–25 min','8 tasks','No sign-up'],lqLab:'Learning quotient',sub:'Trial version · not an intelligence test · your result is sent nowhere unless you press Send',howH:'How it works',
@@ -1673,7 +1675,7 @@ return {start,showResult,shareCard,recallDue,recall};
       ageL:'Age band (optional)',age:[['u30','18–29'],['30s','30s'],['40s','40s'],['50s','50s'],['60+','60+'],['na','Prefer not to say']],
       genL:'Gender (optional)',gen:[['m','Male'],['f','Female'],['na','Prefer not to say']],
       adult:'I am 18 or older (required)',agree:'I have read this and agree to send (required)',send:'Send',sending:'Sending…',ok:'Sent. We\'ll use it to build the baseline. Thank you.',err:'Could not send. Please try again in a moment.',full:'Today\'s record limit is full. Please send again tomorrow.'},
-    l3c:"This site uses no cookies or analytics. LQ results are calculated only in your browser. Only if you agree and press Send on the result screen is your LQ record (LQ and area scores, right/wrong and time per item, language, device type, date sent, how you arrived, and age band and gender if you chose them) sent to Arche's storage (Supabase Inc., servers in Seoul, Republic of Korea, acting as our processor). When you open this site, our hosting provider Vercel Inc. (USA) may process access logs (IP address, access time, browser information) for security and operation, in the US or other countries, for the period set by Vercel's own policy. Our storage provider Supabase may also keep access logs, including IP addresses, for 1 day for security. Arche does not receive these logs or link them to LQ records. If you do not want this processing abroad, please do not visit this site. Contact: Arche privacy team · archeisit@gmail.com",l1:'Scores are estimates based on task types used in research, on a provisional baseline set by Rivalog. This is not an intelligence test or a diagnosis.',l2:'Researchers and institutions cited on the result screen have not reviewed or endorsed this check.',l3:'This page uses no cookies or analytics. Your answers and results are calculated only in this browser and are not stored or sent. Our hosting provider may keep access logs (such as IP addresses) for security.',
+    l3c:"This site uses no cookies or analytics (if you send a record, this browser keeps one number: how many records you have sent). LQ results are calculated only in your browser. Only if you agree and press Send on the result screen is your LQ record (LQ and area scores, right/wrong and time per item, language, device type, date sent, how you arrived, and age band and gender if you chose them) sent to Arche's storage (Supabase Inc., servers in Seoul, Republic of Korea, acting as our processor). When you open this site, our hosting provider Vercel Inc. (USA) may process access logs (IP address, access time, browser information) for security and operation, in the US or other countries, for the period set by Vercel's own policy. Our storage provider Supabase may also keep access logs, including IP addresses, for 1 day for security. Arche does not receive these logs or link them to LQ records. If you do not want this processing abroad, please do not visit this site. Contact: Arche privacy team · archeisit@gmail.com",l1:'Scores are estimates based on task types used in research, on a provisional baseline set by Rivalog. This is not an intelligence test or a diagnosis.',l2:'Researchers and institutions cited on the result screen have not reviewed or endorsed this check.',l3:'This page uses no cookies or analytics. Your answers and results are calculated only in this browser and are not stored or sent. Our hosting provider may keep access logs (such as IP addresses) for security.',
       areas:{reason:'Find the rule',verbal:'Word logic',wm:'Count and remember',learn:'Pair memory',rot:'Turn the shape',keep:'Memory kept',meta:'Knowing what you know',dyn:'Learn from hints',press:'Time pressure',focus:'Hold back on 3'},
       lab:{lq:'LQ',range:'Range',type:'Type',time:'Time taken',min:'min',none:'not measured'}},
     ja:{title:'Rivalog 学習スキルチェック',facts:['約20〜25分','課題8つ','ログイン不要'],lqLab:'学習指数',sub:'試験版 · 知能検査ではありません · 「送信」を押さない限り、結果はどこにも送られません',howH:'進め方',
@@ -1683,7 +1685,7 @@ return {start,showResult,shareCard,recallDue,recall};
       ageL:'年代(任意)',age:[['u30','18〜29歳'],['30s','30代'],['40s','40代'],['50s','50代'],['60+','60歳以上'],['na','答えない']],
       genL:'性別(任意)',gen:[['m','男性'],['f','女性'],['na','答えない']],
       adult:'18歳以上です(必須)',agree:'上の内容を読み、送ることに同意します(必須)',send:'送信',sending:'送信中…',ok:'送信しました。基準づくりに使わせていただきます。ありがとうございました。',err:'送信できませんでした。少し時間をおいて、もう一度押してください。',full:'今日受け付けられる記録の数がいっぱいになりました。明日もう一度送ってください。'},
-    l3c:'このサイトはCookieや分析ツールを使いません。LQチェックの結果はブラウザの中だけで計算されます。利用者が結果画面で同意し「送信」を押した場合にのみ、LQの記録(LQ・領域ごとの点数、問題ごとの正解かどうか・かかった時間、言語、画面の種類、送信日、どこから来たか、選んだ場合は年代・性別)がアルケの保存先(Supabase Inc.、サーバーの所在地:大韓民国ソウル — 取扱いの委託)へ送られます。このサイトを開くと、ホスティング事業者のVercel Inc.(米国)がセキュリティと運営のため、アクセス記録(IPアドレス、アクセス時刻、ブラウザ情報)を米国などの国外で、Vercelのポリシーで定める期間取り扱うことがあります。保存先の事業者Supabaseも、セキュリティのためアクセス記録(IPアドレスを含む)を1日間残すことがあります。アルケはこれらの記録を受け取らず、LQの記録と結びつけることもありません。国外での取扱いを望まない場合は、このサイトにアクセスしないでください。お問い合わせ:個人情報保護担当(Arche)· archeisit@gmail.com',l1:'点数は、研究で使われている課題の形式をもとに、Rivalogが定めた暫定の基準で計算した推定です。知能検査や診断ではありません。',l2:'結果画面で引用している研究者・機関が、このチェックを検討・保証したものではありません。',l3:'このページはCookieや分析ツールを使いません。回答と結果はこのブラウザの画面の中だけで計算され、保存・送信されません。ただし、サイトのホスティング事業者がセキュリティのためアクセス記録(IPアドレスなど)を残すことがあります。',
+    l3c:'このサイトはCookieや分析ツールを使いません(記録を送った場合だけ、「送った回数」という数字を1つこのブラウザに残します)。LQチェックの結果はブラウザの中だけで計算されます。利用者が結果画面で同意し「送信」を押した場合にのみ、LQの記録(LQ・領域ごとの点数、問題ごとの正解かどうか・かかった時間、言語、画面の種類、送信日、どこから来たか、選んだ場合は年代・性別)がアルケの保存先(Supabase Inc.、サーバーの所在地:大韓民国ソウル — 取扱いの委託)へ送られます。このサイトを開くと、ホスティング事業者のVercel Inc.(米国)がセキュリティと運営のため、アクセス記録(IPアドレス、アクセス時刻、ブラウザ情報)を米国などの国外で、Vercelのポリシーで定める期間取り扱うことがあります。保存先の事業者Supabaseも、セキュリティのためアクセス記録(IPアドレスを含む)を1日間残すことがあります。アルケはこれらの記録を受け取らず、LQの記録と結びつけることもありません。国外での取扱いを望まない場合は、このサイトにアクセスしないでください。お問い合わせ:個人情報保護担当(Arche)· archeisit@gmail.com',l1:'点数は、研究で使われている課題の形式をもとに、Rivalogが定めた暫定の基準で計算した推定です。知能検査や診断ではありません。',l2:'結果画面で引用している研究者・機関が、このチェックを検討・保証したものではありません。',l3:'このページはCookieや分析ツールを使いません。回答と結果はこのブラウザの画面の中だけで計算され、保存・送信されません。ただし、サイトのホスティング事業者がセキュリティのためアクセス記録(IPアドレスなど)を残すことがあります。',
       areas:{reason:'ルールを見つける',verbal:'ことばの関係',wm:'計算しながら記憶',learn:'ペア記憶',rot:'図形を回す',keep:'記憶の保持',meta:'わかっているかを知る力',dyn:'ヒントで学ぶ',press:'時間のプレッシャー',focus:'3だけ押さない'},
       lab:{lq:'LQ',range:'範囲',type:'タイプ',time:'かかった時間',min:'分',none:'測定なし'}}};
   let lang=Q.get('lang')==='en'?'en':Q.get('lang')==='ko'?'ko':'ja', last=null; const hist=[];
@@ -1738,7 +1740,7 @@ return {start,showResult,shareCard,recallDue,recall};
     out.push({k:'all',t:sec(R.ms)}); return out; };
   const clSend=async()=>{ const r=clFor, c=TX[lang].cl; if(!r||sentSet.has(r)||clBusy) return; if(!($('clAdult').checked&&$('clAgree').checked)) return;
     const areas={}; Object.keys(r.areas||{}).forEach(k=>{ const v=r.areas[k]; areas[k]=(typeof v==='number')?Math.round(v):null; });
-    const body={ver:'lq2.1',lang:lang,device:devOf(),src:srcOf(),age_band:pick('clAge'),gender:pick('clGen'),adult:true,consent:true,consent_v:(lang==='ko'?'ko-20261020-a14':lang+'-20261020'),lq:Math.round(r.lq),areas:areas,items:itemsOf(r),iq_self:(window.__iqSelf?window.__iqSelf():null)};
+    const body={ver:'lq2.1',lang:lang,device:devOf(),src:srcOf(),age_band:pick('clAge'),gender:pick('clGen'),adult:true,consent:true,consent_v:(lang==='ko'?'ko-20261020-a15':lang+'-20261020-a2'),lq:Math.round(r.lq),areas:areas,items:itemsOf(r),iq_self:(window.__iqSelf?window.__iqSelf():null),attempt:(window.__lqAttempt?window.__lqAttempt():null)};
     clBusy=true; clGate(); $('clSend').textContent=c.sending; $('clMsg').textContent='';
     try{ const res=await fetch('https://cvuyarvywlkvxwfckqjb.supabase.co/rest/v1/lq_records',{method:'POST',headers:{'apikey':'sb_publishable_Z04lS5iGlcrsF605w-oyKA_kXf5DOBA','Authorization':'Bearer sb_publishable_Z04lS5iGlcrsF605w-oyKA_kXf5DOBA','Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify(body),credentials:'omit',cache:'no-store',referrerPolicy:'no-referrer'});
       if(res.ok){ sentSet.add(r); clBusy=false; clShow(r); return; }
@@ -1831,4 +1833,34 @@ return {start,showResult,shareCard,recallDue,recall};
 <script>(function(){ const P={ko:'✏️ 펜과 종이를 준비해 주세요. 계산 과제에서만 쓰고, 외우는 과제에서는 쓰지 않아요. 과제마다 알려 드려요.',en:'✏️ Have a pen and paper ready. Use them only for the calculation tasks, never for the memory tasks. Each task tells you which.',ja:'✏️ 紙とペンを用意してください。使うのは計算の課題だけで、覚える課題では使いません。課題ごとにお知らせします。'};
   const paint=()=>{ const e=document.getElementById('tPrep'); if(e){ const l=(document.documentElement.lang||'ko').slice(0,2); e.textContent=P[l]||P.en; } };
   paint(); new MutationObserver(paint).observe(document.documentElement,{attributes:true,attributeFilter:['lang']}); })();</script>
+<script>
+/* lq-attempt */
+(function(){
+  const K='rivalog_lq_sent';
+  const S={
+    ko:{again:'이 브라우저에서 이미 기록을 {n}번 보냈어요. 다시 해도 괜찮지만, 다시 하면 점수가 조금 오르기 쉬워서 기준 만들기와 순위표에는 첫 기록만 써요.',
+        li:'이 브라우저에서 몇 번째로 보내는 기록인지(1번째 · 2번째 · 3번째 이상 중 하나). 보내면 이 브라우저에 \'보낸 횟수\' 숫자 하나가 남아요.',
+        note:'기록을 보내면, 다시 보냈는지 알기 위해 이 브라우저에 \'보낸 횟수\' 숫자 하나만 남겨요. 기기를 알아보는 값이 아니고, 브라우저의 사이트 데이터를 지우면 사라져요. 보내지 않으면 아무것도 남기지 않아요.'},
+    en:{again:'You have already sent {n} record(s) from this browser. You can do it again, but scores tend to rise on a retake, so only first records are used for the baseline and leaderboard.',
+        li:'Which record this is from this browser (1st, 2nd, or 3rd or later). Sending leaves one number in this browser: how many records you have sent.',
+        note:'If you send a record, this browser keeps a single number — how many records you have sent — so we can tell retakes apart. It does not identify your device, and clearing this site\'s data in your browser removes it. If you do not send, nothing is kept.'},
+    ja:{again:'このブラウザからはすでに{n}回記録を送っています。もう一度受けてもかまいませんが、2回目以降は点数が少し上がりやすいため、基準づくりとランキングには初回の記録だけを使います。',
+        li:'このブラウザから何回目に送る記録か(1回目・2回目・3回目以上のどれか)。送ると、このブラウザに「送った回数」という数字が1つ残ります。',
+        note:'記録を送ると、受け直しかどうかを知るため、このブラウザに「送った回数」という数字を1つだけ残します。端末を見分ける値ではなく、ブラウザでこのサイトのデータを消すと消えます。送らなければ何も残しません。'}};
+  const $=id=>document.getElementById(id); const L=()=>{ const l=(document.documentElement.lang||'ko').slice(0,2); return S[l]?l:'en'; };
+  const get=()=>{ try{ const v=parseInt(localStorage.getItem(K)||'0',10); return Number.isFinite(v)&&v>=0?v:0; }catch(e){ return null; } };
+  window.__lqAttempt=()=>{ const n=get(); return n==null?null:Math.min(n+1,3); };
+  // 보내기에 성공했을 때만 1 올림(쓰기에 실패하면 아무것도 안 함)
+  const of=window.fetch; window.fetch=function(u,o){ const p=of.apply(this,arguments);
+    try{ if(String(u).includes('/rest/v1/lq_records')&&o&&o.method==='POST') p.then(r=>{ if(r&&r.ok){ const n=get(); if(n!=null){ try{ localStorage.setItem(K,String(Math.min(n+1,99))); }catch(e){} } paint(); } }).catch(()=>{}); }catch(e){}
+    return p; };
+  function paint(){ const s=S[L()], n=get();
+    const a=$('tAgain'); if(a){ if(n&&n>=1){ a.textContent=s.again.replace('{n}',n); a.hidden=false; } else a.hidden=true; }
+    const ul=$('clList'); if(ul){ let li=$('clAtLi'); if(!li){ li=document.createElement('li'); li.id='clAtLi'; ul.append(li); } li.textContent=s.li; }
+    const lg=$('tL3'); if(lg){ let p=$('tLAt'); if(!p){ p=document.createElement('p'); p.id='tLAt'; (($('tLBd'))||lg).after(p); } p.textContent=s.note; } }
+  new MutationObserver(paint).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
+  const ul=$('clList'); if(ul) new MutationObserver(()=>{ if(!$('clAtLi')) paint(); }).observe(ul,{childList:true});
+  paint();
+})();
+</script>
 </body></html>

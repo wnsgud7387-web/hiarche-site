@@ -1511,7 +1511,7 @@ return {start,showResult,shareCard,recallDue,recall};
     $('tHow').innerHTML=t.how.map(s=>'<li>'+s.replace(/</g,'&lt;')+'</li>').join('');
     $('bStart').textContent=t.start; $('tResH').textContent=t.resH; $('bShow').textContent=t.show; $('bCopy').textContent=t.copy; $('tNote').textContent=t.note;
     $('bShare').textContent=t.share; $('tApp').textContent=t.app; $('aApp').textContent=t.appBtn; $('aApp').href='https://hiarche.com/apps/rivalog.html'+(lang==='en'?'?lang=en':'');
-    $('tL1').textContent=t.l1; $('tL2').textContent=t.l2; $('tL3').textContent=(COLLECT_ON?t.l3c:t.l3); if(COLLECT_ON) clText(); $('bCopy').hidden=!T1; $('out').hidden=!T1;
+    $('tL1').textContent=t.l1; $('tL2').textContent=t.l2; $('tL3').textContent=(COLLECT_ON?t.l3c:t.l3); if(COLLECT_ON){ if(window.__clLang!==lang){ $('clAdult').checked=false; $('clAgree').checked=false; $('clSend').disabled=true; window.__clLang=lang; } clText(); } $('bCopy').hidden=!T1; $('out').hidden=!T1;
     $('bKo').classList.toggle('on',lang==='ko'); $('bEn').classList.toggle('on',lang==='en'); if(last) render(last); };
   const render=r=>{ const t=TX[lang], A=r.areas||{};
     $('res').hidden=false; $('app').hidden=false; if(COLLECT_ON) clShow(r); $('lq').textContent=t.lab.lq+' '+r.lq;

@@ -100,7 +100,7 @@ button.ghost{background:transparent;color:var(--sub);border:1px solid var(--line
 <main class="w">
   <header class="top">
     <span class="brand"><span class="dot" aria-hidden="true"></span>Rivalog</span>
-    <div class="seg" role="group" aria-label="Language"><button id="bKo" type="button" class="on">한국어</button><button id="bEn" type="button">EN</button></div>
+    <div class="seg" role="group" aria-label="Language"><button id="bKo" type="button" class="on">한국어</button><button id="bEn" type="button">EN</button><button id="bJa" type="button" lang="ja">日本語</button></div>
     <button id="bTheme" type="button" hidden></button>
   </header>
   <section class="hero">
@@ -1623,4 +1623,5 @@ return {start,showResult,shareCard,recallDue,recall};
   apply();
 })();
 </script>
+<script>(function(){var b=document.getElementById('bJa');if(!b)return;b.addEventListener('click',function(){var q=new URLSearchParams(location.search),o=new URLSearchParams();['src','t'].forEach(function(k){var v=q.get(k);if(v)o.set(k,v);});var s=o.toString();location.href='lq2-test-ja.html'+(s?'?'+s:'');});})();</script>
 </body></html>

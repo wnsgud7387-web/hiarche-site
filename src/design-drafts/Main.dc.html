@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>HiArche — Home</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&amp;family=Figtree:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#F3F4EF;color:#16181D;font-family:'Figtree',system-ui,sans-serif;}
+a{color:#16181D;}a:hover{color:#B23E12;}
+h1,h2,h3{font-family:'Bricolage Grotesque','Figtree',sans-serif;text-wrap:balance;}
+input:focus-visible,a:focus-visible,button:focus-visible{outline:3px solid #B23E12;outline-offset:2px;}
+@media (max-width:760px){.hx-hero{flex-direction:column !important;}}
+</style>
+</helmet>
+<div style="min-height: 100%; background: #F3F4EF; color: #16181D">
+
+<header style="max-width: 1200px; margin: 0 auto; padding: 24px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+<a href="#top" style="text-decoration: none; display: flex; align-items: baseline; gap: 2px; font-family: 'Bricolage Grotesque', sans-serif; font-size: 26px; font-weight: 800; letter-spacing: -0.02em"><span style="color: {{accent}}">Hi</span><span>Arche</span></a>
+<nav aria-label="Main" style="display: flex; flex-wrap: wrap; gap: 8px 28px; font-size: 16px; font-weight: 500">
+<a href="#apps" style="text-decoration: none">Apps</a>
+<a href="#lab" style="text-decoration: none">Lab</a>
+<a href="Journal.dc.html" style="text-decoration: none">Journal</a>
+<a href="Support.dc.html" style="text-decoration: none">Support</a>
+<a href="Press.dc.html" style="text-decoration: none">Press &amp; Business</a>
+</nav>
+</header>
+
+<section id="top" class="hx-hero" style="max-width: 1200px; margin: 0 auto; padding: 56px 24px 96px; display: flex; gap: 56px; align-items: center">
+<div style="flex: 1 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
+<p style="margin: 0; font-size: 14px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #5A5F55">A small app studio from Korea</p>
+<h1 style="margin: 0; font-size: clamp(48px, 7vw, 96px); line-height: 0.98; font-weight: 800; letter-spacing: -0.035em">Hi, we're <span style="color: {{accent}}">Arche</span>.</h1>
+<p style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(24px, 2.6vw, 32px); font-weight: 700; letter-spacing: -0.015em">Small apps, made with care.</p>
+<p style="margin: 0; max-width: 34em; font-size: 19px; line-height: 1.55; color: #3C4038">Write a story, walk somewhere new, keep a habit, study with a rival, or just watch something burn. Six small apps, each for one everyday moment.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px; padding-top: 8px">
+<a href="#apps" style="text-decoration: none; display: inline-flex; align-items: center; min-height: 48px; padding: 0 24px; border-radius: 999px; background: #16181D; color: #F3F4EF; font-weight: 600; font-size: 16px">Meet our apps</a>
+<a href="#lab" style="text-decoration: none; display: inline-flex; align-items: center; min-height: 48px; padding: 0 24px; border-radius: 999px; border: 2px solid #16181D; font-weight: 600; font-size: 16px">Try the Lab</a>
+</div>
+</div>
+<div aria-hidden="true" style="flex: 1 1 420px; min-width: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px">
+<sc-for list="{{apps}}" as="app" hint-placeholder-count="6">
+<img src="{{app.icon}}" alt="" style="width: 100%; aspect-ratio: 1; border-radius: 23%; box-shadow: 0 10px 24px rgba(22, 24, 29, 0.14); transform: rotate({{app.tilt}})">
+</sc-for>
+</div>
+</section>
+
+<section id="apps" style="background: #FFFFFF; border-top: 1px solid #DCDED6; border-bottom: 1px solid #DCDED6">
+<div style="max-width: 1200px; margin: 0 auto; padding: 88px 24px; display: flex; flex-direction: column; gap: 40px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
+<h2 style="margin: 0; font-size: clamp(36px, 4.5vw, 56px); font-weight: 800; letter-spacing: -0.03em">Our apps</h2>
+<p style="margin: 0; max-width: 28em; font-size: 17px; line-height: 1.55; color: #50554B">On the App Store now, with Android on the way.</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px">
+<sc-for list="{{apps}}" as="app" hint-placeholder-count="6">
+<article style="display: flex; flex-direction: column; gap: 16px; padding: 28px; border-radius: 24px; background: #F3F4EF">
+<div style="display: flex; align-items: center; gap: 16px">
+<img src="{{app.icon}}" alt="{{app.name}} app icon" style="width: 64px; height: 64px; flex: none; border-radius: 15px">
+<div style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+<h3 style="margin: 0; font-size: 24px; font-weight: 700; letter-spacing: -0.01em">{{app.name}}</h3>
+<span style="font-size: 14px; color: #5A5F55">{{app.kind}}</span>
+</div>
+</div>
+<p style="margin: 0; font-size: 17px; line-height: 1.5; flex-grow: 1">{{app.line}}</p>
+<sc-if value="{{app.hasNote}}" hint-placeholder-val="{{ true }}">
+<p style="margin: 0; font-size: 13px; line-height: 1.5; color: #5A5F55">{{app.note}}</p>
+</sc-if>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-if value="{{app.live}}" hint-placeholder-val="{{ true }}">
+<a href="{{app.ios}}" aria-label="{{app.name}} on the App Store" style="text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 12px; background: #16181D; color: #F3F4EF; font-size: 14px; font-weight: 600">App Store</a>
+</sc-if>
+<sc-if value="{{app.soon}}" hint-placeholder-val="{{ false }}">
+<span style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 12px; background: #E4E6DE; color: #3C4038; font-size: 14px; font-weight: 600">App Store · coming soon</span>
+</sc-if>
+<span style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 12px; border: 1.5px dashed #8C9086; color: #50554B; font-size: 14px; font-weight: 600">Google Play · soon</span>
+</div>
+<div style="display: flex; gap: 16px; font-size: 13px">
+<a href="App.dc.html">Details</a>
+<a href="{{app.privacy}}">Privacy</a>
+<a href="{{app.support}}">Support</a>
+</div>
+</article>
+</sc-for>
+</div>
+</div>
+</section>
+
+<section id="lab" style="max-width: 1200px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 40px">
+<div style="display: flex; flex-direction: column; gap: 12px">
+<p style="margin: 0; font-size: 14px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #B23E12">HiArche Lab</p>
+<h2 style="margin: 0; font-size: clamp(36px, 4.5vw, 56px); font-weight: 800; letter-spacing: -0.03em">Try before you install</h2>
+<p style="margin: 0; max-width: 34em; font-size: 17px; line-height: 1.55; color: #50554B">Small pieces of our apps that work right here in your browser.</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px">
+
+<article style="display: flex; flex-direction: column; justify-content: space-between; gap: 24px; min-height: 380px; padding: 28px; border-radius: 24px; background: #0E0907; color: #F6EDE4; overflow: hidden">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #FF8A3D">From Burnpile</span>
+<h3 style="margin: 0; font-size: 28px; font-weight: 700">A fire for your screen</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.5; color: #D9CBBE">Drag a receipt, a note or a log onto the fire and watch it burn.</p>
+</div>
+<div aria-hidden="true" style="height: 140px; border-radius: 16px; background: radial-gradient(ellipse 50% 70% at 50% 100%, #FFD27A 0%, #FF8A3D 35%, #8A2A0A 65%, rgba(14, 9, 7, 0) 100%)"></div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+<a href="#lab" style="text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; padding: 0 20px; border-radius: 999px; background: #F6EDE4; color: #0E0907; font-weight: 600; font-size: 15px">Light the fire</a>
+<span style="font-size: 12px; color: #BFAF9F">Fire footage is AI-generated.</span>
+</div>
+</article>
+
+<article style="display: flex; flex-direction: column; gap: 20px; min-height: 380px; padding: 28px; border-radius: 24px; background: #FFFFFF; border: 1px solid #DCDED6">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #2F5D50">From Rivalog</span>
+<h3 style="margin: 0; font-size: 28px; font-weight: 700">How much a day?</h3>
+</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #3C4038">Problems to cover
+<input type="number" min="1" value="{{pages}}" onChange="{{setPages}}" style="min-height: 44px; padding: 0 12px; border-radius: 10px; border: 1.5px solid #8C9086; font: inherit; font-size: 18px; color: #16181D; background: #FFFFFF">
+</label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #3C4038">Days left
+<input type="number" min="1" value="{{days}}" onChange="{{setDays}}" style="min-height: 44px; padding: 0 12px; border-radius: 10px; border: 1.5px solid #8C9086; font: inherit; font-size: 18px; color: #16181D; background: #FFFFFF">
+</label>
+</div>
+<div style="display: flex; align-items: baseline; gap: 10px; padding: 16px 20px; border-radius: 16px; background: #E6EFEC">
+<span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 44px; font-weight: 800; color: #2F5D50; font-variant-numeric: tabular-nums">{{perDay}}</span>
+<span style="font-size: 16px; color: #24302C">problems a day</span>
+</div>
+<p style="margin: 0; font-size: 14px; line-height: 1.5; color: #50554B">In the app, this spreads over your real weekly hours, and a rival you create studies 30 minutes more each day.</p>
+</article>
+
+<article style="display: flex; flex-direction: column; justify-content: space-between; gap: 24px; min-height: 380px; padding: 28px; border-radius: 24px; background: #E3EFEE">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #0E6B66">From Story Accounting</span>
+<h3 style="margin: 0; font-size: 28px; font-weight: 700">Read Episode 1</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.5; color: #24302C">"Only 3 months belong to this year." A short accounting story that stops right before the answer, so you make the call.</p>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<a href="#lab" style="text-decoration: none; align-self: flex-start; display: inline-flex; align-items: center; min-height: 44px; padding: 0 20px; border-radius: 999px; background: #0E6B66; color: #FFFFFF; font-weight: 600; font-size: 15px">Start reading</a>
+<span style="font-size: 12px; color: #3C4A48">Unofficial study aid. Not affiliated with or endorsed by ACCA.</span>
+</div>
+</article>
+
+</div>
+</section>
+
+<section aria-labelledby="news-h" style="max-width: 1200px; margin: 0 auto; padding: 0 24px 96px; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
+<h2 id="news-h" style="margin: 0; font-size: clamp(32px, 4vw, 44px); font-weight: 800; letter-spacing: -0.03em">From the Journal</h2>
+<a href="Journal.dc.html" style="font-weight: 600">All updates</a>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px">
+<a href="Journal.dc.html" style="text-decoration: none; display: flex; flex-direction: column; gap: 10px; padding: 24px; border-radius: 20px; background: #FFFFFF; border: 1px solid #DCDED6"><span style="font-size: 13px; color: #5A5F55">Oct 19, 2026 · Studio</span><span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 22px; font-weight: 700">Hi, we're Arche</span><span style="font-size: 15px; line-height: 1.5; color: #3C4038">Our new home on the web, and what we're building next.</span></a>
+<a href="Journal.dc.html" style="text-decoration: none; display: flex; flex-direction: column; gap: 10px; padding: 24px; border-radius: 20px; background: #FFFFFF; border: 1px solid #DCDED6"><span style="font-size: 13px; color: #5A5F55">Oct 17, 2026 · Release</span><span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 22px; font-weight: 700">Niblore 1.4 and Chosim 1.1</span><span style="font-size: 15px; line-height: 1.5; color: #3C4038">Two updates are now on the App Store.</span></a>
+<a href="Journal.dc.html" style="text-decoration: none; display: flex; flex-direction: column; gap: 10px; padding: 24px; border-radius: 20px; background: #FFFFFF; border: 1px solid #DCDED6"><span style="font-size: 13px; color: #5A5F55">Coming soon · Android</span><span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 22px; font-weight: 700">Our apps are coming to Google Play</span><span style="font-size: 15px; line-height: 1.5; color: #3C4038">Niblore, Wanderlure, Chosim and Rivalog are next.</span></a>
+</div>
+</section>
+
+<section id="about" style="background: #16181D; color: #F3F4EF">
+<div style="max-width: 1200px; margin: 0 auto; padding: 96px 24px; display: flex; flex-wrap: wrap; gap: 48px">
+<h2 style="margin: 0; flex: 1 1 360px; font-size: clamp(36px, 4.5vw, 56px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.05">Made by hand,<br>one stitch at a time.</h2>
+<div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 20px; font-size: 18px; line-height: 1.6; color: #C9CCC3">
+<p style="margin: 0">Arche is a small studio in Korea that makes apps by hand, one careful stitch at a time. Nothing flashy, just well-made tools you'll want to keep using.</p>
+<p style="margin: 0">Our name comes from the Greek arche, "beginning." Every app is built for a first step: the first page, the first walk, the first day.</p>
+</div>
+</div>
+</section>
+
+<footer id="contact" style="max-width: 1200px; margin: 0 auto; padding: 56px 24px 72px; display: flex; flex-direction: column; gap: 32px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 22px; font-weight: 800"><span style="color: {{accent}}">Hi</span>Arche</span>
+<span style="font-size: 15px; color: #50554B">Questions or ideas? archeisit@gmail.com</span>
+</div>
+<nav aria-label="Footer" style="display: flex; flex-wrap: wrap; gap: 8px 24px; font-size: 15px">
+<a href="Support.dc.html">Support</a>
+<a href="Press.dc.html">Press &amp; Business</a>
+<a href="Legal.dc.html">Privacy &amp; Legal</a>
+<a href="https://www.instagram.com/arche.apps/">Instagram</a>
+</nav>
+</div>
+<div style="padding-top: 24px; border-top: 1px solid #DCDED6; display: flex; flex-direction: column; gap: 4px; font-size: 13px; line-height: 1.7; color: #5A5F55">
+<p style="margin: 0">Arche (아르케) · Representative: Junhyung Park · Business registration no. (Korea): 774-39-01532</p>
+<p style="margin: 0">Room 7201, 7F, 9-1 Gugalro 60beon-gil, Giheung-gu, Yongin-si, Gyeonggi-do, Republic of Korea · archeisit@gmail.com</p>
+<p style="margin: 0">© 2026 Arche</p>
+</div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#D9481A","options":["#D9481A","#2F5D50","#0E6B66","#5C6BD8"]},"$preview":{"width":1440,"height":3500}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { pages: 480, days: 30 };
+  }
+  renderVals() {
+    const pages = Math.max(1, Number(this.state.pages) || 1);
+    const days = Math.max(1, Number(this.state.days) || 1);
+    const pg = 'https://wnsgud7387-web.github.io/arche-pages/';
+    return {
+      accent: this.props.accent ?? '#D9481A',
+      pages: this.state.pages,
+      days: this.state.days,
+      perDay: Math.ceil(pages / days),
+      setPages: (e) => this.setState({ pages: e.target.value }),
+      setDays: (e) => this.setState({ days: e.target.value }),
+      apps: [
+        { name: 'Niblore', kind: 'Stories', line: 'Write a web novel one episode at a time with AI.', note: 'Stories and illustrations are AI-generated.', hasNote: true, icon: '/_blob/35540fd019d3669ab3a7e91a2d4b07bf', tilt: '-4deg', live: true, soon: false, ios: 'https://apps.apple.com/us/app/niblore-write-your-novel/id6812610681', privacy: 'https://mistory-app.vercel.app/privacy.html', support: 'https://mistory-app.vercel.app/support.html' },
+        { name: 'Burnpile', kind: 'Unwind', line: 'Snap anything, cut it out, and watch it burn.', note: 'Fire footage is AI-generated.', hasNote: true, icon: '/_blob/3bd8bdd23643db390a7537af1232bea5', tilt: '3deg', live: false, soon: true, ios: '#apps', privacy: pg + 'bonfire-privacy.html', support: pg + 'bonfire-support.html' },
+        { name: 'Rivalog', kind: 'Study', line: 'Plan your week and race a rival you create.', note: '', hasNote: false, icon: '/_blob/16b17b48031a683747e8f5eecb7fc824', tilt: '-2deg', live: false, soon: true, ios: '#apps', privacy: pg + 'rivalog-privacy.html', support: pg + 'rivalog-support.html' },
+        { name: 'Chosim', kind: 'Habits', line: 'Not three days, but 21. Last-night you nudges you on time.', note: '', hasNote: false, icon: '/_blob/3d7b1ed81c224c8656a7f3f127b31841', tilt: '2deg', live: true, soon: false, ios: 'https://apps.apple.com/us/app/chosim-21-day-habit-keeper/id6818934076', privacy: pg + 'privacy-microsuccess.html', support: pg + 'support-microsuccess.html' },
+        { name: 'Wanderlure', kind: 'Unwind', line: 'Follow a buzz, not a feed — a walk to somewhere unknown.', note: '', hasNote: false, icon: '/_blob/02bd0c63a1c27eb623f12b2a73074749', tilt: '-3deg', live: true, soon: false, ios: 'https://apps.apple.com/us/app/wanderlure-walk-the-unknown/id6812606367', privacy: pg + 'privacy-explorer.html', support: pg + 'support-explorer.html' },
+        { name: 'Story Accounting', kind: 'Study', line: 'Short accounting stories for the FA, MA and FR exams.', note: 'Unofficial study aid. Not affiliated with or endorsed by ACCA.', hasNote: true, icon: '/_blob/40926c53b7861acf62f0c79a30fdbedd', tilt: '4deg', live: false, soon: true, ios: '#apps', privacy: pg + 'story-acca-privacy.html', support: pg + 'story-acca-support.html' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

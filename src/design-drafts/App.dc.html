@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>App page — HiArche</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&amp;family=Figtree:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#F3F4EF;color:#16181D;font-family:'Figtree',system-ui,sans-serif;}
+a{color:#16181D;}a:hover{color:#B23E12;}
+h1,h2,h3{font-family:'Bricolage Grotesque','Figtree',sans-serif;text-wrap:balance;}
+a:focus-visible,button:focus-visible{outline:3px solid #B23E12;outline-offset:2px;}
+</style>
+</helmet>
+<div style="min-height: 100%; background: #F3F4EF; color: #16181D">
+
+<header style="max-width: 1200px; margin: 0 auto; padding: 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+<a href="Main.dc.html" style="text-decoration: none; font-family: 'Bricolage Grotesque', sans-serif; font-size: 26px; font-weight: 800; letter-spacing: -0.02em"><span style="color: #D9481A">Hi</span>Arche</a>
+<nav aria-label="Main" style="display: flex; flex-wrap: wrap; gap: 8px 28px; font-size: 16px; font-weight: 500">
+<a href="Main.dc.html" style="text-decoration: none">Apps</a>
+<a href="Main.dc.html" style="text-decoration: none">Lab</a>
+<a href="Journal.dc.html" style="text-decoration: none">Journal</a>
+<a href="Support.dc.html" style="text-decoration: none">Support</a>
+<a href="Press.dc.html" style="text-decoration: none">Press &amp; Business</a>
+</nav>
+</header>
+
+<nav aria-label="Our apps" style="max-width: 1200px; margin: 0 auto; padding: 0 24px 20px; display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{tabs}}" as="t" hint-placeholder-count="6">
+<button type="button" aria-pressed="{{t.on}}" onClick="{{t.pick}}" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px 0 6px; border-radius: 999px; border: 1.5px solid {{t.border}}; background: {{t.bg}}; color: {{t.fg}}; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer"><img src="{{t.icon}}" alt="" style="width: 30px; height: 30px; border-radius: 8px">{{t.name}}</button>
+</sc-for>
+</nav>
+
+<section style="background: {{a.bg}}; color: {{a.fg}}">
+<div style="max-width: 1200px; margin: 0 auto; padding: 80px 24px; display: flex; flex-wrap: wrap; gap: 48px; align-items: center">
+<div style="flex: 1 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 22px">
+<img src="{{a.icon}}" alt="{{a.name}} app icon" style="width: 96px; height: 96px; border-radius: 22px">
+<h1 style="margin: 0; font-size: clamp(44px, 6vw, 80px); line-height: 1; font-weight: 800; letter-spacing: -0.03em">{{a.name}}</h1>
+<p style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 28px; font-weight: 700">{{a.line}}</p>
+<p style="margin: 0; max-width: 32em; font-size: 18px; line-height: 1.55; opacity: 0.85">{{a.sub}}</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<sc-if value="{{a.live}}" hint-placeholder-val="{{ true }}">
+<a href="{{a.ios}}" style="text-decoration: none; display: inline-flex; align-items: center; min-height: 48px; padding: 0 22px; border-radius: 12px; background: {{a.fg}}; color: {{a.bg}}; font-weight: 600">Download on the App Store</a>
+</sc-if>
+<sc-if value="{{a.soon}}" hint-placeholder-val="{{ false }}">
+<span style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 22px; border-radius: 12px; background: {{a.fg}}; color: {{a.bg}}; font-weight: 600">App Store · coming soon</span>
+</sc-if>
+<span style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 22px; border-radius: 12px; border: 1.5px dashed {{a.fg}}; font-weight: 600; opacity: 0.8">Google Play · soon</span>
+</div>
+<p style="margin: 0; font-size: 14px; opacity: 0.75">{{a.meta}}</p>
+</div>
+<div style="flex: 1 1 380px; min-width: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px">
+<div style="aspect-ratio: 9 / 19.5; border-radius: 28px; border: 1px solid {{a.fg}}; opacity: 0.6; display: grid; place-items: center; font-size: 14px; text-align: center; padding: 16px">[Screenshot 1]</div>
+<div style="aspect-ratio: 9 / 19.5; border-radius: 28px; border: 1px solid {{a.fg}}; opacity: 0.6; display: grid; place-items: center; font-size: 14px; text-align: center; padding: 16px; margin-top: 48px">[Screenshot 2]</div>
+</div>
+</div>
+</section>
+
+<section style="max-width: 1200px; margin: 0 auto; padding: 88px 24px; display: flex; flex-direction: column; gap: 32px">
+<h2 style="margin: 0; font-size: clamp(32px, 4vw, 48px); font-weight: 800; letter-spacing: -0.03em">What you can do</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px">
+<sc-for list="{{a.features}}" as="f" hint-placeholder-count="3">
+<div style="display: flex; flex-direction: column; gap: 10px; padding: 28px; border-radius: 20px; background: #FFFFFF; border: 1px solid #DCDED6"><h3 style="margin: 0; font-size: 22px">{{f.t}}</h3><p style="margin: 0; font-size: 16px; line-height: 1.55; color: #3C4038">{{f.d}}</p></div>
+</sc-for>
+</div>
+</section>
+
+<section style="background: #FFFFFF; border-top: 1px solid #DCDED6; border-bottom: 1px solid #DCDED6">
+<div style="max-width: 1200px; margin: 0 auto; padding: 88px 24px; display: flex; flex-wrap: wrap; gap: 48px">
+<div style="flex: 1 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+<h2 style="margin: 0; font-size: clamp(32px, 4vw, 48px); font-weight: 800; letter-spacing: -0.03em">Questions</h2>
+<div style="display: flex; flex-direction: column; gap: 8px; padding-bottom: 16px; border-bottom: 1px solid #DCDED6"><h3 style="margin: 0; font-size: 19px">How much does it cost?</h3><p style="margin: 0; font-size: 16px; line-height: 1.55; color: #3C4038">{{a.price}}</p></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><h3 style="margin: 0; font-size: 19px">Where do I get help?</h3><p style="margin: 0; font-size: 16px; line-height: 1.55; color: #3C4038">Open the help page below, or write to archeisit@gmail.com with the app name.</p></div>
+</div>
+<div style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<h2 style="margin: 0; font-size: 24px; font-weight: 700">Links</h2>
+<a href="{{a.support}}">{{a.name}} help page</a>
+<a href="{{a.privacy}}">Privacy policy</a>
+<a href="Support.dc.html">Feedback board</a>
+<sc-if value="{{a.hasNote}}" hint-placeholder-val="{{ true }}">
+<p style="margin: 0; font-size: 13px; line-height: 1.5; color: #5A5F55">{{a.note}}</p>
+</sc-if>
+</div>
+</div>
+</section>
+
+<footer style="max-width: 1200px; margin: 0 auto; padding: 48px 24px 64px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; font-size: 14px; color: #5A5F55">
+<span>© 2026 Arche · archeisit@gmail.com</span>
+<nav aria-label="Footer" style="display: flex; gap: 20px"><a href="Support.dc.html">Support</a><a href="Press.dc.html">Press &amp; Business</a><a href="Legal.dc.html">Privacy &amp; Legal</a></nav>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2900}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { i: 0 }; }
+  renderVals() {
+    const pg = 'https://wnsgud7387-web.github.io/arche-pages/';
+    const apps = [
+      { name: 'Niblore', icon: '/_blob/35540fd019d3669ab3a7e91a2d4b07bf', bg: '#0A132A', fg: '#E3DFD8', line: 'Write a web novel one episode at a time with AI.', sub: 'Give it one line of a hint and get the next episode. Or skip writing and just read a story made for you.', live: true, soon: false, ios: 'https://apps.apple.com/us/app/niblore-write-your-novel/id6812610681', meta: 'Free to start · iPhone and iPad · English, Korean, Japanese', features: [ { t: 'One hint, one episode', d: 'Type what should happen next. Niblore writes the episode and keeps your characters straight.' }, { t: 'Just read', d: 'Pick a genre and a starting story, then read episode after episode.' }, { t: 'Illustrations & sharing', d: 'Add a picture to a scene and share your story with a link.' } ], price: 'Free to start. Ink packs and a monthly plan let you write and illustrate more. Prices are shown in the App Store in your currency.', support: 'https://mistory-app.vercel.app/support.html', privacy: 'https://mistory-app.vercel.app/privacy.html', note: 'Stories and illustrations are AI-generated.', hasNote: true },
+      { name: 'Burnpile', icon: '/_blob/3bd8bdd23643db390a7537af1232bea5', bg: '#0E0907', fg: '#F6EDE4', line: 'Snap anything, cut it out, and watch it burn.', sub: 'Take a photo of something you are done with, cut it out, and set it on the fire. Each material burns its own way.', live: false, soon: true, ios: '#', meta: 'iPhone · Coming soon', features: [ { t: 'Snap and cut out', d: 'Photograph anything and lift it off its background in one tap.' }, { t: 'Burns like the real thing', d: 'Paper curls, wood chars, cloth smoulders, each by its material.' }, { t: 'A quiet place to sit', d: 'An indoor hearth or a backyard camp fire, with slow, endless flames.' } ], price: 'Free. No ads and no purchases in version 1.0.', support: pg + 'bonfire-support.html', privacy: pg + 'bonfire-privacy.html', note: 'Fire footage is AI-generated.', hasNote: true },
+      { name: 'Rivalog', icon: '/_blob/16b17b48031a683747e8f5eecb7fc824', bg: '#2F5D50', fg: '#F1F5F2', line: 'Plan your week and race a rival you create.', sub: 'Tell it your books and the hours you really have. It splits the work across your week and sets a rival a little ahead of you.', live: false, soon: true, ios: '#', meta: 'iPhone · In App Store review', features: [ { t: 'A plan that fits your week', d: 'Set your weekly study hours; today’s share follows the time you have left.' }, { t: 'A rival to race', d: 'Your rival studies 30 minutes more each day. Keep up, or catch up.' }, { t: 'Review before you forget', d: 'See when each round of review is due and when you’ll finish.' } ], price: 'Free to start. Rivalog Plus is a monthly or yearly subscription, with a 7-day free trial on the yearly plan.', support: pg + 'rivalog-support.html', privacy: pg + 'rivalog-privacy.html', note: '', hasNote: false },
+      { name: 'Chosim', icon: '/_blob/3d7b1ed81c224c8656a7f3f127b31841', bg: '#1E8A5A', fg: '#F2FAF5', line: 'Not three days, but 21. Last-night you nudges you on time.', sub: 'Pick one small habit and a time. Each evening you leave a note for tomorrow; each morning it arrives right on time.', live: true, soon: false, ios: 'https://apps.apple.com/us/app/chosim-21-day-habit-keeper/id6818934076', meta: 'iPhone · 9 languages', features: [ { t: '21 days, one habit', d: 'A short, finite journey instead of a streak that never ends.' }, { t: 'A note from last night', d: 'Your own words from the night before arrive at the time you chose.' }, { t: 'Someone in your corner', d: 'Share a link so a friend can see how you are doing.' } ], price: 'Free to try. Each 21-day journey is a small one-time purchase, shown in the App Store in your currency.', support: pg + 'support-microsuccess.html', privacy: pg + 'privacy-microsuccess.html', note: '', hasNote: false },
+      { name: 'Wanderlure', icon: '/_blob/02bd0c63a1c27eb623f12b2a73074749', bg: '#5C6BD8', fg: '#F4F5FD', line: 'Follow a buzz, not a feed — a walk to somewhere unknown.', sub: 'Put the feed down and pick a distance. Your phone buzzes you toward a place you have never been.', live: true, soon: false, ios: 'https://apps.apple.com/us/app/wanderlure-walk-the-unknown/id6812606367', meta: 'iPhone · 6 languages · Keep the screen on while you walk', features: [ { t: 'A destination you don’t know', d: 'Choose how far; Wanderlure picks somewhere new.' }, { t: 'Follow the buzz', d: 'A rough arrow and a gentle vibration, so your eyes stay on the street.' }, { t: 'A record of where you went', d: 'Look back on the streets you found.' } ], price: 'Free, supported by ads.', support: pg + 'support-explorer.html', privacy: pg + 'privacy-explorer.html', note: '', hasNote: false },
+      { name: 'Story Accounting', icon: '/_blob/40926c53b7861acf62f0c79a30fdbedd', bg: '#0E6B66', fg: '#EEF7F6', line: 'Short accounting stories for the FA, MA and FR exams.', sub: 'Each story stops right before the answer, so you make the call. Get it wrong and it tells you the name of the mistake.', live: false, soon: true, ios: '#', meta: 'iPhone · English · In App Store review', features: [ { t: 'Learn by story', d: 'Standards explained through short scenes, with the worked problem beside each one.' }, { t: 'Your turn', d: 'The story pauses before the answer and asks you to choose.' }, { t: 'A mistake log', d: 'Wrong answers are named and saved, so you can see your patterns.' } ], price: 'The first episodes are free. Study passes for FA, MA or FR are sold for 6 or 12 months.', support: pg + 'story-acca-support.html', privacy: pg + 'story-acca-privacy.html', note: 'Unofficial study aid. Not affiliated with or endorsed by ACCA.', hasNote: true }
+    ];
+    const i = this.state.i;
+    const tabs = apps.map((x, k) => ({ name: x.name, icon: x.icon, on: k === i ? 'true' : 'false', bg: k === i ? '#16181D' : '#FFFFFF', fg: k === i ? '#F3F4EF' : '#16181D', border: k === i ? '#16181D' : '#DCDED6', pick: () => this.setState({ i: k }) }));
+    return { tabs, a: apps[i] };
+  }
+}
+</script>
+</body>
+</html>

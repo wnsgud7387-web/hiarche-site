@@ -137,6 +137,14 @@ button.ghost{background:transparent;color:var(--sub);border:1px solid var(--line
 .w .board p.lock{margin:0;font-size:13px;line-height:1.5;color:var(--sub)}
 .w .board .me small.few{display:block;font-size:13px;color:var(--sub);margin-top:2px}
 </style>
+<style>
+.w .sendcta{display:grid;gap:10px;background:var(--accsoft);border:1px solid var(--acc);border-radius:14px;padding:14px;text-align:left}
+.w .sendcta p{margin:0;font-size:14px;line-height:1.6;color:var(--ink)}
+.w .sendcta p b{color:var(--acc)}
+.w .sendcta button{width:100%;min-height:48px;font-size:16px;font-weight:700}
+.w .cl.hl{border:2px solid var(--acc)}
+.w .cl .clstep{margin:0;font-size:13px;font-weight:700;color:var(--acc)}
+</style>
 </head><body>
 <main class="w">
   <header class="top">
@@ -1820,4 +1828,37 @@ return {start,showResult,shareCard,recallDue,recall};
   const paint=()=>{ const e=document.getElementById('tPrep'); if(e){ const l=(document.documentElement.lang||'ko').slice(0,2); e.textContent=P[l]||P.en; } };
   paint(); new MutationObserver(paint).observe(document.documentElement,{attributes:true,attributeFilter:['lang']}); })();</script>
 <script>(function(){var b=document.getElementById('bJa');if(!b)return;b.addEventListener('click',function(){var q=new URLSearchParams(location.search),o=new URLSearchParams();['src','t'].forEach(function(k){var v=q.get(k);if(v)o.set(k,v);});var s=o.toString();location.href='lq2-test-ja.html'+(s?'?'+s:'');});})();</script>
+<script>
+/* lq-sendcta */
+(function(){
+  const S={
+    ko:{t:'아직 이 기록은 <b>어디에도 저장되지 않았어요.</b> 아래 동의 카드에서 <b>\'보내기\'</b>를 눌러 주시면 익명으로 LQ 기준 만들기와 순위표에 보태져요. 지금은 참여 기록이 적어서 한 분 한 분이 큰 도움이 돼요. 기록이 20개 모이면 실제 순위가 열려요. (선택)',
+        b:'기록 보내러 가기',step:'마지막 단계 · 1분이면 끝나요'},
+    en:{t:'This record <b>is not saved anywhere yet.</b> Press <b>"Send"</b> on the card below to add it anonymously to the LQ baseline and the leaderboard. Records are still few, so every one helps. Real rankings open once 20 records are in. (Optional)',
+        b:'Go to Send',step:'Last step · takes about a minute'},
+    ja:{t:'この記録は<b>まだどこにも保存されていません。</b>下のカードで<b>「送信」</b>を押していただくと、匿名でLQの基準づくりとランキングに加わります。まだ記録が少ないので、1件1件が大きな助けになります。記録が20件集まると実際のランキングが表示されます。(任意)',
+        b:'送信へ進む',step:'最後のステップ · 1分ほどで終わります'}};
+  const $=id=>document.getElementById(id); const L=()=>{ const l=(document.documentElement.lang||'ko').slice(0,2); return S[l]?l:'en'; };
+  const res=$('res'), cl=$('cl'); if(!res||!cl) return;
+  res.after(cl); cl.classList.add('hl');
+  const card=res.querySelector('.lqcard'), acts=card&&card.querySelector('.acts'); if(!acts) return;
+  const box=document.createElement('div'); box.className='sendcta'; box.id='sCta'; box.hidden=true;
+  const p=document.createElement('p'); p.id='sCtaT'; const b=document.createElement('button'); b.type='button'; b.id='sCtaB';
+  box.append(p,b); acts.after(box);
+  const st=document.createElement('p'); st.className='clstep'; st.id='clStep'; cl.prepend(st);
+  b.onclick=()=>{ const rm=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+    cl.scrollIntoView({behavior:rm?'auto':'smooth',block:'start'});
+    setTimeout(()=>{ const f=cl.querySelector('#clAgeO input')||$('clAdult'); if(f) f.focus({preventScroll:true}); },rm?0:450); };
+  const sent=()=>{ const r=$('clSend'); const row=r&&r.closest('.row'); return !!(row&&row.hidden); };
+  // 바뀐 것만 고침(동의 카드를 지켜보는 감시가 자기 변경에 다시 불리지 않게)
+  const tx=(e,v,html)=>{ if(html){ if(e.innerHTML!==v) e.innerHTML=v; } else if(e.textContent!==v) e.textContent=v; };
+  const hd=(e,v)=>{ if(e.hidden!==v) e.hidden=v; };
+  function paint(){ const s=S[L()]; tx(p,s.t,1); tx(b,s.b); tx(st,s.step);
+    const done=sent(); hd(box,cl.hidden||res.hidden||done); hd(st,done); if(cl.classList.contains('hl')===done) cl.classList.toggle('hl',!done); }
+  new MutationObserver(paint).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
+  new MutationObserver(paint).observe(cl,{attributes:true,attributeFilter:['hidden'],subtree:true,childList:true});
+  new MutationObserver(paint).observe(res,{attributes:true,attributeFilter:['hidden']});
+  paint();
+})();
+</script>
 </body></html>

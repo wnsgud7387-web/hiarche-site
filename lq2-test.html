@@ -11,7 +11,7 @@
 <meta property="og:locale" content="ko_KR">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://hiarche.com/lab/lq2-test.html">
-<!-- 라이벌로그 LQ 2.0 학습능력검사 공개 시험판. build_public.mjs 자동 생성. 쿠키·분석·저장·전송 없음. -->
+<!-- 라이벌로그 LQ 2.0 학습능력검사 공개 시험판. build_public.mjs 자동 생성. 쿠키·외부 분석 없음. 결과는 동의하고 보내기를 누를 때만 전송, 진행 단계 횟수만 이름 없이 셈. -->
 <style>
 :root{--amberink:#8a5a0b;--dopink:#6a4fb0;--bg:#f4f1ea;--card:#fffdf8;--ink:#1d1b17;--sub:#6b6458;--line:#e5dfd2;--track:#ece6d9;--acc:#2f5d50;--accsoft:#e3ede8;--dop:#7a5cc4;--dopsoft:#efe9fb;--amber:#c98a1b;--ambersoft:#fbf1dc;--warn:#b5482b;--warnsoft:#f8e4dd;--shadow:0 1px 2px rgba(40,30,10,.05),0 4px 16px rgba(40,30,10,.05);color-scheme:light}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141310;--card:#1d1c18;--ink:#ece6da;--sub:#a39a8a;--line:#33302a;--track:#2a2823;--acc:#7fbfa9;--accsoft:#1f2b26;--dop:#b39cf0;--dopsoft:#25203a;--amber:#e5b04e;--ambersoft:#2e2614;--warn:#e07a5f;--warnsoft:#33211c;--amberink:#e5b04e;--dopink:#b39cf0;--shadow:none;color-scheme:dark}}
@@ -146,6 +146,7 @@ button.ghost{background:transparent;color:var(--sub);border:1px solid var(--line
 .w .cl .clstep{margin:0;font-size:13px;font-weight:700;color:var(--acc)}
 </style>
 <style>.w .again{margin:0;font-size:14px;line-height:1.55;color:var(--ink);background:var(--accsoft);border-radius:12px;padding:10px 14px;text-align:left}</style>
+<style>.w .legal button.fnoff{justify-self:start;min-height:44px;padding:0 14px;font-size:13px;margin:2px 0 6px}.w .legal button.fnoff:disabled{opacity:.7;cursor:default}</style>
 </head><body>
 <main class="w">
   <header class="top">
@@ -1665,24 +1666,24 @@ return {start,showResult,shareCard,recallDue,recall};
   const $=id=>document.getElementById(id);
   const Q=new URLSearchParams(location.search), T1=Q.get('t')==='1', COLLECT_ON=true;
   const TX={
-    ko:{title:'라이벌로그 학습능력 체크',facts:['약 20~25분','과제 8개','로그인 없음'],lqLab:'학습지수',sub:'시험판 · 지능검사가 아닙니다 · 내가 보내기를 누르지 않으면 결과는 어디에도 보내지지 않아요',howH:'진행 방법',
+    ko:{title:'라이벌로그 학습능력 체크',facts:['약 20~25분','과제 8개','로그인 없음'],lqLab:'학습지수',sub:'시험판 · 지능검사가 아닙니다 · 내가 보내기를 누르지 않으면 결과는 어디에도 보내지지 않아요(진행 단계 횟수만 이름 없이 세요)',howH:'진행 방법',
       how:['8개 과제를 차례로 풉니다(약 20~25분). 과제마다 처음에 설명과 연습 문제가 나오고, 본 문제는 대부분 시간제한이 있습니다.','시간제한이 있는 과제가 있습니다. 화면을 보고 바로 판단해 고르세요.',"규칙 찾기·말의 관계에서는 답을 고른 뒤 '확실해요·반반·찍었어요' 중 하나를 누릅니다.",(T1?'끝나면 결과 화면이 나오고, 이 페이지 아래에 결과 기록이 생깁니다. 기록을 복사해 전달하세요.':'끝나면 결과 화면이 나오고, 이 페이지 아래에도 결과가 남습니다(이 화면에만).'),'검사가 끝나면 결과 아래 \'보내기\'를 눌러 주세요. 이름·연락처 없이 익명으로 저장되고(아르케도 누가 보냈는지 알 수 없어요), 지금은 참여 기록이 적어서 한 분 한 분의 기록이 LQ 기준과 순위표를 만드는 데 큰 도움이 돼요. (선택이에요 — 보내지 않아도 결과는 볼 수 있어요.)'],
       start:'검사 시작',resH:T1?'결과 기록':'내 결과',show:'결과 화면 다시 보기',copy:'기록 복사',copied:'복사했어요',note:'100은 라이벌로그의 잠정 기준점이에요. 비교 자료가 적어 점수표는 잠정이에요.',share:'공유하기',shared:'공유 문구를 복사했어요',shareNA:'아래 문구를 길게 눌러 복사해 주세요',close:'닫기',typeL:'나의 학습 유형',shareT:'나의 학습 유형은 「{t}」 · 라이벌로그 학습능력 체크(추정 · 지능검사 아님)\n나도 해 보기 hiarche.com/lab/lq2-test.html',app:'이 결과로 만든 라이벌과 공부 계획을 겨루는 앱, 라이벌로그 — 곧 나와요',appBtn:'라이벌로그 보기',cl:{h:'익명으로 검사 기준 만들기에 참여할까요? (선택)',lead:'아르케는 누가 보냈는지 알 수 없어요. 보낸 기록은 LQ 기준점(100)과 점수표를 만드는 통계로만 써요.',
       list:['보내는 것: LQ·영역 점수, 문항별 정답 여부와 걸린 시간, 언어, 화면 종류(휴대폰/PC), 보낸 날짜, 들어온 경로(예: 카카오톡), 나이대·성별(고른 경우만)','보내지 않는 것: 이름·연락처·이메일·쿠키·기기 번호. 아르케는 IP 주소를 저장하지 않아요. 다만 저장소 업체(Supabase, 서버 위치 서울)가 보안을 위해 접속 기록(IP 주소 포함)을 1일 동안 남길 수 있어요.','보관: 기준표를 만든 뒤 2년, 늦어도 수집 시작일부터 3년 안에 지워요.','보내지 않아도 검사와 결과는 그대로 쓸 수 있어요. 보내지 않을 권리가 있어요.','누가 보냈는지 알 수 없게 저장하므로, 보낸 뒤에는 골라서 지울 수 없어요.','만 14세 미만은 보낼 수 없어요(검사와 결과 보기는 누구나 할 수 있어요).'],
       ageL:'나이대(선택)',age:[['u19','14~18'],['u30','19~29'],['30s','30대'],['40s','40대'],['50s','50대'],['60+','60 이상'],['na','밝히지 않음']],
       genL:'성별(선택)',gen:[['m','남'],['f','여'],['na','밝히지 않음']],
       adult:'만 14세 이상이에요(필수)',agree:'위 내용을 읽고 보내는 데 동의해요(필수)',send:'보내기',sending:'보내는 중…',ok:'보냈어요. 기준을 만드는 데 쓸게요. 고마워요.',err:'보내지 못했어요. 잠시 뒤 다시 눌러 주세요.',full:'오늘 받을 수 있는 기록이 다 찼어요. 내일 다시 보내 주세요.'},
-    l3c:"이 사이트는 쿠키나 분석 도구를 쓰지 않아요(기록을 보낸 경우에만 \'보낸 횟수\' 숫자 하나를 이 브라우저에 남겨요). LQ 검사 결과는 브라우저 안에서만 계산돼요. 이용자가 결과 화면에서 직접 동의하고 보내기를 누른 경우에만 LQ 기록(LQ·영역 점수, 문항별 정답 여부와 걸린 시간, 언어, 화면 종류, 보낸 날짜, 들어온 경로, 고른 경우 나이대·성별)이 아르케의 저장소(Supabase Inc., 서버 위치 대한민국 서울 — 처리 위탁)로 전송돼요. 사이트를 열면 호스팅 업체 Vercel Inc.(미국)가 보안과 운영을 위해 접속 기록(IP 주소, 접속 시각, 브라우저 정보)을 미국 등 국외에서 Vercel의 정책에 따른 기간 동안 처리할 수 있어요. 저장소 업체 Supabase도 보안을 위해 접속 기록(IP 주소 포함)을 1일 동안 남길 수 있어요. 아르케는 이 기록들을 받거나 LQ 기록과 연결하지 않아요. 국외 처리를 원하지 않으면 이 사이트에 접속하지 않으면 돼요. 문의: 아르케 개인정보 보호 담당 · archeisit@gmail.com",l1:'점수는 연구에서 쓰는 과제 방식을 바탕으로 라이벌로그가 정한 잠정 기준으로 계산한 추정이에요. 지능검사나 진단이 아니에요.',l2:'결과 화면에 인용한 연구자·기관이 이 검사를 검토·보증한 것은 아니에요.',l3:'이 페이지는 쿠키나 분석 도구를 쓰지 않으며, 검사 답과 결과는 이 브라우저 화면에서만 계산되고 저장·전송되지 않아요. 다만 사이트를 호스팅하는 업체가 보안을 위해 접속 기록(IP 주소 등)을 남길 수 있어요.',
+    l3c:"이 사이트는 쿠키나 외부 분석 도구를 쓰지 않아요(기록을 보낸 경우에만 \'보낸 횟수\' 숫자 하나를 이 브라우저에 남겨요). LQ 검사 결과는 브라우저 안에서만 계산돼요. 이용자가 결과 화면에서 직접 동의하고 보내기를 누른 경우에만 LQ 기록(LQ·영역 점수, 문항별 정답 여부와 걸린 시간, 언어, 화면 종류, 보낸 날짜, 들어온 경로, 고른 경우 나이대·성별)이 아르케의 저장소(Supabase Inc., 서버 위치 대한민국 서울 — 처리 위탁)로 전송돼요. 단, 검사가 어느 단계까지 진행됐는지의 횟수는 아래 안내처럼 동의 없이, 이름 없이 세요. 사이트를 열면 호스팅 업체 Vercel Inc.(미국)가 보안과 운영을 위해 접속 기록(IP 주소, 접속 시각, 브라우저 정보)을 미국 등 국외에서 Vercel의 정책에 따른 기간 동안 처리할 수 있어요. 저장소 업체 Supabase도 보안을 위해 접속 기록(IP 주소 포함)을 1일 동안 남길 수 있어요. 아르케는 이 기록들을 받거나 LQ 기록과 연결하지 않아요. 국외 처리를 원하지 않으면 이 사이트에 접속하지 않으면 돼요. 문의: 아르케 개인정보 보호 담당 · archeisit@gmail.com",l1:'점수는 연구에서 쓰는 과제 방식을 바탕으로 라이벌로그가 정한 잠정 기준으로 계산한 추정이에요. 지능검사나 진단이 아니에요.',l2:'결과 화면에 인용한 연구자·기관이 이 검사를 검토·보증한 것은 아니에요.',l3:'이 페이지는 쿠키나 분석 도구를 쓰지 않으며, 검사 답과 결과는 이 브라우저 화면에서만 계산되고 저장·전송되지 않아요. 다만 사이트를 호스팅하는 업체가 보안을 위해 접속 기록(IP 주소 등)을 남길 수 있어요.',
       areas:{reason:'규칙 찾기',verbal:'말의 관계',wm:'계산하며 기억하기',learn:'짝 외우기',rot:'도형 돌리기',keep:'기억 유지',meta:'아는 걸 아는 힘',dyn:'힌트로 배우기',press:'시간 압박',focus:'숫자 3만 참기'},
       lab:{lq:'LQ',range:'범위',type:'유형',time:'걸린 시간',min:'분',none:'측정 안 됨'}},
-    en:{title:'Rivalog Learning Skills Check',facts:['20–25 min','8 tasks','No sign-up'],lqLab:'Learning quotient',sub:'Trial version · not an intelligence test · your result is sent nowhere unless you press Send',howH:'How it works',
+    en:{title:'Rivalog Learning Skills Check',facts:['20–25 min','8 tasks','No sign-up'],lqLab:'Learning quotient',sub:'Trial version · not an intelligence test · your result is sent nowhere unless you press Send (we only count, without names, which steps are reached)',howH:'How it works',
       how:['Eight tasks in a row (about 20–25 minutes). Each starts with instructions and a practice item; most main rounds are timed.','Some tasks have a time limit. Look and answer right away.',"In Find the rule and Word logic, tap 'Sure · 50/50 · Guessed' after each answer.",(T1?'At the end you see your result, and a result record appears below on this page. Copy it and send it on.':'At the end you see your result, and it also stays below on this page (on this screen only).'),'When you finish, please press \'Send\' under your result. It is stored anonymously, with no name or contact details (even Arche can\'t tell who sent it), and since records are still few, every one helps build the LQ baseline and leaderboard. (Optional — you\'ll see your result either way.)'],
       start:'Start',resH:T1?'Result record':'My result',show:'Show result screen again',copy:'Copy record',copied:'Copied',note:"100 is Rivalog's provisional baseline. Comparison data is limited, so the score table is provisional.",share:'Share',shared:'Share text copied',shareNA:'Press and hold the text below to copy it',close:'Close',typeL:'My learning style',shareT:'My learning style: "{t}" · Rivalog learning skills check (an estimate, not an intelligence test)\nTry it: hiarche.com/lab/lq2-test-en.html',app:'Rivalog, the app where you race this rival with your study plan, is coming soon',appBtn:'See Rivalog',cl:{h:'Help build the test baseline anonymously? (optional)',lead:'Arche cannot tell who sent a record. Records are used only as statistics to set the LQ baseline (100) and score table.',
       list:['We send: LQ and area scores, right/wrong and time per item, language, device type (phone/PC), date sent, how you arrived (e.g. KakaoTalk), and age band and gender only if you choose them','We don\'t send: name, contact details, email, cookies or device IDs. Arche does not store IP addresses. Our storage provider (Supabase, servers in Seoul) may keep access logs, including IP addresses, for 1 day for security.','Kept for 2 years after the baseline is built, and deleted within 3 years of the start of collection at the latest.','You can still use the test and your result if you don\'t send. You have the right not to send.','Because we can\'t tell who sent what, individual records can\'t be deleted after sending.'],
       ageL:'Age band (optional)',age:[['u30','18–29'],['30s','30s'],['40s','40s'],['50s','50s'],['60+','60+'],['na','Prefer not to say']],
       genL:'Gender (optional)',gen:[['m','Male'],['f','Female'],['na','Prefer not to say']],
       adult:'I am 18 or older (required)',agree:'I have read this and agree to send (required)',send:'Send',sending:'Sending…',ok:'Sent. We\'ll use it to build the baseline. Thank you.',err:'Could not send. Please try again in a moment.',full:'Today\'s record limit is full. Please send again tomorrow.'},
-    l3c:"This site uses no cookies or analytics (if you send a record, this browser keeps one number: how many records you have sent). LQ results are calculated only in your browser. Only if you agree and press Send on the result screen is your LQ record (LQ and area scores, right/wrong and time per item, language, device type, date sent, how you arrived, and age band and gender if you chose them) sent to Arche's storage (Supabase Inc., servers in Seoul, Republic of Korea, acting as our processor). When you open this site, our hosting provider Vercel Inc. (USA) may process access logs (IP address, access time, browser information) for security and operation, in the US or other countries, for the period set by Vercel's own policy. Our storage provider Supabase may also keep access logs, including IP addresses, for 1 day for security. Arche does not receive these logs or link them to LQ records. If you do not want this processing abroad, please do not visit this site. Contact: Arche privacy team · archeisit@gmail.com",l1:'Scores are estimates based on task types used in research, on a provisional baseline set by Rivalog. This is not an intelligence test or a diagnosis.',l2:'Researchers and institutions cited on the result screen have not reviewed or endorsed this check.',l3:'This page uses no cookies or analytics. Your answers and results are calculated only in this browser and are not stored or sent. Our hosting provider may keep access logs (such as IP addresses) for security.',
+    l3c:"This site uses no cookies or third-party analytics (if you send a record, this browser keeps one number: how many records you have sent). LQ results are calculated only in your browser. Only if you agree and press Send on the result screen is your LQ record (LQ and area scores, right/wrong and time per item, language, device type, date sent, how you arrived, and age band and gender if you chose them) sent to Arche's storage (Supabase Inc., servers in Seoul, Republic of Korea, acting as our processor). Separately, we count, without consent and without names, how far the check gets, as explained below. When you open this site, our hosting provider Vercel Inc. (USA) may process access logs (IP address, access time, browser information) for security and operation, in the US or other countries, for the period set by Vercel's own policy. Our storage provider Supabase may also keep access logs, including IP addresses, for 1 day for security. Arche does not receive these logs or link them to LQ records. If you do not want this processing abroad, please do not visit this site. Contact: Arche privacy team · archeisit@gmail.com",l1:'Scores are estimates based on task types used in research, on a provisional baseline set by Rivalog. This is not an intelligence test or a diagnosis.',l2:'Researchers and institutions cited on the result screen have not reviewed or endorsed this check.',l3:'This page uses no cookies or analytics. Your answers and results are calculated only in this browser and are not stored or sent. Our hosting provider may keep access logs (such as IP addresses) for security.',
       areas:{reason:'Find the rule',verbal:'Word logic',wm:'Count and remember',learn:'Pair memory',rot:'Turn the shape',keep:'Memory kept',meta:'Knowing what you know',dyn:'Learn from hints',press:'Time pressure',focus:'Hold back on 3'},
       lab:{lq:'LQ',range:'Range',type:'Type',time:'Time taken',min:'min',none:'not measured'}}};
   let lang=Q.get('lang')==='en'?'en':Q.get('lang')==='ko'?'ko':'ko', last=null; const hist=[];
@@ -1891,6 +1892,53 @@ return {start,showResult,shareCard,recallDue,recall};
   new MutationObserver(paint).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
   const ul=$('clList'); if(ul) new MutationObserver(()=>{ if(!$('clAtLi')) paint(); }).observe(ul,{childList:true});
   paint();
+})();
+</script>
+<script>
+/* lq-funnel */
+(function(){
+  const Q=new URLSearchParams(location.search);
+  const TEST=Q.get('t')==='1'||(Q.get('src')||'').toLowerCase()==='test';
+  const GPC=navigator.globalPrivacyControl===true||navigator.doNotTrack==='1'||window.doNotTrack==='1';
+  let optOut=false;   // '이번 방문에서 보내지 않기' — 페이지 안 변수(저장 안 함)
+  const URL_='https://cvuyarvywlkvxwfckqjb.supabase.co/rest/v1/rpc/lq_ping', K='sb_publishable_Z04lS5iGlcrsF605w-oyKA_kXf5DOBA', VER='lq2.1';
+  const AREAS=['reason','learn','verbal','wm','dyn','press','rot','focus'];
+  const lang=()=>{ const l=(document.documentElement.lang||'ko').slice(0,2); return ['ko','en','ja'].includes(l)?l:'en'; };
+  // 아래 셋도 페이지 안 변수일 뿐, 브라우저 저장소·쿠키 어디에도 저장하지 않음(새로 고침하면 처음부터)
+  let seen=null;   // 이번 시도에서 이미 센 단계
+  let tries=0;     // 이 페이지를 연 뒤 몇 번째 시도인지
+  let last=null;   // 이번 시도에서 마지막으로 들어간 단계 → 다시 시작할 때 '앞 시도가 끝난 단계'로 보냄
+  const ping=(st,prev)=>{ if(!seen||seen.has(st)) return; seen.add(st); last=st;
+    if(TEST||GPC||optOut) return;
+    const body={p_stage:st,p_lang:lang(),p_ver:VER,p_try:Math.min(tries,3)}; if(prev) body.p_prev=prev;
+    try{ fetch(URL_,{method:'POST',keepalive:true,headers:{'apikey':K,'Authorization':'Bearer '+K,'Content-Type':'application/json'},body:JSON.stringify(body)}).catch(()=>{}); }catch(e){} };
+  const on=name=>{
+    if(name==='start'){ if(seen&&!seen.has('reason')) return;   // 시작 화면만 열었다 닫고 다시 연 것은 같은 시도
+      const prev=tries>0?last:null; tries++; seen=new Set(); ping('open',prev); return; }
+    if(!seen) return;   // 지난 결과 다시 보기 같은 화면은 세지 않음
+    if(name.startsWith('intro-')){ const a=name.slice(6); if(AREAS.includes(a)) ping(a); return; }
+    if(name==='end-intro'){ if(seen.has('reason')) ping('recall'); return; }
+    if(name==='result'){ if(seen.has('reason')) ping('done'); seen=null; } };
+  const watch=()=>{ const cog=document.getElementById('cog'); if(!cog) return false;
+    new MutationObserver(ms=>{ for(const m of ms) for(const n of m.addedNodes){ if(n.nodeType!==1) continue;
+      const list=n.matches('[data-screen]')?[n]:[...n.querySelectorAll('[data-screen]')];
+      for(const e of list) on(e.dataset.screen); } }).observe(cog,{childList:true,subtree:true}); return true; };
+  if(!watch()){ const w=new MutationObserver(()=>{ if(watch()) w.disconnect(); }); w.observe(document.body,{childList:true}); }
+  // 하단 안내 한 단락 + 거부 단추
+  const S={ko:{t:'중도에 그만두거나 다시 하는 사람이 얼마나 되는지 알기 위해, 검사의 각 단계(시작 화면 · 8개 과제 · 마지막 기억 확인 · 결과 화면)에 들어갈 때마다 단계 이름 · 언어 · 검사 판 · 이 페이지에서 몇 번째 시도인지(다시 시작했다면 앞 시도가 끝난 단계)만 아르케 저장소(Supabase)로 보내 날짜별 횟수 하나를 올려요. 동의를 받지 않고 세지만, 점수 · 답 · 나이 · 기기를 알아보는 값은 보내지 않고 사람별 기록도 만들지 않아요. 횟수 표는 2년이 지나면 지워요. 이때 저장소 업체도 보안을 위해 접속 기록(IP 주소 · 브라우저 정보 등)을 1일 동안 남길 수 있어요. 브라우저의 추적 거부(GPC · Do Not Track)를 켜 두었거나 아래 단추를 누르면 보내지 않아요.',
+      b:'이번 방문에서 단계 횟수 보내지 않기',off:'이번 방문에서는 단계 횟수를 보내지 않아요',gpc:'브라우저의 추적 거부 설정에 따라 단계 횟수를 보내지 않아요'},
+    en:{t:'To learn how many people stop partway or start over, each time you reach a step (start screen, each of the 8 tasks, the final memory check, the result screen) we send only the step name, language, test version and which try this is on this page (and, if you started over, the step where the previous try ended) to Arche\'s storage (Supabase), which adds one to a daily count. This is counted without asking for consent, but no scores, answers, age or device identifiers are sent and no per-person record is made. The count table is deleted after 2 years. Our storage provider may keep access logs (such as IP address and browser information) for 1 day for security. Nothing is sent if your browser has Global Privacy Control or Do Not Track turned on, or if you press the button below.',
+      b:'Do not send step counts on this visit',off:'Step counts will not be sent on this visit',gpc:'Step counts are not sent because your browser asks not to be tracked'},
+    ja:{t:'途中でやめる人や、やり直す人がどれくらいいるかを知るため、チェックの各段階(スタート画面・8つの課題・最後の記憶チェック・結果画面)に入るたびに、段階の名前・言語・チェックの版・このページで何回目の挑戦か(やり直した場合は前回が終わった段階)だけをArcheの保存先(Supabase)に送り、日ごとの回数を1つ増やします。同意をいただかずに数えますが、点数・答え・年齢・端末を見分ける値は送らず、人ごとの記録も作りません。回数の表は2年たつと削除します。このとき保存先の事業者も、セキュリティのためアクセス記録(IPアドレス・ブラウザ情報など)を1日間残すことがあります。ブラウザのトラッキング拒否(GPC・Do Not Track)をオンにしている場合や、下のボタンを押した場合は送りません。',
+      b:'今回の訪問では段階の回数を送らない',off:'今回の訪問では段階の回数を送りません',gpc:'ブラウザのトラッキング拒否の設定により、段階の回数を送りません'}};
+  let p=null, btn=null;
+  const paint=()=>{ const lg=document.getElementById('tL3'); if(!lg) return;
+    if(!p){ p=document.createElement('p'); p.id='tLFn'; btn=document.createElement('button'); btn.type='button'; btn.id='tLFnB'; btn.className='ghost fnoff';
+      btn.onclick=()=>{ optOut=true; paint(); };
+      (document.getElementById('tLAt')||document.getElementById('tLBd')||lg).after(p); p.after(btn); }
+    const s=S[lang()]; if(p.textContent!==s.t) p.textContent=s.t;
+    const bt=GPC?s.gpc:(optOut?s.off:s.b); if(btn.textContent!==bt) btn.textContent=bt; btn.disabled=GPC||optOut; };
+  new MutationObserver(paint).observe(document.documentElement,{attributes:true,attributeFilter:['lang']}); paint(); setTimeout(paint,0);
 })();
 </script>
 </body></html>

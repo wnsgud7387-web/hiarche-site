@@ -55,8 +55,64 @@ NEWS_CSS = '''<style>
 </style>
 '''
 
-ESSAYS = [('journal-why-arche.html', 'Oct 19, 2026', 'Studio', 'Why "Arche"?',
-           'An old Greek word for beginning, and six apps built around one.')]
+# Series 'A one-person company building apps with an AI team' (marketing drafts in src/journal/epN_{en,ko}.md)
+SERIES = [  # (n, file stem, date)
+  (1, 'journal-series-1', 'Oct 22, 2026'),
+  (0, 'journal-series-0', 'Oct 22, 2026'),
+]
+
+def _md(path):
+    import re
+    lines = open(path, encoding='utf-8').read().strip().split('\n')
+    def inline(t):
+        t = E(t)
+        t = re.sub(r'\[([^\]]+)\]\((https?://[^)\s]+)\)', lambda m: f'<a href="{m.group(2)}">{m.group(1)}</a>', t)
+        t = re.sub(r'\*\*(.+?)\*\*', r'<b>\1</b>', t)
+        t = re.sub(r'\*(.+?)\*', r'<i>\1</i>', t)
+        return t
+    title = re.sub(r'^\*\*|\*\*$', '', lines[0].strip())
+    sub = re.sub(r'^\*|\*$', '', lines[1].strip()) if len(lines) > 1 else ''
+    out, ol = [], []
+    def flush():
+        if ol: out.append('<ol>' + ''.join(f'<li>{x}</li>' for x in ol) + '</ol>'); ol.clear()
+    for ln in lines[2:]:
+        ln = ln.strip()
+        if not ln: flush(); continue
+        m = re.match(r'^\d+\.\s+(.*)', ln)
+        if m: ol.append(inline(m.group(1))); continue
+        flush()
+        if ln.startswith('## '): out.append(f'<h2 style="font-size:26px;color:var(--ink)">{inline(ln[3:])}</h2>')
+        elif ln.startswith('> '): out.append(f'<blockquote style="margin:0;padding-left:18px;border-left:3px solid var(--ink);color:var(--ink);font-weight:600">{inline(ln[2:])}</blockquote>')
+        else: out.append(f'<p>{inline(ln)}</p>')
+    flush()
+    return title, sub, '\n'.join(out)
+
+ESSAYS = []
+for _n, _stem, _date in SERIES:
+    _t, _s, _ = _md(os.path.join(ROOT, 'journal', f'ep{_n}_en.md'))
+    ESSAYS.append((f'{_stem}.html', _date, 'Series', _t, _s))
+ESSAYS.append(('journal-why-arche.html', 'Oct 19, 2026', 'Studio', 'Why "Arche"?',
+           'An old Greek word for beginning, and six apps built around one.'))
+
+def build_series():
+    for n, stem, date in SERIES:
+        for lang in ('en', 'ko'):
+            t, sub, body = _md(os.path.join(ROOT, 'journal', f'ep{n}_{lang}.md'))
+            fn = f'{stem}.html' if lang == 'en' else f'{stem}-ko.html'
+            other = f'<a href="{stem}-ko.html" lang="ko">한국어로 읽기</a>' if lang == 'en' else f'<a href="{stem}.html">Read in English</a>'
+            back = 'Journal' if lang == 'en' else '저널'
+            page = head(f'{t} — HiArche Journal', sub, 0, fn) + NEWS_CSS + nav(0, 'Journal') + f'''<main id="main" class="wrap" style="padding-block:48px 96px">
+<article class="essay"{' lang="ko"' if lang == 'ko' else ''}>
+<p class="note"><a href="journal.html">{back}</a> · {date} · {other}</p>
+<h1 class="h1" style="font-size:clamp(36px,5.5vw,58px)">{E(t)}</h1>
+<p class="note">{E(sub)}</p>
+{body}
+<p class="note" style="padding-top:12px;border-top:1px solid var(--line)">— Arche</p>
+</article>
+</main>
+''' + footer(0)
+            if lang == 'ko': page = page.replace('<html lang="en">', '<html lang="ko">', 1)
+            write(fn, page)
 
 def build_news_journal():
     byslug = {a['slug']: a for a in APPS}
@@ -117,3 +173,4 @@ def build_news_journal():
 </main>
 ''' + footer(0)
     write('journal-why-arche.html', essay)
+    build_series()

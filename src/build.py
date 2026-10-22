@@ -187,7 +187,7 @@ def footer(depth):
 <nav aria-label="Footer" class="links" style="font-size:15px"><a href="{up}support.html">Support</a><a href="{BOARD}">Feedback board</a><a href="{up}press.html">Press &amp; Business</a><a href="{up}legal.html">Privacy &amp; Legal</a><a href="https://www.instagram.com/arche.apps/">Instagram</a></nav>
 </div>
 <div class="legal">
-<p>Arche (아르케) · Representative: Junhyung Park · Business registration no. (Korea): 774-39-01532</p>
+<p>Arche (아르케) · Representative: Junhyung Park · Business registration no. (Korea): 774-39-01532 · Mail-order business report no.: 2026-Yongin Giheung-01759 (Giheung-gu Office, Yongin City)</p>
 <p>Room 7201, 7F, 9-1 Gugalro 60beon-gil, Giheung-gu, Yongin-si, Gyeonggi-do, Republic of Korea · archeisit@gmail.com</p>
 <p>© 2026 Arche</p>
 </div>
@@ -410,8 +410,8 @@ def build():
 <div class="tablewrap"><table><thead><tr><th scope="col">App</th><th scope="col">Privacy policy</th><th scope="col">Support</th><th scope="col">Terms</th></tr></thead><tbody>{trs}</tbody></table></div></section>
 <section style="display:flex;flex-direction:column;gap:16px"><h2 style="font-size:28px">Business information</h2>
 <div style="display:flex;flex-wrap:wrap;gap:20px">
-<dl class="facts card white" style="flex:1 1 480px;min-width:0"><dt>Business name</dt><dd>Arche (아르케)</dd><dt>Representative</dt><dd>Junhyung Park</dd><dt>Business registration (Korea)</dt><dd>774-39-01532</dd><dt>Address</dt><dd>Room 7201, 7F, 9-1 Gugalro 60beon-gil, Giheung-gu, Yongin-si, Gyeonggi-do, Republic of Korea</dd><dt>Email</dt><dd>archeisit@gmail.com</dd></dl>
-<div lang="ko" class="card" style="flex:1 1 320px;min-width:0;background:#E9EAE3;gap:4px"><strong>사업자 정보</strong><span>아르케(Arche) · 대표 박준형</span><span>사업자등록번호 774-39-01532</span><span>경기도 용인시 기흥구 구갈로60번길 9-1, 7층 7201호</span><span>archeisit@gmail.com</span></div>
+<dl class="facts card white" style="flex:1 1 480px;min-width:0"><dt>Business name</dt><dd>Arche (아르케)</dd><dt>Representative</dt><dd>Junhyung Park</dd><dt>Business registration (Korea)</dt><dd>774-39-01532</dd><dt>Mail-order business report (Korea)</dt><dd>2026-Yongin Giheung-01759 (Giheung-gu Office, Yongin City)</dd><dt>Address</dt><dd>Room 7201, 7F, 9-1 Gugalro 60beon-gil, Giheung-gu, Yongin-si, Gyeonggi-do, Republic of Korea</dd><dt>Email</dt><dd>archeisit@gmail.com</dd></dl>
+<div lang="ko" class="card" style="flex:1 1 320px;min-width:0;background:#E9EAE3;gap:4px"><strong>사업자 정보</strong><span>아르케(Arche) · 대표 박준형</span><span>사업자등록번호 774-39-01532</span><span>통신판매업 신고 제2026-용인기흥-01759호 (용인시 기흥구청)</span><span>경기도 용인시 기흥구 구갈로60번길 9-1, 7층 7201호</span><span>archeisit@gmail.com</span></div>
 </div></section>
 </main>
 ''' + footer(0)

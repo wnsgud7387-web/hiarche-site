@@ -352,6 +352,8 @@ def build():
 
     # ---------- support ----------
     rows = ''.join(f'<article class="card white"><div class="apphead"><img src="assets/icons/{a["slug"]}.png" alt=""><h3 style="font-size:22px">{E(a["name"])}</h3></div><div class="links" style="font-size:15px"><a href="{a["support"]}">Help page</a><a href="{a["privacy"]}">Privacy policy</a></div></article>' for a in APPS)
+    # 솔로몬의 판결(출시 전 · 아이콘 없음) — 솔로몬팀장 요청 10-22
+    rows += f'<article class="card white"><div class="apphead"><span aria-hidden="true" style="font-size:40px;line-height:1">⚖️</span><h3 style="font-size:22px" lang="ko">솔로몬의 판결</h3></div><div class="links" style="font-size:15px"><a href="{PG}solomon-support.html">Help page</a><a href="{PG}solomon-privacy.html">Privacy policy</a></div></article>'
     support = head('Support — HiArche', 'Help for Arche apps: help pages, common questions, feedback board and email.', 0, 'support.html') + nav(0, 'Support') + f'''<main id="main" class="wrap" style="padding-block:48px 96px;display:flex;flex-direction:column;gap:48px">
 <div style="display:flex;flex-direction:column;gap:12px"><h1 class="h1" style="font-size:clamp(44px,6vw,72px)">How can we help?</h1><p class="lead">Pick an app for its help page, or write to us. A person reads every message.</p></div>
 <section style="display:flex;flex-direction:column;gap:20px"><h2 style="font-size:28px">Choose an app</h2><div class="grid">{rows}</div></section>

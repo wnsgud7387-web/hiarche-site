@@ -172,11 +172,13 @@ def head(title, desc, depth, path):
 <a class="skip" href="#main">Skip to content</a>
 '''
 
-def nav(depth, current):
+def nav(depth, current, ko=None):
     up = '../' * depth
+    ko = ko or f'{up}ko/index.html'
     items = [('Apps', f'{up}index.html#apps'), ('News', f'{up}news.html'), ('Journal', f'{up}journal.html'), ('Support', f'{up}support.html'), ('Press & Business', f'{up}press.html')]
     cur = ' aria-current="page"'
     links = ''.join(f'<a href="{h}"{cur if n==current else ""}>{E(n)}</a>' for n,h in items)
+    links += f'<a href="{ko}" lang="ko">한국어</a>'
     return f'<header class="top wrap"><a class="logo" href="{up}index.html"><b>Hi</b>Arche</a><nav class="main" aria-label="Main">{links}</nav></header>\n'
 
 def footer(depth):
@@ -227,6 +229,7 @@ def write(rel, text):
         f.write(text)
 
 exec(open(os.path.join(ROOT,'news_journal.py'),encoding='utf-8').read())
+exec(open(os.path.join(ROOT,'ko_pages.py'),encoding='utf-8').read())
 
 def build():
     if os.path.exists(OUT): shutil.rmtree(OUT)
@@ -267,7 +270,9 @@ def build():
 <div class="cardfoot"><span class="status {a["status"]}">{ {'live':'On the App Store','review':'In App Store review','soon':'In development'}[a["status"]] }</span>{tryb}<span class="more">See app &rarr;</span></div>
 </a>
 '''
-    index = head('HiArche — Small apps, made with care', 'Arche is a small app studio in Korea. Niblore, Solomon’s Verdict, Rivalog, Chosim, Wanderlure and Story Accounting.', 0, '') + nav(0, '') + f'''<main id="main">
+    index = head('HiArche — Small apps, made with care', 'Arche is a small app studio in Korea. Niblore, Solomon’s Verdict, Rivalog, Chosim, Wanderlure and Story Accounting.', 0, '') + nav(0, '') + f'''<div id="kobar" class="wrap" hidden style="padding-block:4px 12px"><a href="ko/index.html" lang="ko" style="display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:12px;background:#2F5D50;color:#F1F5F2;font-weight:600;text-decoration:none">한국어로 보기 &rarr;</a></div>
+<script>try{{if((navigator.languages||[navigator.language]).some(function(l){{return /^ko/i.test(l)}}))document.getElementById('kobar').hidden=false}}catch(e){{}}</script>
+<main id="main">
 <section class="hero wrap">
 <div class="text">
 <p class="eyebrow">A small app studio from Korea</p>
@@ -332,7 +337,7 @@ def build():
 </div>
 </section>
 '''
-        page = head(f'{a["name"]} — {a["line"]} | HiArche', a['sub'], 1, f'apps/{a["slug"]}.html') + nav(1, 'Apps') + f'''<main id="main">
+        page = head(f'{a["name"]} — {a["line"]} | HiArche', a['sub'], 1, f'apps/{a["slug"]}.html') + nav(1, 'Apps', f'../ko/apps/{a["slug"]}.html') + f'''<main id="main">
 <section style="background:{a["bg"]};color:{a["fg"]}"><div class="wrap hero" style="padding-block:72px">
 <div class="text">
 <img src="../assets/icons/{a["slug"]}.png" alt="{E(a["name"])} app icon" style="width:96px;height:96px;border-radius:22px">
@@ -360,10 +365,11 @@ def build():
         write(f'apps/{a["slug"]}.html', page)
 
     build_news_journal()
+    build_ko()
 
     # ---------- support ----------
     rows = ''.join(f'<article class="card white"><div class="apphead"><img src="assets/icons/{a["slug"]}.png" alt=""><h3 style="font-size:22px">{E(a["name"])}</h3></div><div class="links" style="font-size:15px"><a href="{a["support"]}">Help page</a><a href="{a["privacy"]}">Privacy policy</a></div></article>' for a in APPS)
-    support = head('Support — HiArche', 'Help for Arche apps: help pages, common questions, feedback board and email.', 0, 'support.html') + nav(0, 'Support') + f'''<main id="main" class="wrap" style="padding-block:48px 96px;display:flex;flex-direction:column;gap:48px">
+    support = head('Support — HiArche', 'Help for Arche apps: help pages, common questions, feedback board and email.', 0, 'support.html') + nav(0, 'Support', 'ko/support.html') + f'''<main id="main" class="wrap" style="padding-block:48px 96px;display:flex;flex-direction:column;gap:48px">
 <div style="display:flex;flex-direction:column;gap:12px"><h1 class="h1" style="font-size:clamp(44px,6vw,72px)">How can we help?</h1><p class="lead">Pick an app for its help page, or write to us. A person reads every message.</p></div>
 <section style="display:flex;flex-direction:column;gap:20px"><h2 style="font-size:28px">Choose an app</h2><div class="grid">{rows}</div></section>
 <section class="card white" style="gap:12px"><h2 style="font-size:28px">Common questions</h2>
@@ -429,7 +435,7 @@ def build():
     write('google3e50e77c706ec730.html', 'google-site-verification: google3e50e77c706ec730.html')
     write('vercel.json', open(os.path.join(ROOT,'vercel.json')).read())
     write('robots.txt', 'User-agent: *\nAllow: /\nSitemap: https://hiarche.com/sitemap.xml\n')
-    urls = ['', 'news.html', 'journal.html', 'journal-why-arche.html', 'journal-series-0.html', 'journal-series-0-ko.html', 'journal-series-1.html', 'journal-series-1-ko.html', 'support.html', 'press.html', 'legal.html'] + [f'apps/{a["slug"]}.html' for a in APPS] + ['lab/rivalog-calculator.html','lab/story-accounting-episode-1.html']
+    urls = ['', 'news.html', 'journal.html', 'journal-why-arche.html', 'journal-series-0.html', 'journal-series-0-ko.html', 'journal-series-1.html', 'journal-series-1-ko.html', 'support.html', 'press.html', 'legal.html'] + [f'apps/{a["slug"]}.html' for a in APPS] + ['ko/','ko/support.html']+[f'ko/apps/{a["slug"]}.html' for a in APPS]+['lab/rivalog-calculator.html','lab/story-accounting-episode-1.html']
     write('sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + ''.join(f'<url><loc>https://hiarche.com/{u}</loc></url>\n' for u in urls) + '</urlset>\n')
     write('404.html', head('Not found — HiArche', 'Page not found.', 0, '404.html') + nav(0, '') + '<main id="main" class="wrap" style="padding-block:96px;display:flex;flex-direction:column;gap:20px"><h1 class="h1" style="font-size:64px">Hmm, nothing here.</h1><p class="lead">That page doesn\'t exist. Try the <a href="index.html">home page</a>.</p></main>\n' + footer(0))
 

@@ -32,9 +32,13 @@ NEWS = [
      'A mistake log brings wrong answers back after 1, 3 and 7 days with new figures. Five episodes in each paper are free.'],
    ['Coming to Google Play.'],
    'Unofficial study aid. Not affiliated with or endorsed by ACCA.'),
-  ('burnpile', 'In development', 'In development', 'soon', [
-     'Snap something, cut it out, and watch it burn the way its material would.'],
-   []),
+  ('solomons-verdict', 'Version 1.0 · first release · submitted Oct 22, 2026', 'In App Store review', 'review', [
+     'Each person writes their side on their own phone; Solomon, an AI judge, questions both in turn.',
+     'The verdict gives fault percentages by issue, the reasons, and a suggestion to make peace.',
+     'If both agree, friends can join as a jury. Then the two of you set a few rules so the same fight does not happen again.',
+     'No sign-up. Texts and photos are deleted 7 days after the verdict. For ages 14 and up.'],
+   ['Coming to Google Play.', 'English screens.'],
+   'For entertainment only. Not a real court and not legal advice. Verdicts are written by AI.'),
 ]
 
 NEWS_CSS = '''<style>

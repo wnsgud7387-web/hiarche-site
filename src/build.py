@@ -25,14 +25,14 @@ APPS = [
        price='Free to start. Ink packs and a monthly plan let you write and illustrate more. Prices are shown in the App Store in your currency.',
        support='https://mistory-app.vercel.app/support.html', privacy='https://mistory-app.vercel.app/privacy.html', terms='',
        note='Stories and illustrations are AI-generated.'),
-  dict(slug='burnpile', name='Burnpile', kind='Unwind', bg='#0E0907', fg='#F6EDE4',
-       line='Snap anything, cut it out, and watch it burn.',
-       sub='Take a photo of something you are done with, cut it out, and set it on the fire. Each material burns its own way.',
-       ios='', status='soon', meta='iPhone · In development',
-       features=[('Snap and cut out','Photograph anything and lift it off its background in one tap.'),('Burns like the real thing','Paper curls, wood chars, cloth smoulders, each by its material.'),('A quiet place to sit','An indoor hearth or a backyard camp fire, with slow, endless flames.')],
-       price='Free. No ads and no purchases in version 1.0.',
-       support=PG+'bonfire-support.html', privacy=PG+'bonfire-privacy.html', terms='',
-       note='Fire footage is AI-generated.'),
+  dict(slug='solomons-verdict', name="Solomon's Verdict", kind='Fun', bg='#9E3319', fg='#F4F0E8',
+       line='Two sides of an argument, one AI judge.',
+       sub='Each of you writes your side on your own phone. Solomon, an AI judge, questions both of you in turn and rules with a fault percentage.',
+       ios='', status='review', meta='iPhone · In App Store review · Korean (English coming) · Ages 14+',
+       features=[('File and summon','Write what happened, then send a link. The other person answers on their own phone.'),('A real back-and-forth','Solomon asks each side questions before it decides, so both stories are heard.'),('Verdict, jury and a promise','Fault percentages by issue, an optional friend jury, and a few rules so the same fight does not happen again.')],
+       price='No ads and no sign-up. Filing a case and extras are small one-time purchases, shown in the App Store in your currency.',
+       support=PG+'solomon-support.html', privacy=PG+'solomon-privacy.html', terms='',
+       note='For entertainment only. Not a real court and not legal advice. Verdicts are written by AI (Anthropic Claude).'),
   dict(slug='rivalog', name='Rivalog', kind='Study', bg='#2F5D50', fg='#F1F5F2',
        line='Plan your week and race a rival you create.',
        sub='Tell it your books and the hours you really have. It splits the work across your week and sets a rival a little ahead of you.',
@@ -64,8 +64,8 @@ APPS = [
        support=PG+'story-acca-support.html', privacy=PG+'story-acca-privacy.html', terms='',
        note='Unofficial study aid. Not affiliated with or endorsed by ACCA.'),
 ]
-LAB = {'niblore': None, 'burnpile': ('Light the fire', 'Drag a receipt, a note or a log onto the fire and watch it burn. Works best on a phone-sized window.', '../lab/burnpile-web-fire.html', 780, 420, 'Fire footage is AI-generated.'), 'rivalog': ('How long will your book take?', 'Fill in three of the four boxes and it works out the fourth, with the same math as the app.', '../lab/rivalog-calculator.html', 900, None, 'A planning estimate, not a guarantee.'), 'chosim': None, 'wanderlure': None, 'story-accounting': ('Read Episode 1', '"Only 3 months belong to this year." The story stops right before the answer. Your turn.', '../lab/story-accounting-episode-1.html', 900, None, 'Unofficial study aid. Not affiliated with or endorsed by ACCA.')}
-ICON = {'niblore':'niblore','burnpile':'burnpile','rivalog':'rivalog','chosim':'chosim','wanderlure':'wanderlure','story-accounting':'story'}
+LAB = {'niblore': None, 'solomons-verdict': None, 'rivalog': ('How long will your book take?', 'Fill in three of the four boxes and it works out the fourth, with the same math as the app.', '../lab/rivalog-calculator.html', 900, None, 'A planning estimate, not a guarantee.'), 'chosim': None, 'wanderlure': None, 'story-accounting': ('Read Episode 1', '"Only 3 months belong to this year." The story stops right before the answer. Your turn.', '../lab/story-accounting-episode-1.html', 900, None, 'Unofficial study aid. Not affiliated with or endorsed by ACCA.')}
+ICON = {'niblore':'niblore','solomons-verdict':'solomon','rivalog':'rivalog','chosim':'chosim','wanderlure':'wanderlure','story-accounting':'story'}
 
 CSS = r"""
 :root{--bg:#F3F4EF;--ink:#16181D;--soft:#3C4038;--mute:#5A5F55;--line:#DCDED6;--card:#FFFFFF;--accent:#D9481A;--link-hover:#B23E12}
@@ -208,7 +208,19 @@ def store_chips(a, up):
 def terms_cell(a):
     return f'<a href="{a["terms"]}">Read</a>' if a['terms'] else 'Apple standard EULA'
 
+def _notranslate(html):
+    # 브라우저 자동 번역이 'Arche'를 '아르쉐'로 바꾸지 않게 — body 글자에만 translate="no"
+    import re as _re
+    if '<body' not in html: return html
+    head, body = html.split('<body', 1)
+    def fix(m):
+        t = m.group(0)
+        return _re.sub(r'\b(HiArche|Arche)\b', r'<span translate="no">\1</span>', t)
+    body = _re.sub(r'>[^<]+<', fix, body)
+    return head + '<body' + body
+
 def write(rel, text):
+    if rel.endswith('.html'): text = _notranslate(text)
     p = os.path.join(OUT, rel)
     os.makedirs(os.path.dirname(p), exist_ok=True)
     with open(p, 'w', encoding='utf-8') as f:
@@ -231,8 +243,7 @@ def build():
     d.text((32,33), 'Hi', fill=(255,255,255,255), font=font, anchor='mm')
     im.save(os.path.join(OUT, 'assets/favicon.png'))
     # lab files
-    labs = {'lab/burnpile-web-fire.html': 'Desktop/ARCHE/2_앱/모닥불/웹맛보기/burnpile-web-fire.html',
-            'lab/rivalog-calculator.html': 'Documents/doppel/site/lab/rivalog-calculator.html',
+    labs = {'lab/rivalog-calculator.html': 'Documents/doppel/site/lab/rivalog-calculator.html',
             'lab/story-accounting-episode-1.html': 'Documents/story/hiarche_lab/story-acca-lab.html',
             'lab/lq2-test.html': 'Documents/doppel/lq2/lq2-test.html',
             'lab/lq2-test-en.html': 'Documents/doppel/lq2/lq2-test-en.html',
@@ -256,7 +267,7 @@ def build():
 <div class="cardfoot"><span class="status {a["status"]}">{ {'live':'On the App Store','review':'In App Store review','soon':'In development'}[a["status"]] }</span>{tryb}<span class="more">See app &rarr;</span></div>
 </a>
 '''
-    index = head('HiArche — Small apps, made with care', 'Arche is a small app studio in Korea. Niblore, Burnpile, Rivalog, Chosim, Wanderlure and Story Accounting.', 0, '') + nav(0, '') + f'''<main id="main">
+    index = head('HiArche — Small apps, made with care', 'Arche is a small app studio in Korea. Niblore, Solomon’s Verdict, Rivalog, Chosim, Wanderlure and Story Accounting.', 0, '') + nav(0, '') + f'''<main id="main">
 <section class="hero wrap">
 <div class="text">
 <p class="eyebrow">A small app studio from Korea</p>
@@ -352,8 +363,6 @@ def build():
 
     # ---------- support ----------
     rows = ''.join(f'<article class="card white"><div class="apphead"><img src="assets/icons/{a["slug"]}.png" alt=""><h3 style="font-size:22px">{E(a["name"])}</h3></div><div class="links" style="font-size:15px"><a href="{a["support"]}">Help page</a><a href="{a["privacy"]}">Privacy policy</a></div></article>' for a in APPS)
-    # 솔로몬의 판결(출시 전 · 아이콘 없음) — 솔로몬팀장 요청 10-22
-    rows += f'<article class="card white"><div class="apphead"><span aria-hidden="true" style="font-size:40px;line-height:1">⚖️</span><h3 style="font-size:22px" lang="ko">솔로몬의 판결</h3></div><div class="links" style="font-size:15px"><a href="{PG}solomon-support.html">Help page</a><a href="{PG}solomon-privacy.html">Privacy policy</a></div></article>'
     support = head('Support — HiArche', 'Help for Arche apps: help pages, common questions, feedback board and email.', 0, 'support.html') + nav(0, 'Support') + f'''<main id="main" class="wrap" style="padding-block:48px 96px;display:flex;flex-direction:column;gap:48px">
 <div style="display:flex;flex-direction:column;gap:12px"><h1 class="h1" style="font-size:clamp(44px,6vw,72px)">How can we help?</h1><p class="lead">Pick an app for its help page, or write to us. A person reads every message.</p></div>
 <section style="display:flex;flex-direction:column;gap:20px"><h2 style="font-size:28px">Choose an app</h2><div class="grid">{rows}</div></section>
@@ -375,7 +384,7 @@ def build():
     press = head('Press & Business — HiArche', 'Fact sheet, logos and app icons for Arche, and how to reach us about press and partnerships.', 0, 'press.html') + nav(0, 'Press & Business') + f'''<main id="main" class="wrap" style="padding-block:48px 96px;display:flex;flex-direction:column;gap:48px">
 <div style="display:flex;flex-direction:column;gap:12px"><h1 class="h1" style="font-size:clamp(44px,6vw,72px)">Press &amp; Business</h1><p class="lead">Everything you need to write about Arche, and the way to reach us about working together.</p></div>
 <section class="card white" style="gap:16px"><h2 style="font-size:28px">Fact sheet</h2>
-<dl class="facts"><dt>Studio</dt><dd>Arche (아르케)</dd><dt>Based in</dt><dd>Yongin, Gyeonggi-do, Republic of Korea</dd><dt>Founded</dt><dd>2026</dd><dt>Apps</dt><dd>Niblore, Burnpile, Rivalog, Chosim, Wanderlure, Story Accounting</dd><dt>Platforms</dt><dd>iPhone and iPad today; Android coming soon</dd><dt>Web</dt><dd>HiArche.com</dd></dl>
+<dl class="facts"><dt>Studio</dt><dd>Arche (아르케)</dd><dt>Based in</dt><dd>Yongin, Gyeonggi-do, Republic of Korea</dd><dt>Founded</dt><dd>2026</dd><dt>Apps</dt><dd>Niblore, Solomon’s Verdict, Rivalog, Chosim, Wanderlure, Story Accounting</dd><dt>Platforms</dt><dd>iPhone and iPad today; Android coming soon</dd><dt>Web</dt><dd>HiArche.com</dd></dl>
 <p style="color:var(--soft)">Arche is a small studio in Korea that makes apps by hand, one careful stitch at a time. Nothing flashy, just well-made tools you'll want to keep using.</p></section>
 <section style="display:flex;flex-direction:column;gap:20px"><h2 style="font-size:28px">Logo &amp; icons</h2>
 <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr))">
@@ -420,7 +429,7 @@ def build():
     write('google3e50e77c706ec730.html', 'google-site-verification: google3e50e77c706ec730.html')
     write('vercel.json', open(os.path.join(ROOT,'vercel.json')).read())
     write('robots.txt', 'User-agent: *\nAllow: /\nSitemap: https://hiarche.com/sitemap.xml\n')
-    urls = ['', 'news.html', 'journal.html', 'journal-why-arche.html', 'journal-series-0.html', 'journal-series-0-ko.html', 'journal-series-1.html', 'journal-series-1-ko.html', 'support.html', 'press.html', 'legal.html'] + [f'apps/{a["slug"]}.html' for a in APPS] + ['lab/burnpile-web-fire.html','lab/rivalog-calculator.html','lab/story-accounting-episode-1.html']
+    urls = ['', 'news.html', 'journal.html', 'journal-why-arche.html', 'journal-series-0.html', 'journal-series-0-ko.html', 'journal-series-1.html', 'journal-series-1-ko.html', 'support.html', 'press.html', 'legal.html'] + [f'apps/{a["slug"]}.html' for a in APPS] + ['lab/rivalog-calculator.html','lab/story-accounting-episode-1.html']
     write('sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + ''.join(f'<url><loc>https://hiarche.com/{u}</loc></url>\n' for u in urls) + '</urlset>\n')
     write('404.html', head('Not found — HiArche', 'Page not found.', 0, '404.html') + nav(0, '') + '<main id="main" class="wrap" style="padding-block:96px;display:flex;flex-direction:column;gap:20px"><h1 class="h1" style="font-size:64px">Hmm, nothing here.</h1><p class="lead">That page doesn\'t exist. Try the <a href="index.html">home page</a>.</p></main>\n' + footer(0))
 

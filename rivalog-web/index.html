@@ -6,16 +6,66 @@
      tool/sync_web.py 가 이 파일을 assets/web/index.html 로 옮긴다(저장 다리 넣기 · 바깥 주소 검사). -->
 <title>라이벌로그 — 1회독 계획과 라이벌</title>
 <style>
-/* 라이벌로그 디자인 파일 — tokens.css
-   색 토큰(밝음·어두움). 값을 바꾸면 그 색을 쓰는 모든 화면이 바뀐다.
-   assets/web/index.html 의 /*ARCHE_DESIGN*\/ 자리에 앱(lib/main.dart)이 tokens → components 순서로 끼워 넣는다.
-   고치는 법은 저장소 맨 위 DESIGN_EDIT.md. */
-:root{--amberink:#8a5a0b;--dopink:#6a4fb0;--bg:#f4f1ea;--card:#fffdf8;--ink:#1d1b17;--sub:#6b6458;--line:#e5dfd2;--track:#ece6d9;--acc:#2f5d50;--accsoft:#e3ede8;--dop:#7a5cc4;--dopsoft:#efe9fb;--amber:#c98a1b;--ambersoft:#fbf1dc;--warn:#b5482b;--warnsoft:#f8e4dd;--shadow:0 1px 2px rgba(40,30,10,.05),0 4px 16px rgba(40,30,10,.05);color-scheme:light}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141310;--card:#1d1c18;--ink:#ece6da;--sub:#a39a8a;--line:#33302a;--track:#2a2823;--acc:#7fbfa9;--accsoft:#1f2b26;--dop:#b39cf0;--dopsoft:#25203a;--amber:#e5b04e;--ambersoft:#2e2614;--warn:#e07a5f;--warnsoft:#33211c;--amberink:#e5b04e;--dopink:#b39cf0;--shadow:none;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#141310;--card:#1d1c18;--ink:#ece6da;--sub:#a39a8a;--line:#33302a;--track:#2a2823;--acc:#7fbfa9;--accsoft:#1f2b26;--dop:#b39cf0;--dopsoft:#25203a;--amber:#e5b04e;--ambersoft:#2e2614;--warn:#e07a5f;--warnsoft:#33211c;--amberink:#e5b04e;--dopink:#b39cf0;--shadow:none;color-scheme:dark}
-:root{--fieldline:#8f8778}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--fieldline:#757062}}
-:root[data-theme="dark"]{--fieldline:#757062}
+/* 라이벌로그 디자인 파일 — tokens.css (design/20261024-theme, 디자인실장 10-24)
+   대표님 결정(10-24 13:39): 화면 구성은 하나, 색만 두 벌. 밝은 = A '차분한 공부 노트' · 어두운 = B '게임 같은 경쟁'.
+   assets/web/index.html 의 /*ARCHE_DESIGN*\/ 자리에 앱(lib/main.dart)이 tokens → components → screens_11 순서로 끼워 넣는다.
+   새 이름(--me --rival --subject-2 …)을 쓰고, JS·검사 모듈이 이름으로 부르는 옛 이름(--acc --dop --amber …)은 별칭으로 남긴다 — 지우지 말 것.
+   대비는 색 값으로 계산함(글자 4.5:1 이상, 막대·테두리 3:1 이상). 고치는 법은 저장소 맨 위 DESIGN_EDIT.md. */
+
+/* ── 밝은 테마(A) ── */
+:root{
+  --bg:#f4f1ea; --card:#fffdf8; --ink:#1d1b17; --sub:#6b6458; --line:#e5dfd2; --track:#ece6d9;
+  --chipline:#d9d2c3; --fieldline:#8f8778;
+  --me:#2f5d50; --me-soft:#e3ede8; --on-me:#ffffff;            /* 나·아바타·주 단추 · 흰 글자 7.5:1 */
+  --rival:#6b4fa0; --rival-soft:#efe9fb; --on-rival:#ffffff;   /* 라이벌만 · 카드 위 6.4:1 */
+  --subject-2:#a86f0e; --subject-3:#3d6f9e;                    /* 과목 색(막대 위 글자 없음) */
+  --warn:#a33f24; --warnsoft:#f8e4dd;                          /* 늦음·약한 단원 5.2:1 */
+  --amberink:#8a5a0b; --ambersoft:#fbf1dc;
+  --num-font:'Noto Serif KR',serif;                            /* 큰 숫자(밝은 테마만 명조) */
+  --shadow:0 1px 2px rgba(40,30,10,.05),0 4px 16px rgba(40,30,10,.05);
+  color-scheme:light;
+}
+
+/* ── 어두운 테마(B): 휴대폰 설정 블록과 data-theme="dark" 블록에 같은 값 ── */
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#141310; --card:#1d1c18; --ink:#ece6da; --sub:#a39a8a; --line:#33302a; --track:#2a2823;
+  --chipline:#33302a; --fieldline:#757062;
+  --me:#6fd3b0; --me-soft:#1f2b26; --on-me:#141310;
+  --rival:#b49cff; --rival-soft:#25203a; --on-rival:#141310;
+  --subject-2:#e5b04e; --subject-3:#7fb2e5;
+  --warn:#f09a80; --warnsoft:#33211c;
+  --amberink:#e5b04e; --ambersoft:#2e2614;
+  --num-font:inherit;
+  --shadow:none;
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#141310; --card:#1d1c18; --ink:#ece6da; --sub:#a39a8a; --line:#33302a; --track:#2a2823;
+  --chipline:#33302a; --fieldline:#757062;
+  --me:#6fd3b0; --me-soft:#1f2b26; --on-me:#141310;
+  --rival:#b49cff; --rival-soft:#25203a; --on-rival:#141310;
+  --subject-2:#e5b04e; --subject-3:#7fb2e5;
+  --warn:#f09a80; --warnsoft:#33211c;
+  --amberink:#e5b04e; --ambersoft:#2e2614;
+  --num-font:inherit;
+  --shadow:none;
+  color-scheme:dark;
+}
+
+/* ── 옛 이름 별칭(JS·검사 모듈이 이름으로 씀 — 이름 바꾸기·지우기 금지) ── */
+:root{
+  --acc:var(--me); --accsoft:var(--me-soft);
+  --dop:var(--rival); --dopsoft:var(--rival-soft); --dopink:var(--rival);
+  --amber:var(--subject-2);
+}
+
+/* ── 크기(두 테마 같음) ── */
+:root{
+  --t-caption:.75rem; --t-sub:.875rem; --t-body:1rem; --t-card:1.125rem; --t-title:1.75rem; --t-number:2.125rem; /* 12·14·16·18·28·34 */
+  --r-small:8px; --r-card:14px; --r-pill:999px;
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s6:24px; --s8:32px;
+  --tap:44px; --btn-main:52px;
+}
 
 /* 라이벌로그 디자인 파일 — components.css
    모양 규칙(색·배경·테두리·모서리·그림자·글꼴·글자 간격·줄 간격·안쪽 여백·간격). 보이기/숨기기·위치·크기·애니메이션은 index.html 에 남아 있다.
@@ -358,6 +408,147 @@ details.adv>summary::after{color:var(--sub);font-size:1.125rem}
 .wkb{gap:6px}
 .pill.sm2{padding:0 12px;font-size:.875rem}
 
+/* ════════════════════════════════════════════════════════════════
+   1.1 공통 부품 (design/20261024-theme, 디자인실장 10-24)
+   틀(HTML·클래스·data-*)은 Lueur(feat/1.1), 모양은 여기. 기준: 문서\doppel\cc\라이벌로그_공통부품_클래스.md
+   ⚠ 새 부품(rv-*)은 index.html에 규칙이 없어서, 부품 안쪽 배치(display·gap·grid)와 막대 길이(width: var(--rv-p))·
+     목표선 위치(position·left: var(--rv-x))만 예외로 여기에 둔다. 화면 전체 배치는 screens_11.css(Lueur).
+   ════════════════════════════════════════════════════════════════ */
+
+/* ── 1. 점수판 rv-vs ── */
+.rv-vs{background:var(--card);border:1px solid var(--line);border-radius:var(--r-card);padding:var(--s6) var(--s4);display:flex;flex-direction:column;gap:var(--s4);box-shadow:var(--shadow)}
+.rv-vs__head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--s1) var(--s2)}
+.rv-vs__kicker{font-size:var(--t-sub);color:var(--sub)}
+.rv-vs__title{margin:0;font-size:var(--t-card);font-weight:700;color:var(--ink)} /* 카드 안 제목은 18(10-24 웹 사진 320 검수) */
+.rv-vs__streak{white-space:nowrap;font-size:var(--t-sub);font-weight:600;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:var(--r-pill);padding:var(--s1) var(--s3)}
+.rv-vs__streak[data-on="false"]{color:var(--sub)}
+.rv-vs__board{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:var(--s2);text-align:center}
+.rv-vs__side{display:flex;flex-direction:column;align-items:center;gap:var(--s1)}
+.rv-vs__label{font-size:var(--t-sub);font-weight:600}
+.rv-vs__score{font-family:var(--num-font);font-size:var(--t-number);font-weight:700;line-height:1.1}
+.rv-vs__side--me{color:var(--me)}
+.rv-vs__side--rival{color:var(--rival)}
+.rv-vs__sep{font-size:var(--t-sub);font-weight:700;color:var(--sub)}
+.rv-vs--week .rv-vs__sep{font-size:var(--t-card)}
+.rv-vs__gap{margin:0;align-self:center;font-size:var(--t-body);font-weight:700;border-radius:var(--r-pill);padding:var(--s2) var(--s4);background:var(--track);color:var(--ink)}
+.rv-vs[data-state="ahead"] .rv-vs__gap{background:var(--me);color:var(--on-me)}
+.rv-vs[data-state="behind"] .rv-vs__gap{background:var(--rival);color:var(--on-rival)}
+.rv-vs__hint{margin:0;font-size:var(--t-body);line-height:1.6;color:var(--ink);text-align:center}
+.rv-vs__bars{display:flex;flex-direction:column;gap:var(--s2)}
+.rv-vs__bar{display:grid;grid-template-columns:3.5rem minmax(0,1fr);align-items:center;gap:var(--s2)}
+.rv-vs__bar-label{font-size:var(--t-caption);color:var(--sub)}
+.rv-vs__bar-fill{position:relative;height:12px;border-radius:var(--r-pill);background:var(--track);overflow:hidden}
+.rv-vs__bar-fill::before{content:"";position:absolute;left:0;top:0;bottom:0;width:var(--rv-p,0%);border-radius:var(--r-pill);background:var(--me)}
+.rv-vs__bar--rival .rv-vs__bar-fill::before{background:var(--rival)}
+.rv-vs__goal{align-self:flex-end;font-size:var(--t-caption);color:var(--sub)}
+
+/* ── 2. 요일별 승부 rv-week ── */
+.rv-week{display:flex;flex-direction:column;gap:var(--s3)}
+.rv-week__title{margin:0;font-size:var(--t-card);font-weight:700;color:var(--ink)}
+.rv-week__days{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:var(--s1)}
+.rv-week__day{display:flex;flex-direction:column;align-items:center;gap:6px}
+.rv-week__name{font-size:var(--t-caption);color:var(--sub)}
+.rv-week__mark{min-width:40px;min-height:40px;box-sizing:border-box;display:flex;align-items:center;justify-content:center;border-radius:var(--r-pill);font-size:var(--t-sub);font-weight:700;background:var(--track);color:var(--sub)}
+.rv-week__day[data-result="win"] .rv-week__mark{background:var(--me);color:var(--on-me)}
+.rv-week__day[data-result="lose"] .rv-week__mark{background:var(--rival);color:var(--on-rival)}
+.rv-week__day[data-result="tie"] .rv-week__mark{background:var(--card);border:2px solid var(--sub);color:var(--ink)}
+.rv-week__day[data-result="today"] .rv-week__mark{background:transparent;border:2px dashed var(--me);color:var(--me)}
+.rv-week__day[data-result="today"] .rv-week__name{color:var(--ink);font-weight:700}
+.rv-week__sum{margin:0;font-size:var(--t-sub);color:var(--sub)}
+
+/* ── 3. 아바타 vs 라이벌 rv-duel ── */
+.rv-duel{background:var(--card);border:1px solid var(--line);border-radius:var(--r-card);padding:var(--s6) var(--s4);display:flex;flex-direction:column;gap:var(--s4);box-shadow:var(--shadow)}
+.rv-duel__head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:var(--s1) var(--s2)}
+.rv-duel__kicker{font-size:var(--t-sub);color:var(--sub)}
+.rv-duel__title{margin:0;font-size:var(--t-title);font-weight:700;color:var(--ink)}
+.rv-duel__share{min-width:var(--tap);min-height:var(--tap);border-radius:var(--r-pill);border:1px solid var(--line);background:var(--card);color:var(--ink)}
+.rv-duel__board{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:var(--s2);text-align:center}
+.rv-duel__side{display:flex;flex-direction:column;align-items:center;gap:var(--s1)}
+.rv-duel__side--avatar{color:var(--me)}
+.rv-duel__side--rival{color:var(--rival)}
+.rv-duel__icon svg{width:44px;height:44px}
+.rv-duel__name{font-size:var(--t-sub);font-weight:600}
+.rv-duel__desc{font-size:var(--t-caption);color:var(--sub)}
+.rv-duel__score{font-family:var(--num-font);font-size:var(--t-number);font-weight:700;line-height:1.1}
+.rv-duel__sep{font-size:var(--t-sub);font-weight:700;color:var(--sub)}
+.rv-duel__note{margin:0;font-size:var(--t-sub);line-height:1.5;color:var(--sub);text-align:center} /* 법무 조건: 14 이상·점수 바로 아래 — 줄이지 말 것 */
+.rv-duel__delta{margin:0;align-self:center;font-size:var(--t-body);font-weight:700;border-radius:var(--r-pill);padding:var(--s2) var(--s4);background:var(--rival);color:var(--on-rival)}
+.rv-duel__wait{margin:0;font-size:var(--t-body);color:var(--sub);text-align:center}
+.rv-duel--ai .rv-duel__board{text-align:left}
+.rv-duel--ai .rv-duel__side--rival{align-items:flex-end}
+.rv-duel--ai .rv-duel__side--avatar{align-items:flex-start}
+.rv-duel--ai .rv-duel__note{text-align:left}
+
+/* ── 4. 간트 rv-gantt — 막대 위 글자 없음 ── */
+.rv-gantt{background:var(--card);border:1px solid var(--line);border-radius:var(--r-card);padding:var(--s4);display:flex;flex-direction:column;gap:10px}
+.rv-gantt__axis{display:flex;justify-content:space-between;padding-left:calc(5.5rem + var(--s2));font-size:var(--t-caption);color:var(--sub)}
+.rv-gantt__row{display:grid;grid-template-columns:5.5rem minmax(0,1fr);align-items:center;gap:var(--s2)}
+.rv-gantt__name{display:flex;flex-direction:column;word-break:keep-all;overflow-wrap:anywhere;font-size:var(--t-sub);font-weight:600;line-height:1.3;color:var(--ink)}
+.rv-gantt__end{font-size:var(--t-caption);font-weight:400;color:var(--sub)}
+.rv-gantt__row[data-late="true"] .rv-gantt__end{color:var(--warn);font-weight:600}
+.rv-gantt__track{position:relative;height:28px;border-radius:var(--r-small);background:var(--track)}
+.rv-gantt__plan,.rv-gantt__done{position:absolute;left:0;top:0;bottom:0;width:var(--rv-p,0%);border-radius:var(--r-small);background:var(--rv-c,var(--me))}
+.rv-gantt__plan{opacity:.45}
+.rv-gantt__goal{position:absolute;top:-4px;bottom:-4px;left:var(--rv-x,100%);width:2px;background:var(--warn)}
+.rv-gantt__row[data-c="0"]{--rv-c:var(--me)}
+.rv-gantt__row[data-c="1"]{--rv-c:var(--subject-2)}
+.rv-gantt__row[data-c="2"]{--rv-c:var(--subject-3)}
+.rv-gantt__legend{margin:0;font-size:var(--t-caption);color:var(--sub)}
+
+/* ── 5. 원 그래프 rv-pie ── */
+.rv-pie{background:var(--card);border:1px solid var(--line);border-radius:var(--r-card);padding:var(--s4);display:flex;flex-direction:column;align-items:center;gap:var(--s3)}
+.rv-pie__chart{width:140px;height:140px;transform:rotate(-90deg)}
+.rv-pie__track{fill:none;stroke:var(--track);stroke-width:14}
+.rv-pie__seg{fill:none;stroke-width:14;stroke:var(--me)}
+.rv-pie__seg[data-c="1"]{stroke:var(--subject-2)}
+.rv-pie__seg[data-c="2"]{stroke:var(--subject-3)}
+.rv-pie__total{font-size:var(--t-card);font-weight:700;color:var(--ink)}
+.rv-pie__legend{list-style:none;margin:0;padding:0;align-self:stretch;display:flex;flex-direction:column;gap:var(--s1)}
+.rv-pie__item{display:flex;align-items:center;gap:var(--s2);font-size:var(--t-sub);color:var(--ink)}
+.rv-pie__swatch{width:12px;height:12px;border-radius:3px;background:var(--me);flex-shrink:0}
+.rv-pie__item[data-c="1"] .rv-pie__swatch{background:var(--subject-2)}
+.rv-pie__item[data-c="2"] .rv-pie__swatch{background:var(--subject-3)}
+
+/* ── 6. 화면 테마 rv-theme ── */
+.rv-theme{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s1);padding:var(--s1);border-radius:12px;background:var(--track)}
+.rv-theme__opt{min-height:var(--tap);border:0;border-radius:var(--r-small);background:transparent;color:var(--ink);font-size:var(--t-sub);line-height:1.3;padding:var(--s1) var(--s2)}
+.rv-theme__opt[aria-checked="true"]{background:var(--card);font-weight:700;box-shadow:var(--shadow)}
+
+/* ── 7. 이번 주 계획 점검 rv-weekly ── */
+.rv-weekly{background:var(--me-soft);border-radius:var(--r-card);padding:var(--s4);display:flex;flex-direction:column;gap:var(--s3)}
+.rv-weekly__title{margin:0;font-size:var(--t-card);font-weight:700;color:var(--ink)}
+.rv-weekly__lead{margin:0;font-size:var(--t-sub);color:var(--sub)}
+.rv-weekly__reviews{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.rv-weekly__item{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;column-gap:var(--s2);min-height:52px;border-top:1px solid var(--line)}
+.rv-weekly__item:last-child{border-bottom:1px solid var(--line)}
+.rv-weekly__name{font-size:var(--t-body);color:var(--ink)}
+.rv-weekly__why{grid-column:1;font-size:var(--t-caption);color:var(--warn)}
+.rv-weekly__toggle{grid-column:2;grid-row:1 / span 2;min-height:var(--tap);min-width:64px;border-radius:var(--r-pill);border:1px solid var(--chipline);background:var(--card);color:var(--ink);font-size:var(--t-sub);font-weight:600}
+.rv-weekly__toggle[aria-pressed="true"]{background:var(--me);border-color:var(--me);color:var(--on-me)}
+.rv-weekly__cost{margin:0;font-size:var(--t-sub);line-height:1.5;color:var(--ink);background:var(--card);border-radius:var(--r-small);padding:var(--s2) var(--s3)}
+.rv-weekly__actions{display:flex;flex-direction:column;gap:var(--s2)}
+.rv-weekly__ok{min-height:var(--btn-main);border:0;border-radius:var(--r-pill);background:var(--me);color:var(--on-me);font-size:var(--t-body);font-weight:700}
+.rv-weekly__skip{min-height:var(--tap);border:0;background:transparent;color:var(--me);font-size:var(--t-body);font-weight:600}
+.rv-weekly[data-state="done"],.rv-weekly[data-state="skipped"]{background:var(--card);border:1px solid var(--line)}
+
+/* ── 8. 아래 탭 rv-tabbar (오늘=시계 · 라이벌=두 사람 · 계획=달력) ── */
+.rv-tabbar{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));background:var(--card);border-top:1px solid var(--line);padding:var(--s2) 0 var(--s4)}
+.rv-tabbar__item{min-height:var(--tap);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--s1);border:0;background:transparent;color:var(--sub);text-decoration:none}
+.rv-tabbar__icon svg{width:24px;height:24px}
+.rv-tabbar__label{font-size:var(--t-caption)}
+.rv-tabbar__item[aria-current="page"]{color:var(--me)}
+.rv-tabbar__item[aria-current="page"] .rv-tabbar__label{font-weight:700}
+
+/* ── 9. 접는 섹션 머리 rv-fold (계획 탭) ── */
+.rv-fold{border-top:1px solid var(--line)}
+.rv-fold__head{width:100%;min-height:52px;display:flex;align-items:center;justify-content:space-between;gap:var(--s2);border:0;background:transparent;color:var(--ink);padding:0;text-align:left}
+.rv-fold__title{font-size:var(--t-card);font-weight:700}
+.rv-fold__meta{font-size:var(--t-sub);color:var(--sub);margin-left:auto}
+.rv-fold__chev{color:var(--sub)}
+.rv-fold__chev svg{width:20px;height:20px}
+.rv-fold__head[aria-expanded="true"] .rv-fold__chev svg{transform:rotate(180deg)}
+.rv-fold__body{padding-bottom:var(--s4);display:flex;flex-direction:column;gap:var(--s3)}
+
 /* 라이벌로그 디자인 파일 — screens_11.css (1.1 새 화면의 배치)
    앱(lib/main.dart)이 /*ARCHE_DESIGN*\/ 자리에 tokens → components → screens_11 순서로 끼운다.
    1.1 기능 브랜치가 만든 '감싸는 틀'(np-*)의 배치만 있다. 색은 tokens.css 변수 이름으로만 쓴다(16진수 없음).
@@ -430,12 +621,75 @@ details.adv>summary::after{color:var(--sub);font-size:1.125rem}
 .np-wks select{width:auto;flex:none;min-height:44px}
 .np-wkday{justify-self:start;margin-top:-4px}
 
+/* 라이벌로그 웹판 전용 모양 — web.css (design/20261024-theme, 디자인실장 10-24)
+   웹 빌드에서만 끼움(앱에는 들어가지 않음). 주입 순서 tokens → components → screens_11 → web.
+   틀 클래스: Lueur 쪽지 mail-20261024-lueur-to-design-rivalog-1510 · 알림 신청·설문은 디자인실장 제안 이름(rv-web-notify · rv-web-survey).
+   시안: 캔버스 '라이벌로그 디자인 방향' 웹 1·2·3 */
+
+/* ── PC 넓은 화면: 가운데 480 단, 바깥은 --track ── */
+html{background:var(--track)}
+.rv-web-col{max-width:480px;margin:0 auto;min-height:100vh;background:var(--bg);box-sizing:border-box}
+@media (min-width:600px){
+  .rv-web-col{border-left:1px solid var(--line);border-right:1px solid var(--line)}
+  .rv-web-col .rv-tabbar,.rv-web-col .tabbar{max-width:480px;margin:0 auto}
+}
+
+/* ── 위 안내 줄(닫기 가능) ── */
+.rv-web-bar{min-height:48px;box-sizing:border-box;display:flex;align-items:center;justify-content:center;flex-wrap:nowrap;gap:var(--s2) var(--s4);padding:var(--s2) var(--s4);background:var(--card);border-bottom:1px solid var(--line);font-size:var(--t-sub);color:var(--ink)}
+.rv-web-bar__text{line-height:1.5;flex:1 1 auto;min-width:0} /* 문구는 2줄 안으로(10-24 검수) */
+.rv-web-bar__save{flex-shrink:0;white-space:nowrap;min-height:36px;padding:0 14px;border-radius:var(--r-pill);border:1px solid var(--me);background:var(--card);color:var(--me);font-size:var(--t-sub);font-weight:600}
+.rv-web-bar__close{flex-shrink:0;min-width:36px;min-height:36px;border-radius:var(--r-pill);border:0;background:transparent;color:var(--sub)}
+
+/* ── 설정: 기록 옮기기 ── */
+.rv-web-move{background:var(--card);border:1px solid var(--line);border-radius:var(--r-card);padding:var(--s4);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s2)}
+.rv-web-move__save,.rv-web-move__load{min-height:48px;border-radius:var(--r-pill);font-size:var(--t-body);font-weight:600}
+.rv-web-move__save{border:0;background:var(--me);color:var(--on-me);font-weight:700}
+.rv-web-move__load{border:1px solid var(--chipline);background:var(--card);color:var(--ink)}
+.rv-web-move__last{grid-column:1 / -1;font-size:var(--t-caption);color:var(--sub)}
+
+/* ── 앱에서만 되는 기능 자리(점선 카드) ── */
+.rv-web-appsonly{border:1px dashed var(--chipline);border-radius:var(--r-card);padding:var(--s4);display:flex;flex-wrap:wrap;gap:var(--s2);font-size:var(--t-sub);color:var(--sub);line-height:1.5}
+.rv-web-appsonly__ios,.rv-web-appsonly__android{min-height:var(--tap);padding:0 var(--s4);border-radius:var(--r-pill);border:1px solid var(--chipline);display:inline-flex;align-items:center;color:var(--ink);font-weight:600;text-decoration:none}
+
+/* ── 사업자 정보 칸(법무 요구 — 항상 보임, 글자 12 이상) ── */
+.rv-web-biz{padding:var(--s4);font-size:var(--t-caption);line-height:1.6;color:var(--sub);text-align:center}
+.rv-web-biz a{color:var(--sub)}
+
+/* ── 출시 알림 신청(유료 자리 누르면, 선택) — 제안 이름 ── */
+.rv-web-notify{background:var(--card);border:1px solid var(--line);border-radius:var(--r-card);padding:var(--s4);display:flex;flex-direction:column;gap:var(--s3);box-shadow:var(--shadow)}
+.rv-web-notify__title{margin:0;font-size:var(--t-card);font-weight:700;color:var(--ink)}
+.rv-web-notify__text{margin:0;font-size:var(--t-sub);line-height:1.5;color:var(--sub)}
+.rv-web-notify__email{min-height:48px;padding:0 var(--s3);border-radius:var(--r-small);border:1px solid var(--fieldline);background:var(--card);color:var(--ink);font-size:var(--t-body)}
+.rv-web-notify__consent{display:flex;align-items:flex-start;gap:var(--s2);min-height:var(--tap);font-size:var(--t-sub);line-height:1.5;color:var(--ink)}
+.rv-web-notify__send{min-height:var(--btn-main);border:0;border-radius:var(--r-pill);background:var(--me);color:var(--on-me);font-size:var(--t-body);font-weight:700}
+.rv-web-notify__send:disabled{background:var(--track);color:var(--sub)}
+.rv-web-notify__close{min-height:var(--tap);border:0;background:transparent;color:var(--me);font-size:var(--t-body);font-weight:600}
+
+/* ── 7일째 한 문항 설문(닫을 수 있게, 한 번만) — 제안 이름 ── */
+.rv-web-survey{background:var(--me-soft);border-radius:var(--r-card);padding:var(--s4);display:flex;flex-direction:column;gap:var(--s2)}
+.rv-web-survey__q{margin:0 0 var(--s1);font-size:var(--t-body);font-weight:700;color:var(--ink)}
+.rv-web-survey__opt{min-height:var(--tap);padding:0 var(--s4);border-radius:var(--r-small);border:1px solid var(--chipline);background:var(--card);color:var(--ink);font-size:var(--t-body);text-align:left}
+.rv-web-survey__opt[aria-pressed="true"]{border-color:var(--me);box-shadow:inset 0 0 0 1px var(--me);font-weight:700}
+.rv-web-survey__close{align-self:flex-end;min-height:var(--tap);border:0;background:transparent;color:var(--sub);font-size:var(--t-sub)}
+
+/* ── PC: 마우스 올림·키보드 초점(앱에는 없음) ── */
+@media (hover:hover){
+  button:hover,a:hover,[role="radio"]:hover{filter:brightness(.96)}
+  [data-theme="dark"] button:hover,[data-theme="dark"] a:hover{filter:brightness(1.12)}
+  .rv-tabbar__item:hover{color:var(--ink)}
+}
+:focus-visible{outline:2px solid var(--me);outline-offset:2px;border-radius:var(--r-small)}
+button:focus:not(:focus-visible),a:focus:not(:focus-visible){outline:none}
+
+/* 아래 탭이 화면에 붙어 있으므로 마지막 내용(사업자 정보·약관 줄)이 가려지지 않게 */
+.rv-web-col{padding-bottom:calc(72px + var(--s4))}
+
 /* 웹판 전용 배치(build_web.mjs) — 넓은 화면은 가운데 480px 단 · 아래 탭도 단 안 */
 .rv-web-col{max-width:480px;margin:0 auto}
 .rv-web-col .app{max-width:480px}
 .rv-web-col .tabbar{max-width:480px;margin:0 auto}
 .np-webnote{display:flex;align-items:center;flex-wrap:wrap}
-.np-webnote>span{flex:1 1 200px}
+.np-webnote>span{flex:1 1 280px}  /* 문구 2줄 안: 480 단에서도 단추는 아래 줄로(10-25) */
 .np-webx{min-width:32px;min-height:32px}
 .np-webfoot{margin:8px 0 0;text-align:center}
 .np-webfoot .links{justify-content:center}
@@ -904,7 +1158,7 @@ window.DoppelNative={postMessage:function(s){var o=JSON.parse(s);
 /* 라이벌로그 「내 라이벌 찾기」 학습 성향 체크 모듈 v1 (2026-10-15 · Lueur팀 실무)
    앱 HTML에 그대로 붙여 넣는 조각. 모든 선택자는 #cog 아래로 한정하고, 색은 앱 토큰(var(--acc) 등)만 쓴다.
    바깥 주소·저장소·외부 글꼴·이미지 없음. 그림은 전부 SVG/canvas로 직접 그린다. */
-#cog{position:fixed;inset:0;z-index:60;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Hiragino Sans","Noto Sans",system-ui,sans-serif;font-size:15px;line-height:1.5;text-align:left;word-break:keep-all;overflow-wrap:anywhere;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
+#cog{position:fixed;inset:0;z-index:60;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Hiragino Sans","Noto Sans",system-ui,sans-serif;font-size:var(--t-body);line-height:1.5;text-align:left;word-break:keep-all;overflow-wrap:anywhere;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
 #cog[hidden],#cog [hidden]{display:none!important}
 #cog *,#cog *::before,#cog *::after{box-sizing:border-box}
 #cog button{font:inherit;font-weight:650;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 14px;margin:0;min-height:44px;min-width:44px;cursor:pointer;box-shadow:none;touch-action:manipulation;-webkit-user-select:none;user-select:none;transition:background .15s,border-color .15s,transform .08s}
@@ -915,31 +1169,31 @@ window.DoppelNative={postMessage:function(s){var o=JSON.parse(s);
 #cog .cg-btn{display:block;width:100%;background:var(--acc);border-color:var(--acc);color:var(--card);padding:15px 16px;font-size:16px}
 #cog .cg-ghost{display:block;width:100%;background:transparent;color:var(--sub);font-weight:600}
 #cog .cg-center{text-align:center}
-#cog .cg-muted{color:var(--sub);font-size:13px}
+#cog .cg-muted{color:var(--sub);font-size:var(--t-sub)}
 /* 위 막대 */
 #cog .cg-top{position:sticky;top:0;z-index:3;background:var(--bg);padding:calc(env(safe-area-inset-top,0px) + 6px) 16px 8px}
 #cog .cg-topin{max-width:520px;margin:0 auto}
 #cog .cg-bar{display:flex;align-items:center;gap:8px;min-height:44px}
 #cog .cg-quit{background:transparent;border:0;color:var(--sub);font-weight:600;padding:8px 6px;margin-left:-6px}
 #cog .cg-quit.cg-off{visibility:hidden}
-#cog .cg-steplab{flex:1;text-align:center;font-size:13px;font-weight:700;color:var(--sub);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#cog .cg-steplab{flex:1;text-align:center;font-size:var(--t-sub);font-weight:700;color:var(--sub);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #cog .cg-clock{min-width:64px;text-align:right;font-size:16px;font-weight:750;font-variant-numeric:tabular-nums;color:var(--ink);display:flex;align-items:center;justify-content:flex-end;gap:4px}
 #cog .cg-clock svg{width:15px;height:15px;color:var(--sub)}
 #cog .cg-clock.low{color:var(--warn)}
 #cog .cg-segs{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:4px}
-#cog .cg-seg{height:5px;border-radius:99px;background:var(--track);overflow:hidden}
-#cog .cg-seg i{display:block;height:100%;width:0;background:var(--acc);border-radius:99px;transition:width .3s}
+#cog .cg-seg{height:5px;border-radius:var(--r-pill);background:var(--track);overflow:hidden}
+#cog .cg-seg i{display:block;height:100%;width:0;background:var(--acc);border-radius:var(--r-pill);transition:width .3s}
 #cog .cg-seg.done i{width:100%!important}
 #cog .cg-main{max-width:520px;margin:0 auto;padding:6px 16px calc(env(safe-area-inset-bottom,0px) + 28px)}
 /* 글 */
-#cog .cg-h{font-size:24px;line-height:1.3;letter-spacing:-.01em;margin:10px 0 8px}
+#cog .cg-h{font-size:var(--t-title);line-height:1.3;letter-spacing:-.01em;margin:10px 0 8px}
 #cog .cg-p{color:var(--sub);margin:0 0 12px;line-height:1.6}
 #cog .cg-p b{color:var(--ink)}
 #cog .cg-eyebrow{font-size:12px;font-weight:700;color:var(--sub);letter-spacing:.04em}
-#cog .cg-card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:var(--shadow)}
+#cog .cg-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r-card);padding:18px;box-shadow:var(--shadow)}
 #cog .cg-stack{display:grid;gap:10px;margin-top:18px}
-#cog .cg-tag{display:inline-block;font-size:12px;font-weight:750;color:var(--amber);background:var(--ambersoft);border-radius:99px;padding:3px 10px}
-#cog .cg-qhead{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--sub);margin:4px 0 10px;min-height:24px}
+#cog .cg-tag{display:inline-block;font-size:12px;font-weight:750;color:var(--amber);background:var(--ambersoft);border-radius:var(--r-pill);padding:3px 10px}
+#cog .cg-qhead{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:var(--t-sub);font-weight:700;color:var(--sub);margin:4px 0 10px;min-height:24px}
 #cog .cg-ask{font-size:16px;font-weight:700;margin:0 0 10px}
 #cog .cg-fb{min-height:24px;text-align:center;font-weight:700;margin:12px 0 0}
 #cog .cg-fb.ok{color:var(--acc)}
@@ -958,18 +1212,18 @@ window.DoppelNative={postMessage:function(s){var o=JSON.parse(s);
 #cog .cg-plan{padding:4px 0;margin:0 0 14px}
 #cog .cg-prow{display:grid;grid-template-columns:34px 1fr auto;gap:12px;align-items:center;padding:10px 16px;border-top:1px solid var(--line)}
 #cog .cg-prow:first-child{border-top:0}
-#cog .cg-num{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;background:var(--accsoft);color:var(--acc);font-weight:800;font-size:14px}
-#cog .cg-prow b{display:block;font-size:15px;line-height:1.3}
-#cog .cg-prow span{display:block;font-size:12.5px;color:var(--sub);line-height:1.4}
+#cog .cg-num{width:32px;height:32px;border-radius:var(--r-small);display:grid;place-items:center;background:var(--accsoft);color:var(--acc);font-weight:800;font-size:14px}
+#cog .cg-prow b{display:block;font-size:var(--t-body);line-height:1.3}
+#cog .cg-prow span{display:block;font-size:var(--t-caption);color:var(--sub);line-height:1.4}
 #cog .cg-prow i{font-style:normal;font-size:12px;color:var(--sub);font-weight:700;white-space:nowrap}
 #cog .cg-points{display:grid;gap:8px;margin:0 0 4px;padding:0 4px;list-style:none}
 #cog .cg-points li{display:flex;gap:10px;align-items:flex-start;font-size:14px}
 #cog .cg-points svg{flex:none;width:18px;height:18px;margin-top:2px;color:var(--acc)}
 /* 영역 안내 */
-#cog .cg-icon{width:64px;height:64px;border-radius:20px;background:var(--accsoft);color:var(--acc);display:grid;place-items:center;margin:18px 0 6px}
+#cog .cg-icon{width:64px;height:64px;border-radius:var(--r-card);background:var(--accsoft);color:var(--acc);display:grid;place-items:center;margin:18px 0 6px}
 #cog .cg-icon svg{width:38px;height:38px}
 #cog .cg-ready{text-align:center;padding:28px 18px}
-#cog .cg-ready .cg-big{font-size:40px;font-weight:800;color:var(--acc);font-variant-numeric:tabular-nums;margin:4px 0}
+#cog .cg-ready .cg-big{font-size:var(--t-number);font-weight:800;color:var(--acc);font-variant-numeric:tabular-nums;margin:4px 0}
 /* ① 규칙 찾기 */
 #cog .cg-mx{display:grid;grid-template-columns:repeat(3,1fr);width:min(100%,330px,42vh);margin:0 auto;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;color:var(--ink)}
 #cog .cg-cell{aspect-ratio:1/1;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:grid;place-items:center;min-width:0}
@@ -983,10 +1237,10 @@ window.DoppelNative={postMessage:function(s){var o=JSON.parse(s);
 #cog .cg-ans.no{border-color:var(--warn);background:var(--warnsoft)}
 /* ② 수열 */
 #cog .cg-seq{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:22px 0 26px}
-#cog .cg-n{min-width:44px;height:56px;padding:0 7px;border-radius:13px;background:var(--card);border:1px solid var(--line);display:grid;place-items:center;font-size:21px;font-weight:750;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+#cog .cg-n{min-width:44px;height:56px;padding:0 7px;border-radius:var(--r-card);background:var(--card);border:1px solid var(--line);display:grid;place-items:center;font-size:var(--t-card);font-weight:750;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
 #cog .cg-n.q{background:var(--accsoft);color:var(--acc);border:2px dashed var(--acc)}
 #cog .cg-opts4{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-#cog .cg-opts4 button{min-height:64px;font-size:24px;font-weight:750;font-variant-numeric:tabular-nums;border-width:2px}
+#cog .cg-opts4 button{min-height:64px;font-size:var(--t-title);font-weight:750;font-variant-numeric:tabular-nums;border-width:2px}
 /* ③ 도형 돌리기 */
 #cog .cg-pair{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:8px 0 16px}
 #cog .cg-pair>div{background:var(--card);border:1px solid var(--line);border-radius:18px;aspect-ratio:1/1;display:grid;place-items:center;color:var(--acc);position:relative}
@@ -998,25 +1252,25 @@ window.DoppelNative={postMessage:function(s){var o=JSON.parse(s);
 #cog .cg-two button svg{width:22px;height:22px;display:block;margin:0 auto 2px;color:var(--sub)}
 /* ④ 계산하며 기억하기 */
 #cog .cg-eq{font-size:34px;font-weight:750;text-align:center;font-variant-numeric:tabular-nums;margin:34px 0 12px;letter-spacing:.01em;white-space:nowrap}
-#cog .cg-tbar{height:4px;background:var(--track);border-radius:99px;overflow:hidden;margin:0 auto 22px;max-width:220px}
+#cog .cg-tbar{height:4px;background:var(--track);border-radius:var(--r-pill);overflow:hidden;margin:0 auto 22px;max-width:220px}
 #cog .cg-tbar i{display:block;height:100%;width:100%;background:var(--sub);opacity:.6}
 #cog .cg-letter{font-size:104px;font-weight:800;text-align:center;color:var(--acc);line-height:1.1;margin:48px 0 6px}
 #cog .cg-slots{display:flex;justify-content:center;gap:8px;margin:14px 0 16px;flex-wrap:wrap}
-#cog .cg-slots b{width:46px;height:54px;border-radius:12px;border:2px solid var(--line);display:grid;place-items:center;font-size:24px;background:var(--card)}
+#cog .cg-slots b{width:46px;height:54px;border-radius:var(--r-card);border:2px solid var(--line);display:grid;place-items:center;font-size:var(--t-title);background:var(--card)}
 #cog .cg-slots b.f{border-color:var(--acc);color:var(--acc)}
 #cog .cg-keys{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-#cog .cg-keys button{min-height:54px;font-size:21px;font-weight:750}
-#cog .cg-keys .cg-wide{grid-column:span 2;font-size:15px;color:var(--sub)}
+#cog .cg-keys button{min-height:54px;font-size:var(--t-card);font-weight:750}
+#cog .cg-keys .cg-wide{grid-column:span 2;font-size:var(--t-body);color:var(--sub)}
 /* ⑤ 기호를 숫자로 */
 #cog .cg-key9{display:grid;grid-template-columns:repeat(9,1fr);gap:2px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:8px 4px 6px}
 #cog .cg-kc{display:grid;justify-items:center;gap:2px;color:var(--ink);min-width:0}
 #cog .cg-kc svg{width:100%;max-width:28px;height:auto;aspect-ratio:1/1}
-#cog .cg-kc b{font-size:15px;font-weight:800;color:var(--acc)}
+#cog .cg-kc b{font-size:var(--t-body);font-weight:800;color:var(--acc)}
 #cog .cg-target{width:116px;height:116px;margin:16px auto 14px;color:var(--ink);display:grid;place-items:center;background:var(--card);border:2px solid var(--line);border-radius:26px}
 #cog .cg-target svg{width:70px;height:70px}
 #cog .cg-fstage{height:150px;display:grid;place-items:center;font-size:var(--fs,64px);font-weight:800;font-variant-numeric:tabular-nums;color:var(--ink);user-select:none}
 #cog .cg-fstage.mask{font-size:56px;color:var(--sub)}
-#cog .cg-tap{width:100%;min-height:150px;font-size:22px;font-weight:800;border-radius:22px}
+#cog .cg-tap{width:100%;min-height:150px;font-size:var(--t-card);font-weight:800;border-radius:var(--r-card)}
 #cog .cg-tap:disabled{opacity:.45}
 #cog .cg-quit,#cog .cg-clock,#cog .cg-tag{white-space:nowrap}
 #cog .cg-bar{flex-wrap:wrap;row-gap:0}
@@ -1029,37 +1283,37 @@ window.DoppelNative={postMessage:function(s){var o=JSON.parse(s);
 #cog .cg-ask.cg-late{color:var(--amberink,#8a5a0b)}
 #cog .cg-tsec{margin:-14px 0 10px;font-size:12px}
 #cog .cg-pad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-#cog .cg-pad button{min-height:56px;font-size:22px;font-weight:750;font-variant-numeric:tabular-nums}
-#cog .cg-tally{text-align:center;font-size:13px;color:var(--sub);font-weight:700;margin-top:10px;font-variant-numeric:tabular-nums}
+#cog .cg-pad button{min-height:56px;font-size:var(--t-card);font-weight:750;font-variant-numeric:tabular-nums}
+#cog .cg-tally{text-align:center;font-size:var(--t-sub);color:var(--sub);font-weight:700;margin-top:10px;font-variant-numeric:tabular-nums}
 /* ⑥ 짝 외우기 */
 #cog .cg-study{display:grid;justify-items:center;gap:10px;padding:26px 18px 22px;margin-top:8px}
 #cog .cg-gl{width:132px;height:132px;color:var(--ink)}
 #cog .cg-gl svg{width:100%;height:100%}
-#cog .cg-word{font-size:40px;font-weight:800;color:var(--dop);letter-spacing:.03em;line-height:1.1}
+#cog .cg-word{font-size:var(--t-number);font-weight:800;color:var(--dop);letter-spacing:.03em;line-height:1.1}
 #cog .cg-dots{display:flex;gap:6px;justify-content:center;margin-top:14px}
-#cog .cg-dots i{width:7px;height:7px;border-radius:99px;background:var(--line)}
+#cog .cg-dots i{width:7px;height:7px;border-radius:var(--r-pill);background:var(--line)}
 #cog .cg-dots i.on{background:var(--dop);width:18px}
 #cog .cg-qgl{width:120px;height:120px;margin:4px auto 14px;background:var(--card);border:1px solid var(--line);border-radius:24px;padding:12px;color:var(--ink)}
 #cog .cg-qgl svg{width:100%;height:100%;display:block}
 #cog .cg-words{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-#cog .cg-words button{min-height:52px;font-size:19px;font-weight:700;letter-spacing:.03em;border-width:2px}
+#cog .cg-words button{min-height:52px;font-size:var(--t-card);font-weight:700;letter-spacing:.03em;border-width:2px}
 /* 결과 */
 #cog .cg-res{display:grid;gap:12px;padding-top:6px}
 #cog .cg-scorecard{text-align:center;padding:20px 18px 16px;background:linear-gradient(180deg,var(--accsoft),var(--card) 70%)}
-#cog .cg-lab{font-size:12.5px;font-weight:700;color:var(--sub);letter-spacing:.02em}
+#cog .cg-lab{font-size:var(--t-caption);font-weight:700;color:var(--sub);letter-spacing:.02em}
 #cog .cg-range{font-size:64px;font-weight:850;letter-spacing:-.035em;line-height:1.05;font-variant-numeric:tabular-nums;margin:6px 0 2px;color:var(--ink)}
 #cog .cg-range span{color:var(--acc);margin:0 .04em}
-#cog .cg-scale{font-size:12.5px;color:var(--sub);font-weight:600}
+#cog .cg-scale{font-size:var(--t-caption);color:var(--sub);font-weight:600}
 #cog .cg-curve{display:block;width:100%;max-width:340px;height:auto;margin:10px auto 2px}
-#cog .cg-s24{font-size:13px;color:var(--sub);margin-top:4px;line-height:1.7}
+#cog .cg-s24{font-size:var(--t-sub);color:var(--sub);margin-top:4px;line-height:1.7}
 #cog .cg-ntop{font-size:11.5px;line-height:1.55;color:var(--sub);margin:10px auto 0;max-width:340px}
 #cog .cg-more{margin-top:6px}
-#cog .cg-more summary{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 12px;font-size:12.5px;font-weight:700;color:var(--sub);cursor:pointer;list-style:none;border-radius:12px}
+#cog .cg-more summary{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 12px;font-size:var(--t-caption);font-weight:700;color:var(--sub);cursor:pointer;list-style:none;border-radius:var(--r-card)}
 #cog .cg-more summary::-webkit-details-marker{display:none}
 #cog .cg-more summary::after{content:"";width:6px;height:6px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);margin:-3px 0 0 8px;transition:transform .2s}
 #cog .cg-more[open] summary::after{transform:rotate(-135deg);margin-top:3px}
 #cog .cg-more summary:focus-visible{outline:3px solid var(--acc)}
-#cog .cg-prevr{display:inline-block;margin-top:8px;font-size:12px;font-weight:700;color:var(--sub);background:var(--track);border-radius:99px;padding:3px 10px}
+#cog .cg-prevr{display:inline-block;margin-top:8px;font-size:12px;font-weight:700;color:var(--sub);background:var(--track);border-radius:var(--r-pill);padding:3px 10px}
 #cog .cg-type{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;background:var(--dopsoft);border-color:transparent}
 #cog .cg-type svg{width:60px;height:60px}
 #cog .cg-tyname{font-size:20px;font-weight:800;line-height:1.3;color:var(--dop);margin:2px 0 4px;letter-spacing:-.01em}
@@ -1075,8 +1329,8 @@ window.DoppelNative={postMessage:function(s){var o=JSON.parse(s);
 #cog .cg-av small{font-size:12px;font-weight:700;margin-left:4px}
 #cog .cg-av small.up{color:var(--acc)}
 #cog .cg-av small.dn{color:var(--sub)}
-#cog .cg-trk{grid-column:1/-1;position:relative;height:9px;border-radius:99px;background:var(--track);margin-top:4px}
-#cog .cg-trk i{position:absolute;left:0;top:0;bottom:0;border-radius:99px;background:var(--acc)}
+#cog .cg-trk{grid-column:1/-1;position:relative;height:9px;border-radius:var(--r-pill);background:var(--track);margin-top:4px}
+#cog .cg-trk i{position:absolute;left:0;top:0;bottom:0;border-radius:var(--r-pill);background:var(--acc)}
 #cog .cg-trk u{position:absolute;top:-3px;bottom:-3px;width:2px;margin-left:-1px;background:var(--sub);opacity:.55;border-radius:2px}
 #cog .cg-trk.pv{height:4px;margin-top:3px;background:transparent}
 #cog .cg-trk.pv i{background:var(--sub);opacity:.45}
@@ -1084,7 +1338,7 @@ window.DoppelNative={postMessage:function(s){var o=JSON.parse(s);
 #cog .cg-arow.keep .cg-an b{color:var(--dop)}
 #cog .cg-arow.keep .cg-trk i{background:var(--dop)}
 #cog .cg-pend{grid-column:1/-1;font-size:12px;color:var(--sub)}
-#cog .cg-basis{font-size:13px;line-height:1.6;color:var(--sub);text-align:center;margin:-6px auto 14px;max-width:400px}
+#cog .cg-basis{font-size:var(--t-sub);line-height:1.6;color:var(--sub);text-align:center;margin:-6px auto 14px;max-width:400px}
 #cog .cg-refs{margin:10px 0 0;border:1px solid var(--line);border-radius:14px;padding:0 14px}
 #cog .cg-refs summary{cursor:pointer;font-size:13.5px;font-weight:700;padding:12px 0;color:var(--ink,inherit);list-style:none}
 #cog .cg-refs summary::-webkit-details-marker{display:none}
@@ -1098,13 +1352,13 @@ window.DoppelNative={postMessage:function(s){var o=JSON.parse(s);
 #cog sup.cg-fn{font-size:10px;font-weight:700;color:var(--acc);margin-left:2px;vertical-align:super;line-height:0}
 #cog .cg-refl{font-size:12px;color:var(--sub);margin:8px 0 0;line-height:1.5}
 #cog .cg-notes{margin:2px 0 0;padding:0 2px;list-style:none;display:grid;gap:6px}
-#cog .cg-notes li{font-size:13px;color:var(--sub);display:flex;gap:8px}
+#cog .cg-notes li{font-size:var(--t-sub);color:var(--sub);display:flex;gap:8px}
 #cog .cg-notes li::before{content:"";flex:none;width:5px;height:5px;border-radius:50%;background:var(--sub);margin-top:8px;opacity:.6}
 #cog .cg-notice{font-size:12px;line-height:1.6;color:var(--sub);background:var(--track);border-radius:14px;padding:12px 14px;margin:6px 0 0}
 /* 그만두기 확인 */
 #cog .cg-modal{position:fixed;inset:0;z-index:5;background:rgba(10,8,4,.45);display:flex;align-items:flex-end;justify-content:center;padding:16px 16px calc(env(safe-area-inset-bottom,0px) + 16px)}
-#cog .cg-dlg{width:100%;max-width:420px;background:var(--card);border-radius:22px;padding:22px 18px 18px;border:1px solid var(--line)}
-#cog .cg-dlg h3{margin:0 0 6px;font-size:19px}
+#cog .cg-dlg{width:100%;max-width:420px;background:var(--card);border-radius:var(--r-card);padding:22px 18px 18px;border:1px solid var(--line)}
+#cog .cg-dlg h3{margin:0 0 6px;font-size:var(--t-card)}
 #cog .cg-dlg p{margin:0 0 16px;color:var(--sub)}
 #cog .cg-dlg .cg-two button{min-height:52px}
 #cog .cg-warnbtn{background:var(--warnsoft)!important;color:var(--warn)!important;border-color:transparent!important}
@@ -2124,9 +2378,9 @@ i2p:'本は<b>単元と量</b>、講義は<b>講の数と1講の時間</b>を入
 // 1.1 주간 점검 문구(추가 지시 10-24 14:27)
 Object.assign(T,{ko:{wcT:"이번 주 계획 점검",wcLead:"지난주 {d}일 공부 · 계획의 {p}%",wcNoLog:"지난주 기록이 없어요",wcWhyRep:"시험 날 기억 {r}%",wcWhyAi:"AI 모의 응시에서 약한 유형",wcWhyMem:"지금 기억 {r}%",wcIn:"넣기",wcCost:"복습에 이번 주 {h} → 진도 끝나는 날 {a} → {b}",wcCost0:"복습에 이번 주 {h} · 진도 끝나는 날 {a} 그대로",wcCostH:"복습에 이번 주 {h}",wcNone:"넣은 복습이 없어요. 이번 주는 진도만 나가요.",wcOk:"이대로 이번 주 시작",wcSkip:"이번 주는 그대로",wcDone:"이번 주 복습이 정해졌어요. 오늘 할 일에 그날 몫이 나와요.",wcSkipped:"이번 주는 계획 그대로 가요. 담아 둔 것은 다음 주로 넘겼어요.",wcDoneT:"이번 주 복습을 정했어요",wcAgain:"이번 주 점검 다시 보기",wcDoneS:"복습 정함",wcSkippedS:"이번 주는 그대로",wcAiAgain:"{d}에 {s} AI 모의 응시를 다시 해 보세요",wqAdd:"다음 주 점검에 넣기",wqAdded:"다음 점검({d})에 넣었어요",wqIn:"담겨 있어요",tdRevT:"이번 주 복습 · 오늘 몫",tdRevDone:"복습했어요",tdRevDid:"했어요"},en:{wcT:"This week's plan check",wcLead:"Last week: {d} study days · {p}% of plan",wcNoLog:"No records last week",wcWhyRep:"Exam-day memory {r}%",wcWhyAi:"Weak type in AI mock exam",wcWhyMem:"Memory now {r}%",wcIn:"Add",wcCost:"Review this week: {h} → finish date {a} → {b}",wcCost0:"Review this week: {h} · finish date stays {a}",wcCostH:"Review this week: {h}",wcNone:"No review added. Just new material this week.",wcOk:"Start this week like this",wcSkip:"Keep this week as is",wcDone:"This week's review is set. Each day's share shows in today's tasks.",wcSkipped:"Plan stays the same this week. Saved items move to next week.",wcDoneT:"This week's review is set",wcAgain:"See this week's check again",wcDoneS:"Review set",wcSkippedS:"Kept as is",wcAiAgain:"Try the {s} AI mock exam again on {d}",wqAdd:"Add to next weekly check",wqAdded:"Added to the next check ({d})",wqIn:"Already added",tdRevT:"This week's review · today",tdRevDone:"Reviewed",tdRevDid:"Done"}}[LANG_T]); if(LANG==='ja') Object.assign(T,{wcT:"今週の計画チェック",wcLead:"先週は{d}日勉強 · 計画の{p}%",wcNoLog:"先週の記録がありません",wcWhyRep:"試験の日の記憶 {r}%",wcWhyAi:"AI模擬受験で弱いタイプ",wcWhyMem:"今の記憶 {r}%",wcIn:"入れる",wcCost:"今週の復習 {h} → 進度が終わる日 {a} → {b}",wcCost0:"今週の復習 {h} · 進度が終わる日 {a} のまま",wcCostH:"今週の復習 {h}",wcNone:"入れた復習はありません。今週は進度だけ進めます。",wcOk:"このまま今週を始める",wcSkip:"今週はそのまま",wcDone:"今週の復習が決まりました。その日の分が今日のやることに出ます。",wcSkipped:"今週は計画どおり進めます。入れておいたものは来週に回しました。",wcDoneT:"今週の復習を決めました",wcAgain:"今週のチェックをもう一度見る",wcDoneS:"復習を決めた",wcSkippedS:"今週はそのまま",wcAiAgain:"{d}に{s}のAI模擬受験をもう一度",wqAdd:"次の週間チェックに入れる",wqAdded:"次のチェック（{d}）に入れました",wqIn:"入っています",tdRevT:"今週の復習 · 今日の分",tdRevDone:"復習した",tdRevDid:"済み"});
 // 웹판 1단계 문구(10-24)
-Object.assign(T,{ko:{webNote:"기록은 이 브라우저에만 저장돼요. 브라우저 기록을 지우면 사라져요.",webSave:"기록 파일로 저장",webLoad:"기록 파일 불러오기",webMoveT:"기록 옮기기",webMoveD:"저장한 파일은 나중에 다른 브라우저나 앱에서 불러올 수 있어요.",webLoadQ:"지금 기록을 이 파일의 기록으로 바꿀까요? 지금 기록은 사라져요.",webLoadOk:"기록을 불러왔어요",webLoadBad:"라이벌로그 기록 파일이 아니에요. 아무것도 바꾸지 않았어요.",webSaved:"기록 파일을 저장했어요",webApp:"이 기능은 앱에서 쓸 수 있어요",webAppStore:"App Store",webPlay:"Google Play",webClose:"안내 닫기",aiSoonH:"AI 모의 응시는 준비 중이에요",aiSoonP:"웹에서는 아직 쓸 수 없어요. 앱에서 먼저 열려요. 응시하고 싶은 시험이 있으면 알려 주세요.",repAiWeb:"AI 모의 응시 · 준비 중",webBiz:"통신판매업 신고 제2026-용인기흥-01759호 · 전화 0502-1921-1532"},en:{webNote:"Your records are saved only in this browser. Clearing browser data deletes them.",webSave:"Save records to a file",webLoad:"Load a records file",webMoveT:"Move your records",webMoveD:"You can load the saved file later in another browser or in the app.",webLoadQ:"Replace your current records with this file? Your current records will be gone.",webLoadOk:"Records loaded",webLoadBad:"This isn't a Rivalog records file. Nothing was changed.",webSaved:"Records file saved",webApp:"This feature is available in the app",webAppStore:"App Store",webPlay:"Google Play",webClose:"Close notice",aiSoonH:"AI mock exams are coming soon",aiSoonP:"They aren't available on the web yet. They open in the app first. Tell us which exam you'd like.",repAiWeb:"AI mock exam · coming soon",webBiz:"Mail-order business report No. 2026-Yongin Giheung-01759 · Tel +82 502-1921-1532"}}[LANG_T]); if(LANG==='ja') Object.assign(T,{webNote:"記録はこのブラウザにだけ保存されます。ブラウザのデータを消すと消えます。",webSave:"記録をファイルに保存",webLoad:"記録ファイルを読み込む",webMoveT:"記録を移す",webMoveD:"保存したファイルは、あとで別のブラウザやアプリで読み込めます。",webLoadQ:"今の記録をこのファイルの記録に置き換えますか？今の記録は消えます。",webLoadOk:"記録を読み込みました",webLoadBad:"ライバログの記録ファイルではありません。何も変えていません。",webSaved:"記録ファイルを保存しました",webApp:"この機能はアプリで使えます",webAppStore:"App Store",webPlay:"Google Play",webClose:"案内を閉じる",aiSoonH:"AI模擬受験は準備中です",aiSoonP:"ウェブではまだ使えません。アプリで先に使えるようになります。受けたい試験があれば教えてください。",repAiWeb:"AI模擬受験 · 準備中",webBiz:"通信販売業申告 第2026-龍仁器興-01759号 · 電話 +82 502-1921-1532"});
+Object.assign(T,{ko:{webNote:"기록은 이 브라우저에만 저장돼요. 가끔 파일로 저장해 두세요.",webSave:"기록 파일로 저장",webLoad:"기록 파일 불러오기",webMoveT:"기록 옮기기",webMoveD:"저장한 파일은 나중에 다른 브라우저나 앱에서 불러올 수 있어요.",webLoadQ:"지금 기록을 이 파일의 기록으로 바꿀까요? 지금 기록은 사라져요.",webLoadOk:"기록을 불러왔어요",webLoadBad:"라이벌로그 기록 파일이 아니에요. 아무것도 바꾸지 않았어요.",webSaved:"기록 파일을 저장했어요",webApp:"이 기능은 앱에서 쓸 수 있어요",webAppStore:"App Store",webPlay:"Google Play",webClose:"안내 닫기",aiSoonH:"AI 모의 응시는 준비 중이에요",aiSoonP:"웹에서는 아직 쓸 수 없어요. 앱에서 먼저 열려요. 응시하고 싶은 시험이 있으면 알려 주세요.",repAiWeb:"AI 모의 응시 · 준비 중",webBiz:"통신판매업 신고 제2026-용인기흥-01759호 · 전화 0502-1921-1532"},en:{webNote:"Your records are saved only in this browser. Clearing browser data deletes them.",webSave:"Save records to a file",webLoad:"Load a records file",webMoveT:"Move your records",webMoveD:"You can load the saved file later in another browser or in the app.",webLoadQ:"Replace your current records with this file? Your current records will be gone.",webLoadOk:"Records loaded",webLoadBad:"This isn't a Rivalog records file. Nothing was changed.",webSaved:"Records file saved",webApp:"This feature is available in the app",webAppStore:"App Store",webPlay:"Google Play",webClose:"Close notice",aiSoonH:"AI mock exams are coming soon",aiSoonP:"They aren't available on the web yet. They open in the app first. Tell us which exam you'd like.",repAiWeb:"AI mock exam · coming soon",webBiz:"Mail-order business report No. 2026-Yongin Giheung-01759 · Tel +82 502-1921-1532"}}[LANG_T]); if(LANG==='ja') Object.assign(T,{webNote:"記録はこのブラウザにだけ保存されます。ブラウザのデータを消すと消えます。",webSave:"記録をファイルに保存",webLoad:"記録ファイルを読み込む",webMoveT:"記録を移す",webMoveD:"保存したファイルは、あとで別のブラウザやアプリで読み込めます。",webLoadQ:"今の記録をこのファイルの記録に置き換えますか？今の記録は消えます。",webLoadOk:"記録を読み込みました",webLoadBad:"ライバログの記録ファイルではありません。何も変えていません。",webSaved:"記録ファイルを保存しました",webApp:"この機能はアプリで使えます",webAppStore:"App Store",webPlay:"Google Play",webClose:"案内を閉じる",aiSoonH:"AI模擬受験は準備中です",aiSoonP:"ウェブではまだ使えません。アプリで先に使えるようになります。受けたい試験があれば教えてください。",repAiWeb:"AI模擬受験 · 準備中",webBiz:"通信販売業申告 第2026-龍仁器興-01759号 · 電話 +82 502-1921-1532"});
 // 웹판 1단계 회신 반영(10-24 · 법무 문구 한 문장 · 사업자 정보 칸 · 사용 통계 · 알림 신청 · 7일째 설문)
-Object.assign(T,{"ko":{"webNote":"기록은 이 브라우저에만 저장돼요. 브라우저 기록을 지우면 사라져요. 다른 기기와 연결되지 않아요. 기록 파일을 내려받아 보관해 주세요.","webLast":"마지막 저장 {d}","webLastNo":"아직 기록 파일로 저장한 적이 없어요","webBizBody":"상호 아르케(Arche) · 대표자 박준형<br>사업자등록번호 774-39-01532<br>통신판매업 신고번호 제2026-용인기흥-01759호<br>주소 경기도 용인시 기흥구 구갈로60번길 9-1, 7층 7201호<br>전화 0502-1921-1532<br>이메일 archeisit@gmail.com","wstT":"사용 통계","wstD":"웹판이 얼마나 쓰이는지 알기 위해, 그날 처음 열 때 · 첫 계획을 정할 때 · 3일째와 7일째 다시 열 때 · 앱에서만 되는 기능을 누를 때 · 7일째 한 문항 설문에 답할 때 단계 이름 · 언어 · 웹판 버전 · 들어온 경로(주소의 꼬리표)만 아르케 저장소(Supabase)로 보내 날짜별 횟수 하나를 올려요. 동의를 받지 않고 세지만, 계획 내용 · 이메일 · 기기를 알아보는 값은 보내지 않고 사람별 기록도 만들지 않아요. 횟수 표는 2년이 지나면 지워요. 이때 저장소 업체도 보안을 위해 접속 기록(IP 주소 · 브라우저 정보 등)을 1일 동안 남길 수 있어요. 브라우저의 추적 거부(GPC · Do Not Track)를 켜 두었거나 아래 단추를 누르면 보내지 않아요.","wstOff":"사용 통계 보내지 않기","wstOn":"사용 통계를 보내지 않아요 · 다시 보내기","wstGpc":"브라우저의 추적 거부 설정에 따라 사용 통계를 보내지 않아요","wnBtn":"웹에서 열리면 알림 받기","wnT":"웹에서도 열리면 알려 드릴까요?","wnEmail":"이메일","wnSend":"알림 신청","wnClose":"닫기","wnBad":"이메일 주소를 확인해 주세요","wnOk":"신청했어요","wnDone":"출시 알림을 신청했어요","wnFail":"지금은 신청하지 못했어요. 잠시 뒤 다시 해 주세요.","wvQ":"웹에서 계속 쓰시려면 무엇이 가장 필요하세요?","wvSync":"기기를 바꿔도 이어지는 저장","wvAi":"AI 모의 응시","wvApp":"앱으로 충분해요","wvEtc":"기타","wvClose":"닫기","wvThanks":"답해 주셔서 고마워요"},"en":{"webNote":"Your records are saved only in this browser. Clearing browser data deletes them. They aren't linked to your other devices. Download a records file to keep them.","webLast":"Last saved {d}","webLastNo":"You haven't saved a records file yet","webBizBody":"Arche · Representative: Junhyeong Park<br>Business registration no. 774-39-01532<br>Mail-order business report no. 2026-Yongin Giheung-01759 (Giheung-gu Office, Yongin City)<br>Address: Room 7201, 7F, 9-1 Gugalro 60beon-gil, Giheung-gu, Yongin-si, Gyeonggi-do, Republic of Korea<br>Phone: +82 502-1921-1532<br>Email: archeisit@gmail.com","wstT":"Usage statistics","wstD":"To learn how the web version is used, when you first open it each day, set your first plan, open it again on day 3 and day 7, tap a feature that only works in the app, or answer the one-question survey on day 7, we send only the step name, language, web version and how you arrived (the tag in the address) to Arche's storage (Supabase), which adds one to a daily count. This is counted without asking for consent, but no plan content, email or device identifiers are sent and no per-person record is made. The count table is deleted after 2 years. Our storage provider may keep access logs (such as IP address and browser information) for 1 day for security. Nothing is sent if your browser has Global Privacy Control or Do Not Track turned on, or if you press the button below.","wstOff":"Don't send usage statistics","wstOn":"Usage statistics are off · Turn back on","wstGpc":"Usage statistics are not sent because your browser asks not to be tracked","wnBtn":"Tell me when it opens on the web","wnT":"Want us to tell you when it opens on the web?","wnEmail":"Email","wnSend":"Sign up","wnClose":"Close","wnBad":"Check your email address","wnOk":"You're signed up","wnDone":"You signed up for the launch notice","wnFail":"We couldn't sign you up right now. Try again in a moment.","wvQ":"What would you need most to keep using it on the web?","wvSync":"Records that follow me to other devices","wvAi":"AI mock exams","wvApp":"The app is enough","wvEtc":"Something else","wvClose":"Close","wvThanks":"Thanks for answering"}}[LANG_T]); if(LANG==='ja') Object.assign(T,{"webNote":"記録はこのブラウザにだけ保存されます。ブラウザのデータを消すと消えます。ほかの端末とはつながりません。記録ファイルをダウンロードして保管してください。","webLast":"最後の保存 {d}","webLastNo":"まだ記録ファイルに保存していません","webBizBody":"商号 Arche（アルケ） · 代表者 Junhyeong Park<br>事業者登録番号 774-39-01532<br>通信販売業申告番号 Mail-order business report no. 2026-Yongin Giheung-01759 (Giheung-gu Office, Yongin City)<br>所在地 Room 7201, 7F, 9-1 Gugalro 60beon-gil, Giheung-gu, Yongin-si, Gyeonggi-do, Republic of Korea<br>電話 +82 502-1921-1532<br>メール archeisit@gmail.com","wstT":"利用統計","wstD":"ウェブ版がどれくらい使われているかを知るため、その日はじめて開いたとき・最初の計画を決めたとき・3日目と7日目にまた開いたとき・アプリでだけ使える機能を押したとき・7日目の1問アンケートに答えたときに、段階の名前・言語・ウェブ版の版・来た経路（アドレスのタグ）だけをArcheの保存先（Supabase）に送り、日ごとの回数を1つ増やします。同意をいただかずに数えますが、計画の内容・メール・端末を見分ける値は送らず、人ごとの記録も作りません。回数の表は2年たつと削除します。このとき保存先の事業者も、セキュリティのためアクセス記録（IPアドレス・ブラウザ情報など）を1日間残すことがあります。ブラウザのトラッキング拒否（GPC・Do Not Track）をオンにしている場合や、下のボタンを押した場合は送りません。","wstOff":"利用統計を送らない","wstOn":"利用統計を送っていません · また送る","wstGpc":"ブラウザのトラッキング拒否の設定により、利用統計を送りません","wnBtn":"ウェブで使えるようになったら知らせてほしい","wnT":"ウェブでも使えるようになったらお知らせしましょうか？","wnEmail":"メール","wnSend":"お知らせを申し込む","wnClose":"閉じる","wnBad":"メールアドレスを確認してください","wnOk":"申し込みました","wnDone":"公開のお知らせを申し込みました","wnFail":"今は申し込めませんでした。少ししてからもう一度どうぞ。","wvQ":"ウェブで使い続けるには、何がいちばん必要ですか？","wvSync":"端末を変えても続く保存","wvAi":"AI模擬受験","wvApp":"アプリで十分","wvEtc":"そのほか","wvClose":"閉じる","wvThanks":"答えてくださってありがとうございます"});
+Object.assign(T,{"ko":{"webNote":"기록은 이 브라우저에만 저장돼요. 가끔 파일로 저장해 두세요.","webLast":"마지막 저장 {d}","webLastNo":"아직 기록 파일로 저장한 적이 없어요","webBizBody":"상호 아르케(Arche) · 대표자 박준형<br>사업자등록번호 774-39-01532<br>통신판매업 신고번호 제2026-용인기흥-01759호<br>주소 경기도 용인시 기흥구 구갈로60번길 9-1, 7층 7201호<br>전화 0502-1921-1532<br>이메일 archeisit@gmail.com","wstT":"사용 통계","wstD":"웹판이 얼마나 쓰이는지 알기 위해, 그날 처음 열 때 · 첫 계획을 정할 때 · 3일째와 7일째 다시 열 때 · 앱에서만 되는 기능을 누를 때 · 7일째 한 문항 설문에 답할 때 단계 이름 · 언어 · 웹판 버전 · 들어온 경로(주소의 꼬리표)만 아르케 저장소(Supabase)로 보내 날짜별 횟수 하나를 올려요. 동의를 받지 않고 세지만, 계획 내용 · 이메일 · 기기를 알아보는 값은 보내지 않고 사람별 기록도 만들지 않아요. 횟수 표는 2년이 지나면 지워요. 이때 저장소 업체도 보안을 위해 접속 기록(IP 주소 · 브라우저 정보 등)을 1일 동안 남길 수 있어요. 브라우저의 추적 거부(GPC · Do Not Track)를 켜 두었거나 아래 단추를 누르면 보내지 않아요.","wstOff":"사용 통계 보내지 않기","wstOn":"사용 통계를 보내지 않아요 · 다시 보내기","wstGpc":"브라우저의 추적 거부 설정에 따라 사용 통계를 보내지 않아요","wnBtn":"웹에서 열리면 알림 받기","wnT":"웹에서도 열리면 알려 드릴까요?","wnEmail":"이메일","wnSend":"알림 신청","wnClose":"닫기","wnBad":"이메일 주소를 확인해 주세요","wnOk":"신청했어요","wnDone":"출시 알림을 신청했어요","wnFail":"지금은 신청하지 못했어요. 잠시 뒤 다시 해 주세요.","wvQ":"웹에서 계속 쓰시려면 무엇이 가장 필요하세요?","wvSync":"기기를 바꿔도 이어지는 저장","wvAi":"AI 모의 응시","wvApp":"앱으로 충분해요","wvEtc":"기타","wvClose":"닫기","wvThanks":"답해 주셔서 고마워요"},"en":{"webNote":"Your records are saved only in this browser. Clearing browser data deletes them. They aren't linked to your other devices. Download a records file to keep them.","webLast":"Last saved {d}","webLastNo":"You haven't saved a records file yet","webBizBody":"Arche · Representative: Junhyeong Park<br>Business registration no. 774-39-01532<br>Mail-order business report no. 2026-Yongin Giheung-01759 (Giheung-gu Office, Yongin City)<br>Address: Room 7201, 7F, 9-1 Gugalro 60beon-gil, Giheung-gu, Yongin-si, Gyeonggi-do, Republic of Korea<br>Phone: +82 502-1921-1532<br>Email: archeisit@gmail.com","wstT":"Usage statistics","wstD":"To learn how the web version is used, when you first open it each day, set your first plan, open it again on day 3 and day 7, tap a feature that only works in the app, or answer the one-question survey on day 7, we send only the step name, language, web version and how you arrived (the tag in the address) to Arche's storage (Supabase), which adds one to a daily count. This is counted without asking for consent, but no plan content, email or device identifiers are sent and no per-person record is made. The count table is deleted after 2 years. Our storage provider may keep access logs (such as IP address and browser information) for 1 day for security. Nothing is sent if your browser has Global Privacy Control or Do Not Track turned on, or if you press the button below.","wstOff":"Don't send usage statistics","wstOn":"Usage statistics are off · Turn back on","wstGpc":"Usage statistics are not sent because your browser asks not to be tracked","wnBtn":"Tell me when it opens on the web","wnT":"Want us to tell you when it opens on the web?","wnEmail":"Email","wnSend":"Sign up","wnClose":"Close","wnBad":"Check your email address","wnOk":"You're signed up","wnDone":"You signed up for the launch notice","wnFail":"We couldn't sign you up right now. Try again in a moment.","wvQ":"What would you need most to keep using it on the web?","wvSync":"Records that follow me to other devices","wvAi":"AI mock exams","wvApp":"The app is enough","wvEtc":"Something else","wvClose":"Close","wvThanks":"Thanks for answering"}}[LANG_T]); if(LANG==='ja') Object.assign(T,{"webNote":"記録はこのブラウザにだけ保存されます。ブラウザのデータを消すと消えます。ほかの端末とはつながりません。記録ファイルをダウンロードして保管してください。","webLast":"最後の保存 {d}","webLastNo":"まだ記録ファイルに保存していません","webBizBody":"商号 Arche（アルケ） · 代表者 Junhyeong Park<br>事業者登録番号 774-39-01532<br>通信販売業申告番号 Mail-order business report no. 2026-Yongin Giheung-01759 (Giheung-gu Office, Yongin City)<br>所在地 Room 7201, 7F, 9-1 Gugalro 60beon-gil, Giheung-gu, Yongin-si, Gyeonggi-do, Republic of Korea<br>電話 +82 502-1921-1532<br>メール archeisit@gmail.com","wstT":"利用統計","wstD":"ウェブ版がどれくらい使われているかを知るため、その日はじめて開いたとき・最初の計画を決めたとき・3日目と7日目にまた開いたとき・アプリでだけ使える機能を押したとき・7日目の1問アンケートに答えたときに、段階の名前・言語・ウェブ版の版・来た経路（アドレスのタグ）だけをArcheの保存先（Supabase）に送り、日ごとの回数を1つ増やします。同意をいただかずに数えますが、計画の内容・メール・端末を見分ける値は送らず、人ごとの記録も作りません。回数の表は2年たつと削除します。このとき保存先の事業者も、セキュリティのためアクセス記録（IPアドレス・ブラウザ情報など）を1日間残すことがあります。ブラウザのトラッキング拒否（GPC・Do Not Track）をオンにしている場合や、下のボタンを押した場合は送りません。","wstOff":"利用統計を送らない","wstOn":"利用統計を送っていません · また送る","wstGpc":"ブラウザのトラッキング拒否の設定により、利用統計を送りません","wnBtn":"ウェブで使えるようになったら知らせてほしい","wnT":"ウェブでも使えるようになったらお知らせしましょうか？","wnEmail":"メール","wnSend":"お知らせを申し込む","wnClose":"閉じる","wnBad":"メールアドレスを確認してください","wnOk":"申し込みました","wnDone":"公開のお知らせを申し込みました","wnFail":"今は申し込めませんでした。少ししてからもう一度どうぞ。","wvQ":"ウェブで使い続けるには、何がいちばん必要ですか？","wvSync":"端末を変えても続く保存","wvAi":"AI模擬受験","wvApp":"アプリで十分","wvEtc":"そのほか","wvClose":"閉じる","wvThanks":"答えてくださってありがとうございます"});
 const rvName=()=>{try{return (typeof S!=='undefined'&&S&&S.rival)||T.rvDefault}catch(e){return T.rvDefault}};
 const jong=w=>{const c=w.charCodeAt(w.length-1);return c>=0xAC00&&c<=0xD7A3&&(c-0xAC00)%28>0;};   // 받침 있으면 이/은
 const t=(k,v)=>{const raw=rvName(),n=esc(raw),j=jong(raw),V=Object.assign({rv:n,rv1:esc([...raw][0].toUpperCase()),'rv_이가':LANG==='ko'?n+(j?'이':'가'):n,'rv_은는':LANG==='ko'?n+(j?'은':'는'):n},v||{});

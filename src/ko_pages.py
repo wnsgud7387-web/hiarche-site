@@ -141,7 +141,7 @@ def build_ko():
 <h1 class="h1" style="font-size:clamp(40px,6vw,76px)">{E(k["name"])}</h1>
 <p style="font-family:'Bricolage Grotesque',sans-serif;font-size:26px;font-weight:700">{E(k["line"])}</p>
 <p style="font-size:18px;max-width:32em;opacity:.88">{E(k["sub"])}</p>
-<div style="display:flex;flex-wrap:wrap;gap:12px">{dl}{'<a class="btn" style="border-radius:12px;border:2px solid '+a["fg"]+';color:'+a["fg"]+'" href="#lq">LQ 검사</a>' if a['slug']=='rivalog' else ''}<span class="btn" style="border-radius:12px;border:1.5px dashed {a["fg"]};opacity:.8">구글 플레이 · 곧</span></div>
+<div style="display:flex;flex-wrap:wrap;gap:12px">{dl}{'<a class="btn" style="border-radius:12px;border:2px solid '+a["fg"]+';color:'+a["fg"]+'" href="https://rivalog.hiarche.com/">웹에서 바로 써 보기</a><a class="btn" style="border-radius:12px;border:2px solid '+a["fg"]+';color:'+a["fg"]+'" href="#lq">LQ 검사</a>' if a['slug']=='rivalog' else ''}<span class="btn" style="border-radius:12px;border:1.5px dashed {a["fg"]};opacity:.8">구글 플레이 · 곧</span></div>
 <p style="font-size:14px;opacity:.78">{E(k["meta"])}</p>
 </div>
 </div></section>

@@ -344,7 +344,7 @@ def build():
 <h1 class="h1" style="font-size:clamp(44px,6vw,80px)">{E(a["name"])}</h1>
 <p style="font-family:'Bricolage Grotesque',sans-serif;font-size:28px;font-weight:700">{E(a["line"])}</p>
 <p style="font-size:18px;max-width:32em;opacity:.88">{E(a["sub"])}</p>
-<div style="display:flex;flex-wrap:wrap;gap:12px">{dl}{'<a class="btn" style="border-radius:12px;border:2px solid '+a["fg"]+';color:'+a["fg"]+'" href="#try">Try it here</a>' if lab else ''}{'<a class="btn" style="border-radius:12px;border:2px solid '+a["fg"]+';color:'+a["fg"]+'" href="#lq">LQ check</a>' if a['slug']=='rivalog' else ''}{'' if a['slug']=='burnpile' else '<span class="btn" style="border-radius:12px;border:1.5px dashed '+a['fg']+';opacity:.8">Google Play · soon</span>'}</div>
+<div style="display:flex;flex-wrap:wrap;gap:12px">{dl}{'<a class="btn" style="border-radius:12px;border:2px solid '+a["fg"]+';color:'+a["fg"]+'" href="#try">Try it here</a>' if lab else ''}{'<a class="btn" style="border-radius:12px;border:2px solid '+a["fg"]+';color:'+a["fg"]+'" href="https://rivalog.hiarche.com/">Use it on the web (Korean)</a><a class="btn" style="border-radius:12px;border:2px solid '+a["fg"]+';color:'+a["fg"]+'" href="#lq">LQ check</a>' if a['slug']=='rivalog' else ''}{'' if a['slug']=='burnpile' else '<span class="btn" style="border-radius:12px;border:1.5px dashed '+a['fg']+';opacity:.8">Google Play · soon</span>'}</div>
 <p style="font-size:14px;opacity:.78">{E(a["meta"])}</p>
 </div>
 </div></section>

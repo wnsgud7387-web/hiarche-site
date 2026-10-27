@@ -186,7 +186,7 @@ def footer(depth):
     return f'''<footer class="site wrap">
 <div class="row">
 <div style="display:flex;flex-direction:column;gap:8px"><span class="logo" style="font-size:22px"><b>Hi</b>Arche</span><span style="color:#50554B">Questions or ideas? archeisit@gmail.com</span></div>
-<nav aria-label="Footer" class="links" style="font-size:15px"><a href="{up}support.html">Support</a><a href="{BOARD}">Feedback board</a><a href="{up}press.html">Press &amp; Business</a><a href="{up}legal.html">Privacy &amp; Legal</a><a href="https://www.instagram.com/arche.apps/">Instagram</a></nav>
+<nav aria-label="Footer" class="links" style="font-size:15px"><a href="{up}support.html">Support</a><a href="{BOARD}">Feedback board</a><a href="{up}press.html">Press &amp; Business</a><a href="{up}legal.html">Privacy &amp; Legal</a><a href="{up}ko/terms.html" lang="ko">이용약관</a><a href="{up}ko/refund.html" lang="ko">환불 정책</a><a href="https://www.instagram.com/arche.apps/">Instagram</a></nav>
 </div>
 <div class="legal">
 <p>Arche (아르케) · Representative: Junhyung Park · Business registration no. (Korea): 774-39-01532 · Mail-order business report no.: 2026-Yongin Giheung-01759 (Giheung-gu Office, Yongin City) · Phone: +82 502-1921-1532</p>
@@ -365,7 +365,7 @@ def build():
         write(f'apps/{a["slug"]}.html', page)
 
     build_news_journal()
-    build_ko()
+    build_ko(); build_ko_policies()
 
     # ---------- support ----------
     rows = ''.join(f'<article class="card white"><div class="apphead"><img src="assets/icons/{a["slug"]}.png" alt=""><h3 style="font-size:22px">{E(a["name"])}</h3></div><div class="links" style="font-size:15px"><a href="{a["support"]}">Help page</a><a href="{a["privacy"]}">Privacy policy</a></div></article>' for a in APPS)
@@ -435,7 +435,7 @@ def build():
     write('google3e50e77c706ec730.html', 'google-site-verification: google3e50e77c706ec730.html')
     write('vercel.json', open(os.path.join(ROOT,'vercel.json')).read())
     write('robots.txt', 'User-agent: *\nAllow: /\nSitemap: https://hiarche.com/sitemap.xml\n')
-    urls = ['', 'news.html', 'journal.html', 'journal-why-arche.html', 'journal-series-0.html', 'journal-series-0-ko.html', 'journal-series-1.html', 'journal-series-1-ko.html', 'support.html', 'press.html', 'legal.html'] + [f'apps/{a["slug"]}.html' for a in APPS] + ['ko/','ko/support.html']+[f'ko/apps/{a["slug"]}.html' for a in APPS]+['lab/rivalog-calculator.html','lab/story-accounting-episode-1.html']
+    urls = ['', 'news.html', 'journal.html', 'journal-why-arche.html', 'journal-series-0.html', 'journal-series-0-ko.html', 'journal-series-1.html', 'journal-series-1-ko.html', 'support.html', 'press.html', 'legal.html'] + [f'apps/{a["slug"]}.html' for a in APPS] + ['ko/','ko/support.html','ko/terms.html','ko/refund.html']+[f'ko/apps/{a["slug"]}.html' for a in APPS]+['lab/rivalog-calculator.html','lab/story-accounting-episode-1.html']
     write('sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + ''.join(f'<url><loc>https://hiarche.com/{u}</loc></url>\n' for u in urls) + '</urlset>\n')
     write('404.html', head('Not found — HiArche', 'Page not found.', 0, '404.html') + nav(0, '') + '<main id="main" class="wrap" style="padding-block:96px;display:flex;flex-direction:column;gap:20px"><h1 class="h1" style="font-size:64px">Hmm, nothing here.</h1><p class="lead">That page doesn\'t exist. Try the <a href="index.html">home page</a>.</p></main>\n' + footer(0))
 

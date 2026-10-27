@@ -59,7 +59,7 @@ def footer_ko(depth):
     return f'''<footer class="site wrap">
 <div class="row">
 <div style="display:flex;flex-direction:column;gap:8px"><span class="logo" style="font-size:22px"><b>Hi</b>Arche</span><span style="color:#50554B">질문이나 의견은 archeisit@gmail.com</span></div>
-<nav aria-label="아래 메뉴" class="links" style="font-size:15px"><a href="{up}ko/support.html">고객지원</a><a href="{BOARD}">의견 게시판</a><a href="{up}legal.html">개인정보·약관(영어)</a><a href="https://www.instagram.com/arche.apps/">인스타그램</a></nav>
+<nav aria-label="아래 메뉴" class="links" style="font-size:15px"><a href="{up}ko/support.html">고객지원</a><a href="{BOARD}">의견 게시판</a><a href="{up}ko/terms.html">이용약관</a><a href="{up}ko/refund.html">환불 정책</a><a href="{up}legal.html">개인정보·약관(영어)</a><a href="https://www.instagram.com/arche.apps/">인스타그램</a></nav>
 </div>
 <div class="legal">
 <p>상호 아르케(Arche) · 대표 박준형 · 사업자등록번호 774-39-01532 · 통신판매업 신고 제2026-용인기흥-01759호(용인시 기흥구청) · 전화 0502-1921-1532</p>
@@ -170,3 +170,30 @@ def build_ko():
 </main>
 ''' + footer_ko(1)
     write('ko/support.html', page)
+
+
+TERMS_KO = """<h1 class="h1" style="font-size:clamp(36px,5vw,56px)">아르케 이용약관</h1>
+<p class="note">시행일 2026-10-27 · 아르케(Arche)의 앱과 웹 서비스 공통 약관입니다. 앱별 약관이 따로 있으면 그 앱에서는 앱별 약관이 먼저 적용됩니다.</p>
+<h2>제1조 목적</h2><p>이 약관은 아르케(Arche)(이하 "아르케")가 제공하는 앱과 웹 서비스(이하 "서비스")의 이용에 관한 아르케와 이용자 사이의 권리·의무와 책임을 정합니다.</p>
+<h2>제2조 약관의 게시와 변경</h2><p>아르케는 이 약관을 hiarche.com에 게시합니다. 관련 법령을 위반하지 않는 범위에서 약관을 바꿀 수 있으며, 이용자에게 불리한 변경은 시행 30일 전부터, 그 밖의 변경은 7일 전부터 이 페이지에 알립니다.</p>
+<h2>제3조 서비스의 이용</h2><ul><li>서비스의 내용·이용 조건·나이 제한은 각 앱의 스토어 페이지, 앱 화면, 앱별 약관에 따릅니다.</li><li>이용자는 법령과 이 약관을 지키고, 다른 사람의 권리를 침해하거나 서비스 운영을 방해해서는 안 됩니다.</li><li>아르케는 서비스를 업데이트로 바꿀 수 있고, 사업상 필요하면 제공을 중단할 수 있습니다. 중단할 때는 30일 전부터 알리고, 남은 유료 이용 기간은 법령과 환불 정책에 따라 처리합니다.</li></ul>
+<h2>제4조 유료 서비스</h2><ul><li>앱 안의 유료 상품은 애플 앱스토어 또는 구글 플레이의 결제로 판매하며, 결제·해지는 구매한 스토어의 절차를 따릅니다.</li><li>웹에서 직접 판매하는 상품이 있는 경우 결제 전에 가격·제공 기간·청약철회 방법을 화면에 표시합니다.</li><li>환불과 청약철회는 <a href="refund.html">환불 정책</a>에 따릅니다.</li></ul>
+<h2>제5조 책임의 제한</h2><p>서비스가 보여 주는 계산·추정·AI 생성 결과는 참고 자료이며, 아르케는 특정 결과(시험 합격, 성적, 관계 등)를 보장하지 않습니다. 아르케는 고의 또는 중대한 과실이 없는 한 무료로 제공한 서비스의 이용으로 생긴 손해를 책임지지 않습니다. 다만 법령상 제한할 수 없는 책임은 그렇지 않습니다.</p>
+<h2>제6조 개인정보</h2><p>개인정보는 각 앱의 개인정보처리방침에 따라 처리합니다. 목록은 <a href="../legal.html">개인정보·약관 페이지</a>에 있습니다.</p>
+<h2>제7조 분쟁 해결</h2><p>이 약관은 대한민국 법을 따릅니다. 분쟁이 생기면 먼저 archeisit@gmail.com으로 연락해 주십시오. 소송은 민사소송법에 따른 관할 법원에 제기합니다.</p>
+"""
+
+REFUND_KO = """<h1 class="h1" style="font-size:clamp(36px,5vw,56px)">환불 정책</h1>
+<p class="note">시행일 2026-10-27 · 아르케(Arche)의 모든 앱과 웹 서비스에 적용됩니다. 앱별 약관에 더 자세한 내용이 있으면 그것을 함께 따릅니다.</p>
+<h2>1. 청약철회</h2><ul><li>유료 상품은 구매한 날부터 7일 이내에 청약을 철회할 수 있습니다.</li><li>다만 디지털 콘텐츠를 이미 이용하기 시작했거나 사용한 경우(예: 이미 쓴 포인트·하트, 이미 받은 AI 결과)에는 아르케가 무료 체험 등 시험 사용의 기회를 제공한 범위에서 청약철회가 제한될 수 있습니다(전자상거래법 제17조제2항·제6항).</li><li>상품이 표시·광고나 계약과 다르게 제공된 경우에는 받은 날부터 3개월 이내, 그 사실을 안 날부터 30일 이내에 철회할 수 있습니다(같은 조 제3항).</li></ul>
+<h2>2. 결제 경로별 환불 방법</h2><ul><li><b>아이폰·아이패드(앱스토어 결제)</b>: 결제와 환불은 애플이 처리합니다. reportaproblem.apple.com에서 요청해 주십시오. 아르케는 애플 결제 정보를 받지 않아 직접 환불할 수 없으며, 연락 주시면 요청 방법을 안내합니다.</li><li><b>안드로이드(구글 플레이 결제)</b>: 구글 플레이에 직접 요청하거나, archeisit@gmail.com으로 주문 번호(GPA로 시작)를 보내 주시면 아르케가 구글 플레이 콘솔을 통해 환불합니다.</li><li><b>웹 결제</b>: 웹에서 직접 판매하는 상품은 archeisit@gmail.com 또는 0502-1921-1532로 요청해 주십시오. 결제 수단으로 3영업일 안에 환불 절차를 시작합니다.</li></ul>
+<h2>3. 구독</h2><p>구독은 다음 결제일 24시간 전까지 해지하지 않으면 자동으로 갱신됩니다. 해지해도 이미 결제한 기간이 끝날 때까지 이용할 수 있습니다. 앱을 지우는 것만으로는 해지되지 않습니다.</p>
+<h2>4. 서비스 중단</h2><p>아르케가 서비스 제공을 중단하면 남은 유료 이용 기간이나 쓰지 않은 유료 포인트는 기간·수량에 비례해 환불합니다.</p>
+<h2>5. 미성년자</h2><p>미성년자가 법정대리인의 동의 없이 결제한 경우 등은 관련 법령과 각 스토어의 절차에 따릅니다.</p>
+<h2>6. 문의</h2><p>archeisit@gmail.com · 0502-1921-1532(아르케)</p>
+"""
+
+def build_ko_policies():
+    for slug, body, title, desc in [('terms', TERMS_KO, '이용약관 — 아르케', '아르케 앱과 웹 서비스 공통 이용약관'), ('refund', REFUND_KO, '환불 정책 — 아르케', '아르케 앱과 웹 서비스의 환불·청약철회 정책')]:
+        page = head_ko(title, desc, 1, f'ko/{slug}.html', 'legal.html') + nav_ko(1, '', '../legal.html') + f'<main id="main" class="wrap" style="padding-block:48px 96px;display:flex;flex-direction:column;gap:20px;max-width:820px">{body}</main>' + footer_ko(1)
+        write(f'ko/{slug}.html', page)

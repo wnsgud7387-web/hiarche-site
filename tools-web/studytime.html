@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>순공 시간 계산기 - 쉬는 시간 뺀 순수 공부 시간과 주간 합계 | 수험생 계산기</title>
+<meta name="description" content="공부 시작·끝 시각과 쉬는 시간을 입력하면 순수 공부 시간(순공 시간)을 계산하고, 요일별 순공 시간을 넣어 주간 합계와 하루 평균을 확인할 수 있습니다.">
+<link rel="canonical" href="https://tools.hiarche.com/studytime.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="수험생 계산기">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="순공 시간 계산기 - 쉬는 시간 뺀 순수 공부 시간과 주간 합계 | 수험생 계산기">
+<meta property="og:description" content="공부 시작·끝 시각과 쉬는 시간을 입력하면 순수 공부 시간(순공 시간)을 계산하고, 요일별 순공 시간을 넣어 주간 합계와 하루 평균을 확인할 수 있습니다.">
+<meta property="og:url" content="https://tools.hiarche.com/studytime.html">
+<meta name="twitter:card" content="summary">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#F4F1EA" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141310" media="(prefers-color-scheme: dark)">
+<style>
+:root{--bg:#F4F1EA;--card:#FFFDF8;--fg:#1D1B17;--sub:#6B6458;--line:#E5DFD2;--acc:#2F5D50;--accfg:#FFFDF8;color-scheme:light}
+@media (prefers-color-scheme:dark){:root{--bg:#141310;--card:#1D1C18;--fg:#ECE6DA;--sub:#A39A8A;--line:#33302A;--acc:#7FBFA9;--accfg:#141310;color-scheme:dark}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif;font-size:16px;line-height:1.65;word-break:keep-all;overflow-wrap:break-word}
+a{color:var(--acc)}
+.wrap{max-width:720px;margin:0 auto;padding:0 16px}
+header.top{border-bottom:1px solid var(--line);background:var(--card)}
+header.top .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;padding-top:12px;padding-bottom:12px}
+.brand{font-size:18px;font-weight:700;color:var(--fg);text-decoration:none}
+.topnav{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:14px}
+.topnav a{color:var(--sub);text-decoration:none}
+.topnav a:hover{color:var(--acc)}
+main{padding:24px 0 40px}
+h1{font-size:28px;line-height:1.3;margin:0 0 8px}
+h2{font-size:18px;margin:32px 0 8px}
+h3{font-size:16px;margin:20px 0 4px}
+.lead{color:var(--sub);margin:0 0 20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin:0 0 16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+label.f{display:flex;flex-direction:column;gap:4px;font-size:14px;color:var(--sub);min-width:0}
+input,select,button{font:inherit;font-size:16px;color:var(--fg)}
+input[type=number],input[type=date],input[type=time],input[type=text],select{width:100%;min-width:0;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);-webkit-appearance:none;appearance:none}
+input:focus,select:focus{outline:2px solid var(--acc);outline-offset:1px}
+.hint{font-size:12px;color:var(--sub)}
+.days{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.days label{display:flex;align-items:center;gap:4px;font-size:14px;color:var(--fg);padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:var(--bg);cursor:pointer}
+.btn{display:inline-block;padding:10px 16px;border-radius:999px;border:1px solid var(--acc);background:var(--acc);color:var(--accfg);cursor:pointer;font-size:14px;text-decoration:none}
+.btn.ghost{background:transparent;color:var(--acc)}
+.result{border-color:var(--acc)}
+.res-main{font-size:34px;font-weight:700;line-height:1.2;color:var(--acc);margin:4px 0}
+.res-label{font-size:14px;color:var(--sub)}
+.res-list{list-style:none;padding:0;margin:12px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px}
+.res-list li{border:1px solid var(--line);border-radius:8px;padding:8px 12px;background:var(--bg)}
+.res-list b{display:block;font-size:18px}
+.res-list span{font-size:12px;color:var(--sub)}
+.msg{color:var(--sub);font-size:14px;margin:0}
+.riva{font-size:14px;color:var(--sub);margin:12px 0 0;padding-top:12px;border-top:1px solid var(--line)}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{padding:8px 4px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}
+th{color:var(--sub);font-weight:600}
+td.num,th.num{text-align:right}
+.article p{margin:0 0 12px}
+.faq dt{font-weight:700;margin-top:16px}
+.faq dd{margin:4px 0 0;color:var(--fg)}
+.tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;padding:0;margin:0;list-style:none}
+.tools a{display:block;height:100%;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;text-decoration:none;color:var(--fg)}
+.tools a:hover{border-color:var(--acc)}
+.tools strong{display:block;font-size:18px;color:var(--acc);margin-bottom:4px}
+.tools span{font-size:14px;color:var(--sub)}
+.row{display:grid;grid-template-columns:1fr 1fr auto;gap:8px;align-items:end;margin-bottom:8px}
+.x{border:1px solid var(--line);background:transparent;color:var(--sub);border-radius:999px;width:40px;height:40px;cursor:pointer;font-size:16px}
+footer.foot{border-top:1px solid var(--line);background:var(--card);font-size:12px;color:var(--sub);padding:20px 0 32px}
+footer.foot p{margin:0 0 8px}
+footer.foot nav{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:14px;margin-bottom:12px}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+<a class="brand" href="index.html">수험생 계산기</a>
+<nav class="topnav" aria-label="계산기 목록"><a href="dday.html">D-데이</a><a href="daily.html">하루 공부량</a><a href="lecture.html">인강 배속</a><a href="studytime.html">순공 시간</a><a href="rounds.html">회독 계획</a></nav>
+</div></header>
+<main><div class="wrap">
+<h1>순공 시간 계산기</h1>
+<p class="lead">공부한 전체 시간에서 쉬는 시간을 빼 순수 공부 시간을 계산하고, 한 주의 합계를 확인합니다.</p>
+<section class="card" aria-label="하루 순공 시간 입력">
+<h2 style="margin-top:0">오늘 순공 시간</h2>
+<div class="grid">
+<label class="f">공부 시작 시각<input type="time" id="start" data-k="start"></label>
+<label class="f">공부 끝 시각<input type="time" id="end" data-k="end"></label>
+</div>
+<h3>쉬는 시간</h3>
+<div id="breaks"></div>
+<button type="button" class="btn ghost" id="addBreak">쉬는 시간 추가</button>
+<p class="hint">끝 시각이 시작 시각보다 이르면 자정을 넘긴 것으로 계산합니다. 공부 시간 밖에 있는 쉬는 시간은 빼지 않습니다.</p>
+</section>
+<section class="card result" aria-live="polite">
+<div id="out"><p class="msg">시작·끝 시각을 입력하면 결과가 나옵니다.</p></div>
+<div style="margin-top:12px"><label class="f">결과를 주간 표에 넣기<select id="toDay"><option value="">요일 선택</option><option value="0">월</option><option value="1">화</option><option value="2">수</option><option value="3">목</option><option value="4">금</option><option value="5">토</option><option value="6">일</option></select></label></div>
+<p class="riva">회독 계획을 매일 자동으로 짜 주는 앱: <a href="https://rivalog.hiarche.com/?src=tl" rel="noopener">라이벌로그</a> (웹)</p>
+</section>
+<section class="card" aria-label="주간 순공 시간">
+<h2 style="margin-top:0">주간 합계</h2>
+<table><thead><tr><th scope="col">요일</th><th scope="col">순공 시간(시간)</th></tr></thead><tbody><tr><th scope="row">월</th><td><input type="number" id="w0" data-k="w0" min="0" max="24" step="0.1" inputmode="decimal" aria-label="월요일 순공 시간(시간)" placeholder="0"></td></tr><tr><th scope="row">화</th><td><input type="number" id="w1" data-k="w1" min="0" max="24" step="0.1" inputmode="decimal" aria-label="화요일 순공 시간(시간)" placeholder="0"></td></tr><tr><th scope="row">수</th><td><input type="number" id="w2" data-k="w2" min="0" max="24" step="0.1" inputmode="decimal" aria-label="수요일 순공 시간(시간)" placeholder="0"></td></tr><tr><th scope="row">목</th><td><input type="number" id="w3" data-k="w3" min="0" max="24" step="0.1" inputmode="decimal" aria-label="목요일 순공 시간(시간)" placeholder="0"></td></tr><tr><th scope="row">금</th><td><input type="number" id="w4" data-k="w4" min="0" max="24" step="0.1" inputmode="decimal" aria-label="금요일 순공 시간(시간)" placeholder="0"></td></tr><tr><th scope="row">토</th><td><input type="number" id="w5" data-k="w5" min="0" max="24" step="0.1" inputmode="decimal" aria-label="토요일 순공 시간(시간)" placeholder="0"></td></tr><tr><th scope="row">일</th><td><input type="number" id="w6" data-k="w6" min="0" max="24" step="0.1" inputmode="decimal" aria-label="일요일 순공 시간(시간)" placeholder="0"></td></tr></tbody></table>
+<div id="wout" style="margin-top:12px"></div>
+</section>
+<!-- AD_SLOT -->
+<h2>쓰는 법</h2>
+<div class="article">
+<p>위쪽에는 하루의 공부 시작 시각과 끝 시각을 넣습니다. 그 사이에 밥을 먹거나 쉬었던 시간이 있다면 '쉬는 시간 추가'를 눌러 시작·끝 시각을 넣습니다. 쉬는 시간이 서로 겹치면 한 번만 뺍니다.</p>
+<p>순공 시간은 '전체 시간 − 쉬는 시간'입니다. 결과가 나오면 아래 '결과를 주간 표에 넣기'에서 요일을 고르면 그 요일 칸에 시간이 들어갑니다.</p>
+<p>주간 표에는 요일별 순공 시간을 시간 단위로 직접 넣을 수도 있습니다. 1.5는 1시간 30분입니다. 칸을 채우면 주간 합계와 하루 평균, 가장 많이 한 요일을 보여 줍니다.</p>
+</div>
+<h2>자주 묻는 질문</h2>
+<dl class="faq">
+<dt>순공 시간이란 무엇인가요?</dt><dd>책상에 앉아 있던 전체 시간 중 쉬는 시간, 식사, 이동 등을 빼고 실제로 공부한 시간을 흔히 순공 시간이라고 부릅니다.</dd>
+<dt>밤을 넘겨 공부한 경우는요?</dt><dd>끝 시각이 시작 시각보다 이르면 다음 날로 넘어간 것으로 보고 계산합니다. 예를 들어 22:00 시작, 01:00 끝이면 3시간입니다.</dd>
+<dt>주간 표는 매주 지워지나요?</dt><dd>자동으로 지워지지 않습니다. 새 주가 시작되면 칸을 직접 지우거나 덮어써 주세요.</dd>
+<dt>기록이 다른 기기에도 보이나요?</dt><dd>아니요. 입력값은 지금 쓰는 브라우저에만 저장되며 서버로 보내지 않습니다.</dd>
+</dl>
+<!-- AD_SLOT -->
+</div></main>
+<footer class="foot"><div class="wrap">
+<nav aria-label="사이트 안내"><a href="index.html">전체 계산기</a><a href="privacy.html">개인정보처리방침</a><a href="about.html">운영자 소개</a><a href="https://hiarche.com" rel="noopener">hiarche.com</a></nav>
+<p>상호 아르케(Arche) · 대표 박준형 · 사업자등록번호 774-39-01532 · 통신판매업 신고 제2026-용인기흥-01759호</p>
+<p>전화 0502-1921-1532 · <a href="mailto:archeisit@gmail.com">archeisit@gmail.com</a></p>
+<p>주소 경기도 용인시 기흥구 구갈로60번길 9-1 라파빌딩 7층 7201호</p>
+<p>이 사이트의 계산 결과는 입력한 값에 따른 참고용이며, 입력값은 이용자의 브라우저에만 저장됩니다.</p>
+</div></footer>
+<script>
+var TL=(function(){
+  function load(k){try{var v=localStorage.getItem('tl_'+k);return v?JSON.parse(v):null}catch(e){return null}}
+  function save(k,o){try{localStorage.setItem('tl_'+k,JSON.stringify(o))}catch(e){}}
+  function today(){var d=new Date(Date.now()+9*3600000);return Date.UTC(d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate())}
+  function parseDate(s){if(!/^\d{4}-\d{2}-\d{2}$/.test(s||''))return NaN;var p=s.split('-').map(Number);return Date.UTC(p[0],p[1]-1,p[2])}
+  function iso(ms){return new Date(ms).toISOString().slice(0,10)}
+  var W='일월화수목금토';
+  function dow(ms){return new Date(ms).getUTCDay()}
+  function fd(ms){var d=new Date(ms);return d.getUTCFullYear()+'년 '+(d.getUTCMonth()+1)+'월 '+d.getUTCDate()+'일 ('+W[d.getUTCDay()]+')'}
+  function fds(ms){var d=new Date(ms);return (d.getUTCMonth()+1)+'.'+d.getUTCDate()+' ('+W[d.getUTCDay()]+')'}
+  function n(v){var x=parseFloat(v);return isFinite(x)?x:NaN}
+  function f(x,dg){return Number(x).toLocaleString('ko-KR',{maximumFractionDigits:dg==null?1:dg})}
+  function hm(min){min=Math.round(min);var h=Math.floor(min/60),m=min%60;return (h?h+'시간 ':'')+m+'분'}
+  // data-k 속성이 있는 입력칸을 자동 저장·복원
+  function bind(key,calc){
+    var els=[].slice.call(document.querySelectorAll('[data-k]'));
+    var s=load(key)||{};
+    els.forEach(function(el){var k=el.getAttribute('data-k');if(s[k]===undefined)return;if(el.type==='checkbox')el.checked=!!s[k];else el.value=s[k]});
+    function run(){var o=load(key)||{};els.forEach(function(el){o[el.getAttribute('data-k')]=el.type==='checkbox'?el.checked:el.value});save(key,o);calc()}
+    els.forEach(function(el){el.addEventListener('input',run);el.addEventListener('change',run)});
+    calc();
+    return run;
+  }
+  return {load:load,save:save,today:today,parseDate:parseDate,iso:iso,dow:dow,fd:fd,fds:fds,n:n,f:f,hm:hm,bind:bind,DAY:86400000};
+})();
+
+var KEY='studytime', last=null;
+function tm(s){if(!/^\d{2}:\d{2}/.test(s||''))return NaN;var p=s.split(':');return (+p[0])*60+(+p[1])}
+function getBreaks(){return [].slice.call(document.querySelectorAll('#breaks .row')).map(function(r){var i=r.querySelectorAll('input');return [i[0].value,i[1].value]})}
+function saveBreaks(){var o=TL.load(KEY)||{};o.breaks=getBreaks();TL.save(KEY,o)}
+function addRow(a,b){
+  var d=document.createElement('div');d.className='row';
+  d.innerHTML='<label class="f">쉬기 시작<input type="time"></label><label class="f">쉬기 끝<input type="time"></label><button type="button" class="x" aria-label="이 쉬는 시간 지우기">×</button>';
+  var ins=d.querySelectorAll('input');ins[0].value=a||'';ins[1].value=b||'';
+  [].forEach.call(ins,function(el){el.addEventListener('input',function(){saveBreaks();calc()});el.addEventListener('change',function(){saveBreaks();calc()})});
+  d.querySelector('.x').addEventListener('click',function(){d.remove();saveBreaks();calc()});
+  document.getElementById('breaks').appendChild(d);
+}
+function calc(){
+  var out=document.getElementById('out');
+  var s=tm(document.getElementById('start').value), e=tm(document.getElementById('end').value);
+  if(isNaN(s)||isNaN(e)){last=null;out.innerHTML='<p class="msg">시작·끝 시각을 입력하면 결과가 나옵니다.</p>';weekly();return}
+  if(e<=s)e+=1440;
+  var total=e-s, iv=[];
+  getBreaks().forEach(function(b){
+    var a=tm(b[0]), c=tm(b[1]); if(isNaN(a)||isNaN(c))return;
+    if(a<s)a+=1440; if(c<a)c+=1440;
+    a=Math.max(a,s); c=Math.min(c,e); if(c>a)iv.push([a,c]);
+  });
+  iv.sort(function(x,y){return x[0]-y[0]});
+  var rest=0,cs=-1,ce=-1;
+  iv.forEach(function(x){if(x[0]>ce){if(ce>cs)rest+=ce-cs;cs=x[0];ce=x[1]}else ce=Math.max(ce,x[1])});
+  if(ce>cs)rest+=ce-cs;
+  var net=total-rest; last=net;
+  var h='<div class="res-label">오늘 순공 시간</div><div class="res-main" id="r-main">'+TL.hm(net)+'</div>';
+  h+='<ul class="res-list"><li><span>전체 시간</span><b id="r-total">'+TL.hm(total)+'</b></li><li><span>쉬는 시간</span><b id="r-rest">'+TL.hm(rest)+'</b></li><li><span>순공 비율</span><b id="r-ratio">'+TL.f(total?net/total*100:0,0)+'%</b></li></ul>';
+  out.innerHTML=h; weekly();
+}
+function weekly(){
+  var sum=0,cnt=0,mx=-1,mi=-1,W='월화수목금토일';
+  for(var i=0;i<7;i++){var v=TL.n(document.getElementById('w'+i).value);if(!isNaN(v)&&v>=0){sum+=v;cnt++;if(v>mx){mx=v;mi=i}}}
+  var w=document.getElementById('wout');
+  if(!cnt){w.innerHTML='<p class="msg">요일별 순공 시간을 넣으면 합계가 나옵니다.</p>';return}
+  w.innerHTML='<ul class="res-list"><li><span>주간 합계</span><b id="r-week">'+TL.hm(sum*60)+'</b></li><li><span>입력한 날 평균</span><b id="r-avg">'+TL.hm(sum*60/cnt)+'</b></li><li><span>가장 많이 한 요일</span><b>'+W[mi]+'요일</b></li></ul>';
+}
+(function(){
+  var s=TL.load(KEY)||{};
+  var b=(s.breaks&&s.breaks.length)?s.breaks:[['','']];
+  b.forEach(function(x){addRow(x[0],x[1])});
+  document.getElementById('addBreak').addEventListener('click',function(){addRow('','');saveBreaks()});
+  var run=TL.bind(KEY,calc);
+  document.getElementById('toDay').addEventListener('change',function(){
+    var i=this.value; if(i===''||last==null)return;
+    document.getElementById('w'+i).value=Math.round(last/60*100)/100; this.value=''; run();
+  });
+})();
+</script>
+</body>
+</html>

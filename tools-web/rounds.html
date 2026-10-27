@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>회독 계획 계산기 - 회독별 소요 일수와 종료일 | 수험생 계산기</title>
+<meta name="description" content="단원 수, 1회독 때 하루에 볼 단원 수, 목표 회독 수, 회독마다 줄어드는 시간 비율을 입력하면 회독별 소요 일수와 시작일·종료일을 표로 계산합니다.">
+<link rel="canonical" href="https://tools.hiarche.com/rounds.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="수험생 계산기">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="회독 계획 계산기 - 회독별 소요 일수와 종료일 | 수험생 계산기">
+<meta property="og:description" content="단원 수, 1회독 때 하루에 볼 단원 수, 목표 회독 수, 회독마다 줄어드는 시간 비율을 입력하면 회독별 소요 일수와 시작일·종료일을 표로 계산합니다.">
+<meta property="og:url" content="https://tools.hiarche.com/rounds.html">
+<meta name="twitter:card" content="summary">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#F4F1EA" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141310" media="(prefers-color-scheme: dark)">
+<style>
+:root{--bg:#F4F1EA;--card:#FFFDF8;--fg:#1D1B17;--sub:#6B6458;--line:#E5DFD2;--acc:#2F5D50;--accfg:#FFFDF8;color-scheme:light}
+@media (prefers-color-scheme:dark){:root{--bg:#141310;--card:#1D1C18;--fg:#ECE6DA;--sub:#A39A8A;--line:#33302A;--acc:#7FBFA9;--accfg:#141310;color-scheme:dark}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif;font-size:16px;line-height:1.65;word-break:keep-all;overflow-wrap:break-word}
+a{color:var(--acc)}
+.wrap{max-width:720px;margin:0 auto;padding:0 16px}
+header.top{border-bottom:1px solid var(--line);background:var(--card)}
+header.top .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;padding-top:12px;padding-bottom:12px}
+.brand{font-size:18px;font-weight:700;color:var(--fg);text-decoration:none}
+.topnav{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:14px}
+.topnav a{color:var(--sub);text-decoration:none}
+.topnav a:hover{color:var(--acc)}
+main{padding:24px 0 40px}
+h1{font-size:28px;line-height:1.3;margin:0 0 8px}
+h2{font-size:18px;margin:32px 0 8px}
+h3{font-size:16px;margin:20px 0 4px}
+.lead{color:var(--sub);margin:0 0 20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin:0 0 16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+label.f{display:flex;flex-direction:column;gap:4px;font-size:14px;color:var(--sub);min-width:0}
+input,select,button{font:inherit;font-size:16px;color:var(--fg)}
+input[type=number],input[type=date],input[type=time],input[type=text],select{width:100%;min-width:0;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);-webkit-appearance:none;appearance:none}
+input:focus,select:focus{outline:2px solid var(--acc);outline-offset:1px}
+.hint{font-size:12px;color:var(--sub)}
+.days{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.days label{display:flex;align-items:center;gap:4px;font-size:14px;color:var(--fg);padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:var(--bg);cursor:pointer}
+.btn{display:inline-block;padding:10px 16px;border-radius:999px;border:1px solid var(--acc);background:var(--acc);color:var(--accfg);cursor:pointer;font-size:14px;text-decoration:none}
+.btn.ghost{background:transparent;color:var(--acc)}
+.result{border-color:var(--acc)}
+.res-main{font-size:34px;font-weight:700;line-height:1.2;color:var(--acc);margin:4px 0}
+.res-label{font-size:14px;color:var(--sub)}
+.res-list{list-style:none;padding:0;margin:12px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px}
+.res-list li{border:1px solid var(--line);border-radius:8px;padding:8px 12px;background:var(--bg)}
+.res-list b{display:block;font-size:18px}
+.res-list span{font-size:12px;color:var(--sub)}
+.msg{color:var(--sub);font-size:14px;margin:0}
+.riva{font-size:14px;color:var(--sub);margin:12px 0 0;padding-top:12px;border-top:1px solid var(--line)}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{padding:8px 4px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}
+th{color:var(--sub);font-weight:600}
+td.num,th.num{text-align:right}
+.article p{margin:0 0 12px}
+.faq dt{font-weight:700;margin-top:16px}
+.faq dd{margin:4px 0 0;color:var(--fg)}
+.tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;padding:0;margin:0;list-style:none}
+.tools a{display:block;height:100%;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;text-decoration:none;color:var(--fg)}
+.tools a:hover{border-color:var(--acc)}
+.tools strong{display:block;font-size:18px;color:var(--acc);margin-bottom:4px}
+.tools span{font-size:14px;color:var(--sub)}
+.row{display:grid;grid-template-columns:1fr 1fr auto;gap:8px;align-items:end;margin-bottom:8px}
+.x{border:1px solid var(--line);background:transparent;color:var(--sub);border-radius:999px;width:40px;height:40px;cursor:pointer;font-size:16px}
+footer.foot{border-top:1px solid var(--line);background:var(--card);font-size:12px;color:var(--sub);padding:20px 0 32px}
+footer.foot p{margin:0 0 8px}
+footer.foot nav{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:14px;margin-bottom:12px}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+<a class="brand" href="index.html">수험생 계산기</a>
+<nav class="topnav" aria-label="계산기 목록"><a href="dday.html">D-데이</a><a href="daily.html">하루 공부량</a><a href="lecture.html">인강 배속</a><a href="studytime.html">순공 시간</a><a href="rounds.html">회독 계획</a></nav>
+</div></header>
+<main><div class="wrap">
+<h1>회독 계획 계산기</h1>
+<p class="lead">회독을 거듭할수록 빨라지는 속도를 반영해 회독별로 며칠이 걸리고 언제 끝나는지 계산합니다.</p>
+<section class="card" aria-label="입력">
+<div class="grid">
+<label class="f">전체 단원 수<input type="number" id="units" data-k="units" min="1" step="1" inputmode="numeric" placeholder="예: 24"></label>
+<label class="f">1회독 하루 단원 수<input type="number" id="per" data-k="per" min="0.1" step="0.5" inputmode="decimal" placeholder="예: 1"></label>
+<label class="f">목표 회독 수<input type="number" id="goal" data-k="goal" min="1" max="20" step="1" inputmode="numeric" placeholder="예: 4"></label>
+<label class="f">다음 회독 시간 비율(%)<input type="number" id="ratio" data-k="ratio" min="10" max="100" step="5" inputmode="numeric" placeholder="예: 70"></label>
+<label class="f">시작일<input type="date" id="sd" data-k="sd"></label>
+</div>
+<p class="hint">비율 70%는 2회독이 1회독 시간의 70%, 3회독이 2회독의 70%가 걸린다는 뜻입니다. 시작일을 비우면 오늘(한국 시간)부터 계산합니다.</p>
+</section>
+<section class="card result" aria-live="polite">
+<div id="out"><p class="msg">단원 수와 하루 단원 수, 목표 회독 수를 입력하면 결과가 나옵니다.</p></div>
+<p class="riva">회독 계획을 매일 자동으로 짜 주는 앱: <a href="https://rivalog.hiarche.com/?src=tl" rel="noopener">라이벌로그</a> (웹)</p>
+</section>
+<!-- AD_SLOT -->
+<h2>쓰는 법</h2>
+<div class="article">
+<p>전체 단원 수에는 교재나 과목의 단원(챕터) 개수를 넣습니다. 1회독 하루 단원 수는 처음 볼 때 하루에 끝낼 수 있는 단원 수입니다. 하루에 반 단원이라면 0.5를 넣으면 됩니다.</p>
+<p>다음 회독 시간 비율은 직전 회독에 비해 얼마만큼의 시간이 드는지를 뜻합니다. 비워 두면 100%, 즉 매 회독이 같은 시간이 걸린다고 보고 계산합니다. 각 회독의 일수는 소수점을 올림하고, 최소 하루로 셉니다.</p>
+<p>결과 표에는 회독마다 걸리는 일수, 그 회독의 하루 단원 수, 시작일과 종료일이 나옵니다. 회독 사이에 쉬는 날 없이 이어서 진행한다고 가정합니다. 시험일까지 남은 기간과 비교하려면 <a href="dday.html">시험 D-데이 계산기</a>를 함께 써 보세요.</p>
+</div>
+<h2>자주 묻는 질문</h2>
+<dl class="faq">
+<dt>비율은 몇 %로 넣어야 하나요?</dt><dd>정해진 값은 없습니다. 1회독을 끝낸 뒤 2회독 첫 며칠의 속도를 재 보고, 1회독 때와 비교한 비율을 넣으면 내 상황에 가깝게 계산됩니다.</dd>
+<dt>쉬는 요일은 반영되나요?</dt><dd>이 계산기는 매일 공부한다고 가정합니다. 쉬는 요일이 있다면 1회독 하루 단원 수를 주 평균으로 낮춰 넣거나, <a href="daily.html">하루 공부량 계산기</a>를 함께 써 주세요.</dd>
+<dt>단원마다 분량이 다르면요?</dt><dd>단원 대신 페이지 수를 넣고, 하루 단원 수 칸에 하루 페이지 수를 넣어도 같은 방식으로 계산됩니다.</dd>
+<dt>입력값은 저장되나요?</dt><dd>이 브라우저에만 저장되며 서버로 보내지 않습니다.</dd>
+</dl>
+<!-- AD_SLOT -->
+</div></main>
+<footer class="foot"><div class="wrap">
+<nav aria-label="사이트 안내"><a href="index.html">전체 계산기</a><a href="privacy.html">개인정보처리방침</a><a href="about.html">운영자 소개</a><a href="https://hiarche.com" rel="noopener">hiarche.com</a></nav>
+<p>상호 아르케(Arche) · 대표 박준형 · 사업자등록번호 774-39-01532 · 통신판매업 신고 제2026-용인기흥-01759호</p>
+<p>전화 0502-1921-1532 · <a href="mailto:archeisit@gmail.com">archeisit@gmail.com</a></p>
+<p>주소 경기도 용인시 기흥구 구갈로60번길 9-1 라파빌딩 7층 7201호</p>
+<p>이 사이트의 계산 결과는 입력한 값에 따른 참고용이며, 입력값은 이용자의 브라우저에만 저장됩니다.</p>
+</div></footer>
+<script>
+var TL=(function(){
+  function load(k){try{var v=localStorage.getItem('tl_'+k);return v?JSON.parse(v):null}catch(e){return null}}
+  function save(k,o){try{localStorage.setItem('tl_'+k,JSON.stringify(o))}catch(e){}}
+  function today(){var d=new Date(Date.now()+9*3600000);return Date.UTC(d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate())}
+  function parseDate(s){if(!/^\d{4}-\d{2}-\d{2}$/.test(s||''))return NaN;var p=s.split('-').map(Number);return Date.UTC(p[0],p[1]-1,p[2])}
+  function iso(ms){return new Date(ms).toISOString().slice(0,10)}
+  var W='일월화수목금토';
+  function dow(ms){return new Date(ms).getUTCDay()}
+  function fd(ms){var d=new Date(ms);return d.getUTCFullYear()+'년 '+(d.getUTCMonth()+1)+'월 '+d.getUTCDate()+'일 ('+W[d.getUTCDay()]+')'}
+  function fds(ms){var d=new Date(ms);return (d.getUTCMonth()+1)+'.'+d.getUTCDate()+' ('+W[d.getUTCDay()]+')'}
+  function n(v){var x=parseFloat(v);return isFinite(x)?x:NaN}
+  function f(x,dg){return Number(x).toLocaleString('ko-KR',{maximumFractionDigits:dg==null?1:dg})}
+  function hm(min){min=Math.round(min);var h=Math.floor(min/60),m=min%60;return (h?h+'시간 ':'')+m+'분'}
+  // data-k 속성이 있는 입력칸을 자동 저장·복원
+  function bind(key,calc){
+    var els=[].slice.call(document.querySelectorAll('[data-k]'));
+    var s=load(key)||{};
+    els.forEach(function(el){var k=el.getAttribute('data-k');if(s[k]===undefined)return;if(el.type==='checkbox')el.checked=!!s[k];else el.value=s[k]});
+    function run(){var o=load(key)||{};els.forEach(function(el){o[el.getAttribute('data-k')]=el.type==='checkbox'?el.checked:el.value});save(key,o);calc()}
+    els.forEach(function(el){el.addEventListener('input',run);el.addEventListener('change',run)});
+    calc();
+    return run;
+  }
+  return {load:load,save:save,today:today,parseDate:parseDate,iso:iso,dow:dow,fd:fd,fds:fds,n:n,f:f,hm:hm,bind:bind,DAY:86400000};
+})();
+
+function calc(){
+  var out=document.getElementById('out'), g=function(i){return TL.n(document.getElementById(i).value)};
+  var u=g('units'), p=g('per'), goal=g('goal'), r=g('ratio');
+  if(isNaN(r))r=100;
+  if(isNaN(u)||u<=0||isNaN(p)||p<=0||isNaN(goal)||goal<1){out.innerHTML='<p class="msg">단원 수와 하루 단원 수, 목표 회독 수를 입력하면 결과가 나옵니다.</p>';return}
+  if(r<10||r>100){out.innerHTML='<p class="msg">시간 비율은 10에서 100 사이로 넣어 주세요.</p>';return}
+  goal=Math.min(20,Math.floor(goal));
+  var sd=TL.parseDate(document.getElementById('sd').value); if(isNaN(sd))sd=TL.today();
+  var base=u/p, cur=sd, tot=0, rows='';
+  for(var k=1;k<=goal;k++){
+    var d=Math.max(1,Math.ceil(base*Math.pow(r/100,k-1)-1e-9)), end=cur+(d-1)*TL.DAY;
+    rows+='<tr><td>'+k+'회독</td><td class="num">'+d+'일</td><td class="num">'+TL.f(u/d,1)+'</td><td>'+TL.fds(cur)+'<br>~ '+TL.fds(end)+'</td></tr>';
+    tot+=d; cur=end+TL.DAY;
+  }
+  var last=cur-TL.DAY;
+  var h='<div class="res-label">'+goal+'회독 종료일</div><div class="res-main" id="r-main">'+TL.fd(last)+'</div>';
+  h+='<ul class="res-list"><li><span>총 소요 일수</span><b id="r-total">'+TL.f(tot,0)+'일</b></li><li><span>시작일</span><b>'+TL.fds(sd)+'</b></li></ul>';
+  h+='<table style="margin-top:12px"><thead><tr><th scope="col">회독</th><th scope="col" class="num">일수</th><th scope="col" class="num">하루 단원</th><th scope="col">기간</th></tr></thead><tbody id="r-rows">'+rows+'</tbody></table>';
+  out.innerHTML=h;
+}
+TL.bind('rounds',calc);
+</script>
+</body>
+</html>

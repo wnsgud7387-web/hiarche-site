@@ -13,20 +13,22 @@
 <meta property="og:description" content="수험생 계산기(tools.hiarche.com)의 개인정보처리방침입니다. 입력값은 브라우저 밖으로 보내지 않으며, 현재 쿠키와 분석 도구를 쓰지 않습니다.">
 <meta property="og:url" content="https://tools.hiarche.com/privacy.html">
 <meta name="twitter:card" content="summary">
-<meta name="color-scheme" content="light dark">
-<meta name="theme-color" content="#F4F1EA" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#141310" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F6F7FB">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap">
+<script>try{if(localStorage.getItem("theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
 <style>
-:root{--bg:#F4F1EA;--card:#FFFDF8;--fg:#1D1B17;--sub:#6B6458;--line:#E5DFD2;--track:#ECE6D9;--field:#8F8778;--acc:#2F5D50;--accsoft:#E3EDE8;--accfg:#FFFFFF;--rival:#6B4FA0;--rivalsoft:#EFE9FB;--num-font:'Noto Serif KR','Nanum Myeongjo',serif;--shadow:0 1px 2px rgba(40,30,10,.05),0 4px 16px rgba(40,30,10,.05);color-scheme:light}
-@media (prefers-color-scheme:dark){:root{--bg:#141310;--card:#1D1C18;--fg:#ECE6DA;--sub:#A39A8A;--line:#33302A;--track:#2A2823;--field:#757062;--acc:#6FD3B0;--accsoft:#1F2B26;--accfg:#141310;--rival:#B49CFF;--rivalsoft:#25203A;--num-font:inherit;--shadow:none;color-scheme:dark}}
+:root{--bg:#F6F7FB;--card:#FFFFFF;--fg:#1B1D24;--sub:#5F6472;--line:#E5E7EE;--track:#EEF0F5;--field:#8F8778;--acc:#1F1D1A;--accsoft:#F1F2F6;--accfg:#FFFFFF;--rival:#E8590C;--rivalsoft:#FFF1E8;--num-font:inherit;--shadow:0 1px 2px rgba(20,22,30,.04),0 4px 16px rgba(20,22,30,.05);color-scheme:light}
+:root[data-theme="dark"]{--bg:#14151A;--card:#1C1E25;--fg:#ECEDF2;--sub:#A3A7B3;--line:#2F323C;--track:#262932;--field:#757A87;--acc:#ECEDF2;--accsoft:#232631;--accfg:#14151A;--rival:#FF8A4C;--rivalsoft:#2E2119;--shadow:none;color-scheme:dark}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--fg);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif;font-size:16px;line-height:1.65;word-break:keep-all;overflow-wrap:break-word}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:"Gowun Dodum",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;font-size:16px;line-height:1.65;word-break:keep-all;overflow-wrap:break-word}
 a{color:var(--acc)}
 .wrap{max-width:720px;margin:0 auto;padding:0 16px}
 header.top{border-bottom:1px solid var(--line);background:var(--card)}
 header.top .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;padding-top:12px;padding-bottom:12px}
 .brand{font-size:18px;font-weight:700;color:var(--fg);text-decoration:none}
+.themebtn{min-height:44px;padding:0 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--sub);font-size:12px;cursor:pointer}
 .topnav{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:14px}
 .topnav a{color:var(--sub);text-decoration:none}
 .topnav a:hover{color:var(--acc)}
@@ -44,7 +46,7 @@ input:focus,select:focus{outline:2px solid var(--acc);outline-offset:1px}
 .hint{font-size:12px;color:var(--sub)}
 .days{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
 .days label{display:flex;align-items:center;gap:4px;font-size:14px;color:var(--fg);padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:var(--bg);cursor:pointer}
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 20px;font-weight:600;border-radius:999px;border:1px solid var(--acc);background:var(--acc);color:var(--accfg);cursor:pointer;font-size:14px;text-decoration:none}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 20px;font-weight:600;border-radius:10px;border:1px solid var(--acc);background:var(--acc);color:var(--accfg);cursor:pointer;font-size:14px;text-decoration:none}
 .btn.ghost{background:transparent;color:var(--acc)}
 .result{border-color:var(--acc);background:var(--accsoft)}
 .result b,.result strong{font-family:var(--num-font)}
@@ -79,7 +81,7 @@ footer.foot nav{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:14px;margin-b
 </head>
 <body>
 <header class="top"><div class="wrap">
-<a class="brand" href="index.html">수험생 계산기</a>
+<a class="brand" href="index.html">수험생 계산기</a><button type="button" class="themebtn" onclick="(function(){var d=document.documentElement;var dark=d.dataset.theme!=='dark';if(dark)d.dataset.theme='dark';else delete d.dataset.theme;try{localStorage.setItem('theme',dark?'dark':'light')}catch(e){}})()" aria-label="밝기 바꾸기">어둡게/밝게</button>
 <nav class="topnav" aria-label="계산기 목록"><a href="dday.html">D-데이</a><a href="daily.html">하루 공부량</a><a href="lecture.html">인강 배속</a><a href="studytime.html">순공 시간</a><a href="rounds.html">회독 계획</a><a href="timer.html">집중 타이머</a></nav>
 </div></header>
 <main><div class="wrap">
@@ -92,7 +94,7 @@ footer.foot nav{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:14px;margin-b
 <h2>2. 계산기 입력값의 처리</h2>
 <p>계산기에 입력한 값(시험 날짜, 공부 시간, 분량 등)은 이용자의 브라우저 안에서만 계산됩니다. 다음 방문 때 다시 채워 드리기 위해 이용자 브라우저의 로컬 저장공간(localStorage)에 저장하며, 이 값을 운영자의 서버나 제3자에게 보내지 않습니다. 저장된 값은 브라우저 설정에서 이 사이트의 데이터를 삭제하면 지워집니다.</p>
 <h2>3. 쿠키와 분석 도구</h2>
-<p>현재 사이트는 쿠키를 사용하지 않으며, 방문자 분석 도구나 광고 추적 도구도 사용하지 않습니다.</p>
+<p>현재 사이트는 쿠키를 사용하지 않으며, 방문자 분석 도구나 광고 추적 도구도 사용하지 않습니다. 다만 글꼴(고운돋움)을 Google Fonts에서 불러오므로, 페이지를 열 때 브라우저가 Google 서버에 접속하며 이때 IP 주소 등 접속 정보가 Google에 전달될 수 있습니다. 입력값은 전달되지 않습니다.</p>
 <h2>4. 광고 도입 시 사전 고지</h2>
 <p>운영자는 앞으로 사이트 운영을 위해 구글 애드센스(Google AdSense) 광고를 붙일 수 있습니다. 광고를 붙이게 되면, 그 전에 이 페이지에 광고 제공자, 광고 제공자가 사용하는 쿠키와 그 목적, 맞춤형 광고를 거부하는 방법을 먼저 고지하겠습니다.</p>
 <h2>5. 접속 기록</h2>

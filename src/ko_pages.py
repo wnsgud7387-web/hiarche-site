@@ -4,13 +4,13 @@ KO = {
     sub='다음 화에 일어날 일을 한 줄만 적으면 이어지는 한 화를 써 줘요. 쓰지 않고 나만을 위해 만든 이야기를 읽기만 해도 돼요.',
     meta='무료로 시작 · iPhone·iPad·안드로이드 · 한국어·영어·일본어',
     features=[('힌트 한 줄, 한 화','다음에 일어날 일을 적으면 니블로어가 등장인물을 헷갈리지 않고 한 화를 써요.'),('읽기만 하기','장르와 첫 이야기를 고르면 1화부터 바로 이어서 읽을 수 있어요.'),('삽화와 공유','장면에 그림을 넣고, 링크로 내 이야기를 나눠요.')],
-    price='무료로 시작해요. 잉크 묶음과 월 구독으로 더 많이 쓰고 그릴 수 있어요. 가격은 앱스토어에 원화로 표시돼요.',
+    price='무료로 시작해요. 잉크 묶음과 월 구독으로 더 많이 쓰고 그릴 수 있어요. 가격은 앱스토어·구글 플레이에 원화로 표시돼요.',
     note='이야기와 삽화는 AI가 만들어요.'),
   'solomons-verdict': dict(name='솔로몬의 판결', kind='재미', line='우리 싸움, 누가 더 잘못했을까?',
     sub='두 사람이 각자 자기 폰에서 입장을 적으면, AI 재판장 솔로몬이 양쪽 이야기를 번갈아 듣고 과실 비율로 판결해 줘요.',
     meta='iPhone · 안드로이드 · 앱스토어 심사 중 · 만 14세 이상',
     features=[('소장과 소환장','무슨 일이 있었는지 적고 링크를 보내요. 상대는 자기 폰에서 답변해요.'),('번갈아 묻는 변론','솔로몬이 양쪽에 질문하고 두 사람의 이야기를 모두 들은 뒤 판결해요.'),('판결·배심원·재발 방지 약속','쟁점별 과실 비율과 이유, 친구 배심원, 같은 다툼을 막는 약속 조항까지.')],
-    price='광고와 회원가입이 없어요. 사건 접수와 추가 기능은 소액 1회 구매이며, 가격은 앱스토어에 원화로 표시돼요.',
+    price='광고와 회원가입이 없어요. 사건 접수와 추가 기능은 소액 1회 구매이며, 가격은 앱스토어·구글 플레이에 원화로 표시돼요.',
     note='재미로 보는 AI 판정이에요. 실제 법원과 무관하며 법적 효력이 없고 법률 상담이 아니에요. 판결문은 AI(Anthropic Claude)가 만들어요.'),
   'rivalog': dict(name='라이벌로그', kind='공부', line='한 주를 계획하고, 내가 만든 라이벌과 겨뤄요.',
     sub='공부할 책과 실제로 쓸 수 있는 시간을 알려 주면 한 주에 나눠 주고, 나보다 조금 앞서가는 라이벌을 세워 줘요.',
@@ -80,7 +80,7 @@ def build_ko():
         cards += f'''<a class="card appcard" href="apps/{a["slug"]}.html" aria-label="{E(k["name"])}: {E(k["line"])}">
 <div class="apphead"><img src="../assets/icons/{a["slug"]}.png" alt=""><div><h3>{E(k["name"])}</h3><span class="kind">{E(k["kind"])}</span></div></div>
 <p style="font-size:17px;flex-grow:1">{E(k["line"])}</p>
-<div class="cardfoot"><span class="status {a["status"]}">{KO_STATUS[a["status"]]}</span><span class="more">앱 보기 &rarr;</span></div>
+<div class="cardfoot"><span class="status {'live' if a['slug'] in PLAY else a["status"]}">{({'live':'앱스토어·구글 플레이에 있어요','review':'구글 플레이에 있어요 · 앱스토어 심사 중'} if a['slug'] in PLAY else KO_STATUS)[a["status"]]}</span><span class="more">앱 보기 &rarr;</span></div>
 </a>
 '''
     page = head_ko('HiArche — 정성껏 만든 작은 앱들', '아르케는 한국의 작은 앱 스튜디오예요. 니블로어, 솔로몬의 판결, 라이벌로그, 초심, 홀린 듯, Story Accounting.', 1, 'ko/', '') + nav_ko(1, '', '../index.html') + f'''<main id="main">

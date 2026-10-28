@@ -1,12 +1,12 @@
 # News + Journal pages (exec'd from build.py; uses head/nav/footer/write/E/APPS)
 
 NEWS = [
-  ('niblore', 'Version 1.4.0 · October 2026', 'On the App Store', 'live', [
+  ('niblore', 'Version 1.4.0 · October 2026', 'On the App Store and Google Play', 'live', [
      'New Read mode: pick a genre and a starting story, and Episode 1 begins right away — no setup needed.',
      'At the end of each episode, choose one of two paths for what happens next, or tap "Surprise me" and let the story carry on.',
      'Longer episodes in both Read and Write modes, and you can add illustrations while you read.',
      'Bring your story to a finale and share the whole book with a single link.'],
-   ['Coming to Google Play.']),
+   ['Now on Google Play (Oct 28, 2026).']),
   ('wanderlure', 'Version 1.2 · October 2026', 'On the App Store', 'live', [
      'Wanderlure now speaks six languages: English, Korean, Japanese, Simplified Chinese, Spanish and French.',
      'Pick your own walking time instead of choosing from presets.',
@@ -18,12 +18,12 @@ NEWS = [
      'Add a proof photo to the steps you finish today. It is deleted the next day.',
      'Clearer rules and polished translations.'],
    ['Coming to Google Play.']),
-  ('rivalog', 'Version 1.0 · first release · submitted Oct 19, 2026', 'In App Store review', 'review', [
+  ('rivalog', 'Version 1.0 · first release · submitted Oct 19, 2026', 'On Google Play · App Store in review', 'live', [
      "Plan your week: add your books or courses, set your weekly study time as routines, and get today's target and range.",
      'See when each pass will finish. If your target date is tight, Rivalog shows what it takes: hours per week, or minutes per problem.',
      'Race a rival you create. It studies at your pace plus 30 minutes more a day, takes a 10-minute break every hour (or none), and shows a focus gauge through the day.',
      'Find your rival with a learning-style check of about 18 minutes across seven short tasks, built on task formats from published psychology research. The papers are cited in the app.'],
-   ['Coming to Google Play.'],
+   ['Now on Google Play.'],
    'The check is an estimate for choosing a rival, not an intelligence test or a diagnosis.'),
   ('story-accounting', 'Version 1.0 · first release · submitted Oct 18, 2026', 'In App Store review', 'review', [
      'First release: 270 short story episodes for three papers — Financial Accounting (75), Management Accounting (75) and Financial Reporting (120), in syllabus order.',
@@ -32,12 +32,12 @@ NEWS = [
      'A mistake log brings wrong answers back after 1, 3 and 7 days with new figures. Five episodes in each paper are free.'],
    ['Coming to Google Play.'],
    'Unofficial study aid. Not affiliated with or endorsed by ACCA.'),
-  ('solomons-verdict', 'Version 1.0 · first release · submitted Oct 22, 2026', 'In App Store review', 'review', [
+  ('solomons-verdict', 'Version 1.0 · first release · submitted Oct 22, 2026', 'On Google Play · App Store in review', 'live', [
      'Each person writes their side on their own phone; Solomon, an AI judge, questions both in turn.',
      'The verdict gives fault percentages by issue, the reasons, and a suggestion to make peace.',
      'If both agree, friends can join as a jury. Then the two of you set a few rules so the same fight does not happen again.',
      'No sign-up. Texts and photos are deleted 7 days after the verdict. For ages 14 and up.'],
-   ['Coming to Google Play.', 'English screens.'],
+   ['Now on Google Play (Oct 28, 2026).', 'English screens.'],
    'For entertainment only. Not a real court and not legal advice. Verdicts are written by AI.'),
 ]
 

@@ -22,7 +22,7 @@ APPS = [
        ios='https://apps.apple.com/us/app/niblore-write-your-novel/id6812610681', status='live',
        meta='Free to start · iPhone, iPad and Android · English, Korean, Japanese',
        features=[('One hint, one episode','Type what should happen next. Niblore writes the episode and keeps your characters straight.'),('Just read','Pick a genre and a starting story, then read episode after episode.'),('Illustrations & sharing','Add a picture to a scene and share your story with a link.')],
-       price='Free to start. Ink packs and a monthly plan let you write and illustrate more. Prices are shown in the App Store in your currency.',
+       price='Free to start. Ink packs and a monthly plan let you write and illustrate more. Prices are shown in the App Store or Google Play in your currency.',
        support='https://mistory-app.vercel.app/support.html', privacy='https://mistory-app.vercel.app/privacy.html', terms='',
        note='Stories and illustrations are AI-generated.'),
   dict(slug='solomons-verdict', name="Solomon's Verdict", kind='Fun', bg='#9E3319', fg='#F4F0E8',
@@ -30,7 +30,7 @@ APPS = [
        sub='Each of you writes your side on your own phone. Solomon, an AI judge, questions both of you in turn and rules with a fault percentage.',
        ios='', status='review', meta='iPhone · Android · In App Store review · Korean (English coming) · Ages 14+',
        features=[('File and summon','Write what happened, then send a link. The other person answers on their own phone.'),('A real back-and-forth','Solomon asks each side questions before it decides, so both stories are heard.'),('Verdict, jury and a promise','Fault percentages by issue, an optional friend jury, and a few rules so the same fight does not happen again.')],
-       price='No ads and no sign-up. Filing a case and extras are small one-time purchases, shown in the App Store in your currency.',
+       price='No ads and no sign-up. Filing a case and extras are small one-time purchases, shown in the App Store or Google Play in your currency.',
        support=PG+'solomon-support.html', privacy=PG+'solomon-privacy.html', terms='',
        note='For entertainment only. Not a real court and not legal advice. Verdicts are written by AI (Anthropic Claude).'),
   dict(slug='rivalog', name='Rivalog', kind='Study', bg='#2F5D50', fg='#F1F5F2',
@@ -206,6 +206,8 @@ def store_chips(a, up):
         s = '<span class="chip soon">App Store · in review</span>'
     else:
         s = '<span class="chip soon">In development</span>'
+    if a['slug'] in PLAY:
+        return s + f'<a class="chip store" href="https://play.google.com/store/apps/details?id={PLAY[a["slug"]]}">Google Play</a>'
     return s + ('' if a['slug']=='burnpile' else '<span class="chip play">Google Play · soon</span>')
 
 def terms_cell(a):
@@ -268,7 +270,7 @@ def build():
         cards += f'''<a class="card appcard" href="apps/{a["slug"]}.html" aria-label="{E(a["name"])}: {E(a["line"])}">
 <div class="apphead"><img src="assets/icons/{a["slug"]}.png" alt=""><div><h3>{E(a["name"])}</h3><span class="kind">{E(a["kind"])}</span></div></div>
 <p style="font-size:17px;flex-grow:1">{E(a["line"])}</p>
-<div class="cardfoot"><span class="status {a["status"]}">{ {'live':'On the App Store','review':'In App Store review','soon':'In development'}[a["status"]] }</span>{tryb}<span class="more">See app &rarr;</span></div>
+<div class="cardfoot"><span class="status {'live' if a['slug'] in PLAY else a["status"]}">{ ({'live':'On the App Store and Google Play','review':'On Google Play · App Store in review'} if a['slug'] in PLAY else {'live':'On the App Store','review':'In App Store review','soon':'In development'})[a["status"]] }</span>{tryb}<span class="more">See app &rarr;</span></div>
 </a>
 '''
     index = head('HiArche — Small apps, made with care', 'Arche is a small app studio in Korea. Niblore, Solomon’s Verdict, Rivalog, Chosim, Wanderlure and Story Accounting.', 0, '') + nav(0, '') + f'''<div id="kobar" class="wrap" hidden style="padding-block:4px 12px"><a href="ko/index.html" lang="ko" style="display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:12px;background:#2F5D50;color:#F1F5F2;font-weight:600;text-decoration:none">한국어로 보기 &rarr;</a></div>
@@ -292,7 +294,7 @@ def build():
 <div class="sechead"><h2 id="news-h" style="font-size:clamp(32px,4vw,44px);font-weight:800;letter-spacing:-.03em">What's new</h2><a href="news.html" style="font-weight:600">All app news</a></div>
 <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr))">
 <a class="card white" style="text-decoration:none" href="news.html#niblore"><span class="note">News · Niblore 1.4.0</span><h3 style="font-size:22px">A new Read mode</h3><span style="color:var(--soft)">Pick a genre and a starting story, and Episode 1 begins right away.</span></a>
-<a class="card white" style="text-decoration:none" href="news.html#rivalog"><span class="note">News · In App Store review</span><h3 style="font-size:22px">Rivalog and Story Accounting</h3><span style="color:var(--soft)">Two new apps are waiting for App Store review.</span></a>
+<a class="card white" style="text-decoration:none" href="news.html#solomons-verdict"><span class="note">News · Oct 28, 2026</span><h3 style="font-size:22px">Now on Google Play</h3><span style="color:var(--soft)">Niblore, Rivalog and Solomon's Verdict are out on Android.</span></a>
 <a class="card white" style="text-decoration:none" href="journal-why-arche.html"><span class="note">Journal · Oct 19, 2026</span><h3 style="font-size:22px">Why "Arche"?</h3><span style="color:var(--soft)">An old Greek word for beginning, and six apps built around one.</span></a>
 </div>
 </section>

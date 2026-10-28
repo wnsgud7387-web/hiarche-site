@@ -61,6 +61,7 @@ NEWS_CSS = '''<style>
 
 # Series 'A one-person company building apps with an AI team' (marketing drafts in src/journal/epN_{en,ko}.md)
 SERIES = [  # (n, file stem, date)
+  (2, 'journal-series-2', 'Oct 28, 2026'),
   (1, 'journal-series-1', 'Oct 22, 2026'),
   (0, 'journal-series-0', 'Oct 22, 2026'),
 ]

@@ -80,7 +80,7 @@ def build_ko():
         cards += f'''<a class="card appcard" href="apps/{a["slug"]}.html" aria-label="{E(k["name"])}: {E(k["line"])}">
 <div class="apphead"><img src="../assets/icons/{a["slug"]}.png" alt=""><div><h3>{E(k["name"])}</h3><span class="kind">{E(k["kind"])}</span></div></div>
 <p style="font-size:17px;flex-grow:1">{E(k["line"])}</p>
-<div class="cardfoot"><span class="status {'live' if a['slug'] in PLAY else a["status"]}">{({'live':'앱스토어·구글 플레이에 있어요','review':'구글 플레이에 있어요 · 앱스토어 심사 중'} if a['slug'] in PLAY else KO_STATUS)[a["status"]]}</span><span class="more">앱 보기 &rarr;</span></div>
+<div class="cardfoot">{store_badges(a, 'ko', link=False, size='sm')}<span class="more">앱 보기 &rarr;</span></div>
 </a>
 '''
     page = head_ko('HiArche — 정성껏 만든 작은 앱들', '아르케는 한국의 작은 앱 스튜디오예요. 니블로어, 솔로몬의 판결, 라이벌로그, 초심, 홀린 듯, Story Accounting.', 1, 'ko/', '') + nav_ko(1, '', '../index.html') + f'''<main id="main">
@@ -141,7 +141,8 @@ def build_ko():
 <h1 class="h1" style="font-size:clamp(40px,6vw,76px)">{E(k["name"])}</h1>
 <p style="font-family:'Bricolage Grotesque',sans-serif;font-size:26px;font-weight:700">{E(k["line"])}</p>
 <p style="font-size:18px;max-width:32em;opacity:.88">{E(k["sub"])}</p>
-<div style="display:flex;flex-wrap:wrap;gap:12px">{dl}{'<a class="btn" style="border-radius:12px;border:2px solid '+a["fg"]+';color:'+a["fg"]+'" href="https://rivalog.hiarche.com/">웹에서 바로 써 보기</a><a class="btn" style="border-radius:12px;border:2px solid '+a["fg"]+';color:'+a["fg"]+'" href="#lq">LQ 검사</a>' if a['slug']=='rivalog' else ''}{('<a class="btn" style="border-radius:12px;border:2px solid '+a['fg']+';color:'+a['fg']+'" href="https://play.google.com/store/apps/details?id='+PLAY[a['slug']]+'">구글 플레이에서 받기</a>') if a['slug'] in PLAY else '<span class="btn" style="border-radius:12px;border:1.5px dashed '+a['fg']+';opacity:.8">구글 플레이 · 곧</span>'}</div>
+<div style="display:flex;flex-wrap:wrap;gap:12px">{store_badges(a, 'ko')}</div>
+<div style="display:flex;flex-wrap:wrap;gap:12px">{'<a class="btn" style="border-radius:12px;border:2px solid '+a["fg"]+';color:'+a["fg"]+'" href="https://rivalog.hiarche.com/">웹에서 바로 써 보기</a><a class="btn" style="border-radius:12px;border:2px solid '+a["fg"]+';color:'+a["fg"]+'" href="#lq">LQ 검사</a>' if a['slug']=='rivalog' else ''}</div>
 <p style="font-size:14px;opacity:.78">{E(k["meta"])}</p>
 </div>
 </div></section>

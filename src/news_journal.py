@@ -131,7 +131,7 @@ def build_news_journal():
         title_now = 'This update' if scls != 'soon' else 'Where it stands'
         notep = f'<p class="note">{E(note)}</p>' if note else ''
         cards += f'''<article class="ncard" id="{slug}">
-<div class="top"><img src="assets/icons/{slug}.png" alt=""><div style="display:flex;flex-direction:column;gap:2px;min-width:0"><h2>{E(a["name"])}</h2><span class="ver">{E(ver)}</span></div><span class="status {scls}" style="margin-left:auto;font-size:13px;font-weight:600">{E(stat)}</span></div>
+<div class="top"><img src="assets/icons/{slug}.png" alt=""><div style="display:flex;flex-direction:column;gap:2px;min-width:0"><h2>{E(a["name"])}</h2><span class="ver">{E(ver)}</span></div><span style="margin-left:auto">{store_badges(a, 'en', size='sm')}</span></div>
 <div class="ncols"><div><h3>{title_now}</h3><ul>{nowl}</ul></div><div class="next"><h3>Coming next</h3><ul>{nxtl}</ul></div></div>
 <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px">{notep}<a href="apps/{slug}.html" style="font-weight:600;margin-left:auto">About {E(a["name"])} &rarr;</a></div>
 </article>

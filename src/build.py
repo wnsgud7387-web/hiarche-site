@@ -65,6 +65,35 @@ APPS = [
        note='Unofficial study aid. Not affiliated with or endorsed by ACCA.'),
 ]
 LAB = {'niblore': None, 'solomons-verdict': None, 'rivalog': ('How long will your book take?', 'Fill in three of the four boxes and it works out the fourth, with the same math as the app.', '../lab/rivalog-calculator.html', 900, None, 'A planning estimate, not a guarantee.'), 'chosim': None, 'wanderlure': None, 'story-accounting': ('Read Episode 1', '"Only 3 months belong to this year." The story stops right before the answer. Your turn.', '../lab/story-accounting-episode-1.html', 900, None, 'Unofficial study aid. Not affiliated with or endorsed by ACCA.')}
+# 스토어 아이콘(Simple Icons 13.21.0, CC0 — 아이콘 모양은 각 회사 상표) · 대표님 10-28: 스토어별 버튼 따로, 출시=컬러 / 아직=흑백
+SVG_APPLE = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>'
+SVG_PLAY = '<svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="gpg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#00C3FF"/><stop offset=".45" stop-color="#00E676"/><stop offset=".7" stop-color="#FFD400"/><stop offset="1" stop-color="#FF3A44"/></linearGradient></defs><path fill="url(#gpg)" d="M22.018 13.298l-3.919 2.218-3.515-3.493 3.543-3.521 3.891 2.202a1.49 1.49 0 0 1 0 2.594zM1.337.924a1.486 1.486 0 0 0-.112.568v21.017c0 .217.045.419.124.6l11.155-11.087L1.337.924zm12.207 10.065l3.258-3.238L3.45.195a1.466 1.466 0 0 0-.946-.179l11.04 10.973zm0 2.067l-11 10.933c.298.036.612-.016.906-.183l13.324-7.54-3.23-3.21z"/></svg>'
+
+def store_state(a):
+    """(앱스토어, 구글 플레이) 상태 — live / review / soon / none"""
+    play = 'none' if a['slug'] == 'burnpile' else ('live' if a['slug'] in PLAY else 'soon')
+    return a['status'], play
+
+def store_badges(a, lang='en', link=True, size='lg'):
+    ios, play = store_state(a)
+    T = {'en': {'live': 'Available on', 'review': 'In review ·', 'soon': 'Coming soon ·'},
+         'ko': {'live': '출시', 'review': '심사 중', 'soon': '준비 중'}}[lang]
+    names = {'en': ('App Store', 'Google Play'), 'ko': ('앱스토어', '구글 플레이')}[lang]
+    ios_url = a['ios'].replace('/us/', '/kr/') if (lang == 'ko' and a['ios']) else a['ios']
+    play_url = f'https://play.google.com/store/apps/details?id={PLAY[a["slug"]]}' if a['slug'] in PLAY else ''
+    out = []
+    for name, st, url, svg, kind in [(names[0], ios, ios_url, SVG_APPLE, 'apple'), (names[1], play, play_url, SVG_PLAY, 'gplay')]:
+        if st == 'none':
+            continue
+        cls = f'sb {size} {"on" if st == "live" else "off"} {kind}'
+        inner = f'{svg}<span class="sbt"><small>{T[st]}</small><b>{name}</b></span>'
+        label = f'{name}: {T[st].strip(" ·")}'
+        if st == 'live' and link and url:
+            out.append(f'<a class="{cls}" href="{url}" aria-label="{E(label)}">{inner}</a>')
+        else:
+            out.append(f'<span class="{cls}" role="img" aria-label="{E(label)}">{inner}</span>')
+    return '<span class="sbs">' + ''.join(out) + '</span>'
+
 PLAY = {'rivalog':'com.arche.rivalog','niblore':'com.arche.niblore','solomons-verdict':'com.arche.solomon'}
 ICON = {'niblore':'niblore','solomons-verdict':'solomon','rivalog':'rivalog','chosim':'chosim','wanderlure':'wanderlure','story-accounting':'story'}
 
@@ -113,6 +142,13 @@ nav.main a{text-decoration:none}nav.main a[aria-current]{text-decoration:underli
 .chip.store{background:var(--ink);color:var(--bg)}.chip.store:hover{color:#fff}
 .chip.soon{background:#E4E6DE;color:var(--soft)}
 .chip.play{border:1.5px dashed #8C9086;color:#50554B}
+.sbs{display:inline-flex;flex-wrap:wrap;gap:8px}
+.sb{display:inline-flex;align-items:center;gap:8px;border-radius:12px;text-decoration:none;line-height:1.15;background:#fff;color:#1B1D24;border:1px solid #D8DAD2}
+.sb.lg{min-height:48px;padding:6px 16px 6px 12px}.sb.sm{min-height:36px;padding:4px 10px 4px 8px}
+.sb svg{flex:none;width:24px;height:24px}.sb.sm svg{width:17px;height:17px}
+.sb .sbt{display:flex;flex-direction:column}.sb small{font-size:11px;font-weight:600;opacity:.7}.sb b{font-size:15px;font-weight:700}.sb.sm small{font-size:10px}.sb.sm b{font-size:12.5px}
+.sb.on.apple svg{color:#0A84FF}a.sb.on:hover{border-color:#1B1D24;color:#1B1D24}
+.sb.off{background:#ECEDE8;color:#868980;border-style:dashed;border-color:#B7BAB1}.sb.off svg{filter:grayscale(1);opacity:.5}.sb.off.apple svg{color:#868980}
 .links{display:flex;flex-wrap:wrap;gap:16px;font-size:14px}
 .appcard{text-decoration:none;color:var(--ink);border:1px solid transparent;transition:border-color .15s,transform .15s}.appcard:hover{border-color:#B9BCB1;transform:translateY(-2px);color:var(--ink)}
 .cardfoot{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;font-weight:600}
@@ -200,6 +236,7 @@ def footer(depth):
 '''
 
 def store_chips(a, up):
+    return store_badges(a, 'en')
     if a['status'] == 'live':
         s = f'<a class="chip store" href="{a["ios"]}">App Store</a>'
     elif a['status'] == 'review':
@@ -270,7 +307,7 @@ def build():
         cards += f'''<a class="card appcard" href="apps/{a["slug"]}.html" aria-label="{E(a["name"])}: {E(a["line"])}">
 <div class="apphead"><img src="assets/icons/{a["slug"]}.png" alt=""><div><h3>{E(a["name"])}</h3><span class="kind">{E(a["kind"])}</span></div></div>
 <p style="font-size:17px;flex-grow:1">{E(a["line"])}</p>
-<div class="cardfoot"><span class="status {'live' if a['slug'] in PLAY else a["status"]}">{ ({'live':'On the App Store and Google Play','review':'On Google Play · App Store in review'} if a['slug'] in PLAY else {'live':'On the App Store','review':'In App Store review','soon':'In development'})[a["status"]] }</span>{tryb}<span class="more">See app &rarr;</span></div>
+<div class="cardfoot">{store_badges(a, 'en', link=False, size='sm')}{tryb}<span class="more">See app &rarr;</span></div>
 </a>
 '''
     index = head('HiArche — Small apps, made with care', 'Arche is a small app studio in Korea. Niblore, Solomon’s Verdict, Rivalog, Chosim, Wanderlure and Story Accounting.', 0, '') + nav(0, '') + f'''<div id="kobar" class="wrap" hidden style="padding-block:4px 12px"><a href="ko/index.html" lang="ko" style="display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:12px;background:#2F5D50;color:#F1F5F2;font-weight:600;text-decoration:none">한국어로 보기 &rarr;</a></div>
@@ -347,7 +384,8 @@ def build():
 <h1 class="h1" style="font-size:clamp(44px,6vw,80px)">{E(a["name"])}</h1>
 <p style="font-family:'Bricolage Grotesque',sans-serif;font-size:28px;font-weight:700">{E(a["line"])}</p>
 <p style="font-size:18px;max-width:32em;opacity:.88">{E(a["sub"])}</p>
-<div style="display:flex;flex-wrap:wrap;gap:12px">{dl}{'<a class="btn" style="border-radius:12px;border:2px solid '+a["fg"]+';color:'+a["fg"]+'" href="#try">Try it here</a>' if lab else ''}{'<a class="btn" style="border-radius:12px;border:2px solid '+a["fg"]+';color:'+a["fg"]+'" href="https://rivalog.hiarche.com/">Use it on the web (Korean)</a><a class="btn" style="border-radius:12px;border:2px solid '+a["fg"]+';color:'+a["fg"]+'" href="#lq">LQ check</a>' if a['slug']=='rivalog' else ''}{'' if a['slug']=='burnpile' else ('<a class="btn" style="border-radius:12px;border:2px solid '+a['fg']+';color:'+a['fg']+'" href="https://play.google.com/store/apps/details?id='+PLAY[a['slug']]+'">Get it on Google Play</a>' if a['slug'] in PLAY else '<span class="btn" style="border-radius:12px;border:1.5px dashed '+a['fg']+';opacity:.8">Google Play · soon</span>')}</div>
+<div style="display:flex;flex-wrap:wrap;gap:12px">{store_badges(a, 'en')}</div>
+<div style="display:flex;flex-wrap:wrap;gap:12px">{'<a class="btn" style="border-radius:12px;border:2px solid '+a["fg"]+';color:'+a["fg"]+'" href="#try">Try it here</a>' if lab else ''}{'<a class="btn" style="border-radius:12px;border:2px solid '+a["fg"]+';color:'+a["fg"]+'" href="https://rivalog.hiarche.com/">Use it on the web (Korean)</a><a class="btn" style="border-radius:12px;border:2px solid '+a["fg"]+';color:'+a["fg"]+'" href="#lq">LQ check</a>' if a['slug']=='rivalog' else ''}</div>
 <p style="font-size:14px;opacity:.78">{E(a["meta"])}</p>
 </div>
 </div></section>

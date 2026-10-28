@@ -197,3 +197,44 @@ def build_ko_policies():
     for slug, body, title, desc in [('terms', TERMS_KO, '이용약관 — 아르케', '아르케 앱과 웹 서비스 공통 이용약관'), ('refund', REFUND_KO, '환불 정책 — 아르케', '아르케 앱과 웹 서비스의 환불·청약철회 정책')]:
         page = head_ko(title, desc, 1, f'ko/{slug}.html', 'legal.html') + nav_ko(1, '', '../legal.html') + f'<main id="main" class="wrap" style="padding-block:48px 96px;display:flex;flex-direction:column;gap:20px;max-width:820px">{body}</main>' + footer_ko(1)
         write(f'ko/{slug}.html', page)
+
+# 앱별 정책 페이지 (md → html) — 튜링 하트 1.0 (법무실장 10-28판, 비서 게시)
+def _policy_md(path):
+    import re
+    def inl(t):
+        t = E(t)
+        return re.sub(r'\*\*(.+?)\*\*', r'<b>\1</b>', t)
+    out, i = [], 0
+    L = open(path, encoding='utf-8').read().strip().split('\n')
+    while i < len(L):
+        l = L[i]
+        if not l.strip(): i += 1; continue
+        if l.startswith('# '): out.append(f'<h1 class="h1" style="font-size:clamp(34px,5vw,52px)">{inl(l[2:])}</h1>'); i += 1; continue
+        if l.startswith('## '): out.append(f'<h2>{inl(l[3:])}</h2>'); i += 1; continue
+        if l.startswith('> '): out.append(f'<p class="note">{inl(l[2:])}</p>'); i += 1; continue
+        if l.startswith('|'):
+            rows = []
+            while i < len(L) and L[i].startswith('|'):
+                if not re.match(r'^\|[\s\-|]+\|$', L[i]): rows.append([c.strip() for c in L[i].strip('|').split('|')])
+                i += 1
+            th = ''.join(f'<th>{inl(c)}</th>' for c in rows[0])
+            tb = ''.join('<tr>' + ''.join(f'<td>{inl(c)}</td>' for c in r) + '</tr>' for r in rows[1:])
+            out.append(f'<div style="overflow-x:auto"><table class="ptable"><thead><tr>{th}</tr></thead><tbody>{tb}</tbody></table></div>'); continue
+        if re.match(r'^(- |\d+\. )', l):
+            tag = 'ol' if l[0].isdigit() else 'ul'; items = []
+            while i < len(L) and re.match(r'^(- |\d+\. )', L[i]):
+                items.append(re.sub(r'^(- |\d+\. )', '', L[i])); i += 1
+            out.append(f'<{tag}>' + ''.join(f'<li>{inl(x)}</li>' for x in items) + f'</{tag}>'); continue
+        out.append(f'<p>{inl(l)}</p>'); i += 1
+    return '\n'.join(out)
+
+PTABLE_CSS = '<style>.ptable{border-collapse:collapse;width:100%;min-width:560px;font-size:15px}.ptable th,.ptable td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}.ptable th{background:var(--card)}main ol,main ul{padding-left:22px;display:flex;flex-direction:column;gap:6px}</style>'
+
+def build_app_policies():
+    for slug, fn, title, desc in [
+        ('turing-heart/privacy', 'turing-heart-privacy.md', '튜링 하트 개인정보 처리방침 — 아르케', '튜링 하트가 처리하는 개인정보와 목적, 보관 기간, 국외 이전, 이용자의 권리'),
+        ('turing-heart/terms', 'turing-heart-terms.md', '튜링 하트 이용약관 — 아르케', '튜링 하트 이용 자격, 금지 행동, 하트·월 패스, 환불과 분쟁'),
+    ]:
+        body = _policy_md(os.path.join(ROOT, 'policies', fn))
+        page = head_ko(title, desc, 2, f'ko/{slug}.html', 'legal.html') + PTABLE_CSS + nav_ko(2, '', '../../legal.html') + f'<main id="main" class="wrap" style="padding-block:48px 96px;display:flex;flex-direction:column;gap:20px;max-width:880px">{body}</main>' + footer_ko(2)
+        write(f'ko/{slug}.html', page)

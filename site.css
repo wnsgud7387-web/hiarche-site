@@ -42,6 +42,13 @@ nav.main a{text-decoration:none}nav.main a[aria-current]{text-decoration:underli
 .chip.store{background:var(--ink);color:var(--bg)}.chip.store:hover{color:#fff}
 .chip.soon{background:#E4E6DE;color:var(--soft)}
 .chip.play{border:1.5px dashed #8C9086;color:#50554B}
+.sbs{display:inline-flex;flex-wrap:wrap;gap:8px}
+.sb{display:inline-flex;align-items:center;gap:8px;border-radius:12px;text-decoration:none;line-height:1.15;background:#fff;color:#1B1D24;border:1px solid #D8DAD2}
+.sb.lg{min-height:48px;padding:6px 16px 6px 12px}.sb.sm{min-height:36px;padding:4px 10px 4px 8px}
+.sb svg{flex:none;width:24px;height:24px}.sb.sm svg{width:17px;height:17px}
+.sb .sbt{display:flex;flex-direction:column}.sb small{font-size:11px;font-weight:600;opacity:.7}.sb b{font-size:15px;font-weight:700}.sb.sm small{font-size:10px}.sb.sm b{font-size:12.5px}
+.sb.on.apple svg{color:#0A84FF}a.sb.on:hover{border-color:#1B1D24;color:#1B1D24}
+.sb.off{background:#ECEDE8;color:#868980;border-style:dashed;border-color:#B7BAB1}.sb.off svg{filter:grayscale(1);opacity:.5}.sb.off.apple svg{color:#868980}
 .links{display:flex;flex-wrap:wrap;gap:16px;font-size:14px}
 .appcard{text-decoration:none;color:var(--ink);border:1px solid transparent;transition:border-color .15s,transform .15s}.appcard:hover{border-color:#B9BCB1;transform:translateY(-2px);color:var(--ink)}
 .cardfoot{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;font-weight:600}

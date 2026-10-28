@@ -20,7 +20,7 @@ APPS = [
        line='Write a web novel one episode at a time with AI.',
        sub='Give it one line of a hint and get the next episode. Or skip writing and just read a story made for you.',
        ios='https://apps.apple.com/us/app/niblore-write-your-novel/id6812610681', status='live',
-       meta='Free to start · iPhone and iPad · English, Korean, Japanese',
+       meta='Free to start · iPhone, iPad and Android · English, Korean, Japanese',
        features=[('One hint, one episode','Type what should happen next. Niblore writes the episode and keeps your characters straight.'),('Just read','Pick a genre and a starting story, then read episode after episode.'),('Illustrations & sharing','Add a picture to a scene and share your story with a link.')],
        price='Free to start. Ink packs and a monthly plan let you write and illustrate more. Prices are shown in the App Store in your currency.',
        support='https://mistory-app.vercel.app/support.html', privacy='https://mistory-app.vercel.app/privacy.html', terms='',
@@ -28,7 +28,7 @@ APPS = [
   dict(slug='solomons-verdict', name="Solomon's Verdict", kind='Fun', bg='#9E3319', fg='#F4F0E8',
        line='Two sides of an argument, one AI judge.',
        sub='Each of you writes your side on your own phone. Solomon, an AI judge, questions both of you in turn and rules with a fault percentage.',
-       ios='', status='review', meta='iPhone · In App Store review · Korean (English coming) · Ages 14+',
+       ios='', status='review', meta='iPhone · Android · In App Store review · Korean (English coming) · Ages 14+',
        features=[('File and summon','Write what happened, then send a link. The other person answers on their own phone.'),('A real back-and-forth','Solomon asks each side questions before it decides, so both stories are heard.'),('Verdict, jury and a promise','Fault percentages by issue, an optional friend jury, and a few rules so the same fight does not happen again.')],
        price='No ads and no sign-up. Filing a case and extras are small one-time purchases, shown in the App Store in your currency.',
        support=PG+'solomon-support.html', privacy=PG+'solomon-privacy.html', terms='',
@@ -36,7 +36,7 @@ APPS = [
   dict(slug='rivalog', name='Rivalog', kind='Study', bg='#2F5D50', fg='#F1F5F2',
        line='Plan your week and race a rival you create.',
        sub='Tell it your books and the hours you really have. It splits the work across your week and sets a rival a little ahead of you.',
-       ios='', status='review', meta='iPhone · In App Store review',
+       ios='', status='review', meta='iPhone · Android · In App Store review',
        features=[('A plan that fits your week',"Set your weekly study hours; today's share follows the time you have left."),('A rival to race','Your rival studies 30 minutes more each day. Keep up, or catch up.'),('Review before you forget',"See when each round of review is due and when you'll finish.")],
        price='Free to start. Rivalog Plus is a monthly or yearly subscription, with a 7-day free trial on the yearly plan.',
        support=PG+'rivalog-support.html', privacy=PG+'rivalog-privacy.html', terms=PG+'rivalog-terms.html', note=''),
@@ -65,6 +65,7 @@ APPS = [
        note='Unofficial study aid. Not affiliated with or endorsed by ACCA.'),
 ]
 LAB = {'niblore': None, 'solomons-verdict': None, 'rivalog': ('How long will your book take?', 'Fill in three of the four boxes and it works out the fourth, with the same math as the app.', '../lab/rivalog-calculator.html', 900, None, 'A planning estimate, not a guarantee.'), 'chosim': None, 'wanderlure': None, 'story-accounting': ('Read Episode 1', '"Only 3 months belong to this year." The story stops right before the answer. Your turn.', '../lab/story-accounting-episode-1.html', 900, None, 'Unofficial study aid. Not affiliated with or endorsed by ACCA.')}
+PLAY = {'rivalog':'com.arche.rivalog','niblore':'com.arche.niblore','solomons-verdict':'com.arche.solomon'}
 ICON = {'niblore':'niblore','solomons-verdict':'solomon','rivalog':'rivalog','chosim':'chosim','wanderlure':'wanderlure','story-accounting':'story'}
 
 CSS = r"""
@@ -344,7 +345,7 @@ def build():
 <h1 class="h1" style="font-size:clamp(44px,6vw,80px)">{E(a["name"])}</h1>
 <p style="font-family:'Bricolage Grotesque',sans-serif;font-size:28px;font-weight:700">{E(a["line"])}</p>
 <p style="font-size:18px;max-width:32em;opacity:.88">{E(a["sub"])}</p>
-<div style="display:flex;flex-wrap:wrap;gap:12px">{dl}{'<a class="btn" style="border-radius:12px;border:2px solid '+a["fg"]+';color:'+a["fg"]+'" href="#try">Try it here</a>' if lab else ''}{'<a class="btn" style="border-radius:12px;border:2px solid '+a["fg"]+';color:'+a["fg"]+'" href="https://rivalog.hiarche.com/">Use it on the web (Korean)</a><a class="btn" style="border-radius:12px;border:2px solid '+a["fg"]+';color:'+a["fg"]+'" href="#lq">LQ check</a>' if a['slug']=='rivalog' else ''}{'' if a['slug']=='burnpile' else '<span class="btn" style="border-radius:12px;border:1.5px dashed '+a['fg']+';opacity:.8">Google Play · soon</span>'}</div>
+<div style="display:flex;flex-wrap:wrap;gap:12px">{dl}{'<a class="btn" style="border-radius:12px;border:2px solid '+a["fg"]+';color:'+a["fg"]+'" href="#try">Try it here</a>' if lab else ''}{'<a class="btn" style="border-radius:12px;border:2px solid '+a["fg"]+';color:'+a["fg"]+'" href="https://rivalog.hiarche.com/">Use it on the web (Korean)</a><a class="btn" style="border-radius:12px;border:2px solid '+a["fg"]+';color:'+a["fg"]+'" href="#lq">LQ check</a>' if a['slug']=='rivalog' else ''}{'' if a['slug']=='burnpile' else ('<a class="btn" style="border-radius:12px;border:2px solid '+a['fg']+';color:'+a['fg']+'" href="https://play.google.com/store/apps/details?id='+PLAY[a['slug']]+'">Get it on Google Play</a>' if a['slug'] in PLAY else '<span class="btn" style="border-radius:12px;border:1.5px dashed '+a['fg']+';opacity:.8">Google Play · soon</span>')}</div>
 <p style="font-size:14px;opacity:.78">{E(a["meta"])}</p>
 </div>
 </div></section>

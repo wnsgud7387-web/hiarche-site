@@ -94,7 +94,7 @@ const ERR = {
   not_found: '사건을 찾을 수 없습니다. 링크를 다시 확인해 주십시오.', not_your_turn: '지금은 상대 차례입니다.', counsel_limit: '이 사건의 변론 도우미를 모두 썼습니다.', payment_required: '이 기능은 아이폰 앱에서 결제한 뒤 쓸 수 있어요.', purchase_used: '이미 사용한 결제예요.', bad_purchase: '결제를 확인하지 못했어요.',
   photo_too_big: '사진이 너무 큽니다.', ai_error: '재판장이 잠시 자리를 비웠습니다. 잠시 뒤 다시 눌러 주십시오.', ai_not_configured: '법정 준비 중입니다. 조금 뒤 열립니다.',
   ai_limit: '이 사건은 더 진행할 수 없습니다.', already_claimed: '이미 다른 기기에서 열렸습니다. 원고에게 새 초대장을 요청하십시오.', busy: '처리 중입니다. 잠시 뒤 새로고침해 주십시오.',
-  jury_full: '배심원은 한쪽에 3명까지 초대할 수 있어요.', opinion_blocked: '욕설이나 비하하는 말은 의견에 쓸 수 없어요. 고쳐서 다시 내 주세요.', extend_limit: '변론은 이 사건에서 더 늘릴 수 없어요.', already_voted: '이미 투표했어요. 배심원 한 명은 한 번만 투표할 수 있어요.', bad_vote: '과실 비율을 골라 주세요.', opinion_required: '내 의견을 다섯 글자 이상 적어 주세요.',
+  jury_full: '배심원은 한쪽에 3명까지 초대할 수 있어요.', opinion_blocked: '욕설·비하나 위험할 수 있는 말은 의견에 쓸 수 없어요. 고쳐서 다시 내 주세요.', stale: '그 사이 사건 단계가 바뀌었어요(상대가 사건을 그만뒀을 수 있어요). 적은 글을 복사해 두고 새로고침해 주세요.', case_closed: '원고가 그만둔 사건이라 더 진행되지 않아요.', extend_limit: '변론은 이 사건에서 더 늘릴 수 없어요.', already_voted: '이미 투표했어요. 배심원 한 명은 한 번만 투표할 수 있어요.', bad_vote: '과실 비율을 골라 주세요.', opinion_required: '내 의견을 다섯 글자 이상 적어 주세요.',
   ip_limit: '오늘은 이 연결에서 더 접수할 수 없습니다. 내일 다시 와 주십시오.', self_claim: '원고는 자기 사건의 피고로 참여할 수 없습니다. 초대장 링크를 상대에게 보내 주십시오.', server: '문제가 생겼습니다. 잠시 뒤 다시 시도해 주십시오.', network: '인터넷 연결을 확인해 주십시오.'
 };
 async function api(body) {
@@ -283,6 +283,7 @@ async function screenCase(id, key) {
   store.add({ id: v.case_id, key, role: v.role, name: v.case_name, judged: v.status === 'judged' });
   const ctx = { id, key };
   if (v.status === 'help') return screenHelp(v);
+  if (v.status === 'closed') return screenClosed(v);
   if (v.status === 'judged') return screenVerdict(v);
   if (v.my_turn) return screenWrite(v, ctx);
   screenWait(v, ctx);
@@ -327,7 +328,8 @@ function screenEnvelope(v, next) {
 }
 function screenWrite(v, ctx) {
   const isD = v.role === 'defendant', first = isD && v.status === 'answer', fin = v.status === 'final', apl = v.status === 'appeal';
-  const max = first ? MAXLEN.answer : fin ? MAXLEN.final : MAXLEN.arg;
+  const otherLeft = !!(v.left && !v.left.mine);   // 상대가 사건을 그만둠(v7b)
+  const max = first ? MAXLEN.answer : fin ? (v.left ? MAXLEN.arg : MAXLEN.final) : MAXLEN.arg;   // 상대가 그만둔 뒤 마지막 변론 900자(감사 v7b3-1)
   const o1 = v.verdict?.order || {};
   const title = apl ? '항소 답변서를 제출하십시오' : first ? '답변서를 제출하십시오' : fin ? '최종변론을 하십시오' : `변론 ${v.round}회 — 솔로몬의 질문에 답하십시오`;
   const left = (v.max_rounds || 6) - (v.round || 0);
@@ -338,7 +340,8 @@ function screenWrite(v, ctx) {
   ${v.answer_summary ? `<div class="sum"><b>피고 답변 요지</b><br>${esc(v.answer_summary)}</div>` : ''}
   ${v.issues?.length ? `<div class="sum"><b>쟁점</b><ol style="margin:4px 0 0;padding-left:20px">${v.issues.map((x) => `<li>${esc(x)}</li>`).join('')}</ol></div>` : ''}
   ${(v.questions = (v.questions || []).filter((x) => !String(x).startsWith('[항소 요지]'))).length ? `<div class="q"><b>솔로몬 → ${isD ? '피고' : '원고'}</b><ol>${v.questions.map((x) => `<li>${esc(x)}</li>`).join('')}</ol></div>` : ''}
-  ${fin ? `<div class="q"><b>솔로몬</b><br>${v.capped ? `변론 ${v.max_rounds}회를 모두 썼습니다.${v.can_extend ? ' 변론 3회 추가는 아이폰 앱에서 할 수 있어요.' : ''}` : '양측 주장을 충분히 들었으므로 변론을 종결합니다.'} 마지막으로 재판부가 꼭 기억해 주길 바라는 점을 정리하십시오. 새 이야기보다 핵심을 짧게.${v.other_final_done ? '<br><span class="small">상대는 최종변론을 냈습니다.</span>' : ''}</div>` : ''}
+  ${fin && otherLeft ? `<div class="q"><b>솔로몬</b><br>상대가 사건을 그만두었습니다. 마지막으로 하고 싶은 말이 있으면 아래에 적어 내고, 없으면 바로 판결을 받으세요. 마감까지 아무것도 하지 않으면 지금까지의 기록으로 판결합니다.</div><button class="btn ghost" id="wv" type="button">할 말 없음 · 바로 판결 받기</button><div class="err" id="wver" hidden></div>` : ''}
+  ${fin && !otherLeft ? `<div class="q"><b>솔로몬</b><br>${v.capped ? `변론 ${v.max_rounds}회를 모두 썼습니다.${v.can_extend ? ' 변론 3회 추가는 아이폰 앱에서 할 수 있어요.' : ''}` : '양측 주장을 충분히 들었으므로 변론을 종결합니다.'} 마지막으로 재판부가 꼭 기억해 주길 바라는 점을 정리하십시오. 새 이야기보다 핵심을 짧게.${v.other_final_done ? '<br><span class="small">상대는 최종변론을 냈습니다.</span>' : ''}</div>` : ''}
   ${v.status === 'arg' ? `<p class="small">⚖️ 변론 ${v.round}회째 · ${v.max_rounds}회 중 ${Math.max(0, left)}회 남음${left <= 1 && v.can_extend ? ` — 변론 3회 추가는 아이폰 앱에서 할 수 있어요` : ''}</p>` : ''}
   <p class="small">🔒 상대의 원문은 판결이 나면 공개됩니다.</p>
   ${counselBlock(v.role, v.counsel_left)}
@@ -355,17 +358,26 @@ function screenWrite(v, ctx) {
     <button class="btn" id="go">${apl ? '항소 답변서 제출' : first ? '답변서 제출' : fin ? '최종변론 제출' : '변론 제출'}</button>
   </form>
   <button class="btn ghost" id="mine" type="button">내 사건 링크 복사</button>
+  ${leaveBlock(!otherLeft)}
   ${v.my_submissions?.length ? `<details><summary>내가 낸 글 보기</summary>${v.my_submissions.map((s) => `<div class="rec"><b>${kindLabel(s.kind)}</b>\n${esc(s.body)}</div>`).join('')}</details>` : ''}
   ${footer()}`;
   const ta = document.getElementById('t'); counter(ta, document.getElementById('cc'), max);
   document.getElementById('mine').onclick = () => copy(caseLink(ctx.id, ctx.key), 'mine');
+  wireLeave(ctx);
+  const wv = document.getElementById('wv');
+  if (wv) { let armed = false; wv.onclick = async () => {
+    if (!armed) { armed = true; wv.textContent = '정말 바로 판결 받기'; return; }
+    busy(wv, true, '솔로몬이 판결문을 쓰는 중…');
+    try { const r = await api({ action: 'waive', case_id: ctx.id, key: ctx.key }); if (r.status === 'judged') return screenVerdict(r); if (r.status === 'help') return screenHelp(r); screenCase(ctx.id, ctx.key); }
+    catch (e) { showErr(document.getElementById('wver'), e); busy(wv, false, '할 말 없음 · 바로 판결 받기'); armed = false; }
+  }; }
   const photos = photoPicker(document.getElementById('f'));
   wireCounsel(app, ctx, ta);
   document.getElementById('f').onsubmit = async (ev) => {
     ev.preventDefault(); const er = document.getElementById('er'); er.hidden = true; const btn = document.getElementById('go'); const lbl = btn.textContent;
-    busy(btn, true, apl || (fin && v.other_final_done) ? '솔로몬이 판결문을 쓰는 중…' : '솔로몬이 검토하는 중…');
+    busy(btn, true, apl || (fin && (v.other_final_done || otherLeft)) ? '솔로몬이 판결문을 쓰는 중…' : '솔로몬이 검토하는 중…');
     try {
-      const body = { action: 'reply', case_id: ctx.id, key: ctx.key, text: ta.value, photos };
+      const body = { action: 'reply', case_id: ctx.id, key: ctx.key, text: ta.value, photos, expect_kind: apl ? 'appeal_answer' : first ? 'answer' : fin ? `final_${v.role}` : `arg${v.round}` };
       if (first) Object.assign(body, { label: document.getElementById('lab').value, age_ok: document.getElementById('age').checked, consent: document.getElementById('ok').checked });
       const r = await api(body);
       if (r.status === 'judged') return screenVerdict(r);
@@ -377,16 +389,17 @@ function screenWrite(v, ctx) {
 function screenWait(v, ctx) {
   const other = v.role === 'plaintiff' ? '피고' : '원고';
   const fin = v.status === 'final', apl = v.status === 'appeal', judging = !!v.judging;
+  const iLeft = !!(v.left && v.left.mine);   // 내가 그만둠(v7b)
   app.innerHTML = `${header()}${progress(v.progress, stageOf(v))}
-  <h1>${judging ? '솔로몬이 판결문을 쓰고 있습니다' : apl ? `${other}의 항소 답변을 기다립니다` : fin ? `${other}의 최종변론을 기다립니다` : `${other} 차례입니다`}</h1><div class="small">사건: ${esc(v.case_name)} · 마감 ${esc(fmtDue(v.due_at))}</div>
-  <div class="card">${judging ? `<p>양쪽 글이 모두 접수됐습니다. 판결문이 준비되면 이 화면에 바로 나옵니다.</p><p class="small">화면을 닫아도 판결은 그대로 진행됩니다.</p>` : apl ? `<p>항소를 접수했습니다. ${other}가 항소 답변서를 내면 바로 2심 판결을 선고합니다.</p><p class="small">마감까지 ${other}가 내지 않으면 지금까지의 기록으로 판결합니다.</p>` : fin ? `<p>내 최종변론은 접수됐습니다. ${other}가 최종변론을 내면 바로 1심 판결이 선고됩니다.</p>
+  <h1>${iLeft && !judging ? '사건을 그만두었습니다' : judging ? '솔로몬이 판결문을 쓰고 있습니다' : apl ? `${other}의 항소 답변을 기다립니다` : fin ? `${other}의 최종변론을 기다립니다` : `${other} 차례입니다`}</h1><div class="small">사건: ${esc(v.case_name)} · 마감 ${esc(fmtDue(v.due_at))}</div>
+  <div class="card">${iLeft && !judging ? `<p>더 쓰지 않아도 됩니다. 상대가 마지막 변론을 내거나 '할 말 없음'을 고르면(늦어도 마감 때) 솔로몬이 지금까지의 기록으로 판결합니다.</p>` : judging ? `<p>양쪽 글이 모두 접수됐습니다. 판결문이 준비되면 이 화면에 바로 나옵니다.</p><p class="small">화면을 닫아도 판결은 그대로 진행됩니다.</p>` : apl ? `<p>항소를 접수했습니다. ${other}가 항소 답변서를 내면 바로 2심 판결을 선고합니다.</p><p class="small">마감까지 ${other}가 내지 않으면 지금까지의 기록으로 판결합니다.</p>` : fin ? `<p>내 최종변론은 접수됐습니다. ${other}가 최종변론을 내면 바로 1심 판결이 선고됩니다.</p>
   <p class="small">마감까지 ${other}가 내지 않으면 지금까지의 기록으로 판결합니다.</p>` : `<p>솔로몬이 ${other}에게 ${v.status === 'answer' ? '초대장과 질문' : '자료제출명령'}을 보냈습니다. ${other}가 답하면 다음 절차가 열립니다.</p>
   <p class="small">이 화면을 닫아도 됩니다. 같은 링크로 다시 오면 진행 상황을 볼 수 있습니다. 마감까지 ${other}가 답하지 않으면 불출석 판결이 납니다.</p>`}</div>
   ${v.role === 'plaintiff' && v.status === 'answer' ? (v.defendant_joined
     ? `<p class="small">✅ 피고가 참여했습니다. 답변서를 쓰는 중입니다.</p>`
     : `<div class="card"><p class="small">⏳ 피고가 아직 초대장을 열지 않았습니다. 링크를 잃어버렸다면 새 초대장을 만드십시오(예전 링크는 못 쓰게 됩니다).</p><button class="btn ghost" id="ri">초대장 다시 만들기</button><div class="err" id="rier" hidden></div></div>`) : ''}
   <button class="btn ghost" id="mine">내 사건 링크 복사</button>
-  <button class="btn ghost" id="rf">새로고침</button>${footer()}`;
+  <button class="btn ghost" id="rf">새로고침</button>${leaveBlock(!iLeft)}${footer()}`;
   document.getElementById('mine').onclick = () => copy(caseLink(ctx.id, ctx.key), 'mine');
   const ri = document.getElementById('ri');
   if (ri) ri.onclick = async () => {
@@ -395,10 +408,49 @@ function screenWait(v, ctx) {
     catch (e) { showErr(document.getElementById('rier'), e); busy(ri, false, '초대장 다시 만들기'); }
   };
   document.getElementById('rf').onclick = () => screenCase(ctx.id, ctx.key);
+  wireLeave(ctx);
   clearInterval(poll); poll = setInterval(async () => {
     if (document.hidden) return;
     try { const n = await api({ action: 'view', case_id: ctx.id, key: ctx.key }); if (n.status !== v.status || n.my_turn) { clearInterval(poll); screenCase(ctx.id, ctx.key); } } catch {}
   }, 20000);
+}
+// 사건 그만하기 · 신고(v7b 10-29 · 애플 1.2 이용자 차단) — 웹(피고·원고) 공통
+function leaveBlock(showLeave = true) {
+  return `<details class="card small" id="lv"><summary>상대가 불편하게 하나요? 신고${showLeave ? ' · 상대 차단(사건 그만하기)' : ''}</summary>
+  <p>신고하면 사유만 담당자에게 가요. 그만두면 나는 더 쓰지 않고 상대의 글도 더 받지 않아요. 상대는 마지막 변론을 한 번 내거나 바로 판결을 받을 수 있고, 그 뒤 솔로몬이 지금까지의 기록으로 판결해요. 상대가 답하기 전에 원고가 그만두면 사건이 닫혀요. 내가 항소한 2심이면 항소를 취하하고 1심이 확정돼요. 그만둔 사건은 항소·정관·배심원이 열리지 않아요. 되돌릴 수 없어요.</p>
+  <textarea id="lvr" maxlength="200" placeholder="사유(신고할 때는 꼭 · 그만둘 때는 선택)"></textarea>
+  <div class="err" id="lver" hidden></div>
+  <button class="btn ghost" id="rp" type="button">신고 보내기</button>
+  ${showLeave ? '<button class="btn ghost" id="lvgo" type="button">상대 차단 · 사건 그만하기</button>' : ''}</details>`;
+}
+function wireLeave(ctx) {
+  const er = document.getElementById('lver'), why = document.getElementById('lvr');
+  const rp = document.getElementById('rp'), go = document.getElementById('lvgo');
+  if (!rp) return;
+  rp.onclick = async () => {
+    er.hidden = true;
+    if (why.value.trim().length < 2) { er.textContent = '신고 사유를 적어 주십시오.'; er.hidden = false; return; }
+    busy(rp, true, '보내는 중…');
+    try { await api({ action: 'report', case_id: ctx.id, key: ctx.key, reason: why.value.trim() }); busy(rp, false, '신고를 보냈어요'); rp.disabled = true; }
+    catch (e) { showErr(er, e); busy(rp, false, '신고 보내기'); }
+  };
+  let armed = false;
+  if (go) go.onclick = async () => {
+    er.hidden = true;
+    if (!armed) { armed = true; go.textContent = '정말 그만하기(되돌릴 수 없어요)'; return; }
+    busy(go, true, '처리하는 중…');
+    try {
+      const r = await api({ action: 'leave', case_id: ctx.id, key: ctx.key, ...(why.value.trim() ? { reason: why.value.trim() } : {}) });
+      clearInterval(poll);
+      if (r.status === 'judged') return screenVerdict(r);
+      if (r.status === 'help') return screenHelp(r);
+      if (r.status === 'closed') return screenClosed(r);
+      screenCase(ctx.id, ctx.key);
+    } catch (e) { showErr(er, e); busy(go, false, '상대 차단 · 사건 그만하기'); armed = false; }
+  };
+}
+function screenClosed(v) {
+  app.innerHTML = `${header()}<h1>사건이 닫혔습니다</h1><div class="card"><p>${esc(v.help_reason || '이 사건은 더 진행되지 않아요.')}</p><p class="small">글과 사진은 7일 뒤 지워져요.</p></div><a class="btn ghost" href="${SITE}">처음으로</a>${footer()}`;
 }
 function screenHelp(v) {
   app.innerHTML = `${header()}
@@ -487,8 +539,10 @@ function screenVerdict(v) {
   const second = V.instance === 2, A = V.appeal || {}, F = V.first || {}, o1 = F.order || {};
   app.innerHTML = `${header()}${progress(100, second ? '2심 판결' : '1심 판결')}
   <h1>${second ? '2심 판결이 선고됐습니다' : '1심 판결이 선고됐습니다'}</h1>
+  ${V.left ? `<div class="q">${A.result === 'withdrawn' ? esc(A.note || '항소가 취하되어 1심 판결이 확정됐어요.') : `${V.left.by === v.role ? '내가' : '상대가'} 사건을 그만두어 지금까지의 기록으로 판결했어요. 항소·정관·배심원은 열리지 않아요.`}</div>` : ''}
   <div class="doc" id="doc"><h2>판 결</h2><div class="small" style="text-align:center">${second ? '제2심(항소심)' : '제1심'} · 솔로몬의 판결</div>
     <div><span class="k">사건</span> ${esc(v.case_name)}</div>
+    ${v.filed_day ? `<div><span class="k">날짜</span> 소 제기 ${esc(v.filed_day)}${v.judged_day ? ` · 판결 ${esc(v.judged_day)}` : ''}</div>` : ''}
     <div><span class="k">재판부</span> ${MODE(v.mode)}${v.prior_count ? ` · 이전 판결 ${v.prior_count}건 참작` : ''}</div>
     <div><span class="k">당사자</span> 원고${V.counsel?.plaintiff ? ' (변론 도우미 사용)' : ''} · 피고${V.counsel?.defendant ? ' (변론 도우미 사용)' : ''}</div>
     ${V.absent ? `<div class="small">※ ${V.absent === 'plaintiff' ? '원고' : '피고'} 불출석 판결</div>` : ''}
@@ -554,7 +608,7 @@ async function screenJury(id, tok) {
     if (!v.voted) {
       const chips = [1,2,3,4,5,6,7,8,9].map((i) => `<label class="chip"><input type="radio" name="jv" value="${i}"> ${i * 10}%</label>`).join('');
       app.innerHTML = `${header()}<p class="small" style="color:var(--red)"><b>재미로 보는 AI 판정 · 실제 법원과 무관</b></p><h1>「${esc(v.case_name)}」</h1><p class="small">원고 = 먼저 솔로몬을 찾은 사람, 피고 = 초대받은 사람이에요.</p><p class="small">두 사람의 다툼을 읽고 누구 잘못이 더 큰지 골라 주세요. 누가 누군지는 알 수 없어요.</p>${doc}
-        ${v.open ? `<h2>원고의 과실은 몇 %일까요?</h2><p class="small">나머지는 피고의 과실이에요. 50%는 둘 다 비슷하다는 뜻이에요.</p><div class="chips">${chips}</div>
+        ${v.open ? `<h2>원고의 과실은 몇 %일까요?</h2><p class="small">나머지는 피고의 과실이에요. 두 사람 잘못이 비슷해 보이면 50%를 고르세요.</p><div class="chips">${chips}</div>
         <label for="jo">내 의견</label><textarea id="jo" maxlength="300" placeholder="왜 그렇게 생각하는지 적어 주세요. 두 사람이 이 의견을 읽어요."></textarea>
         <p class="small">이름은 나가지 않고 '배심원 1·2…'로만 보여요. 상처 주는 말은 피해 주세요.</p>
         <button class="btn" id="jv" disabled>과실 비율을 골라 주세요</button><p class="err" id="je" hidden></p>

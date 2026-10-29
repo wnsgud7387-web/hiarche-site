@@ -85,6 +85,8 @@ summary{cursor:pointer;font-weight:700}
 const FN = 'https://cvuyarvywlkvxwfckqjb.supabase.co/functions/v1/solomon';
 const SITE = 'https://hiarche.com/lab/solomon.html';
 const MAXLEN = { claim: 1500, answer: 1500, arg: 900, final: 600 };
+// 2심(항소) 안내 카드 — 항소 단추가 있는 앱(1.0.1)이 스토어에 나간 뒤 true로(그전엔 앱에서 항소할 수 없음)
+const APPEAL_IN_APP = false;
 const app = document.getElementById('app');
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const ERR = {
@@ -121,8 +123,8 @@ const header = () => `<div class="top"><a class="brand" href="${SITE}">⚖️ �
 const footer = () => `<p class="foot">솔로몬은 AI가 하는 재미 판정이며 법적 효력이 없습니다. 법률 자문이 아닙니다.<br>이름·연락처는 받지 않아요. 제출한 글·사진은 판결 7일 뒤, 판결문은 1년 뒤 지워요.<br><a href="https://wnsgud7387-web.github.io/arche-pages/solomon-privacy.html">개인정보 처리방침</a> · <a href="https://wnsgud7387-web.github.io/arche-pages/solomon-support.html">도움말</a> · Arche</p>`;
 const progress = (p, label) => `<div class="prog"><div class="row"><span>심리 진행도</span><span>${esc(label)} ${p}%</span></div><div class="bar"><div style="width:${p}%"></div></div></div>`;
 const MODE = (m) => m === 'strict' ? '🧑‍⚖️ 엄격 재판부' : '😄 재미 재판부';
-const stageOf = (v) => v.status === 'answer' ? '답변 대기' : v.status === 'arg' ? `변론 ${v.round}회` : v.status === 'final' ? '최종변론' : v.status === 'judged' ? '1심 판결' : '종료';
-const kindLabel = (k) => k === 'complaint' ? '소장' : k === 'answer' ? '답변서' : /^arg\d+$/.test(k) ? `변론 ${k.slice(3)}회` : k === 'final_plaintiff' || k === 'final_defendant' ? '최종변론' : k;
+const stageOf = (v) => v.status === 'appeal' ? '2심(항소) 진행' : v.status === 'judged' && v.verdict?.instance === 2 ? '2심 판결' : v.status === 'answer' ? '답변 대기' : v.status === 'arg' ? `변론 ${v.round}회` : v.status === 'final' ? '최종변론' : v.status === 'judged' ? '1심 판결' : '종료';
+const kindLabel = (k) => k === 'appeal_answer' ? '항소 답변서' : /^appeal_/.test(k) ? '항소이유서' : k === 'complaint' ? '소장' : k === 'answer' ? '답변서' : /^arg\d+$/.test(k) ? `변론 ${k.slice(3)}회` : k === 'final_plaintiff' || k === 'final_defendant' ? '최종변론' : k;
 const ROUND_NOTE = (max) => `변론은 솔로몬이 "새로운 내용이 더 없다"고 볼 때까지 오갑니다. 사건 한 건에 변론 ${max || 6}회까지 들어 있고, 더 다투고 싶으면 앱에서 변론 3회를 추가할 수 있어요.`;
 function busy(btn, on, text) { btn.disabled = on; btn.innerHTML = on ? `<span class="spin"></span>${text}` : text; }
 function showErr(el, e) { el.hidden = false; el.textContent = ERR[e.message] || ERR.server; }
@@ -324,16 +326,18 @@ function screenEnvelope(v, next) {
   const g = document.getElementById('go'); g.onclick = () => next(g);
 }
 function screenWrite(v, ctx) {
-  const isD = v.role === 'defendant', first = isD && v.status === 'answer', fin = v.status === 'final';
+  const isD = v.role === 'defendant', first = isD && v.status === 'answer', fin = v.status === 'final', apl = v.status === 'appeal';
   const max = first ? MAXLEN.answer : fin ? MAXLEN.final : MAXLEN.arg;
-  const title = first ? '답변서를 제출하십시오' : fin ? '최종변론을 하십시오' : `변론 ${v.round}회 — 솔로몬의 질문에 답하십시오`;
+  const o1 = v.verdict?.order || {};
+  const title = apl ? '항소 답변서를 제출하십시오' : first ? '답변서를 제출하십시오' : fin ? '최종변론을 하십시오' : `변론 ${v.round}회 — 솔로몬의 질문에 답하십시오`;
   const left = (v.max_rounds || 6) - (v.round || 0);
   app.innerHTML = `${header()}${progress(v.progress, stageOf(v))}
   <h1>${title}</h1><div class="small">사건: ${esc(v.case_name)} · ${MODE(v.mode)} · 마감 ${esc(fmtDue(v.due_at))}</div>
+  ${apl ? `<div class="sum"><b>1심 판결</b><br>원고 ${o1.plaintiff ?? '-'}% : 피고 ${o1.defendant ?? '-'}%</div>${v.appeal?.summary ? `<div class="sum"><b>상대의 항소 요지</b><br>${esc(v.appeal.summary)}</div>` : ''}<p class="small">항소 답변서를 내면 솔로몬이 1심 기록과 양쪽 글을 다시 보고 2심 판결을 내립니다. 2심이 마지막 판결이에요.</p>` : ''}
   ${v.claim_summary ? `<div class="sum"><b>소장 요지</b><br>${esc(v.claim_summary)}</div>` : ''}
   ${v.answer_summary ? `<div class="sum"><b>피고 답변 요지</b><br>${esc(v.answer_summary)}</div>` : ''}
   ${v.issues?.length ? `<div class="sum"><b>쟁점</b><ol style="margin:4px 0 0;padding-left:20px">${v.issues.map((x) => `<li>${esc(x)}</li>`).join('')}</ol></div>` : ''}
-  ${v.questions?.length ? `<div class="q"><b>솔로몬 → ${isD ? '피고' : '원고'}</b><ol>${v.questions.map((x) => `<li>${esc(x)}</li>`).join('')}</ol></div>` : ''}
+  ${(v.questions = (v.questions || []).filter((x) => !String(x).startsWith('[항소 요지]'))).length ? `<div class="q"><b>솔로몬 → ${isD ? '피고' : '원고'}</b><ol>${v.questions.map((x) => `<li>${esc(x)}</li>`).join('')}</ol></div>` : ''}
   ${fin ? `<div class="q"><b>솔로몬</b><br>${v.capped ? `변론 ${v.max_rounds}회를 모두 썼습니다.${v.can_extend ? ' 변론 3회 추가는 아이폰 앱에서 할 수 있어요.' : ''}` : '양측 주장을 충분히 들었으므로 변론을 종결합니다.'} 마지막으로 재판부가 꼭 기억해 주길 바라는 점을 정리하십시오. 새 이야기보다 핵심을 짧게.${v.other_final_done ? '<br><span class="small">상대는 최종변론을 냈습니다.</span>' : ''}</div>` : ''}
   ${v.status === 'arg' ? `<p class="small">⚖️ 변론 ${v.round}회째 · ${v.max_rounds}회 중 ${Math.max(0, left)}회 남음${left <= 1 && v.can_extend ? ` — 변론 3회 추가는 아이폰 앱에서 할 수 있어요` : ''}</p>` : ''}
   <p class="small">🔒 상대의 원문은 판결이 나면 공개됩니다.</p>
@@ -341,14 +345,14 @@ function screenWrite(v, ctx) {
   <form class="card" id="f">
     ${first ? `<label for="lab">내(피고) 호칭 (선택)</label><input type="text" id="lab" maxlength="12" value="${esc(v.my_label)}">` : ''}
     <p class="small">편하게 쓰세요. 판결문에서는 솔로몬이 원고·피고로 가려요. 전화번호·주소, 그리고 다른 사람(친구·선생님 등)의 실명은 빼 주세요.</p>
-    <label for="t">${first ? '답변과 나의 주장' : fin ? '최종변론' : '변론'}</label>
+    <label for="t">${apl ? '항소 답변서' : first ? '답변과 나의 주장' : fin ? '최종변론' : '변론'}</label>
     <textarea id="t" maxlength="${max}" placeholder="${fin ? '재판부가 꼭 기억해 주길 바라는 핵심을 짧게 정리해 주십시오.' : '질문에 답하고, 하고 싶은 말을 적어 주십시오.'} 전화번호·주소는 빼 주세요." required></textarea><div class="count" id="cc"></div>
     ${photoBlock()}
     ${first ? `<details class="small"><summary>개인정보 자세히 보기</summary>· 목적: 두 사람의 글로 재미 판정 만들기<br>· 저장: 사건 개요, 호칭, 각자의 글·사진, 솔로몬의 질문·요지, 판결(이름·연락처·IP 원문·시각은 저장하지 않아요. 전화번호·이메일 모양은 자동으로 가려요)<br>· 보관: 글·사진은 판결 7일 뒤 지워요. 상대가 답하지 않은 사건은 판결 뒤 같은 규칙. 판결문(비율·사건명·이유)은 1년 뒤 지워요. 도움 안내로 끝난 사건은 바로 지워요<br>· 보내는 곳: 저장소 Supabase(대한민국 서울), AI 판정 Anthropic PBC(미국) — 판정할 때 인터넷으로 보냄. 보낸 글은 AI 학습에 쓰이지 않고, Anthropic은 최대 30일 뒤 지워요(이용 정책 위반이 감지되면 최대 2년)<br>· 동의하지 않으면 이용할 수 없어요.</details>
     <label class="check"><input type="checkbox" id="age"> 만 14세 이상이에요</label>
     <label class="check"><input type="checkbox" id="ok"> 위 내용을 읽고 내 글을 AI 판정과 상대에게 보내는 데 동의해요</label>` : ''}
     <div class="err" id="er" hidden></div>
-    <button class="btn" id="go">${first ? '답변서 제출' : fin ? '최종변론 제출' : '변론 제출'}</button>
+    <button class="btn" id="go">${apl ? '항소 답변서 제출' : first ? '답변서 제출' : fin ? '최종변론 제출' : '변론 제출'}</button>
   </form>
   <button class="btn ghost" id="mine" type="button">내 사건 링크 복사</button>
   ${v.my_submissions?.length ? `<details><summary>내가 낸 글 보기</summary>${v.my_submissions.map((s) => `<div class="rec"><b>${kindLabel(s.kind)}</b>\n${esc(s.body)}</div>`).join('')}</details>` : ''}
@@ -359,7 +363,7 @@ function screenWrite(v, ctx) {
   wireCounsel(app, ctx, ta);
   document.getElementById('f').onsubmit = async (ev) => {
     ev.preventDefault(); const er = document.getElementById('er'); er.hidden = true; const btn = document.getElementById('go'); const lbl = btn.textContent;
-    busy(btn, true, '솔로몬이 검토하는 중…');
+    busy(btn, true, apl || (fin && v.other_final_done) ? '솔로몬이 판결문을 쓰는 중…' : '솔로몬이 검토하는 중…');
     try {
       const body = { action: 'reply', case_id: ctx.id, key: ctx.key, text: ta.value, photos };
       if (first) Object.assign(body, { label: document.getElementById('lab').value, age_ok: document.getElementById('age').checked, consent: document.getElementById('ok').checked });
@@ -372,10 +376,10 @@ function screenWrite(v, ctx) {
 }
 function screenWait(v, ctx) {
   const other = v.role === 'plaintiff' ? '피고' : '원고';
-  const fin = v.status === 'final';
+  const fin = v.status === 'final', apl = v.status === 'appeal', judging = !!v.judging;
   app.innerHTML = `${header()}${progress(v.progress, stageOf(v))}
-  <h1>${fin ? `${other}의 최종변론을 기다립니다` : `${other} 차례입니다`}</h1><div class="small">사건: ${esc(v.case_name)} · 마감 ${esc(fmtDue(v.due_at))}</div>
-  <div class="card">${fin ? `<p>내 최종변론은 접수됐습니다. ${other}가 최종변론을 내면 바로 1심 판결이 선고됩니다.</p>
+  <h1>${judging ? '솔로몬이 판결문을 쓰고 있습니다' : apl ? `${other}의 항소 답변을 기다립니다` : fin ? `${other}의 최종변론을 기다립니다` : `${other} 차례입니다`}</h1><div class="small">사건: ${esc(v.case_name)} · 마감 ${esc(fmtDue(v.due_at))}</div>
+  <div class="card">${judging ? `<p>양쪽 글이 모두 접수됐습니다. 판결문이 준비되면 이 화면에 바로 나옵니다.</p><p class="small">화면을 닫아도 판결은 그대로 진행됩니다.</p>` : apl ? `<p>항소를 접수했습니다. ${other}가 항소 답변서를 내면 바로 2심 판결을 선고합니다.</p><p class="small">마감까지 ${other}가 내지 않으면 지금까지의 기록으로 판결합니다.</p>` : fin ? `<p>내 최종변론은 접수됐습니다. ${other}가 최종변론을 내면 바로 1심 판결이 선고됩니다.</p>
   <p class="small">마감까지 ${other}가 내지 않으면 지금까지의 기록으로 판결합니다.</p>` : `<p>솔로몬이 ${other}에게 ${v.status === 'answer' ? '초대장과 질문' : '자료제출명령'}을 보냈습니다. ${other}가 답하면 다음 절차가 열립니다.</p>
   <p class="small">이 화면을 닫아도 됩니다. 같은 링크로 다시 오면 진행 상황을 볼 수 있습니다. 마감까지 ${other}가 답하지 않으면 불출석 판결이 납니다.</p>`}</div>
   ${v.role === 'plaintiff' && v.status === 'answer' ? (v.defendant_joined
@@ -437,15 +441,15 @@ function renderPledge(p, ctx, snap) {
   };
 }
 // 2심(항소) 안내 — 소송 기초 교육 겸
-function appealCard() {
-  return `<details><summary><b>판결이 억울하다면? 2심(항소) 안내 · 소송 상식</b></summary>
+function appealCard(second) {
+  return `<details><summary><b>${second ? '2심 판결이란? · 소송 상식' : '판결이 억울하다면? 2심(항소) 안내 · 소송 상식'}</b></summary>
   <p class="small">· <b>1심</b>: 처음 받는 재판입니다. 지금 받은 판결이 1심 판결입니다.<br>
   · <b>2심(항소)</b>: 실제 민사소송에서는 판결서를 송달받은 날부터 <b>2주 안에</b> 항소할 수 있어요(민사소송법 제396조①). 2심은 사실관계와 판단을 다시 봐요. 형사 사건은 기간이 달라요.<br>
   · <b>3심(상고)</b>: 주로 법 적용이 잘못됐는지를 다투는 단계예요.<br>
   · <b>재심</b>: 판결이 확정된 뒤에는 법이 정한 사유가 있을 때만 예외적으로 다시 재판해요.<br>
-  · <b>솔로몬의 판결</b>: 판결 후 2주 안에 2심을 청구할 수 있게 준비 중이에요(추가 결제).<br>
+  ${APPEAL_IN_APP ? `· <b>솔로몬의 판결</b>: 1심 판결 뒤 3일 안에 원고·피고 중 한쪽이 앱에서 한 번 항소할 수 있어요. 상대가 항소 답변서를 내면 솔로몬이 1심을 유지하거나 비율을 바꿔요. 2심이 마지막이에요.<br>` : ''}
   · 위 내용은 일반 상식이며 법률 자문이 아니에요. 솔로몬 판결은 실제 법원과 무관해요.</p>
-  <button class="btn ghost" disabled>2심 청구 (준비 중 · 유료)</button></details>`;
+  </details>`;
 }
 function vaultBlock() {
   const vs = store.vault();
@@ -460,7 +464,7 @@ function screenVault(id) {
   <h1>이거 봐, 전에도 판결받았잖아</h1>
   <div class="doc"><h2>판 결</h2><div class="small" style="text-align:center">제1심 · 솔로몬의 판결 · ${esc(x.day)} 선고</div>
     <div><span class="k">사건</span> ${esc(x.name)}</div>
-    <div><span class="k">원고</span> ${esc(x.P)} &nbsp; <span class="k">피고</span> ${esc(x.D)}</div>
+    <div><span class="k">당사자</span> 원고 · 피고</div>
     <div class="order" role="img" aria-label="원고 과실 ${x.order?.plaintiff}%, 피고 과실 ${x.order?.defendant}%"><div style="flex:${x.order?.plaintiff};background:var(--red)">원고 ${x.order?.plaintiff}%</div><div style="flex:${x.order?.defendant};background:var(--green)">피고 ${x.order?.defendant}%</div></div>
     <div><span class="k">주문</span><br>${esc(String(x.order_text || '').replace(/^\s*주문\s*[:：]\s*/, ''))}</div>
     ${x.reasons?.length ? `<div><span class="k">이유</span><ol style="margin:4px 0 0;padding-left:20px">${x.reasons.map((r) => `<li>${esc(r)}</li>`).join('')}</ol></div>` : ''}
@@ -480,12 +484,13 @@ function screenVerdict(v) {
   const P = v.role === 'plaintiff' ? v.my_label : v.other_label, D = v.role === 'defendant' ? v.my_label : v.other_label;
   const snap = { id: v.case_id, name: v.case_name, mode: v.mode, role: v.role, P, D, order: o, order_text: V.order_text, reasons: (V.reasons || []).slice(0, 4), settlement: V.settlement, day: new Date().toISOString().slice(0, 10) };
   const kept = store.vault().some((x) => x.id === v.case_id);
-  app.innerHTML = `${header()}${progress(100, '1심 판결')}
-  <h1>1심 판결이 선고됐습니다</h1>
-  <div class="doc" id="doc"><h2>판 결</h2><div class="small" style="text-align:center">제1심 · 솔로몬의 판결</div>
+  const second = V.instance === 2, A = V.appeal || {}, F = V.first || {}, o1 = F.order || {};
+  app.innerHTML = `${header()}${progress(100, second ? '2심 판결' : '1심 판결')}
+  <h1>${second ? '2심 판결이 선고됐습니다' : '1심 판결이 선고됐습니다'}</h1>
+  <div class="doc" id="doc"><h2>판 결</h2><div class="small" style="text-align:center">${second ? '제2심(항소심)' : '제1심'} · 솔로몬의 판결</div>
     <div><span class="k">사건</span> ${esc(v.case_name)}</div>
     <div><span class="k">재판부</span> ${MODE(v.mode)}${v.prior_count ? ` · 이전 판결 ${v.prior_count}건 참작` : ''}</div>
-    <div><span class="k">원고</span> ${esc(P)}${V.counsel?.plaintiff ? ' (변론 도우미 사용)' : ''} &nbsp; <span class="k">피고</span> ${esc(D)}${V.counsel?.defendant ? ' (변론 도우미 사용)' : ''}</div>
+    <div><span class="k">당사자</span> 원고${V.counsel?.plaintiff ? ' (변론 도우미 사용)' : ''} · 피고${V.counsel?.defendant ? ' (변론 도우미 사용)' : ''}</div>
     ${V.absent ? `<div class="small">※ ${V.absent === 'plaintiff' ? '원고' : '피고'} 불출석 판결</div>` : ''}
     <div class="order" role="img" aria-label="원고 과실 ${o.plaintiff}%, 피고 과실 ${o.defendant}%"><div style="flex:${o.plaintiff};background:var(--red)">원고 ${o.plaintiff}%</div><div style="flex:${o.defendant};background:var(--green)">피고 ${o.defendant}%</div></div>
     <div><span class="k">주문</span><br>${esc(String(V.order_text || '').replace(/^\s*주문\s*[:：]\s*/, ''))}</div>
@@ -495,13 +500,15 @@ function screenVerdict(v) {
     <div><span class="k">화해 권고</span> ${esc(V.settlement)}</div>
     <div class="seal">AI 법정 재판장 솔로몬 (인)</div>
     <div class="small">본 판결은 AI의 재미 판정이며 실제 법원과 무관하고 법적 효력이 없습니다.</div></div>
+  ${second ? `<div class="card"><b>${A.result === 'changed' ? '원판결 변경 — 비율이 바뀌었습니다' : '항소 기각 — 1심 판결 유지'}</b><p class="small">${A.by === 'plaintiff' ? '원고' : '피고'}가 항소했습니다. 1심 원고 ${o1.plaintiff ?? '-'}% : 피고 ${o1.defendant ?? '-'}% → 2심 원고 ${o.plaintiff}% : 피고 ${o.defendant}%</p>${A.note ? `<p>${esc(A.note)}</p>` : ''}</div>` : ''}
+  ${APPEAL_IN_APP && v.appeal?.eligible ? `<div class="card"><b>판결에 불복하나요? 2심(항소)</b><p class="small">${esc(fmtDue(v.appeal.deadline))}까지 원고·피고 중 한쪽이 한 번 항소할 수 있어요. 항소는 솔로몬의 판결 앱에서 할 수 있어요${v.pay_required ? '(유료)' : ''}. 상대가 항소하면 이 링크에서 항소 답변서를 낼 수 있어요. 정관을 만들기 시작하면 항소할 수 없어요.</p></div>` : ''}
   <button class="btn" id="keep">${kept ? '판결문 보관함에 있음 ✓' : '📁 판결문 보관함에 저장'}</button>
   <p class="small">같은 일로 또 다투게 되면 보관함에서 꺼내 보여 주십시오. "우리 이거 전에 솔로몬한테 판결받았잖아!" 새 사건을 낼 때 '이전 사건 참작'으로 고르면 솔로몬도 참고합니다. 보관함은 이 기기에만 저장되고 원문은 담지 않습니다.</p>
   <button class="btn ghost" id="img">판결문 이미지로 저장·공유</button>
   <button class="btn ghost" id="sh">판결 결과 공유하기</button>
   <details><summary>재판 기록 보기 (양측 원문)</summary>${(v.record || []).map((r) => `<div class="rec"><b>${r.role === 'plaintiff' ? '원고' : '피고'} · ${kindLabel(r.kind)}</b>${r.demand ? `\n청구 취지: ${esc(r.demand)}` : ''}\n${esc(r.body ?? '(보관 기간이 지나 지워졌습니다)')}${(r.photos || []).map((u) => `<br><a href="${esc(u)}" target="_blank" rel="noopener"><img src="${esc(u)}" alt="증거 사진"></a>`).join('')}</div>`).join('')}</details>
   <div id="pledge"></div>
-  ${appealCard()}
+  ${appealCard(second)}
   <a class="btn ghost" href="${SITE}">나도 소 제기하기</a>${footer()}`;
   document.getElementById('keep').onclick = (ev) => { store.keep(snap); ev.target.textContent = '판결문 보관함에 있음 ✓'; };
   renderPledge(v.pledge, { id: v.case_id, key: (store.all().find((m) => m.id === v.case_id) || {}).key }, snap);

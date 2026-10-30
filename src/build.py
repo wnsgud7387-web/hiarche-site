@@ -28,7 +28,7 @@ APPS = [
   dict(slug='solomons-verdict', name="Solomon's Verdict", kind='Fun', bg='#9E3319', fg='#F4F0E8',
        line='Two sides of an argument, one AI judge.',
        sub='Each of you writes your side on your own phone. Solomon, an AI judge, questions both of you in turn and rules with a fault percentage.',
-       ios='', status='review', meta='iPhone · Android · In App Store review · Korean (English coming) · Ages 14+',
+       ios='https://apps.apple.com/us/app/id6825205586', status='live', meta='iPhone · Android · Korean (English coming) · Ages 14+',
        features=[('File and summon','Write what happened, then send a link. The other person answers on their own phone.'),('A real back-and-forth','Solomon asks each side questions before it decides, so both stories are heard.'),('Verdict, jury and a promise','Fault percentages by issue, an optional friend jury, and a few rules so the same fight does not happen again.')],
        price='No ads and no sign-up. Filing a case and extras are small one-time purchases, shown in the App Store or Google Play in your currency.',
        support=PG+'solomon-support.html', privacy=PG+'solomon-privacy.html', terms='',

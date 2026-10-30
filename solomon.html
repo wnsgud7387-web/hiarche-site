@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>솔로몬의 판결 — 재미로 가리는 누구 잘못</title>
 <meta name="description" content="다툰 두 사람이 각자 자기 폰에서 주장하면, AI 재판장 솔로몬이 묻고 듣고 과실 비율로 판결합니다. 재미 판정이며 실제 법원과 무관합니다.">
-<meta property="og:title" content="⚖️ 솔로몬의 판결 — 초대장이 도착했어요">
-<meta property="og:description" content="우리 다툼, AI 재판장 솔로몬에게 같이 맡겨 봐요. 재미로 보는 AI 판정 · 실제 법원과 무관">
+<meta property="og:title" content="⚖️ 솔로몬 놀이 법정에 초대했어요">
+<meta property="og:description" content="AI 재판장이 가르는 재미 재판 — 놀이 법정이라 실제 법원과 무관하고 법적 효력이 없어요">
 <meta property="og:image" content="https://hiarche.com/lab/og_solomon.png">
 <meta property="og:url" content="https://hiarche.com/lab/solomon.html">
 <meta property="og:type" content="website">
@@ -328,6 +328,7 @@ function screenEnvelope(v, next) {
 }
 function screenWrite(v, ctx) {
   const isD = v.role === 'defendant', first = isD && v.status === 'answer', fin = v.status === 'final', apl = v.status === 'appeal';
+  const needC = !(v.my_submissions && v.my_submissions.length);   // 처음 글 내는 사람은 어느 단계든 동의(앱 needConsent와 같음)
   const otherLeft = !!(v.left && !v.left.mine);   // 상대가 사건을 그만둠(v7b)
   const max = first ? MAXLEN.answer : fin ? (v.left ? MAXLEN.arg : MAXLEN.final) : MAXLEN.arg;   // 상대가 그만둔 뒤 마지막 변론 900자(감사 v7b3-1)
   const o1 = v.verdict?.order || {};
@@ -351,7 +352,7 @@ function screenWrite(v, ctx) {
     <label for="t">${apl ? '항소 답변서' : first ? '답변과 나의 주장' : fin ? '최종변론' : '변론'}</label>
     <textarea id="t" maxlength="${max}" placeholder="${fin ? '재판부가 꼭 기억해 주길 바라는 핵심을 짧게 정리해 주십시오.' : '질문에 답하고, 하고 싶은 말을 적어 주십시오.'} 전화번호·주소는 빼 주세요." required></textarea><div class="count" id="cc"></div>
     ${photoBlock()}
-    ${first ? `<details class="small"><summary>개인정보 자세히 보기</summary>· 목적: 두 사람의 글로 재미 판정 만들기<br>· 저장: 사건 개요, 호칭, 각자의 글·사진, 솔로몬의 질문·요지, 판결(이름·연락처·IP 원문·시각은 저장하지 않아요. 전화번호·이메일 모양은 자동으로 가려요)<br>· 보관: 글·사진은 판결 7일 뒤 지워요. 상대가 답하지 않은 사건은 판결 뒤 같은 규칙. 판결문(비율·사건명·이유)은 1년 뒤 지워요. 도움 안내로 끝난 사건은 바로 지워요<br>· 보내는 곳: 저장소 Supabase(대한민국 서울), AI 판정 Anthropic PBC(미국) — 판정할 때 인터넷으로 보냄. 보낸 글은 AI 학습에 쓰이지 않고, Anthropic은 최대 30일 뒤 지워요(이용 정책 위반이 감지되면 최대 2년)<br>· 동의하지 않으면 이용할 수 없어요.</details>
+    ${needC ? `<details class="small"><summary>개인정보 자세히 보기</summary>· 목적: 두 사람의 글로 재미 판정 만들기<br>· 저장: 사건 개요, 호칭, 각자의 글·사진, 솔로몬의 질문·요지, 판결(이름·연락처·IP 원문·시각은 저장하지 않아요. 전화번호·이메일 모양은 자동으로 가려요)<br>· 보관: 글·사진은 판결 7일 뒤 지워요. 상대가 답하지 않은 사건은 판결 뒤 같은 규칙. 판결문(비율·사건명·이유)은 1년 뒤 지워요. 도움 안내로 끝난 사건은 바로 지워요<br>· 보내는 곳: 저장소 Supabase(대한민국 서울), AI 판정 Anthropic PBC(미국) — 판정할 때 인터넷으로 보냄. 보낸 글은 AI 학습에 쓰이지 않고, Anthropic은 최대 30일 뒤 지워요(이용 정책 위반이 감지되면 최대 2년)<br>· 동의하지 않으면 이용할 수 없어요.</details>
     <label class="check"><input type="checkbox" id="age"> 만 14세 이상이에요</label>
     <label class="check"><input type="checkbox" id="ok"> 위 내용을 읽고 내 글을 AI 판정과 상대에게 보내는 데 동의해요</label>` : ''}
     <div class="err" id="er" hidden></div>
@@ -378,7 +379,8 @@ function screenWrite(v, ctx) {
     busy(btn, true, apl || (fin && (v.other_final_done || otherLeft)) ? '솔로몬이 판결문을 쓰는 중…' : '솔로몬이 검토하는 중…');
     try {
       const body = { action: 'reply', case_id: ctx.id, key: ctx.key, text: ta.value, photos, expect_kind: apl ? 'appeal_answer' : first ? 'answer' : fin ? `final_${v.role}` : `arg${v.round}` };
-      if (first) Object.assign(body, { label: document.getElementById('lab').value, age_ok: document.getElementById('age').checked, consent: document.getElementById('ok').checked });
+      if (first) body.label = document.getElementById('lab').value;
+      if (needC) Object.assign(body, { age_ok: document.getElementById('age').checked, consent: document.getElementById('ok').checked });
       const r = await api(body);
       if (r.status === 'judged') return screenVerdict(r);
       if (r.status === 'help') return screenHelp(r);
@@ -554,7 +556,7 @@ function screenVerdict(v) {
     <div><span class="k">화해 권고</span> ${esc(V.settlement)}</div>
     <div class="seal">AI 법정 재판장 솔로몬 (인)</div>
     <div class="small">본 판결은 AI의 재미 판정이며 실제 법원과 무관하고 법적 효력이 없습니다.</div></div>
-  ${second ? `<div class="card"><b>${A.result === 'changed' ? '원판결 변경 — 비율이 바뀌었습니다' : '항소 기각 — 1심 판결 유지'}</b><p class="small">${A.by === 'plaintiff' ? '원고' : '피고'}가 항소했습니다. 1심 원고 ${o1.plaintiff ?? '-'}% : 피고 ${o1.defendant ?? '-'}% → 2심 원고 ${o.plaintiff}% : 피고 ${o.defendant}%</p>${A.note ? `<p>${esc(A.note)}</p>` : ''}</div>` : ''}
+  ${second ? `<div class="card"><b>${A.result === 'changed' ? '원판결 변경 — 비율이 바뀌었습니다' : A.result === 'limit' ? '2심 판결을 내리지 못함 — 1심 유지' : '항소 기각 — 1심 판결 유지'}</b><p class="small">${A.by === 'plaintiff' ? '원고' : '피고'}가 항소했습니다. 1심 원고 ${o1.plaintiff ?? '-'}% : 피고 ${o1.defendant ?? '-'}% → 2심 원고 ${o.plaintiff}% : 피고 ${o.defendant}%</p>${A.note ? `<p>${esc(A.note)}</p>` : ''}</div>` : ''}
   ${APPEAL_IN_APP && v.appeal?.eligible ? `<div class="card"><b>판결에 불복하나요? 2심(항소)</b><p class="small">${esc(fmtDue(v.appeal.deadline))}까지 원고·피고 중 한쪽이 한 번 항소할 수 있어요. 항소는 솔로몬의 판결 앱에서 할 수 있어요${v.pay_required ? '(유료)' : ''}. 상대가 항소하면 이 링크에서 항소 답변서를 낼 수 있어요. 정관을 만들기 시작하면 항소할 수 없어요.</p></div>` : ''}
   <button class="btn" id="keep">${kept ? '판결문 보관함에 있음 ✓' : '📁 판결문 보관함에 저장'}</button>
   <p class="small">같은 일로 또 다투게 되면 보관함에서 꺼내 보여 주십시오. "우리 이거 전에 솔로몬한테 판결받았잖아!" 새 사건을 낼 때 '이전 사건 참작'으로 고르면 솔로몬도 참고합니다. 보관함은 이 기기에만 저장되고 원문은 담지 않습니다.</p>

@@ -86,7 +86,7 @@ const FN = 'https://cvuyarvywlkvxwfckqjb.supabase.co/functions/v1/solomon';
 const SITE = 'https://hiarche.com/lab/solomon.html';
 const MAXLEN = { claim: 1500, answer: 1500, arg: 900, final: 600 };
 // 2심(항소) 안내 카드 — 항소 단추가 있는 앱(1.0.1)이 스토어에 나간 뒤 true로(그전엔 앱에서 항소할 수 없음)
-const APPEAL_IN_APP = false;
+const APPEAL_IN_APP = true; // 11-02 1.0.1 양대 스토어 공개
 const app = document.getElementById('app');
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const ERR = {

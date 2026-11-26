@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>弱点補強の申込み — ARCHE 基本情報 毎日ドリル</title>
+<!-- 약점보완 신청 페이지 ja판 · Lueur팀장 11-26 · 만들기_외국어판.py로 생성(직접 고치지 말고 그 파일을 고칠 것)
+     서버 없음: 메일 앱에 내용이 채워진 메일이 열리고 이용자가 보내면 archeisit@gmail.com 으로 감. 본문 꼴은 weekly.py가 읽음.
+     ★ 법무 검토 전 초안 · 회차당 문항 수 N=20은 교재편집실 확정 전 임시값 -->
+<style>
+:root{
+  --bg:#F4F1EA; --paper:#FFFDF8; --line:#E5DFD2; --rule:#1D1B17; --field:#8F877A;
+  --ink:#1D1B17; --sub:#6B6458; --pen:#C23B22; --penSoft:#F6E3DC; --onInk:#F4F1EA;
+  --serif:"Hiragino Mincho ProN","Noto Serif JP","Yu Mincho",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#141310; --paper:#1D1C18; --line:#33302A; --rule:#ECE6DA; --field:#6E675C;
+  --ink:#ECE6DA; --sub:#A39A8A; --pen:#FF8A70; --penSoft:rgba(255,138,112,.22); --onInk:#141310;
+}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--sans);word-break:normal;line-break:strict;overflow-wrap:anywhere}
+main{max-width:600px;margin:0 auto;padding:16px 16px calc(112px + env(safe-area-inset-bottom))}
+.serif{font-family:var(--serif)}
+/* 머리띠: 실제 PDF 머리와 같은 꼴 */
+/* 형광펜: 이 페이지의 대표 표시(대표님 11-26 '하이라이터 색 예쁘다') */
+.hl{background:linear-gradient(transparent 55%,var(--penSoft) 55%);padding:0 2px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.mast{display:flex;justify-content:space-between;align-items:baseline;gap:12px;border-bottom:1px solid var(--line);padding:4px 0 12px;font-size:14px;color:var(--sub)}
+.mast b{color:var(--ink);font-weight:700}
+h1{font-weight:700;font-size:28px;line-height:1.35;margin:24px 0 12px;letter-spacing:-.02em}
+.lead{margin:0 0 24px}
+.lead em{font-style:normal;background:linear-gradient(transparent 55%,var(--penSoft) 55%)}
+/* 한 주 띠 */
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.week div{border-radius:14px;padding:10px 0 8px;text-align:center;font-size:14px;line-height:1.3;background:var(--paper);color:var(--sub)}
+.week small{display:block;font-size:12px;min-height:16px}
+.week .sat{color:var(--ink)}
+.week .sat small{font-weight:600}
+.week .sun{background:var(--penSoft);color:var(--ink);font-weight:700}
+.weeknote{font-size:14px;color:var(--sub);margin:8px 0 32px}
+/* 절 제목: 형광펜 번호 */
+h2{display:flex;align-items:center;gap:8px;font-size:18px;font-weight:700;margin:40px 0 8px}
+h2 .no{display:inline-grid;place-items:center;min-width:28px;height:28px;border-radius:999px;background:var(--penSoft);font-size:14px;font-weight:700}
+ol.steps{list-style:none;margin:0;padding:0;counter-reset:s}
+ol.steps li{counter-increment:s;display:grid;grid-template-columns:28px 1fr;gap:8px;padding:12px 0;border-bottom:1px dashed var(--line)}
+ol.steps li:last-child{border-bottom:0}
+ol.steps li::before{content:counter(s);font-weight:700;font-size:16px;line-height:1.6;color:var(--pen)}
+ol.steps b{background:linear-gradient(transparent 55%,var(--penSoft) 55%)}
+details{border-bottom:1px solid var(--line)}
+summary{list-style:none;cursor:pointer;padding:12px 32px 12px 0;position:relative;font-weight:600;min-height:44px}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"Q.";font-weight:700;margin-right:8px;color:var(--pen)}
+summary::after{content:"+";position:absolute;right:4px;top:10px;font-size:18px;color:var(--sub)}
+details[open] summary::after{content:"−"}
+details p{margin:0 0 12px 28px;color:var(--sub)}
+/* 입력: 종이에 쓰는 밑줄 칸 */
+label.f{display:block;font-weight:600;margin:24px 0 0}
+.hint{color:var(--sub);font-size:14px;margin:4px 0 0}
+input[type=text],input[type=email],select{width:100%;min-height:48px;border:0;border-bottom:2px solid var(--field);border-radius:0;background:transparent;color:var(--ink);font:inherit;font-size:18px;padding:8px 2px;outline:none;-webkit-appearance:none;appearance:none}
+input[type=text]:focus,input[type=email]:focus,select:focus{border-bottom-color:var(--ink)}
+input::placeholder{color:var(--sub);opacity:.75}
+input:disabled{color:var(--sub);border-bottom-style:dashed}
+select{background-image:linear-gradient(45deg,transparent 50%,var(--ink) 50%),linear-gradient(135deg,var(--ink) 50%,transparent 50%);background-position:calc(100% - 14px) 22px,calc(100% - 8px) 22px;background-size:6px 6px;background-repeat:no-repeat;padding-right:28px;font-weight:700}
+.chk{display:flex;gap:12px;align-items:flex-start;margin:16px 0 0;cursor:pointer}
+.chk input{width:22px;height:22px;margin:2px 0 0;accent-color:var(--ink);flex:none}
+.pick{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.pick label{display:flex;align-items:center;justify-content:center;gap:6px;min-height:48px;cursor:pointer;font-weight:600;position:relative;border-radius:999px;border:1px solid var(--field);background:var(--paper)}
+.pick input{position:absolute;opacity:0}
+.pick label:has(input:checked){background:var(--penSoft);border-color:var(--penSoft);font-weight:700}
+.pick label:has(input:checked)::before{content:"✓";color:var(--pen)}
+.pick label:has(input:focus-visible){outline:2px solid var(--pen);outline-offset:2px}
+/* 채점표: 누르면 빨간펜 빗금 */
+.sheet{margin-top:16px;border-radius:14px;background:var(--paper);overflow:hidden;box-shadow:0 1px 3px rgba(29,27,23,.1)}
+.sheet+.sheet{margin-top:12px}
+.sheethead{display:flex;align-items:center;gap:8px;padding:4px 8px 4px 12px;border-bottom:1px dashed var(--line)}
+.sheethead select{flex:1;min-height:44px;border-bottom:0;font-size:18px}
+.sheethead .x{border:0;background:none;color:var(--sub);font:inherit;font-size:14px;min-height:44px;padding:0 8px;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(4,1fr)}
+.grid label{position:relative;display:flex;align-items:center;justify-content:center;min-height:52px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);font-weight:600;font-size:18px;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent;font-variant-numeric:tabular-nums}
+.grid label.on{background:var(--penSoft)}
+.grid label:nth-child(4n){border-right:0}
+.grid label:nth-last-child(-n+4){border-bottom:0}
+.grid input{position:absolute;opacity:0;pointer-events:none}
+/* 틀림 표시 = 빨간 X(기호) · 숫자는 먹색 그대로(대표님 11-26: 글자색과 기호색을 다르게) */
+.grid label span{position:relative;z-index:1}
+.grid label.on{color:var(--ink);font-weight:700}
+.grid label.on::before,.grid label.on::after{content:"";position:absolute;left:50%;top:50%;width:40px;height:2.5px;background:var(--pen);border-radius:2px}
+.grid label.on::before{transform:translate(-50%,-50%) rotate(45deg)}
+.grid label.on::after{transform:translate(-50%,-50%) rotate(-45deg)}
+.grid label:has(input:focus-visible){outline:2px solid var(--pen);outline-offset:-3px}
+.ghost{display:inline-flex;align-items:center;gap:6px;margin-top:12px;min-height:44px;padding:0 4px;border:0;background:none;color:var(--ink);font:inherit;font-weight:600;text-decoration:underline;text-underline-offset:4px;cursor:pointer}
+.fine{color:var(--sub);font-size:14px;line-height:1.6;margin:8px 0 0 34px}
+.fine li{margin:0}
+.fine ul{margin:4px 0 0;padding-left:16px}
+/* 아래 고정 주 버튼 */
+.bar{position:fixed;left:0;right:0;bottom:0;background:var(--bg);box-shadow:0 -1px 0 var(--line);padding:12px 16px calc(12px + env(safe-area-inset-bottom))}
+.bar .in{max-width:600px;margin:0 auto;display:flex;align-items:center;gap:12px}
+.count{font-size:14px;color:var(--sub);white-space:nowrap}
+.count b{font-size:18px;color:var(--pen)}
+.main{flex:1;min-height:52px;border:0;border-radius:999px;background:var(--rule);color:var(--onInk);font:inherit;font-weight:700;cursor:pointer}
+.err{color:var(--pen);font-weight:600;font-size:14px;margin:8px 0 0;min-height:0}
+.err:empty{display:none}
+/* 보낼 내용 쪽지 */
+.memo{margin-top:24px;border:1.5px dashed var(--field);border-radius:14px;background:var(--paper);padding:16px}
+.memo pre{white-space:pre-wrap;font:14px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;margin:12px 0;padding:12px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+footer{color:var(--sub);font-size:12px;line-height:1.7;margin-top:48px;padding-top:12px;border-top:1px solid var(--line)}
+footer a{color:inherit}
+</style>
+</head>
+<body>
+<main>
+  <div class="mast"><span><b>ARCHE</b> ドリル · 基本情報技術者試験</span><span>弱点補強の申込み</span></div>
+  <h1><span class="hl">間違えた問題だけ</span>、<br>作り直して届けます</h1>
+  <p class="lead">ドリルで間違えた問題番号を送ってください。毎週日曜の朝、その問題の<em>数値・条件・選択肢を変えた練習問題と解説</em>をPDFでメールに届けます。</p>
+  <div class="week"><div>月<small></small></div><div>火<small></small></div><div>水<small></small></div><div>木<small></small></div><div>金<small></small></div><div class="sat">土<small>締切</small></div><div class="sun">日<small>メール到着</small></div></div>
+  <p class="weeknote">月〜土のいつでも送れます。土曜24時に締め切り、日曜の朝にまとめて届けます。</p>
+
+  <h2><span class="no">A</span>流れ</h2>
+  <ol class="steps"><li><span>ARCHE 基本情報 毎日ドリルを解いて採点します。</span></li><li><span>下の解答表で回（DAY）を選び、間違えた番号を押します。押した番号に赤い×が付きます。</span></li><li><span>「申込みメールを作成」を押すと、内容が入ったメールがメールアプリで開きます。<b>メールアプリで「送信」を押すと申込み完了です。</b></span></li><li><span>日曜の朝、間違えた問題1問につき作り直した問題1〜2問と解説がPDFで届きます。</span></li></ol>
+
+  <h2><span class="no">B</span>はじめにお読みください</h2>
+  <details><summary>誰が申し込めますか？</summary><p>ARCHE 基本情報 毎日ドリルを購入した方と、無料サンプル回を解いた方です。購入した回の間違えた問題を申し込めます。</p></details><details><summary>費用はかかりますか？</summary><p>追加料金はかかりません。無料回だけの方は1回受け取れます。</p></details><details><summary>問題はどう変わりますか？</summary><p>IPAが公開した過去問題をもとに、問われている内容はそのまま、数値・条件・選択肢を変えます（一部改変）。答えを覚えるのではなく、もう一度解くためです。</p></details><details><summary>全問正解の回は？</summary><p>入力しなくて大丈夫です。1週間ミスがなければ、その週に多くの人が間違えた問題の改変版を届けます。</p></details>
+
+  <h2><span class="no">1</span>受け取る方</h2>
+  <label class="f" for="buy">BOOTH 注文番号</label>
+  <p class="hint">BOOTH の購入履歴にある注文番号です。購入確認にだけ使います。</p>
+  <p class="hint"><b>現在は無料回のみ受け付けています。</b></p>
+  <input id="buy" type="text" autocomplete="off" placeholder="注文番号を入力">
+  <label class="chk"><input id="free" type="checkbox"><span>無料回だけ解きました。注文番号はありません。</span></label>
+  <label class="f" for="mail">受け取るメールアドレス</label>
+  <input id="mail" type="email" autocomplete="email" placeholder="name@example.com">
+  <label class="chk"><input id="biweekly" type="checkbox"><span>2週間に1回だけ受け取る（チェックしなければ毎週）</span></label>
+
+  <h2><span class="no">2</span>間違えた問題</h2>
+  <p class="hint" style="margin-top:0">回を選び、間違えた番号を押してください。もう一度押すと×が消えます。</p>
+  <div id="days"></div>
+  <button type="button" class="ghost" id="addDay">+ 別の回も入力</button>
+
+  <h2><span class="no">3</span>同意</h2>
+  <label class="chk"><input id="agree" type="checkbox"><span><b>[必須]</b> 弱点補強ドリルを受け取るための個人情報の取得・利用に同意します。</span></label>
+  <div class="fine"><ul><li>取得する情報：メールアドレス、注文番号（ある場合）、受け取る頻度、回ごとの間違えた問題番号</li><li>利用目的：問題を作り直した練習問題のメール送付、購入確認</li><li>保存期間：受け取りを停止した日、または利用期間が終わった日から30日後に削除します。</li><li>外国にある第三者への提供：メールの受信・送信に Google LLC（米国）の Gmail を使います。詳しくは「個人情報の取扱い」をご覧ください。</li><li>同意しなくてもドリルはそのまま使えます。ただし弱点補強ドリルは受け取れません。</li><li>中学生以下の方は、保護者の同意を得てからお申し込みください。</li></ul></div>
+  <label class="chk"><input id="news" type="checkbox"><span>[任意] ARCHE の新しいドリルやキャンペーンのお知らせをメールで受け取ります。いつでも停止できます。</span></label>
+  <p class="err" id="err" role="alert"></p>
+
+  <div class="memo" id="fallback" hidden>
+    <b>メールアプリで「送信」を押してください。</b>
+    <p class="hint">メールアプリが開かない場合は、下の内容をコピーして <b>archeisit@gmail.com</b> に直接送ってください。</p>
+    <pre id="preview"></pre>
+    <button type="button" class="ghost" id="copy" style="margin-top:0">内容をコピー</button>
+  </div>
+
+  <footer>
+    受け取りを止めるには、弱点補強メールに「停止」と返信するか、archeisit@gmail.com までご連絡ください。すぐに止め、30日以内に情報を削除します。<br>
+    <a href="privacy.html">弱点補強 個人情報の取扱い</a><br>
+    出典：IPA 基本情報技術者試験 公開問題（一部改変）。ARCHE による改変で、IPA の公式問題・解答ではありません。<br>
+    ARCHE（大韓民国）· 事業者登録番号 774-39-01532 · archeisit@gmail.com
+  </footer>
+</main>
+
+<div class="bar"><div class="in">
+  <span class="count">間違い <b id="cnt">0</b> 問</span>
+  <button type="button" class="main" id="send">申込みメールを作成</button>
+</div></div>
+
+<script>
+(function(){
+  var T = {"N": 20, "exam": "基本情報技術者試験 (jp-fe, ja)", "err_buy": "注文番号を入力するか、「無料回だけ解きました」にチェックしてください。", "err_mail": "メールアドレスをもう一度ご確認ください。", "err_wrong": "間違えた番号を1つ以上押してください。", "err_agree": "[必須] の同意にチェックすると申し込めます。", "wrong_aria": "{n}番 間違い", "day_aria": "回", "remove": "削除", "body_head": "[ARCHE 弱点補強申込み v0]", "k_exam": "試験", "k_buy": "注文番号", "free_v": "無料回", "k_mail": "メール", "k_cad": "頻度", "cad": ["毎週", "隔週"], "k_wrong": "間違い", "k_agree": "同意(必須): はい / お知らせ(任意): ", "yes": "はい", "no": "いいえ", "subj": "弱点補強の申込み", "copied": "コピーしました"};
+  var TO = 'archeisit@gmail.com', MAXDAY = 150, N = T.N, dayCount = 0;
+  var days = document.getElementById('days'), cnt = document.getElementById('cnt');
+  function recount(){ cnt.textContent = days.querySelectorAll('.grid input:checked').length; }
+  function addDay(){
+    dayCount++;
+    var d = document.createElement('div'); d.className = 'sheet';
+    var opts = ''; for (var i = 1; i <= MAXDAY; i++) opts += '<option value="' + i + '">DAY ' + (i < 10 ? '0' + i : i) + '</option>';
+    var boxes = ''; for (var j = 1; j <= N; j++) boxes += '<label><input type="checkbox" value="' + j + '" aria-label="' + T.wrong_aria.replace('{n}', j) + '"><span>' + j + '</span></label>';
+    d.innerHTML = '<div class="sheethead"><select aria-label="' + T.day_aria + '">' + opts + '</select>' + (dayCount > 1 ? '<button type="button" class="x">' + T.remove + '</button>' : '') + '</div><div class="grid">' + boxes + '</div>';
+    d.querySelector('select').value = String(Math.min(dayCount, MAXDAY));
+    d.querySelectorAll('.grid input').forEach(function(c){ c.onchange = function(){ c.parentNode.classList.toggle('on', c.checked); recount(); }; });
+    var x = d.querySelector('.x'); if (x) x.onclick = function(){ d.remove(); recount(); };
+    days.appendChild(d);
+  }
+  addDay();
+  document.getElementById('addDay').onclick = addDay;
+  var free = document.getElementById('free'), buy = document.getElementById('buy');
+  free.onchange = function(){ buy.disabled = free.checked; if (free.checked) buy.value = ''; };
+  function fail(msg, el){ var err = document.getElementById('err'); err.textContent = msg; (el || err).scrollIntoView({behavior:'smooth', block:'center'}); if (el && el.focus) el.focus({preventScroll:true}); }
+  document.getElementById('send').onclick = function(){
+    document.getElementById('err').textContent = '';
+    var mail = document.getElementById('mail').value.trim();
+    if (!free.checked && !buy.value.trim()) return fail(T.err_buy, buy);
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(mail)) return fail(T.err_mail, document.getElementById('mail'));
+    var lines = [], total = 0;
+    days.querySelectorAll('.sheet').forEach(function(d){
+      var day = d.querySelector('select').value, w = [];
+      d.querySelectorAll('.grid input:checked').forEach(function(c){ w.push(c.value); });
+      if (w.length) { lines.push('DAY ' + day + ': ' + w.join(', ')); total += w.length; }
+    });
+    if (!total) return fail(T.err_wrong, days);
+    if (!document.getElementById('agree').checked) return fail(T.err_agree, document.getElementById('agree'));
+    var body = [
+      T.body_head,
+      T.k_exam + ': ' + T.exam,
+      T.k_buy + ': ' + (free.checked ? T.free_v : buy.value.trim()),
+      T.k_mail + ': ' + mail,
+      T.k_cad + ': ' + (document.getElementById('biweekly').checked ? T.cad[1] : T.cad[0]),
+      T.k_wrong + '(' + total + '):',
+      lines.join('\n'),
+      T.k_agree + (document.getElementById('news').checked ? T.yes : T.no)
+    ].join('\n');
+    document.getElementById('preview').textContent = body;
+    var fb = document.getElementById('fallback'); fb.hidden = false;
+    document.getElementById('copy').onclick = function(){ try { navigator.clipboard.writeText(body).then(function(){ document.getElementById('copy').textContent = T.copied; }); } catch (e) {} };
+    var subject = T.subj + ' · ' + (free.checked ? T.free_v : buy.value.trim());
+    location.href = 'mailto:' + TO + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    fb.scrollIntoView({behavior: 'smooth', block: 'start'});
+  };
+})();
+</script>
+</body>
+</html>

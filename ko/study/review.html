@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>약점보완 신청서 — 아르케 세무사 1차 학습지</title>
+<!-- 0단계(손 시험) · Lueur팀장 11-26 3판(디자인: '종이 학습지·빨간펜 채점' 꼴)
+     서버 없음: [신청 메일 쓰기]를 누르면 이용자 메일 앱에 내용이 채워진 새 메일이 열리고, 이용자가 [보내기]를 눌러야 archeisit@gmail.com 으로 간다.
+     동의 문구 = 2판 그대로(법무 재확인 중 · mail-20261126-lueur-to-legal-weakness-v2). 신청 메일 본문 꼴은 weekly.py와 맞춤 — 바꾸지 말 것.
+     글꼴: 외부 글꼴 안 씀(개인정보 처리방침에 새 업체가 생기지 않게). 제목은 기기 명조, 본문은 기기 고딕. -->
+<style>
+:root{
+  --bg:#F4F1EA; --paper:#FFFDF8; --line:#E5DFD2; --rule:#1D1B17; --field:#8F877A;
+  --ink:#1D1B17; --sub:#6B6458; --pen:#C23B22; --penSoft:#F6E3DC; --onInk:#F4F1EA;
+  --serif:"AppleMyungjo","Noto Serif KR","Noto Serif CJK KR","Nanum Myeongjo","Batang",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#141310; --paper:#1D1C18; --line:#33302A; --rule:#ECE6DA; --field:#6E675C;
+  --ink:#ECE6DA; --sub:#A39A8A; --pen:#FF8A70; --penSoft:#3A2520; --onInk:#141310;
+}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--sans);word-break:keep-all;overflow-wrap:anywhere}
+main{max-width:600px;margin:0 auto;padding:16px 16px calc(112px + env(safe-area-inset-bottom))}
+.serif{font-family:var(--serif)}
+/* 머리띠: 실제 PDF 머리와 같은 꼴 */
+/* 형광펜: 이 페이지의 대표 표시(대표님 11-26 '하이라이터 색 예쁘다') */
+.hl{background:linear-gradient(transparent 55%,var(--penSoft) 55%);padding:0 2px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.mast{display:flex;justify-content:space-between;align-items:baseline;gap:12px;border-bottom:1px solid var(--line);padding:4px 0 12px;font-size:14px;color:var(--sub)}
+.mast b{color:var(--ink);font-weight:700}
+h1{font-weight:700;font-size:28px;line-height:1.35;margin:24px 0 12px;letter-spacing:-.02em}
+.lead{margin:0 0 24px}
+.lead em{font-style:normal;background:linear-gradient(transparent 55%,var(--penSoft) 55%)}
+/* 한 주 띠 */
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.week div{border-radius:14px;padding:10px 0 8px;text-align:center;font-size:14px;line-height:1.3;background:var(--paper);color:var(--sub)}
+.week small{display:block;font-size:12px;min-height:16px}
+.week .sat{color:var(--ink)}
+.week .sat small{font-weight:600}
+.week .sun{background:var(--penSoft);color:var(--ink);font-weight:700}
+.weeknote{font-size:14px;color:var(--sub);margin:8px 0 32px}
+/* 절 제목: 형광펜 번호 */
+h2{display:flex;align-items:center;gap:8px;font-size:18px;font-weight:700;margin:40px 0 8px}
+h2 .no{display:inline-grid;place-items:center;min-width:28px;height:28px;border-radius:999px;background:var(--penSoft);font-size:14px;font-weight:700}
+ol.steps{list-style:none;margin:0;padding:0;counter-reset:s}
+ol.steps li{counter-increment:s;display:grid;grid-template-columns:28px 1fr;gap:8px;padding:12px 0;border-bottom:1px dashed var(--line)}
+ol.steps li:last-child{border-bottom:0}
+ol.steps li::before{content:counter(s);font-weight:700;font-size:16px;line-height:1.6;color:var(--pen)}
+ol.steps b{background:linear-gradient(transparent 55%,var(--penSoft) 55%)}
+details{border-bottom:1px solid var(--line)}
+summary{list-style:none;cursor:pointer;padding:12px 32px 12px 0;position:relative;font-weight:600;min-height:44px}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"Q.";font-weight:700;margin-right:8px;color:var(--pen)}
+summary::after{content:"+";position:absolute;right:4px;top:10px;font-size:18px;color:var(--sub)}
+details[open] summary::after{content:"−"}
+details p{margin:0 0 12px 28px;color:var(--sub)}
+/* 입력: 종이에 쓰는 밑줄 칸 */
+label.f{display:block;font-weight:600;margin:24px 0 0}
+.hint{color:var(--sub);font-size:14px;margin:4px 0 0}
+input[type=text],input[type=email],select{width:100%;min-height:48px;border:0;border-bottom:2px solid var(--field);border-radius:0;background:transparent;color:var(--ink);font:inherit;font-size:18px;padding:8px 2px;outline:none;-webkit-appearance:none;appearance:none}
+input[type=text]:focus,input[type=email]:focus,select:focus{border-bottom-color:var(--ink)}
+input::placeholder{color:var(--sub);opacity:.75}
+input:disabled{color:var(--sub);border-bottom-style:dashed}
+select{background-image:linear-gradient(45deg,transparent 50%,var(--ink) 50%),linear-gradient(135deg,var(--ink) 50%,transparent 50%);background-position:calc(100% - 14px) 22px,calc(100% - 8px) 22px;background-size:6px 6px;background-repeat:no-repeat;padding-right:28px;font-weight:700}
+.chk{display:flex;gap:12px;align-items:flex-start;margin:16px 0 0;cursor:pointer}
+.chk input{width:22px;height:22px;margin:2px 0 0;accent-color:var(--ink);flex:none}
+.pick{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.pick label{display:flex;align-items:center;justify-content:center;gap:6px;min-height:48px;cursor:pointer;font-weight:600;position:relative;border-radius:999px;border:1px solid var(--field);background:var(--paper)}
+.pick input{position:absolute;opacity:0}
+.pick label:has(input:checked){background:var(--penSoft);border-color:var(--penSoft);font-weight:700}
+.pick label:has(input:checked)::before{content:"✓";color:var(--pen)}
+.pick label:has(input:focus-visible){outline:2px solid var(--pen);outline-offset:2px}
+/* 채점표: 누르면 빨간펜 빗금 */
+.sheet{margin-top:16px;border-radius:14px;background:var(--paper);overflow:hidden;box-shadow:0 1px 3px rgba(29,27,23,.1)}
+.sheet+.sheet{margin-top:12px}
+.sheethead{display:flex;align-items:center;gap:8px;padding:4px 8px 4px 12px;border-bottom:1px dashed var(--line)}
+.sheethead select{flex:1;min-height:44px;border-bottom:0;font-size:18px}
+.sheethead .x{border:0;background:none;color:var(--sub);font:inherit;font-size:14px;min-height:44px;padding:0 8px;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(4,1fr)}
+.grid label{position:relative;display:flex;align-items:center;justify-content:center;min-height:52px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);font-weight:600;font-size:18px;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent;font-variant-numeric:tabular-nums}
+.grid label.on{background:var(--penSoft)}
+.grid label:nth-child(4n){border-right:0}
+.grid label:nth-last-child(-n+4){border-bottom:0}
+.grid input{position:absolute;opacity:0;pointer-events:none}
+/* 틀림 표시 = 빨간 X(기호) · 숫자는 먹색 그대로(대표님 11-26: 글자색과 기호색을 다르게) */
+.grid label span{position:relative;z-index:1}
+.grid label.on{color:var(--ink);font-weight:700}
+.grid label.on::before,.grid label.on::after{content:"";position:absolute;left:50%;top:50%;width:40px;height:3px;background:var(--pen);border-radius:2px;opacity:.9}
+.grid label.on::before{transform:translate(-50%,-50%) rotate(45deg)}
+.grid label.on::after{transform:translate(-50%,-50%) rotate(-45deg)}
+.grid label:has(input:focus-visible){outline:2px solid var(--pen);outline-offset:-3px}
+.ghost{display:inline-flex;align-items:center;gap:6px;margin-top:12px;min-height:44px;padding:0 4px;border:0;background:none;color:var(--ink);font:inherit;font-weight:600;text-decoration:underline;text-underline-offset:4px;cursor:pointer}
+.fine{color:var(--sub);font-size:14px;line-height:1.6;margin:8px 0 0 34px}
+.fine li{margin:0}
+.fine ul{margin:4px 0 0;padding-left:16px}
+/* 아래 고정 주 버튼 */
+.bar{position:fixed;left:0;right:0;bottom:0;background:var(--bg);box-shadow:0 -1px 0 var(--line);padding:12px 16px calc(12px + env(safe-area-inset-bottom))}
+.bar .in{max-width:600px;margin:0 auto;display:flex;align-items:center;gap:12px}
+.count{font-size:14px;color:var(--sub);white-space:nowrap}
+.count b{font-size:18px;color:var(--pen)}
+.main{flex:1;min-height:52px;border:0;border-radius:999px;background:var(--rule);color:var(--onInk);font:inherit;font-weight:700;cursor:pointer}
+.err{color:var(--pen);font-weight:600;font-size:14px;margin:8px 0 0;min-height:0}
+.err:empty{display:none}
+/* 보낼 내용 쪽지 */
+.memo{margin-top:24px;border:1.5px dashed var(--field);border-radius:14px;background:var(--paper);padding:16px}
+.memo pre{white-space:pre-wrap;font:14px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;margin:12px 0;padding:12px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+footer{color:var(--sub);font-size:12px;line-height:1.7;margin-top:48px;padding-top:12px;border-top:1px solid var(--line)}
+footer a{color:inherit}
+@media (prefers-reduced-motion:no-preference){.grid label.on::before{animation:mark .12s ease-out}.grid label.on::after{animation:mark .12s ease-out .08s both}@keyframes mark{from{width:0}to{width:40px}}}
+</style>
+</head>
+<body>
+<main>
+  <div class="mast"><span><b>ARCHE</b> 학습지 · 세무사 1차</span><span>약점보완 신청</span></div>
+
+  <h1><span class="hl">틀린 문제만</span> 골라,<br>다시 풀게 보내 드려요</h1>
+  <p class="lead">학습지에서 틀린 문제 번호를 적어 보내 주세요. 그 문제의 <em>숫자·조건·보기를 바꾼 연습 문제와 해설</em>을 일요일 아침에 PDF로 메일에 담아 보내 드려요.</p>
+
+  <div class="week" aria-label="한 주 일정">
+    <div>월<small></small></div><div>화<small></small></div><div>수<small></small></div><div>목<small></small></div><div>금<small></small></div>
+    <div class="sat">토<small>밤12시 마감</small></div>
+    <div class="sun">일<small>메일 도착</small></div>
+  </div>
+  <p class="weeknote">월~토 언제든 적어 보내면, 그 주 신청을 모아 일요일 아침에 보내 드려요.</p>
+
+  <h2><span class="no">가</span>이렇게 진행돼요</h2>
+  <ol class="steps">
+    <li><span>아르케 세무사 1차 학습지(하루 1회차, 16문제)를 풀고 채점해요.</span></li>
+    <li><span>아래 채점표에서 회차(DAY)를 고르고, 틀린 문제 번호를 눌러요. 누른 번호에는 빨간 X 표시가 생겨요.</span></li>
+    <li><span>[신청 메일 쓰기]를 누르면 메일 앱에 신청 내용이 채워진 메일이 열려요. <b>메일 앱에서 [보내기]까지 눌러야 신청이 끝나요.</b></span></li>
+    <li><span>일요일 아침, 틀린 문제 하나마다 바꾼 문제 1~2개와 해설이 담긴 PDF가 도착해요.</span></li>
+  </ol>
+
+  <h2><span class="no">나</span>미리 알아 두세요</h2>
+  <details><summary>누가 신청할 수 있나요?</summary><p>네이버에서 아르케 세무사 1차 학습지를 구매하신 분, 그리고 무료 회차(DAY 1~3)를 풀어 보신 분이에요. 구매하신 회차의 틀린 문제를 받으실 수 있어요.</p></details>
+  <details><summary>비용이 드나요?</summary><p>따로 내는 돈은 없어요. 무료 회차만 풀어 보신 분은 한 번 받아 보실 수 있어요.</p></details>
+  <details><summary>문제는 어떻게 바뀌나요?</summary><p>세무사 1차 기출문제를 바탕으로, 묻는 내용은 그대로 두고 숫자·조건·보기를 바꿔요. 답을 외워서 맞히지 않고 다시 풀어 보게 하려는 거예요.</p></details>
+  <details><summary>다 맞힌 회차는요?</summary><p>적지 않아도 돼요. 한 주 동안 틀린 문제가 없으면, 그 주에 다른 분들이 많이 틀린 문제를 바꿔 보내 드려요.</p></details>
+
+  <h2><span class="no">1</span>받으실 분</h2>
+  <label class="f" for="buy">네이버 주문번호</label>
+  <p class="hint">네이버 구매 내역의 주문번호예요. 구매 확인에만 써요.</p>
+  <input id="buy" type="text" inputmode="numeric" autocomplete="off" placeholder="2026112612345678">
+  <label class="chk"><input id="free" type="checkbox"><span>무료 회차(DAY 1~3)만 풀어 봤어요. 주문번호가 없어요.</span></label>
+  <label class="f" for="mail">받을 메일 주소</label>
+  <input id="mail" type="email" autocomplete="email" placeholder="name@example.com">
+  <span class="f" style="display:block;font-weight:600;margin-top:24px">푸신 학습지</span>
+  <p class="hint">선택과목에 따라 회차별 문제가 달라요.</p>
+  <div class="pick" role="radiogroup" aria-label="푸신 학습지"><label><input type="radio" name="track" value="행정소송법" checked>행정소송법판</label><label><input type="radio" name="track" value="상법">상법판</label></div>
+  <label class="chk"><input id="biweekly" type="checkbox"><span>2주에 한 번만 받을래요. (체크하지 않으면 매주 받아요)</span></label>
+
+  <h2><span class="no">2</span>틀린 문제</h2>
+  <p class="hint" style="margin-top:0">회차를 고르고 틀린 번호를 눌러요. 다시 누르면 X 표시가 지워져요.</p>
+  <div id="days"></div>
+  <button type="button" class="ghost" id="addDay">+ 다른 회차도 적기</button>
+
+  <h2><span class="no">3</span>동의</h2>
+  <label class="chk"><input id="news" type="checkbox"><span>[선택] 아르케의 새 학습지·이벤트 소식을 메일로 받겠습니다. 언제든 그만 받을 수 있습니다.</span></label>
+  <label class="chk"><input id="agree" type="checkbox"><span><b>[필수]</b> 약점보완지를 받기 위한 개인정보 수집·이용에 동의합니다.</span></label>
+  <div class="fine"><ul>
+    <li>받는 정보: 메일 주소, 네이버 주문번호(있는 경우), 푸신 학습지(상법판·행정소송법판), 받는 주기(매주·격주), 회차별 틀린 문제 번호</li>
+    <li>쓰는 곳: 틀린 문제를 바꾼 연습 문제를 메일로 보내기, 구매 확인</li>
+    <li>보관: 받기를 그만두시거나 이용 기간이 끝난 날부터 30일 뒤 지웁니다.</li>
+    <li>동의하지 않으셔도 학습지는 그대로 이용하실 수 있습니다. 다만 약점보완지는 받으실 수 없습니다.</li>
+    <li>만 14세 이상만 신청할 수 있습니다.</li>
+  </ul></div>
+  <p class="err" id="err" role="alert"></p>
+
+  <div class="memo" id="fallback" hidden>
+    <b>메일 앱에서 [보내기]를 눌러 주세요.</b>
+    <p class="hint">메일 앱이 열리지 않았다면, 아래 내용을 복사해 <b>archeisit@gmail.com</b> 으로 직접 보내 주세요.</p>
+    <pre id="preview"></pre>
+    <button type="button" class="ghost" id="copy" style="margin-top:0">내용 복사</button>
+  </div>
+
+  <footer>
+    그만 받으려면 약점보완지 메일에 '그만'이라고 답장하시거나 archeisit@gmail.com으로 알려 주세요. 바로 멈추고 30일 안에 정보를 지웁니다.<br>
+    <a href="privacy.html">약점보완지 개인정보 처리방침</a><br>
+    문제 출처: 한국산업인력공단 세무사 1차 시험문제(공공누리 제1유형)를 아르케가 바꾼 것으로, 공단의 공식 문제·정답이 아닙니다.<br>
+    아르케(Arche) · 사업자등록번호 774-39-01532 · 통신판매업 제2026-용인기흥-01759호 · archeisit@gmail.com · 0502-1921-1532
+  </footer>
+</main>
+
+<div class="bar"><div class="in">
+  <span class="count">틀린 문제 <b id="cnt">0</b>개</span>
+  <button type="button" class="main" id="send">신청 메일 쓰기</button>
+</div></div>
+
+<script>
+(function(){
+  var TO = 'archeisit@gmail.com'; // 대표님 11-26 결정
+  var MAXDAY = 150, N = 16, dayCount = 0;
+  var days = document.getElementById('days'), cnt = document.getElementById('cnt');
+  function recount(){ cnt.textContent = days.querySelectorAll('.grid input:checked').length; }
+  function addDay(){
+    dayCount++;
+    var d = document.createElement('div'); d.className = 'sheet';
+    var opts = ''; for (var i = 1; i <= MAXDAY; i++) opts += '<option value="' + i + '">DAY ' + (i < 10 ? '0' + i : i) + '</option>';
+    var boxes = ''; for (var j = 1; j <= N; j++) boxes += '<label><input type="checkbox" value="' + j + '" aria-label="' + j + '번 틀림"><span>' + j + '</span></label>';
+    d.innerHTML = '<div class="sheethead"><select aria-label="회차">' + opts + '</select>' + (dayCount > 1 ? '<button type="button" class="x">빼기</button>' : '') + '</div><div class="grid">' + boxes + '</div>';
+    d.querySelector('select').value = String(Math.min(dayCount, MAXDAY));
+    d.querySelectorAll('.grid input').forEach(function(c){ c.onchange = function(){ c.parentNode.classList.toggle('on', c.checked); recount(); }; });
+    var x = d.querySelector('.x'); if (x) x.onclick = function(){ d.remove(); recount(); };
+    days.appendChild(d);
+  }
+  addDay();
+  document.getElementById('addDay').onclick = addDay;
+  var free = document.getElementById('free'), buy = document.getElementById('buy');
+  free.onchange = function(){ buy.disabled = free.checked; if (free.checked) buy.value = ''; };
+  function val(name){ var e = document.querySelector('input[name="' + name + '"]:checked'); return e ? e.value : ''; }
+  function fail(msg, el){ var err = document.getElementById('err'); err.textContent = msg; (el || err).scrollIntoView({behavior:'smooth', block:'center'}); if (el && el.focus) el.focus({preventScroll:true}); }
+  document.getElementById('send').onclick = function(){
+    document.getElementById('err').textContent = '';
+    var mail = document.getElementById('mail').value.trim();
+    if (!free.checked && !buy.value.trim()) return fail('네이버 주문번호를 적거나, "무료 회차만 풀어 봤어요"에 체크해 주세요.', buy);
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(mail)) return fail('받을 메일 주소를 다시 확인해 주세요.', document.getElementById('mail'));
+    var lines = [], total = 0;
+    days.querySelectorAll('.sheet').forEach(function(d){
+      var day = d.querySelector('select').value, w = [];
+      d.querySelectorAll('.grid input:checked').forEach(function(c){ w.push(c.value); });
+      if (w.length) { lines.push('DAY ' + day + ': ' + w.join(', ')); total += w.length; }
+    });
+    if (!total) return fail('틀린 문제 번호를 하나 이상 눌러 주세요.', days);
+    if (!document.getElementById('agree').checked) return fail('[필수] 동의에 체크해 주셔야 신청할 수 있어요.', document.getElementById('agree'));
+    var body = [
+      '[아르케 약점보완 신청 v0]',
+      '시험: 세무사 1차 (semusa1, ko)',
+      '구매번호: ' + (free.checked ? '무료 회차' : buy.value.trim()),
+      '메일: ' + mail,
+      '선택과목: ' + val('track'),
+      '주기: ' + (document.getElementById('biweekly').checked ? '격주' : '매주'),
+      '틀린 문항(' + total + '개):',
+      lines.join('\n'),
+      '동의(필수): 예 / 소식(선택): ' + (document.getElementById('news').checked ? '예' : '아니요')
+    ].join('\n');
+    document.getElementById('preview').textContent = body;
+    var fb = document.getElementById('fallback'); fb.hidden = false;
+    document.getElementById('copy').onclick = function(){ try { navigator.clipboard.writeText(body).then(function(){ document.getElementById('copy').textContent = '복사했어요'; }); } catch (e) {} };
+    var subject = '약점보완 신청 · ' + (free.checked ? '무료 회차' : buy.value.trim());
+    location.href = 'mailto:' + TO + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    fb.scrollIntoView({behavior: 'smooth', block: 'start'});
+  };
+})();
+</script>
+</body>
+</html>
